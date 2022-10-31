@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-primary;
+  }
+}
+
+@layer components {
+  .form-label {
+    @apply absolute text-[10px] uppercase scale-[1.4] duration-[0.4] origin-top-left translate-y-[18px] z-30;
+  }
+  .form-input {
+    @apply transition-all duration-[0.4s] w-full bg-secondarybg border-0 border-b border-secondary focus:shadow-none focus:ring-0 focus:outline-0 hover:outline-0 focus:border-transparent focus:border-b-primary focus:bg-none hover:bg-none focus:text-primary hover:text-primary;
+  }
+}

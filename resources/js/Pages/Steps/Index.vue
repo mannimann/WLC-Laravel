@@ -105,14 +105,10 @@ function setActive() {
                 class="grid grid-cols-1 md:grid-cols-2 justify-items-stretch gap-3 mb-1"
               >
                 <div class="mb-6">
-                  <label
-                    for="f_vorname"
-                    class="absolute text-[10px] uppercase scale-[1.4] duration-[0.4] origin-top-left translate-y-[18px] z-30"
-                    >Vorname:</label
-                  >
+                  <label for="f_vorname" class="form-label">Vorname:</label>
                   <input
                     type="text"
-                    class="transition-all duration-[0.4s] w-full bg-secondarybg border-0 border-b border-secondary focus:shadow-none focus:ring-0 focus:outline-0 hover:outline-0 focus:border-transparent focus:border-b-primary focus:bg-none hover:bg-none focus:text-primary hover:text-primary"
+                    class="form-input"
                     pattern="[\p{L} -]+"
                     name="vorname"
                     id="f_vorname"
@@ -128,7 +124,7 @@ function setActive() {
                   <label for="f_name" class="form-label">Nachname:</label>
                   <input
                     type="text"
-                    class="form-control form-control-sm"
+                    class="form-input"
                     pattern="[\p{L} -]+"
                     name="name"
                     id="f_name"
@@ -143,7 +139,7 @@ function setActive() {
                   <label for="f_klasse" class="form-label">Klasse:</label>
                   <select
                     name="klasse"
-                    class="form-select form-select-sm"
+                    class="form-input"
                     id="f_klasse"
                     v-model="stepdata.klasse"
                     @focus="addNotEmpty"
@@ -201,7 +197,7 @@ function setActive() {
                   <label for="f_schritte" class="form-label">Schritte:</label>
                   <input
                     type="text"
-                    class="form-control form-control-sm"
+                    class="form-input"
                     pattern="[0-9]+"
                     name="schritte"
                     id="f_schritte"

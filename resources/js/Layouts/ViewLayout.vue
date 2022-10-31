@@ -19,16 +19,18 @@ const showingNavigationDropdown = ref(false);
 
 <template>
   <div>
-    <div class="flex flex-col min-h-screen bg-slate-800">
-      <nav class="bg-white border-b border-gray-100">
+    <div class="flex flex-col min-h-screen bg-primarybg">
+      <nav
+        class="border-b border-secondarybg bg-gradient-to-t from-primarybg to-secondarybg"
+      >
         <!-- Primary Navigation Menu -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div class="flex justify-between h-16">
             <div class="flex">
               <!-- Logo -->
-              <div class="shrink-0 flex items-center">
+              <div class="flex items-center shrink-0">
                 <Link :href="route('index')">
-                  <ApplicationLogo class="block h-9 w-auto" />
+                  <ApplicationLogo class="block w-auto h-9" />
                 </Link>
               </div>
 
@@ -45,21 +47,21 @@ const showingNavigationDropdown = ref(false);
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
               <!-- Login/Register -->
-              <div class="ml-3 relative">
+              <div class="relative ml-3">
                 <div
                   v-if="canLogin"
-                  class="hidden fixed top-0 right-0 px-6 py-4 sm:block"
+                  class="fixed top-0 right-0 hidden px-6 py-4 sm:block"
                 >
                   <Link
                     :href="route('login')"
-                    class="text-sm text-gray-700 dark:text-gray-500 underline"
+                    class="text-sm text-gray-500 underline dark:text-gray-500"
                     >Log in</Link
                   >
 
                   <Link
                     v-if="canRegister"
                     :href="route('register')"
-                    class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline"
+                    class="ml-4 text-sm text-gray-500 underline dark:text-gray-500"
                     >Register</Link
                   >
                 </div>
@@ -67,13 +69,13 @@ const showingNavigationDropdown = ref(false);
             </div>
 
             <!-- Hamburger -->
-            <div class="-mr-2 flex items-center sm:hidden">
+            <div class="flex items-center -mr-2 sm:hidden">
               <button
                 @click="showingNavigationDropdown = !showingNavigationDropdown"
-                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
+                class="inline-flex items-center justify-center p-2 text-gray-400 transition duration-150 ease-in-out rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500"
               >
                 <svg
-                  class="h-6 w-6"
+                  class="w-6 h-6"
                   stroke="currentColor"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -126,13 +128,13 @@ const showingNavigationDropdown = ref(false);
             <div class="mt-3 space-y-1">
               <div
                 v-if="canLogin"
-                class="hidden fixed top-0 right-0 px-6 py-4 sm:block"
+                class="fixed top-0 right-0 hidden px-6 py-4 sm:block"
               >
                 <ResponsiveNavLink
                   :href="route('login')"
                   method="post"
                   as="button"
-                  class="text-sm text-gray-700 dark:text-gray-500 underline"
+                  class="text-sm text-gray-500 underline dark:text-gray-500"
                   >Log in</ResponsiveNavLink
                 >
 
@@ -141,7 +143,7 @@ const showingNavigationDropdown = ref(false);
                   :href="route('register')"
                   method="post"
                   as="button"
-                  class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline"
+                  class="ml-4 text-sm text-gray-500 underline dark:text-gray-500"
                   >Register</ResponsiveNavLink
                 >
               </div>
@@ -152,7 +154,7 @@ const showingNavigationDropdown = ref(false);
 
       <!-- Page Heading -->
       <header class="bg-white shadow" v-if="$slots.header">
-        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <slot name="header" />
         </div>
       </header>
