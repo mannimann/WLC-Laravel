@@ -13,11 +13,11 @@ function setActive() {
   <Head title="Steps" />
 
   <ViewLayout>
-    <div class="p-4 mx-auto sm:p-6 lg:p-8">
+    <div class="mx-auto p-4 sm:p-6 lg:p-8">
       <!-- DescriptionCard -->
       <section id="DescriptionCard" class="mb-3">
         <div
-          class="container mx-auto overflow-hidden rounded-lg shadow-md bg-secondarybg"
+          class="container mx-auto overflow-hidden rounded-lg bg-secondarybg shadow-md"
         >
           <div
             class="flex justify-between p-3 text-3xl font-bold text-primary"
@@ -36,7 +36,7 @@ function setActive() {
                 viewBox="0 0 24 24"
                 stroke-width="3.5"
                 stroke="currentColor"
-                class="w-9 h-9"
+                class="h-9 w-9"
               >
                 <path
                   stroke-linecap="round"
@@ -62,9 +62,9 @@ function setActive() {
                 beste Klasse und den besten Läufer! <br /><br />
                 <strong>Also nimm die Beine in die Hand und los gehts!</strong>
               </p>
-              <div class="flex justify-center flex-shrink mx-auto">
+              <div class="mx-auto flex flex-shrink justify-center">
                 <iframe
-                  class="h-auto max-w-full aspect-video"
+                  class="aspect-video h-auto max-w-full"
                   width="560"
                   height="315"
                   src="https://www.youtube.com/embed/YJ3ShqLPiPo"
@@ -82,7 +82,7 @@ function setActive() {
       <!-- InputCard -->
       <section id="InputCard" class="mb-3">
         <div
-          class="container mx-auto overflow-hidden rounded-lg shadow-md bg-secondarybg"
+          class="container mx-auto overflow-hidden rounded-lg bg-secondarybg shadow-md"
         >
           <div class="p-3 text-3xl font-bold">
             <h3>Daten eingeben:</h3>
@@ -102,7 +102,7 @@ function setActive() {
               @submit.prevent="handleSubmit"
             >
               <div
-                class="grid grid-cols-1 gap-3 mb-1 md:grid-cols-2 justify-items-stretch"
+                class="mb-1 grid grid-cols-1 justify-items-stretch gap-3 md:grid-cols-2"
               >
                 <div class="mb-6">
                   <label for="f_vorname" class="form-label">Vorname:</label>
@@ -253,8 +253,6 @@ function setActive() {
           </div>
         </div>
       </section>
-
-      <div id="InputCard" class="mb-3"></div>
     </div>
   </ViewLayout>
 </template>
@@ -279,6 +277,13 @@ function setActive() {
 .cardbody-leave-from {
   max-height: 100em;
   overflow: hidden;
+}
+
+.not-empty > label {
+  transform: none;
+}
+.not-empty > input {
+  background: #0e141b;
 }
 </style>
 
