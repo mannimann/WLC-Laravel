@@ -15,9 +15,20 @@
 
 @layer components {
   .form-label {
-    @apply absolute z-30 origin-top-left translate-y-[18px] scale-[1.4] text-[10px] uppercase transition-all duration-[0.4s];
+    @apply absolute z-30 origin-[0] translate-y-[18px] scale-[1.4] cursor-text text-[10px] uppercase transition-all duration-[0.4s];
   }
   .form-input {
     @apply w-full border-0 border-b border-secondary bg-secondarybg hover:bg-none hover:text-primary hover:outline-0 focus:border-transparent focus:border-b-primary focus:bg-none focus:text-primary focus:shadow-none focus:outline-0 focus:ring-0;
   }
+  .form-not-empty > label {
+    @apply transform-none;
+  }
+
+  /* TODO: */
+  /* .form-label {
+    @apply absolute z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 dark:text-gray-400 peer-focus:dark:text-blue-500;
+  }
+  .form-input {
+    @apply block w-full appearance-none border-0 border-b border-secondary bg-secondarybg hover:bg-none hover:text-primary hover:outline-0 focus:border-transparent focus:border-b-primary focus:bg-none focus:text-primary focus:shadow-none focus:outline-0 focus:ring-0;
+  } */
 }

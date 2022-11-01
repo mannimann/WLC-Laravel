@@ -27,9 +27,7 @@ const showingNavigationDropdown = ref(false);
         </div>
 
         <div v-else>
-          <h1
-            class="text-center text-4xl font-bold uppercase lg:text-5xl xl:text-6xl"
-          >
+          <h1 class="text-center text-4xl font-bold uppercase lg:text-5xl">
             Winterlauf Challenge
           </h1>
         </div>

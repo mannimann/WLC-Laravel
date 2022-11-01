@@ -1,5 +1,6 @@
 <script setup>
 import ViewLayout from "@/Layouts/ViewLayout.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { Head } from "@inertiajs/inertia-vue3";
 import { ref, Transition } from "vue";
 
@@ -20,7 +21,7 @@ function setActive() {
           class="container mx-auto overflow-hidden rounded-lg bg-secondarybg shadow-md"
         >
           <div
-            class="flex justify-between p-3 text-3xl font-bold text-primary"
+            class="flex justify-between p-3 text-2xl font-bold text-primary"
             :class="{ active: isActive }"
             role="button"
             @click="setActive"
@@ -84,7 +85,7 @@ function setActive() {
         <div
           class="container mx-auto overflow-hidden rounded-lg bg-secondarybg shadow-md"
         >
-          <div class="p-3 text-3xl font-bold">
+          <div class="p-3 text-2xl font-bold">
             <h3>Daten eingeben:</h3>
           </div>
 
@@ -104,6 +105,8 @@ function setActive() {
               <div
                 class="mb-1 grid grid-cols-1 justify-items-stretch gap-3 md:grid-cols-2"
               >
+                <!-- TODO -->
+                <!-- evtl: relativ z-0 -->
                 <div class="mb-6">
                   <label for="f_vorname" class="form-label">Vorname:</label>
                   <input
@@ -116,10 +119,10 @@ function setActive() {
                     @focus="addNotEmpty"
                     @blur="removeNotEmpty"
                     required
+                    autofocus
                   />
                 </div>
 
-                <!-- TODO -->
                 <div class="mb-6">
                   <label for="f_name" class="form-label">Nachname:</label>
                   <input
@@ -136,7 +139,9 @@ function setActive() {
                 </div>
 
                 <div class="mb-6">
-                  <label for="f_klasse" class="form-label">Klasse:</label>
+                  <label for="f_klasse" class="form-label cursor-default"
+                    >Klasse:</label
+                  >
                   <select
                     name="klasse"
                     class="form-input"
@@ -147,12 +152,12 @@ function setActive() {
                     required
                   >
                     <!-- Default -->
-                    <option value="" class="form-select-option"></option>
+                    <option value="" class=""></option>
                     <option
                       v-for="klasse in klassen_liste"
                       :key="klasse"
                       :value="klasse"
-                      class="form-select-option"
+                      class=""
                     >
                       {{ klasse }}
                     </option>
@@ -160,7 +165,9 @@ function setActive() {
                 </div>
 
                 <div class="mb-6">
-                  <label for="f_zeitraum" class="form-label">Zeitraum:</label>
+                  <label for="f_zeitraum" class="form-label cursor-default"
+                    >Zeitraum:</label
+                  >
                   <select
                     name="zeitraum"
                     class="form-input"
@@ -171,12 +178,12 @@ function setActive() {
                     required
                   >
                     <!-- Default -->
-                    <option value="" class="form-select-option"></option>
+                    <option value="" class=""></option>
                     <option
                       v-for="zeitraum in zeitraum_liste"
                       :key="zeitraum"
                       :value="zeitraum"
-                      class="form-select-option"
+                      class=""
                     >
                       {{ zeitraum }}
                     </option>
@@ -208,28 +215,24 @@ function setActive() {
                   />
                 </div>
 
-                <div class="mb-6">
-                  <div class="inline-block">
+                <div class="mb-6 flex overflow-hidden">
+                  <div class="mt-4">
                     <label
                       for="f_screenshot"
-                      class=""
-                      style="margin-right: 20px"
+                      class="mr-3 cursor-pointer text-[14px] uppercase"
                       >Screenshot:</label
                     >
                   </div>
-                  <div class="mb-6">
-                    <label for="f_screenshot" class=""></label>
-                    <input
-                      type="file"
-                      class=""
-                      name="screenshot_big"
-                      id="f_screenshot"
-                      @change="fileChanged"
-                    />
-                    <!-- multiple="multiple" -->
+                  <input
+                    type="file"
+                    class="form-input cursor-pointer"
+                    name="screenshot_big"
+                    id="f_screenshot"
+                    @change="fileChanged"
+                  />
+                  <!-- multiple="multiple" -->
 
-                    <!-- <input type="hidden" name="screenshot" id="f_screenshot_hidden" value="" /> -->
-                  </div>
+                  <!-- <input type="hidden" name="screenshot" id="f_screenshot_hidden" value="" /> -->
                 </div>
               </div>
 
@@ -238,14 +241,13 @@ function setActive() {
                   Achtung: Du kannst für jeden Zeitraum nur einmal deine Daten
                   eintragen!
                 </p>
-                <button
-                  type="submit"
-                  class="btn btn-lg btn-success"
+                <PrimaryButton
+                  class="m-3 bg-green-700 hover:bg-green-600 active:bg-green-800"
                   :class="{ disabled: submit_disabled }"
                   value="Eintragen"
                 >
-                  Eintragen
-                </button>
+                  <span class="text-lg">Eintragen</span>
+                </PrimaryButton>
                 <!-- bei Bedarf hinzufügen: disabled -->
               </div>
             </form>
@@ -278,13 +280,6 @@ function setActive() {
   max-height: 100em;
   overflow: hidden;
 }
-
-.not-empty > label {
-  transform: none;
-}
-.not-empty > input {
-  background: #0e141b;
-}
 </style>
 
 <script>
@@ -309,11 +304,11 @@ export default {
       //TODO
     },
     addNotEmpty(e) {
-      e.target.parentElement.classList.add("not-empty");
+      e.target.parentElement.classList.add("form-not-empty");
     },
     removeNotEmpty(e) {
       e.target.value === ""
-        ? e.target.parentElement.classList.remove("not-empty")
+        ? e.target.parentElement.classList.remove("form-not-empty")
         : null;
     },
     // Bilder verkleinern (clientseitig)
