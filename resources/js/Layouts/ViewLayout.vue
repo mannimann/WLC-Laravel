@@ -19,9 +19,23 @@ const showingNavigationDropdown = ref(false);
 
 <template>
   <div>
+    <!-- Page Heading -->
+    <header class="shadow bg-secondarybg" v-if="$slots.header">
+      <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <slot name="header" />
+      </div>
+    </header>
+    <header v-else class="shadow bg-secondarybg">
+      <div class="px-4 pt-6 pb-0 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <h1 class="text-4xl font-bold text-center lg:text-5xl xl:text-6xl">
+          Winterlauf Challenge
+        </h1>
+      </div>
+    </header>
+
     <div class="flex flex-col min-h-screen bg-primarybg">
       <nav
-        class="border-b border-secondarybg bg-gradient-to-t from-primarybg to-secondarybg"
+        class="border-b border-secondarybg bg-gradient-to-b from-secondarybg to-primarybg"
       >
         <!-- Primary Navigation Menu -->
         <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -151,13 +165,6 @@ const showingNavigationDropdown = ref(false);
           </div>
         </div>
       </nav>
-
-      <!-- Page Heading -->
-      <header class="bg-white shadow" v-if="$slots.header">
-        <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <slot name="header" />
-        </div>
-      </header>
 
       <!-- Page Content -->
       <main class="text-secondary">

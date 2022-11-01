@@ -13,14 +13,14 @@ function setActive() {
   <Head title="Steps" />
 
   <ViewLayout>
-    <div class="mx-auto p-4 sm:p-6 lg:p-8">
+    <div class="p-4 mx-auto sm:p-6 lg:p-8">
       <!-- DescriptionCard -->
       <section id="DescriptionCard" class="mb-3">
         <div
-          class="container mx-auto bg-secondarybg rounded-lg shadow-md overflow-hidden"
+          class="container mx-auto overflow-hidden rounded-lg shadow-md bg-secondarybg"
         >
           <div
-            class="text-primary text-3xl font-bold p-3 flex justify-between"
+            class="flex justify-between p-3 text-3xl font-bold text-primary"
             :class="{ active: isActive }"
             role="button"
             @click="setActive"
@@ -64,7 +64,7 @@ function setActive() {
               </p>
               <div class="flex justify-center flex-shrink mx-auto">
                 <iframe
-                  class="max-w-full h-auto aspect-video"
+                  class="h-auto max-w-full aspect-video"
                   width="560"
                   height="315"
                   src="https://www.youtube.com/embed/YJ3ShqLPiPo"
@@ -82,9 +82,9 @@ function setActive() {
       <!-- InputCard -->
       <section id="InputCard" class="mb-3">
         <div
-          class="container mx-auto bg-secondarybg rounded-lg shadow-md overflow-hidden"
+          class="container mx-auto overflow-hidden rounded-lg shadow-md bg-secondarybg"
         >
-          <div class="text-primary text-3xl font-bold p-3">
+          <div class="p-3 text-3xl font-bold text-primary">
             <h3>Daten eingeben:</h3>
           </div>
 
@@ -102,7 +102,7 @@ function setActive() {
               @submit.prevent="handleSubmit"
             >
               <div
-                class="grid grid-cols-1 md:grid-cols-2 justify-items-stretch gap-3 mb-1"
+                class="grid grid-cols-1 gap-3 mb-1 md:grid-cols-2 justify-items-stretch"
               >
                 <div class="mb-6">
                   <label for="f_vorname" class="form-label">Vorname:</label>
@@ -120,7 +120,7 @@ function setActive() {
                 </div>
 
                 <!-- TODO -->
-                <div class="">
+                <div class="mb-6">
                   <label for="f_name" class="form-label">Nachname:</label>
                   <input
                     type="text"
@@ -135,7 +135,7 @@ function setActive() {
                   />
                 </div>
 
-                <div class="justify-self-stretch">
+                <div class="mb-6">
                   <label for="f_klasse" class="form-label">Klasse:</label>
                   <select
                     name="klasse"
@@ -159,11 +159,11 @@ function setActive() {
                   </select>
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="mb-6">
                   <label for="f_zeitraum" class="form-label">Zeitraum:</label>
                   <select
                     name="zeitraum"
-                    class="form-select form-select-sm"
+                    class="form-input"
                     id="f_zeitraum"
                     v-model="stepdata.zeitraum"
                     @focus="addNotEmpty"
@@ -193,7 +193,7 @@ function setActive() {
                   </select>
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="mb-6">
                   <label for="f_schritte" class="form-label">Schritte:</label>
                   <input
                     type="text"
@@ -208,26 +208,28 @@ function setActive() {
                   />
                 </div>
 
-                <div class="form-group col col-md-auto col1">
-                  <label
-                    for="f_screenshot"
-                    class="form-label"
-                    style="margin-right: 20px"
-                    >Screenshot:</label
-                  >
-                </div>
-                <div class="form-group col col2">
-                  <label for="f_screenshot" class="form-label"></label>
-                  <input
-                    type="file"
-                    class="form-control form-control-sm"
-                    name="screenshot_big"
-                    id="f_screenshot"
-                    @change="fileChanged"
-                  />
-                  <!-- multiple="multiple" -->
+                <div class="mb-6">
+                  <div class="inline-block">
+                    <label
+                      for="f_screenshot"
+                      class=""
+                      style="margin-right: 20px"
+                      >Screenshot:</label
+                    >
+                  </div>
+                  <div class="mb-6">
+                    <label for="f_screenshot" class=""></label>
+                    <input
+                      type="file"
+                      class=""
+                      name="screenshot_big"
+                      id="f_screenshot"
+                      @change="fileChanged"
+                    />
+                    <!-- multiple="multiple" -->
 
-                  <!-- <input type="hidden" name="screenshot" id="f_screenshot_hidden" value="" /> -->
+                    <!-- <input type="hidden" name="screenshot" id="f_screenshot_hidden" value="" /> -->
+                  </div>
                 </div>
               </div>
 

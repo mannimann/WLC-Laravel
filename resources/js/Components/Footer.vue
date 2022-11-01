@@ -5,7 +5,7 @@
     class="bg-gradient-to-b from-primarybg to-secondarybg"
     style="height: 20px"
   ></div>
-  <div class="bg-secondarybg text-secondary text-center pt-1 pb-3">
+  <div class="pt-1 pb-3 text-center bg-secondarybg text-secondary">
     <div class="grid grid-cols-1 md:grid-cols-2">
       <div class="mt-1 mb-1">
         <p>
