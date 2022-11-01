@@ -20,31 +20,34 @@ const showingNavigationDropdown = ref(false);
 <template>
   <div>
     <!-- Page Heading -->
-    <header class="shadow bg-secondarybg" v-if="$slots.header">
-      <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <slot name="header" />
-      </div>
-    </header>
-    <header v-else class="shadow bg-secondarybg">
-      <div class="px-4 pt-6 pb-0 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <h1 class="text-4xl font-bold text-center lg:text-5xl xl:text-6xl">
-          Winterlauf Challenge
-        </h1>
+    <header class="bg-secondarybg shadow">
+      <div class="mx-auto max-w-7xl px-4 pt-6 pb-0 sm:px-6 lg:px-8">
+        <div v-if="$slots.header">
+          <slot name="header" />
+        </div>
+
+        <div v-else>
+          <h1
+            class="text-center text-4xl font-bold uppercase lg:text-5xl xl:text-6xl"
+          >
+            Winterlauf Challenge
+          </h1>
+        </div>
       </div>
     </header>
 
-    <div class="flex flex-col min-h-screen bg-primarybg">
+    <div class="flex min-h-screen flex-col bg-primarybg">
       <nav
-        class="border-b border-secondarybg bg-gradient-to-b from-secondarybg to-primarybg"
+        class="border-b border-secondary bg-gradient-to-b from-secondarybg to-primarybg"
       >
         <!-- Primary Navigation Menu -->
-        <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <div class="flex justify-between h-16">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="flex h-16 justify-between">
             <div class="flex">
               <!-- Logo -->
-              <div class="flex items-center shrink-0">
+              <div class="flex shrink-0 items-center">
                 <Link :href="route('index')">
-                  <ApplicationLogo class="block w-auto h-9" />
+                  <ApplicationLogo class="block h-9 w-auto" />
                 </Link>
               </div>
 
@@ -56,26 +59,31 @@ const showingNavigationDropdown = ref(false);
                 >
                   Steps
                 </NavLink>
+                <NavLink
+                  :href="route('dashboard')"
+                  :active="route().current('dashboard')"
+                >
+                  Dashboard
+                </NavLink>
               </div>
             </div>
 
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
+            <div class="hidden sm:ml-6 sm:flex sm:items-center">
               <!-- Login/Register -->
               <div class="relative ml-3">
                 <div
                   v-if="canLogin"
-                  class="fixed top-0 right-0 hidden px-6 py-4 sm:block"
+                  class="fixed right-0 top-[4.2rem] hidden px-6 py-4 sm:block"
                 >
                   <Link
                     :href="route('login')"
-                    class="text-sm text-gray-500 underline dark:text-gray-500"
+                    class="text-sm text-secondary underline"
                     >Log in</Link
                   >
-
                   <Link
                     v-if="canRegister"
                     :href="route('register')"
-                    class="ml-4 text-sm text-gray-500 underline dark:text-gray-500"
+                    class="ml-4 text-sm text-secondary underline"
                     >Register</Link
                   >
                 </div>
@@ -83,13 +91,13 @@ const showingNavigationDropdown = ref(false);
             </div>
 
             <!-- Hamburger -->
-            <div class="flex items-center -mr-2 sm:hidden">
+            <div class="-mr-2 flex items-center sm:hidden">
               <button
                 @click="showingNavigationDropdown = !showingNavigationDropdown"
-                class="inline-flex items-center justify-center p-2 text-gray-400 transition duration-150 ease-in-out rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500"
+                class="inline-flex items-center justify-center rounded-md p-2 text-secondary transition duration-150 ease-in-out hover:bg-primarybg hover:text-primary focus:bg-primarybg focus:text-primary focus:outline-none"
               >
                 <svg
-                  class="w-6 h-6"
+                  class="h-6 w-6"
                   stroke="currentColor"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -128,39 +136,29 @@ const showingNavigationDropdown = ref(false);
           }"
           class="sm:hidden"
         >
-          <div class="pt-2 pb-3 space-y-1">
+          <div class="space-y-1 pt-2 pb-3">
             <ResponsiveNavLink
               :href="route('index')"
               :active="route().current('index')"
             >
               Steps
             </ResponsiveNavLink>
-          </div>
+            <ResponsiveNavLink
+              :href="route('dashboard')"
+              :active="route().current('dashboard')"
+            >
+              Dashboard
+            </ResponsiveNavLink>
 
-          <!-- Responsive Login/Register -->
-          <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="mt-3 space-y-1">
-              <div
-                v-if="canLogin"
-                class="fixed top-0 right-0 hidden px-6 py-4 sm:block"
+            <!-- Responsive Login/Register -->
+
+            <div v-if="canLogin" class="space-y-1 text-secondary underline">
+              <ResponsiveNavLink :href="route('login')"
+                >Log in</ResponsiveNavLink
               >
-                <ResponsiveNavLink
-                  :href="route('login')"
-                  method="post"
-                  as="button"
-                  class="text-sm text-gray-500 underline dark:text-gray-500"
-                  >Log in</ResponsiveNavLink
-                >
-
-                <ResponsiveNavLink
-                  v-if="canRegister"
-                  :href="route('register')"
-                  method="post"
-                  as="button"
-                  class="ml-4 text-sm text-gray-500 underline dark:text-gray-500"
-                  >Register</ResponsiveNavLink
-                >
-              </div>
+              <ResponsiveNavLink v-if="canRegister" :href="route('register')"
+                >Register</ResponsiveNavLink
+              >
             </div>
           </div>
         </div>

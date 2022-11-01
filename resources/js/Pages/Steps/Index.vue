@@ -48,7 +48,7 @@ function setActive() {
           </div>
 
           <Transition name="cardbody">
-            <div v-if="isActive" class="p-3">
+            <div v-show="isActive" class="p-3">
               <p>
                 Die Challenge besteht darin, in den nächsten Wochen
                 <span class="uppercase">so viele Schritte wie möglich</span> zu
@@ -84,7 +84,7 @@ function setActive() {
         <div
           class="container mx-auto overflow-hidden rounded-lg shadow-md bg-secondarybg"
         >
-          <div class="p-3 text-3xl font-bold text-primary">
+          <div class="p-3 text-3xl font-bold">
             <h3>Daten eingeben:</h3>
           </div>
 
@@ -96,7 +96,7 @@ function setActive() {
               </p>
             </div>
             <form
-              class="form"
+              class="pt-6"
               name="insertData"
               id="insertData"
               @submit.prevent="handleSubmit"
