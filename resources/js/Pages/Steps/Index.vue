@@ -117,7 +117,7 @@ const form = useForm({
               name="insertData"
               id="insertData"
               @submit.prevent="
-                form.post(route('steps.store'), {
+                form.post(route('store'), {
                   onSuccess: () => form.reset(),
                 })
               "
@@ -155,6 +155,7 @@ const form = useForm({
                     @blur="removeNotEmpty"
                     required
                   />
+                  <InputError :message="form.errors.name" class="mt-2" />
                 </div>
 
                 <div class="mb-6">
@@ -181,6 +182,7 @@ const form = useForm({
                       {{ klasse }}
                     </option>
                   </select>
+                  <InputError :message="form.errors.klasse" class="mt-2" />
                 </div>
 
                 <div class="mb-6">
@@ -217,6 +219,7 @@ const form = useForm({
                       }
                     ?> -->
                   </select>
+                  <InputError :message="form.errors.zeitraum" class="mt-2" />
                 </div>
 
                 <div class="mb-6">
@@ -232,6 +235,7 @@ const form = useForm({
                     @blur="removeNotEmpty"
                     required
                   />
+                  <InputError :message="form.errors.schritte" class="mt-2" />
                 </div>
 
                 <div class="mb-6 flex overflow-hidden">
@@ -250,6 +254,7 @@ const form = useForm({
                     @change="fileChanged"
                   />
                   <!-- multiple="multiple" -->
+                  <InputError :message="form.errors.screenshot" class="mt-2" />
 
                   <!-- <input type="hidden" name="screenshot" id="f_screenshot_hidden" value="" /> -->
                 </div>
