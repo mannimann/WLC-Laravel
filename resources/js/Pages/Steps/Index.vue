@@ -8,6 +8,8 @@ const isActive = ref(false);
 function setActive() {
   isActive.value = !isActive.value;
 }
+
+const klassen_liste = ["5a", "5b", "5c"];
 </script>
 
 <template>
@@ -96,6 +98,8 @@ function setActive() {
                 können deine Schritte nicht richtig zusammengerechnet werden!
               </p>
             </div>
+
+            <!-- Form -->
             <form
               class="pt-6"
               name="insertData"
@@ -105,8 +109,6 @@ function setActive() {
               <div
                 class="mb-1 grid grid-cols-1 justify-items-stretch gap-3 md:grid-cols-2"
               >
-                <!-- TODO -->
-                <!-- evtl: relativ z-0 -->
                 <div class="mb-6">
                   <label for="f_vorname" class="form-label">Vorname:</label>
                   <input
@@ -115,7 +117,7 @@ function setActive() {
                     pattern="[\p{L} -]+"
                     name="vorname"
                     id="f_vorname"
-                    v-model="stepdata.vorname"
+                    v-model="steps.vorname"
                     @focus="addNotEmpty"
                     @blur="removeNotEmpty"
                     required
@@ -131,7 +133,7 @@ function setActive() {
                     pattern="[\p{L} -]+"
                     name="name"
                     id="f_name"
-                    v-model="stepdata.name"
+                    v-model="steps.name"
                     @focus="addNotEmpty"
                     @blur="removeNotEmpty"
                     required
@@ -144,20 +146,20 @@ function setActive() {
                   >
                   <select
                     name="klasse"
-                    class="form-input"
+                    class="form-select"
                     id="f_klasse"
-                    v-model="stepdata.klasse"
+                    v-model="steps.klasse"
                     @focus="addNotEmpty"
                     @blur="removeNotEmpty"
                     required
                   >
                     <!-- Default -->
-                    <option value="" class=""></option>
+                    <option value="" class="form-select-option"></option>
                     <option
                       v-for="klasse in klassen_liste"
                       :key="klasse"
                       :value="klasse"
-                      class=""
+                      class="form-select-option"
                     >
                       {{ klasse }}
                     </option>
@@ -170,20 +172,20 @@ function setActive() {
                   >
                   <select
                     name="zeitraum"
-                    class="form-input"
+                    class="form-select"
                     id="f_zeitraum"
-                    v-model="stepdata.zeitraum"
+                    v-model="steps.zeitraum"
                     @focus="addNotEmpty"
                     @blur="removeNotEmpty"
                     required
                   >
                     <!-- Default -->
-                    <option value="" class=""></option>
+                    <option value="" class="form-select-option"></option>
                     <option
                       v-for="zeitraum in zeitraum_liste"
                       :key="zeitraum"
                       :value="zeitraum"
-                      class=""
+                      class="form-select-option"
                     >
                       {{ zeitraum }}
                     </option>
@@ -208,7 +210,7 @@ function setActive() {
                     pattern="[0-9]+"
                     name="schritte"
                     id="f_schritte"
-                    v-model="stepdata.schritte"
+                    v-model="steps.schritte"
                     @focus="addNotEmpty"
                     @blur="removeNotEmpty"
                     required
@@ -287,7 +289,7 @@ function setActive() {
 export default {
   data() {
     return {
-      stepdata: {
+      steps: {
         vorname: "",
         name: "",
         klasse: "",
@@ -300,7 +302,7 @@ export default {
   },
   methods: {
     handleSubmit() {
-      console.log(this.stepdata);
+      console.log(this.steps);
       //TODO
     },
     addNotEmpty(e) {
