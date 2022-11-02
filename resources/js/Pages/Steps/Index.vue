@@ -1,8 +1,11 @@
 <script setup>
 import ViewLayout from "@/Layouts/ViewLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import { Head } from "@inertiajs/inertia-vue3";
+import InputError from "@/Components/InputError.vue";
+import { useForm, Head } from "@inertiajs/inertia-vue3";
 import { ref, Transition } from "vue";
+
+const submit_disabled = ref(true); // TODO
 
 const isActive = ref(false);
 function setActive() {
@@ -10,6 +13,15 @@ function setActive() {
 }
 
 const klassen_liste = ["5a", "5b", "5c"];
+
+const form = useForm({
+  vorname: "",
+  name: "",
+  klasse: "",
+  zeitraum: "",
+  schritte: "",
+  screenshot: "",
+});
 </script>
 
 <template>
@@ -104,7 +116,11 @@ const klassen_liste = ["5a", "5b", "5c"];
               class="pt-6"
               name="insertData"
               id="insertData"
-              @submit.prevent="handleSubmit"
+              @submit.prevent="
+                form.post(route('steps.store'), {
+                  onSuccess: () => form.reset(),
+                })
+              "
             >
               <div
                 class="mb-1 grid grid-cols-1 justify-items-stretch gap-3 md:grid-cols-2"
@@ -117,12 +133,13 @@ const klassen_liste = ["5a", "5b", "5c"];
                     pattern="[\p{L} -]+"
                     name="vorname"
                     id="f_vorname"
-                    v-model="steps.vorname"
+                    v-model="form.vorname"
                     @focus="addNotEmpty"
                     @blur="removeNotEmpty"
                     required
                     autofocus
                   />
+                  <InputError :message="form.errors.vorname" class="mt-2" />
                 </div>
 
                 <div class="mb-6">
@@ -133,7 +150,7 @@ const klassen_liste = ["5a", "5b", "5c"];
                     pattern="[\p{L} -]+"
                     name="name"
                     id="f_name"
-                    v-model="steps.name"
+                    v-model="form.name"
                     @focus="addNotEmpty"
                     @blur="removeNotEmpty"
                     required
@@ -148,7 +165,7 @@ const klassen_liste = ["5a", "5b", "5c"];
                     name="klasse"
                     class="form-select"
                     id="f_klasse"
-                    v-model="steps.klasse"
+                    v-model="form.klasse"
                     @focus="addNotEmpty"
                     @blur="removeNotEmpty"
                     required
@@ -174,7 +191,7 @@ const klassen_liste = ["5a", "5b", "5c"];
                     name="zeitraum"
                     class="form-select"
                     id="f_zeitraum"
-                    v-model="steps.zeitraum"
+                    v-model="form.zeitraum"
                     @focus="addNotEmpty"
                     @blur="removeNotEmpty"
                     required
@@ -210,7 +227,7 @@ const klassen_liste = ["5a", "5b", "5c"];
                     pattern="[0-9]+"
                     name="schritte"
                     id="f_schritte"
-                    v-model="steps.schritte"
+                    v-model="form.schritte"
                     @focus="addNotEmpty"
                     @blur="removeNotEmpty"
                     required
@@ -289,22 +306,21 @@ const klassen_liste = ["5a", "5b", "5c"];
 export default {
   data() {
     return {
-      steps: {
-        vorname: "",
-        name: "",
-        klasse: "",
-        // zeitraum: '',
-        schritte: "",
-        // screenshot: '',
-      },
-      submit_disabled: false,
+      // steps: {
+      //   vorname: "",
+      //   name: "",
+      //   klasse: "",
+      //   // zeitraum: '',
+      //   schritte: "",
+      //   // screenshot: '',
+      // },
     };
   },
   methods: {
-    handleSubmit() {
-      console.log(this.steps);
-      //TODO
-    },
+    // handleSubmit() {
+    //   console.log(this.steps);
+    //   //TODO
+    // },
     addNotEmpty(e) {
       e.target.parentElement.classList.add("form-not-empty");
     },

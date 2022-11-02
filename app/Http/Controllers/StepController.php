@@ -36,7 +36,13 @@ class StepController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    $validated = $request->validate([
+      "vorname" => "required|string|max:50",
+    ]);
+
+    $request->steps()->create($validated);
+
+    return redirect(route("steps.index"));
   }
 
   /**
