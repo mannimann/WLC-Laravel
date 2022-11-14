@@ -43,6 +43,11 @@ class StepController extends Controller
     // $request->steps()->create($validated);
 
     // return redirect(route("steps.index"));
+
+    error_log(request("vorname"));
+    error_log(request("name"));
+    error_log(request("klasse"));
+    error_log(request("schritte"));
   }
 
   /**
