@@ -57,8 +57,8 @@ const showingNavigationDropdown = ref(false);
                 Eintragen
               </NavLink>
               <NavLink
-                :href="route('dashboard')"
-                :active="route().current('dashboard')"
+                :href="route('auswertung')"
+                :active="route().current('auswertung')"
               >
                 Auswertung
               </NavLink>
@@ -138,8 +138,8 @@ const showingNavigationDropdown = ref(false);
             Eintragen
           </ResponsiveNavLink>
           <ResponsiveNavLink
-            :href="route('dashboard')"
-            :active="route().current('dashboard')"
+            :href="route('auswertung')"
+            :active="route().current('auswertung')"
           >
             Auswertung
           </ResponsiveNavLink>

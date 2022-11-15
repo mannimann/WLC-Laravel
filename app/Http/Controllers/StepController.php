@@ -44,10 +44,22 @@ class StepController extends Controller
 
     // return redirect(route("steps.index"));
 
-    error_log(request("vorname"));
-    error_log(request("name"));
-    error_log(request("klasse"));
-    error_log(request("schritte"));
+    $step = new Step();
+
+    $step->vorname = request("vorname");
+    $step->name = request("name");
+    $step->klasse = request("klasse");
+    $step->zeitraum = request("zeitraum");
+    $step->schritte = request("schritte");
+
+    $step->save();
+
+    error_log($step);
+
+    // error_log(request("vorname"));
+    // error_log(request("name"));
+    // error_log(request("klasse"));
+    // error_log(request("schritte"));
   }
 
   /**

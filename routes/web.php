@@ -17,20 +17,25 @@ use App\Http\Controllers\StepController;
 */
 
 Route::get("/welcome", function () {
-    return Inertia::render("Welcome", [
-        "canLogin" => Route::has("login"),
-        "canRegister" => Route::has("register"),
-        "laravelVersion" => Application::VERSION,
-        "phpVersion" => PHP_VERSION,
-    ]);
+  return Inertia::render("Welcome", [
+    "canLogin" => Route::has("login"),
+    "canRegister" => Route::has("register"),
+    "laravelVersion" => Application::VERSION,
+    "phpVersion" => PHP_VERSION,
+  ]);
 });
 
 Route::get("/dashboard", function () {
-    return Inertia::render("Dashboard");
+  return Inertia::render("Dashboard");
 })
-    ->middleware(["auth", "verified"])
-    ->name("dashboard");
+  ->middleware(["auth", "verified"])
+  ->name("dashboard");
 
-Route::resource("/", StepController::class)->only(["index", "store"]);
+Route::resource("/", StepController::class)
+  //   ->name("steps")
+  ->only(["index", "store"]);
+
+Route::inertia("/auswertung", "Auswertung/Index")->name("auswertung");
+Route::inertia("/steps", "Steps/Index")->name("steps");
 
 require __DIR__ . "/auth.php";
