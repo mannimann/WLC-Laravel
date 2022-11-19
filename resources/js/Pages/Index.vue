@@ -26,7 +26,7 @@ const form = useForm({
 </script>
 
 <template>
-  <Head title="Steps" />
+  <Head title="Eintragen" />
 
   <ViewLayout>
     <div class="mx-auto p-4 sm:p-6 lg:p-8">
