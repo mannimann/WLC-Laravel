@@ -57,8 +57,8 @@ const showingNavigationDropdown = ref(false);
                 Eintragen
               </NavLink>
               <NavLink
-                :href="route('auswertung')"
-                :active="route().current('auswertung')"
+                :href="route('steps.index')"
+                :active="route().current('steps.index')"
               >
                 Auswertung
               </NavLink>
@@ -138,14 +138,13 @@ const showingNavigationDropdown = ref(false);
             Eintragen
           </ResponsiveNavLink>
           <ResponsiveNavLink
-            :href="route('auswertung')"
-            :active="route().current('auswertung')"
+            :href="route('steps.index')"
+            :active="route().current('steps.index')"
           >
             Auswertung
           </ResponsiveNavLink>
 
           <!-- Responsive Login/Register -->
-
           <div
             v-if="canLogin"
             class="space-y-1 border-t border-gray-700 pt-1 text-secondary underline"

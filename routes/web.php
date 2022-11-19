@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -31,11 +32,25 @@ Route::get("/dashboard", function () {
   ->middleware(["auth", "verified"])
   ->name("dashboard");
 
-Route::resource("/", StepController::class)
-  //   ->name("steps")
-  ->only(["index", "store"]);
+// Route::resource("/", StepController::class)
+//   //   ->name("steps")
+//   ->only(["index", "store"]);
 
-Route::inertia("/auswertung", "Auswertung/Index")->name("auswertung");
-Route::inertia("/steps", "Steps/Index")->name("steps");
+// Route::get("/auswertung", function () {
+//   return Inertia::render("Auswertung/Index");
+// })->name("auswertung");
+
+// Route::get("/steps", function () {
+//   return Inertia::render("Steps/Index");
+// })->name("steps");
+
+// TODO: DB-Inhalt in Auswertung anzeigen
+// TODO: Routes umbauen -> Steps/Index wird nicht angezeigt, sondern nur "/"
+
+Route::get("/", HomeController::class)->name("index");
+
+Route::resource("/auswertung", StepController::class, [
+  "names" => "steps",
+])->only(["index", "store"]);
 
 require __DIR__ . "/auth.php";
