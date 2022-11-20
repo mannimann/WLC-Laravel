@@ -16,7 +16,7 @@ import { Head, Link } from "@inertiajs/inertia-vue3";
     <div class="mx-auto p-4 sm:p-6 lg:p-8">
       <section class="mb-3">
         <div
-          class="container mx-auto overflow-hidden rounded-lg bg-secondarybg shadow-md"
+          class="container mx-auto overflow-hidden rounded-lg bg-secondarybg shadow-md dark:bg-secondarybg_dark"
         >
           <AuswertungTest />
         </div>

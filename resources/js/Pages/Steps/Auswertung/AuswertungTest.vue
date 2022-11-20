@@ -6,7 +6,9 @@ import Table from "./Table.vue";
 <template>
   <div class="card card-primary mb-3">
     <div class="card-header">
-      <h3 class="panel-title text-primary">DB-Inhalt (Test):</h3>
+      <h3 class="panel-title text-primary dark:text-primary_dark">
+        DB-Inhalt (Test):
+      </h3>
     </div>
     <div class="card-body">
       <!-- <table>
@@ -32,8 +34,7 @@ export default {
         "Name",
         "Vorname",
         "Klasse",
-        "Von",
-        "Bis",
+        "Zeitraum",
         "Schritte",
         "createdAt",
         "updatedAt",

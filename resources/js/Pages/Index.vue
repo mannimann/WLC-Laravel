@@ -63,10 +63,10 @@ const form = useForm({
         <!-- DescriptionCard -->
         <section id="DescriptionCard" class="mb-3">
           <div
-            class="container mx-auto overflow-hidden rounded-lg bg-secondarybg shadow-md"
+            class="container mx-auto overflow-hidden rounded-lg bg-secondarybg shadow-md dark:bg-secondarybg_dark"
           >
             <div
-              class="flex justify-between p-3 text-2xl font-bold text-primary"
+              class="flex justify-between p-3 text-2xl font-bold text-primary dark:text-primary_dark"
               :class="{ active: isActive }"
               role="button"
               @click="setActive"
@@ -130,14 +130,14 @@ const form = useForm({
         <!-- InputCard -->
         <section id="InputCard" class="mb-3">
           <div
-            class="container mx-auto overflow-hidden rounded-lg bg-secondarybg shadow-md"
+            class="container mx-auto overflow-hidden rounded-lg bg-secondarybg shadow-md dark:bg-secondarybg_dark"
           >
             <div class="p-3 text-2xl font-bold">
               <h3>Daten eingeben:</h3>
             </div>
 
             <div class="p-3">
-              <div class="text-primary">
+              <div class="text-primary dark:text-primary_dark">
                 <p class="text-lg">
                   Achte darauf, deinen Namen immer gleich zu schreiben, sonst
                   können deine Schritte nicht richtig zusammengerechnet werden!

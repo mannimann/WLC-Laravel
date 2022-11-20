@@ -9,10 +9,14 @@
   h4,
   h5,
   h6 {
-    @apply text-primary;
+    @apply text-primary dark:text-primary_dark;
   }
   a {
     @apply text-blue-500;
+  }
+  /* TODO */
+  body {
+    @apply transition-colors duration-700;
   }
 }
 
@@ -21,7 +25,7 @@
     @apply absolute z-30 origin-[0] translate-y-[18px] scale-[1.4] cursor-text text-[10px] uppercase transition-all duration-[0.4s];
   }
   .form-input {
-    @apply w-full border-0 border-b border-secondary bg-secondarybg hover:border-b-primary hover:text-primary hover:outline-0 focus:border-transparent focus:border-b-primary focus:bg-none focus:text-primary focus:shadow-none focus:outline-0 focus:ring-0;
+    @apply w-full border-0 border-b border-secondary bg-secondarybg hover:border-b-primary hover:text-primary hover:outline-0 focus:border-transparent focus:border-b-primary focus:bg-none focus:text-primary focus:shadow-none focus:outline-0 focus:ring-0 dark:border-secondary_dark dark:bg-secondarybg_dark dark:hover:border-b-primary_dark dark:hover:text-primary_dark dark:focus:border-b-primary_dark dark:focus:text-primary_dark;
   }
   .form-select {
     @apply form-input;

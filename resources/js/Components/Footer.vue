@@ -1,8 +1,12 @@
 <!-- TODO: redirect -->
 
 <template>
-  <div class="h-6 bg-gradient-to-b from-primarybg to-secondarybg"></div>
-  <div class="bg-secondarybg pt-1 pb-3 text-center text-secondary">
+  <div
+    class="h-6 bg-gradient-to-b from-primarybg to-secondarybg dark:from-primarybg_dark dark:to-secondarybg_dark"
+  ></div>
+  <div
+    class="bg-secondarybg pt-1 pb-3 text-center text-secondary dark:bg-secondarybg_dark dark:text-secondary_dark"
+  >
     <div class="grid grid-cols-1 md:grid-cols-2">
       <div class="mt-1 mb-1">
         <p>

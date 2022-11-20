@@ -4,6 +4,7 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import NavLink from "@/Components/NavLink.vue";
 import Footer from "@/Components/Footer.vue";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
+import DarkModeButton from "@/Components/DarkModeButton.vue";
 import { Link } from "@inertiajs/inertia-vue3";
 
 // defineProps({
@@ -18,14 +19,13 @@ const showingNavigationDropdown = ref(false);
 </script>
 
 <template>
-  <div class="flex min-h-screen flex-col bg-primarybg">
+  <div class="flex min-h-screen flex-col bg-primarybg dark:bg-primarybg_dark">
     <!-- Page Heading -->
-    <header class="bg-secondarybg shadow">
+    <header class="bg-secondarybg shadow dark:bg-secondarybg_dark">
       <div class="mx-auto max-w-7xl px-4 pt-6 pb-0 sm:px-6 lg:px-8">
         <div v-if="$slots.header">
           <slot name="header" />
         </div>
-
         <div v-else>
           <h1 class="text-center text-4xl font-bold uppercase lg:text-5xl">
             Winterlauf Challenge
@@ -33,9 +33,8 @@ const showingNavigationDropdown = ref(false);
         </div>
       </div>
     </header>
-
     <nav
-      class="border-b border-secondary bg-gradient-to-b from-secondarybg to-primarybg"
+      class="border-b border-secondary bg-gradient-to-b from-secondarybg to-primarybg dark:border-secondary_dark dark:from-secondarybg_dark dark:to-primarybg_dark"
     >
       <!-- Primary Navigation Menu -->
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -47,7 +46,6 @@ const showingNavigationDropdown = ref(false);
                 <ApplicationLogo class="block h-9 w-auto" />
               </Link>
             </div>
-
             <!-- Navigation Links -->
             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
               <NavLink
@@ -64,31 +62,31 @@ const showingNavigationDropdown = ref(false);
               </NavLink>
             </div>
           </div>
-
           <div class="hidden sm:ml-6 sm:flex sm:items-center">
+            <DarkModeButton />
             <!-- Login/Register -->
             <div class="relative ml-3">
               <div v-if="canLogin" class="hidden px-6 py-4 sm:block">
                 <Link
                   :href="route('login')"
-                  class="text-sm text-secondary underline"
+                  class="text-sm text-secondary underline dark:text-secondary_dark"
                   >Log in</Link
                 >
                 <Link
                   v-if="canRegister"
                   :href="route('register')"
-                  class="ml-4 text-sm text-secondary underline"
+                  class="ml-4 text-sm text-secondary underline dark:text-secondary_dark"
                   >Register</Link
                 >
               </div>
             </div>
           </div>
-
           <!-- Hamburger -->
           <div class="-mr-2 flex items-center sm:hidden">
+            <DarkModeButton />
             <button
               @click="showingNavigationDropdown = !showingNavigationDropdown"
-              class="inline-flex items-center justify-center rounded-md p-2 text-secondary transition duration-150 ease-in-out hover:bg-primarybg hover:text-primary focus:bg-primarybg focus:text-primary focus:outline-none"
+              class="inline-flex items-center justify-center rounded-md p-2 text-secondary transition duration-150 ease-in-out hover:bg-primarybg hover:text-primary focus:bg-primarybg focus:text-primary focus:outline-none dark:text-secondary_dark dark:hover:bg-primarybg_dark dark:hover:text-primary_dark dark:focus:bg-primarybg_dark dark:focus:text-primary_dark"
             >
               <svg
                 class="h-6 w-6"
@@ -121,7 +119,6 @@ const showingNavigationDropdown = ref(false);
           </div>
         </div>
       </div>
-
       <!-- Responsive Navigation Menu -->
       <div
         :class="{
@@ -143,11 +140,11 @@ const showingNavigationDropdown = ref(false);
           >
             Auswertung
           </ResponsiveNavLink>
-
           <!-- Responsive Login/Register -->
+          <!-- TODO: dark-border-->
           <div
             v-if="canLogin"
-            class="space-y-1 border-t border-gray-700 pt-1 text-secondary underline"
+            class="space-y-1 border-t border-gray-700 pt-1 text-secondary underline dark:text-secondary_dark"
           >
             <ResponsiveNavLink :href="route('login')">Log in</ResponsiveNavLink>
             <ResponsiveNavLink v-if="canRegister" :href="route('register')"
@@ -157,12 +154,10 @@ const showingNavigationDropdown = ref(false);
         </div>
       </div>
     </nav>
-
     <!-- Page Content -->
-    <main class="text-secondary">
+    <main class="text-secondary dark:text-secondary_dark">
       <slot />
     </main>
-
     <footer class="mt-auto">
       <Footer />
     </footer>
