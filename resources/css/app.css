@@ -15,9 +15,9 @@
     @apply text-blue-500;
   }
   /* TODO */
-  body {
+  /* body {
     @apply transition-colors duration-700;
-  }
+  } */
 }
 
 @layer components {

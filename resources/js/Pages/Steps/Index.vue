@@ -7,6 +7,8 @@ import AuswertungTest from "./Auswertung/AuswertungTest.vue";
 
 import ViewLayout from "@/Layouts/ViewLayout.vue";
 import { Head, Link } from "@inertiajs/inertia-vue3";
+
+const props = defineProps(["steps"]);
 </script>
 
 <template>
@@ -32,6 +34,11 @@ import { Head, Link } from "@inertiajs/inertia-vue3";
       <div class="col-12 mb-3">
         <AuswertungAlle />
       </div> -->
+
+      <!-- TODO -->
+      <div v-for="step in steps">
+        {{ step }}
+      </div>
     </div>
   </ViewLayout>
 </template>

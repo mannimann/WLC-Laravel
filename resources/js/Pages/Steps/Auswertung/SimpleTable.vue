@@ -1,6 +1,6 @@
 <!-- TODO: auf alle Tabellen anwenden -->
 <script setup>
-// import { DataTable } from 'simple-datatables';
+// import { DataTable } from "simple-datatables";
 </script>
 
 <template>

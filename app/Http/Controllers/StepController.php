@@ -15,7 +15,15 @@ class StepController extends Controller
    */
   public function index()
   {
-    return Inertia::render("Steps/Index", []);
+    $steps = Step::get();
+    // $steps = Step::where("name", "qwe")->get();
+    // $steps = Step::where("name", "<>", "qwe")->get();
+
+    // dd($steps);
+
+    return Inertia::render("Steps/Index", [
+      "steps" => $steps,
+    ]);
   }
 
   /**
