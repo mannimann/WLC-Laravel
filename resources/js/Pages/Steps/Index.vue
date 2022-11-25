@@ -20,7 +20,7 @@ const props = defineProps(["steps"]);
         <div
           class="container mx-auto overflow-hidden rounded-lg bg-secondarybg shadow-md dark:bg-secondarybg_dark"
         >
-          <AuswertungTest />
+          <AuswertungTest :steps="steps" />
         </div>
       </section>
 
@@ -36,9 +36,9 @@ const props = defineProps(["steps"]);
       </div> -->
 
       <!-- TODO -->
-      <div v-for="step in steps">
+      <!-- <div v-for="step in steps">
         {{ step }}
-      </div>
+      </div> -->
     </div>
   </ViewLayout>
 </template>

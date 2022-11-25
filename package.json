@@ -23,7 +23,9 @@
         "vue": "^3.2.31"
     },
     "dependencies": {
+        "@andresouzaabreu/vue-data-table": "^3.3.3",
         "@vueuse/core": "^9.5.0",
-        "simple-datatables": "^4.0.7"
+        "simple-datatables": "^4.0.7",
+        "vue-easytable": "^2.21.8"
     }
 }

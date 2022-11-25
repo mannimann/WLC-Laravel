@@ -1,6 +1,24 @@
 <script setup>
-import Table from "./Table.vue";
+// import Table from "./Table.vue";
 // import StepdataDataService from '../../services/StepdataDataService';
+
+import SimpleTable from "./SimpleTable.vue";
+
+// import DataTable from "@andresouzaabreu/vue-data-table";
+// Vue.component("data-table", DataTable);
+
+const props = defineProps(["steps"]);
+
+const header = [
+  "Id",
+  "Name",
+  "Vorname",
+  "Klasse",
+  "Zeitraum",
+  "Schritte",
+  "createdAt",
+  "updatedAt",
+];
 </script>
 
 <template>
@@ -19,51 +37,16 @@ import Table from "./Table.vue";
           <td v-for="(item, index) in row" :key="index" :class="{ 'fw-bold': index === 0 }">{{ item }}</td>
         </tr>
       </table> -->
-      <Table :header="header" :rows="rows" sortable />
+
+      <!-- <Table :header="header" :rows="rows" sortable /> -->
+
+      <!-- <DataTable v-bind="bindings" /> -->
+
+      <SimpleTable :header="header" :rows="steps" />
+
+      <!-- <div v-for="step in steps">
+        {{ step }}
+      </div> -->
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  components: { Table },
-  data() {
-    return {
-      header: [
-        "Id",
-        "Name",
-        "Vorname",
-        "Klasse",
-        "Zeitraum",
-        "Schritte",
-        "createdAt",
-        "updatedAt",
-      ],
-      rows: [],
-    };
-  },
-  methods: {
-    retrieveData() {
-      // fetch('http://localhost:3000/api/stepdata')
-      //   .then((response) => response.json())
-      //   .then((data) => {
-      //     this.rows = data;
-      //     console.log(this.rows);
-      //   })
-      //   .catch((err) => console.log(err.message));
-      // StepdataDataService.getAll()
-      //   .then((res) => {
-      //     this.rows = res.data;
-      //     // console.log(res.data);
-      //     // console.log(this.rows);
-      //   })
-      //   .catch((err) => {
-      //     console.log("Error: ", err.message);
-      //   });
-    },
-  },
-  mounted() {
-    this.retrieveData();
-  },
-};
-</script>

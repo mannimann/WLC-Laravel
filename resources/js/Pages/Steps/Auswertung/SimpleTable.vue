@@ -1,10 +1,10 @@
 <!-- TODO: auf alle Tabellen anwenden -->
 <script setup>
-// import { DataTable } from "simple-datatables";
+import { DataTable } from "simple-datatables";
 </script>
 
 <template>
-  <div class="table-responsible">
+  <div class="">
     <table
       id="myTable"
       ref="simpleTable"
