@@ -1,6 +1,13 @@
 <!-- TODO: auf alle Tabellen anwenden -->
 <script setup>
 import { DataTable } from "simple-datatables";
+
+const props = defineProps({
+  header: Array,
+  rows: Array,
+  footer: Array,
+  sortable: Boolean,
+});
 </script>
 
 <template>
@@ -11,7 +18,7 @@ import { DataTable } from "simple-datatables";
       style="width: 100%"
       class="table-striped table"
     >
-      <thead>
+      <thead class="text-primary">
         <tr style="align: left">
           <th v-for="(item, index) in header" :key="item">
             {{ item }}
@@ -48,7 +55,6 @@ import { DataTable } from "simple-datatables";
 
 <script>
 export default {
-  props: { header: Array, rows: Array, footer: Array, sortable: Boolean },
   data() {
     return {
       // header: ['Age', 'First Name', 'Last Name'],
