@@ -5,8 +5,9 @@
 
 import "vue-good-table-next/dist/vue-good-table-next.css";
 import { VueGoodTable } from "vue-good-table-next";
-import { useDark } from "@vueuse/core";
-import { ref, watch } from "vue";
+// import { useDark } from "@vueuse/core";
+// import { ref, watch } from "vue";
+import Card from "@/Components/Card.vue";
 
 const props = defineProps(["steps"]);
 
@@ -74,15 +75,11 @@ const columns = [
 </script>
 
 <template>
-  <div class="card card-primary mb-3">
-    <div class="card-header m-3">
-      <h3
-        class="panel-title text-lg font-bold text-primary dark:text-primary_dark"
-      >
-        DB-Inhalt (Test):
-      </h3>
-    </div>
-    <div class="card-body m-3">
+  <Card>
+    <template v-slot:header>
+      <h3>DB-Inhalt (Test):</h3>
+    </template>
+    <template v-slot:body>
       <!-- <SimpleTable :header="header" :rows="steps" /> -->
 
       <!-- styleClass="condensed" -->
@@ -156,6 +153,6 @@ const columns = [
         {{ step }}
       </div> -->
       <!-- <p>{{ isDark }}</p> -->
-    </div>
-  </div>
+    </template>
+  </Card>
 </template>

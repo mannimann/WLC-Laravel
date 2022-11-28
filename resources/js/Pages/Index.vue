@@ -4,6 +4,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import InputError from "@/Components/InputError.vue";
 import { useForm, Head, Link } from "@inertiajs/inertia-vue3";
 import { ref, Transition } from "vue";
+import Card from "@/Components/Card.vue";
 
 const submit_disabled = ref(true); // TODO
 const submitted = ref(false);
@@ -29,114 +30,113 @@ const form = useForm({
   <Head title="Eintragen" />
 
   <ViewLayout>
-    <div class="mx-auto p-4 sm:p-6 lg:p-8">
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
       <!-- Submitted -->
       <div v-if="submitted">
-        <div
-          class="mx-auto w-fit overflow-hidden rounded-lg bg-secondarybg shadow-md"
-        >
-          <div class="p-3 text-center text-2xl font-bold">
+        <Card>
+          <template v-slot:header>
             <h3>Daten erfolgreich eingetragen</h3>
-          </div>
-          <div class="mt-3 text-center">
-            <PrimaryButton
-              class="m-3 bg-green-700 hover:bg-green-600 active:bg-green-800"
-              value="Zurück"
-              @click="submitted = !submitted"
-            >
-              <span class="text-lg">Zurück</span>
-            </PrimaryButton>
-
-            <Link :href="route('dashboard')">
+          </template>
+          <template v-slot:body>
+            <div class="mt-3 text-center">
               <PrimaryButton
                 class="m-3 bg-green-700 hover:bg-green-600 active:bg-green-800"
-                value="Zur Auswertung"
+                value="Zurück"
+                @click="submitted = !submitted"
               >
-                <span class="text-lg">Zur Auswertung</span>
+                <span class="text-lg">Zurück</span>
               </PrimaryButton>
-            </Link>
-          </div>
-        </div>
+              <Link :href="route('dashboard')">
+                <PrimaryButton
+                  class="m-3 bg-green-700 hover:bg-green-600 active:bg-green-800"
+                  value="Zur Auswertung"
+                >
+                  <span class="text-lg">Zur Auswertung</span>
+                </PrimaryButton>
+              </Link>
+            </div>
+          </template>
+        </Card>
       </div>
       <!-- Normal Site -->
       <div v-else>
         <!-- DescriptionCard -->
         <section id="DescriptionCard" class="mb-3">
-          <div
-            class="container mx-auto overflow-hidden rounded-lg bg-secondarybg shadow-md dark:bg-secondarybg_dark"
-          >
-            <div
-              class="flex justify-between p-3 text-2xl font-bold text-primary dark:text-primary_dark"
-              :class="{ active: isActive }"
-              role="button"
-              @click="setActive"
-            >
-              <h3>Beschreibung:</h3>
+          <Card>
+            <template v-slot:header>
               <div
-                class="transition-all duration-500 ease-in-out"
-                :class="{ 'rotate-180': isActive }"
+                class="flex justify-between text-primary dark:text-primary_dark"
+                :class="{ active: isActive }"
+                role="button"
+                @click="setActive"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="3.5"
-                  stroke="currentColor"
-                  class="h-9 w-9"
+                <h3>Beschreibung:</h3>
+                <div
+                  class="transition-all duration-500 ease-in-out"
+                  :class="{ 'rotate-180': isActive }"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                  />
-                </svg>
-              </div>
-            </div>
-
-            <Transition name="cardbody">
-              <div v-show="isActive" class="p-3">
-                <p>
-                  Die Challenge besteht darin, in den nächsten Wochen
-                  <span class="uppercase">so viele Schritte wie möglich</span>
-                  zu machen. Nutze eine App oder eine Fitness-Uhr, um die
-                  Schritte, die du jeden Tag machst, mitzählen zu lassen.
-                  <span class="uppercase">Jede Woche</span> kannst dem die
-                  Gesamtanzahl der erreichten Schritte
-                  <span class="uppercase">einmal hier eintragen</span> und für
-                  deine Klasse Schritte sammeln. Lade dazu am besten noch einen
-                  Screenshot mit deiner Schrittanzahl hoch. <br />Wir suchen die
-                  beste Klasse und den besten Läufer! <br /><br />
-                  <strong
-                    >Also nimm die Beine in die Hand und los gehts!</strong
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="3.5"
+                    stroke="currentColor"
+                    class="h-9 w-9"
                   >
-                </p>
-                <div class="mx-auto flex flex-shrink justify-center">
-                  <iframe
-                    class="aspect-video h-auto max-w-full"
-                    width="560"
-                    height="315"
-                    src="https://www.youtube.com/embed/YJ3ShqLPiPo"
-                    title="YouTube video player"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                  ></iframe>
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                    />
+                  </svg>
                 </div>
               </div>
-            </Transition>
-          </div>
+            </template>
+
+            <template v-slot:body>
+              <Transition name="cardbody">
+                <div v-show="isActive">
+                  <p>
+                    Die Challenge besteht darin, in den nächsten Wochen
+                    <span class="uppercase">so viele Schritte wie möglich</span>
+                    zu machen. Nutze eine App oder eine Fitness-Uhr, um die
+                    Schritte, die du jeden Tag machst, mitzählen zu lassen.
+                    <span class="uppercase">Jede Woche</span> kannst dem die
+                    Gesamtanzahl der erreichten Schritte
+                    <span class="uppercase">einmal hier eintragen</span> und für
+                    deine Klasse Schritte sammeln. Lade dazu am besten noch
+                    einen Screenshot mit deiner Schrittanzahl hoch. <br />Wir
+                    suchen die beste Klasse und den besten Läufer! <br /><br />
+                    <strong
+                      >Also nimm die Beine in die Hand und los gehts!</strong
+                    >
+                  </p>
+                  <div class="mx-auto flex flex-shrink justify-center">
+                    <iframe
+                      class="aspect-video h-auto max-w-full"
+                      width="560"
+                      height="315"
+                      src="https://www.youtube.com/embed/YJ3ShqLPiPo"
+                      title="YouTube video player"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  </div>
+                </div>
+              </Transition>
+            </template>
+          </Card>
         </section>
 
         <!-- InputCard -->
         <section id="InputCard" class="mb-3">
-          <div
-            class="container mx-auto overflow-hidden rounded-lg bg-secondarybg shadow-md dark:bg-secondarybg_dark"
-          >
-            <div class="p-3 text-2xl font-bold">
+          <Card>
+            <template v-slot:header>
               <h3>Daten eingeben:</h3>
-            </div>
+            </template>
 
-            <div class="p-3">
+            <template v-slot:body>
               <div class="text-primary dark:text-primary_dark">
                 <p class="text-lg">
                   Achte darauf, deinen Namen immer gleich zu schreiben, sonst
@@ -317,15 +317,15 @@ const form = useForm({
                 </div>
               </form>
               <!-- <p>{{ screenshot }}</p> -->
-            </div>
-          </div>
+            </template>
+          </Card>
         </section>
       </div>
     </div>
   </ViewLayout>
 </template>
 
-<style>
+<style scoped>
 .chevron-enter-from,
 .chevron-leave-to {
   -webkit-transform: rotate(180deg);
@@ -349,25 +349,8 @@ const form = useForm({
 </style>
 
 <script>
-// TODO
 export default {
-  data() {
-    return {
-      // steps: {
-      //   vorname: "",
-      //   name: "",
-      //   klasse: "",
-      //   // zeitraum: '',
-      //   schritte: "",
-      //   // screenshot: '',
-      // },
-    };
-  },
   methods: {
-    // handleSubmit() {
-    //   console.log(this.steps);
-    //   //TODO
-    // },
     addNotEmpty(e) {
       e.target.parentElement.classList.add("form-not-empty");
     },
@@ -380,7 +363,6 @@ export default {
     fileChanged(e) {
       for (var i = 0; i < e.target.files.length; i++) {
         var file = e.target.files[i];
-
         if (file.type == "image/jpeg" || file.type == "image/png") {
           var reader = new FileReader();
           reader.onload = (readerEvent) => {
@@ -389,7 +371,6 @@ export default {
               var max_size = 860;
               var w = image.width;
               var h = image.height;
-
               if (w > h) {
                 if (w > max_size) {
                   h *= max_size / w;
@@ -401,13 +382,12 @@ export default {
                   h = max_size;
                 }
               }
-
               var canvas = document.createElement("canvas");
               canvas.width = w;
               canvas.height = h;
               canvas.getContext("2d").drawImage(image, 0, 0, w, h);
               if (file.type == "image/jpeg") {
-                var dataURL = canvas.toDataURL("image/jpeg", 1.0);
+                var dataURL = canvas.toDataURL("image/jpeg", 1);
               } else {
                 var dataURL = canvas.toDataURL("image/png");
               }

@@ -1,67 +1,187 @@
 <script setup>
-import Table from './Table.vue';
+import "vue-good-table-next/dist/vue-good-table-next.css";
+import { VueGoodTable } from "vue-good-table-next";
+import Card from "@/Components/Card.vue";
+import { ref } from "vue";
+
+const isActive = ref(false);
+function setActive() {
+  isActive.value = !isActive.value;
+}
+
+const props = defineProps(["steps"]);
+
+const columns = [
+  {
+    label: "Id",
+    field: "id",
+    tdClass: "font-bold",
+  },
+  {
+    label: "Name",
+    field: "name",
+  },
+  {
+    label: "Vorname",
+    field: "vorname",
+  },
+  {
+    label: "Klasse",
+    field: "klasse",
+  },
+  {
+    label: "Zeitraum",
+    field: "zeitraum",
+  },
+  {
+    label: "Schritte",
+    field: "schritte",
+    type: "number",
+  },
+  {
+    label: "Created At",
+    field: "created_at",
+    type: "date",
+    dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'",
+    dateOutputFormat: "MM.dd.yy - HH:mm:ss",
+    hidden: true,
+  },
+  {
+    label: "Updated At",
+    field: "updated_at",
+    type: "date",
+    dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'",
+    dateOutputFormat: "MM.dd.yy - HH:mm:ss",
+    hidden: true,
+  },
+];
 </script>
 
 <template>
-  <div class="card card-primary text-primary" id="alleTeilnehmerDiv">
-    <div
-      class="card-header panel-heading"
-      :class="{ active: isActive }"
-      id="alleTeilnehmerHeader"
-      role="button"
-      data-bs-toggle="collapse"
-      data-bs-parent="#alleTeilnehmerDiv"
-      href="#alleTeilnehmer"
-      aria-expanded="false"
-      aria-controls="alleTeilnehmer"
-      @click="setActive"
-    >
-      <h3 class="panel-title">Alle Läufer:</h3>
-    </div>
+  <Card>
+    <template v-slot:header>
+      <div
+        class="flex justify-between text-primary dark:text-primary_dark"
+        :class="{ active: isActive }"
+        role="button"
+        @click="setActive"
+      >
+        <h3>Alle Läufer:</h3>
+        <div
+          class="transition-all duration-500 ease-in-out"
+          :class="{ 'rotate-180': isActive }"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="3.5"
+            stroke="currentColor"
+            class="h-9 w-9"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+            />
+          </svg>
+        </div>
+      </div>
+    </template>
 
-    <div id="alleTeilnehmer" class="card-body collapse" aria-labelledby="alleTeilnehmerHeader">
-      <Table :header="header" sortable />
-    </div>
-  </div>
+    <template v-slot:body>
+      <Transition name="cardbody">
+        <div v-show="isActive">
+          <span class="dark:hidden">
+            <VueGoodTable
+              :columns="columns"
+              :rows="steps"
+              theme=""
+              styleClass="vgt-table striped"
+              :pagination-options="{
+                enabled: true,
+                perPage: 10,
+                position: 'bottom',
+                perPageDropdown: [10, 25, 50],
+                dropdownAllowAll: true,
+                nextLabel: 'Weiter',
+                prevLabel: 'Zurück',
+                rowsPerPageLabel: 'Anzahl pro Seite',
+                ofLabel: 'von',
+                allLabel: 'Alle',
+              }"
+              :search-options="{
+                enabled: true,
+                // trigger: 'enter',
+                skipDiacritics: true,
+                placeholder: 'Suchen...',
+              }"
+              :sort-options="{
+                enabled: true,
+                initialSortBy: { field: 'id', type: 'asc' },
+              }"
+            >
+              <template #emptystate>Keine Einträge vorhanden ...</template>
+            </VueGoodTable>
+          </span>
+
+          <span class="hidden dark:inline">
+            <VueGoodTable
+              :columns="columns"
+              :rows="steps"
+              theme="nocturnal"
+              styleClass="vgt-table striped"
+              :pagination-options="{
+                enabled: true,
+                perPage: 10,
+                position: 'bottom',
+                perPageDropdown: [10, 25, 50],
+                dropdownAllowAll: true,
+                nextLabel: 'Weiter',
+                prevLabel: 'Zurück',
+                rowsPerPageLabel: 'Anzahl pro Seite',
+                ofLabel: 'von',
+                allLabel: 'Alle',
+              }"
+              :search-options="{
+                enabled: true,
+                // trigger: 'enter',
+                skipDiacritics: true,
+                placeholder: 'Suchen...',
+              }"
+              :sort-options="{
+                enabled: true,
+                initialSortBy: { field: 'id', type: 'asc' },
+              }"
+            >
+              <template #emptystate>Keine Einträge vorhanden ...</template>
+            </VueGoodTable>
+          </span>
+        </div>
+      </Transition>
+    </template>
+  </Card>
 </template>
 
-<script>
-export default {
-  props: ['title'],
-  components: { Table },
-  data() {
-    return {
-      isActive: false,
-
-      // TODO: alle Zeiträume auflisten
-      header: ['#', 'Vorname', 'Nachname', 'Klasse', 'Schritte gesamt'],
-    };
-  },
-  methods: {
-    setActive() {
-      this.isActive = !this.isActive;
-    },
-  },
-  mounted() {
-    // fetch('http://localhost:3000/klassen_liste')
-    //   .then((response) => response.json())
-    //   .then((data) => (this.klassen_liste = data))
-    //   .catch((err) => console.log(err.message));
-  },
-};
-</script>
-
 <style scoped>
-.panel-heading h3:before {
-  font-family: FontAwesome;
-  content: '\f078';
-  font-weight: 900;
-  float: right;
-  transition: all 0.5s;
-}
-.panel-heading.active h3:before {
+.chevron-enter-from,
+.chevron-leave-to {
   -webkit-transform: rotate(180deg);
   -moz-transform: rotate(180deg);
   transform: rotate(180deg);
+}
+.cardbody-enter-from,
+.cardbody-leave-to {
+  max-height: 0;
+  overflow: hidden;
+}
+.cardbody-enter-active,
+.cardbody-leave-active {
+  transition: all 0.5s ease-in-out;
+}
+.cardbody-enter-to,
+.cardbody-leave-from {
+  max-height: 100em;
+  overflow: hidden;
 }
 </style>
