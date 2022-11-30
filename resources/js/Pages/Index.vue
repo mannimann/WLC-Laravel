@@ -3,7 +3,7 @@ import ViewLayout from "@/Layouts/ViewLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import InputError from "@/Components/InputError.vue";
 import { useForm, Head, Link } from "@inertiajs/inertia-vue3";
-import { ref, Transition } from "vue";
+import { computed, ref, Transition } from "vue";
 import Card from "@/Components/Card.vue";
 
 const submit_disabled = ref(true); // TODO
@@ -15,6 +15,13 @@ function setActive() {
 }
 
 const klassen_liste = ["5a", "5b", "5c"];
+
+const von = "2022-11-28";
+const bis = "2022-12-04";
+
+const zeitraum_liste = computed(() => {
+  return von + " - " + bis;
+});
 
 const form = useForm({
   vorname: "",
@@ -30,6 +37,10 @@ const form = useForm({
   <Head title="Eintragen" />
 
   <ViewLayout>
+    <p>{{ von }}</p>
+    <p>{{ bis }}</p>
+    <p>{{ zeitraum_liste }}</p>
+
     <div class="container mx-auto p-4 sm:p-6 lg:p-8">
       <!-- Submitted -->
       <div v-if="submitted">
@@ -58,6 +69,7 @@ const form = useForm({
           </template>
         </Card>
       </div>
+
       <!-- Normal Site -->
       <div v-else>
         <!-- DescriptionCard -->
@@ -236,16 +248,16 @@ const form = useForm({
                     >
                       <!-- Default -->
                       <option value="" class="form-select-option"></option>
-                      <option
+                      <!-- <option
                         v-for="zeitraum in zeitraum_liste"
                         :key="zeitraum"
                         :value="zeitraum"
                         class="form-select-option"
                       >
                         {{ zeitraum }}
-                      </option>
+                      </option> -->
 
-                      <option>Testzeitraum</option>
+                      <option>{{ von }} - {{ bis }}</option>
 
                       <!-- TODO -->
 
@@ -313,10 +325,23 @@ const form = useForm({
                   >
                     <span class="text-lg">Eintragen</span>
                   </PrimaryButton>
+
                   <!-- bei Bedarf hinzufügen: disabled -->
                 </div>
               </form>
               <!-- <p>{{ screenshot }}</p> -->
+
+              <!-- TODO !!!!!!!!!!!!!!!!!!!!!!!!!! -->
+              <PrimaryButton
+                class="m-3 bg-green-700 hover:bg-green-600 active:bg-green-800"
+                @click="
+                  {
+                    console.log(zeitraum);
+                  }
+                "
+              >
+                <span class="text-lg">Check Zeitraum</span>
+              </PrimaryButton>
             </template>
           </Card>
         </section>
