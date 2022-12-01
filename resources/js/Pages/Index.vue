@@ -307,6 +307,13 @@ const zeitraum = computed({
                       :message="form.errors.screenshot"
                       class="mt-2"
                     />
+                    <progress
+                      v-if="form.progress"
+                      :value="form.progress.percentage"
+                      max="100"
+                    >
+                      {{ form.progress.percentage }}%
+                    </progress>
 
                     <!-- <input type="hidden" name="screenshot" id="f_screenshot_hidden" value="" /> -->
                   </div>
@@ -320,6 +327,7 @@ const zeitraum = computed({
                   <PrimaryButton
                     class="m-3 bg-green-700 hover:bg-green-600 active:bg-green-800"
                     :class="{ disabled: submit_disabled }"
+                    :disabled="form.processing"
                     value="Eintragen"
                   >
                     <span class="text-lg">Eintragen</span>

@@ -57,7 +57,8 @@ class StepController extends Controller
     $step->vorname = request("vorname");
     $step->name = request("name");
     $step->klasse = request("klasse");
-    $step->zeitraum = request("zeitraum");
+    $step->von = request("von");
+    $step->bis = request("bis");
     $step->schritte = request("schritte");
 
     $step->save();
