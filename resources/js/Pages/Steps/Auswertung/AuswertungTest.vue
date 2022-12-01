@@ -5,8 +5,8 @@
 
 import "vue-good-table-next/dist/vue-good-table-next.css";
 import { VueGoodTable } from "vue-good-table-next";
-// import { useDark } from "@vueuse/core";
-// import { ref, watch } from "vue";
+import { useDark } from "@vueuse/core";
+import { ref, watch, onUpdated } from "vue";
 import Card from "@/Components/Card.vue";
 
 const props = defineProps(["steps"]);
@@ -14,6 +14,20 @@ const props = defineProps(["steps"]);
 // const isDark = ref(useDark());
 // watch(isDark.value, () => {
 //   console.log(useDark());
+// });
+
+// let theme = ref("bb");
+
+// const isDark = useDark({
+//   onChanged(dark) {
+//     theme.value = dark ? "nocturnal" : "";
+//     console.log(dark);
+//   }
+// });
+
+// onUpdated(() => {
+//   theme.value = dark ? "nocturnal" : "";
+//   console.log(dark);
 // });
 
 // const theme = isDark.value ? "nocturnal" : "";
@@ -75,6 +89,8 @@ const columns = [
 </script>
 
 <template>
+  <!-- <p>{{ theme }}</p> -->
+
   <Card>
     <template v-slot:header>
       <h3>DB-Inhalt (Test):</h3>
