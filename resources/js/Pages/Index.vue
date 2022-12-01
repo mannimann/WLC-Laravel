@@ -14,22 +14,33 @@ function setActive() {
   isActive.value = !isActive.value;
 }
 
-const klassen_liste = ["5a", "5b", "5c"];
-
-const von = "2022-11-28";
-const bis = "2022-12-04";
-
-const zeitraum_liste = computed(() => {
-  return von + " - " + bis;
-});
-
 const form = useForm({
   vorname: "",
   name: "",
   klasse: "",
-  zeitraum: "",
+  von: "",
+  bis: "",
   schritte: "",
   screenshot: "",
+});
+
+const klassen_liste = ["5a", "5b", "5c"];
+const zeitraum_liste = [
+  ["2022-11-28", "2022-12-04"],
+  ["2022-11-29", "2022-12-05"],
+  ["2022-11-30", "2022-12-06"],
+];
+
+const zeitraum = computed({
+  get() {
+    return [form.von, form.bis];
+  },
+  set(newValue) {
+    // TODO: check if empty
+
+    form.von = newValue[0];
+    form.bis = newValue[1];
+  },
 });
 </script>
 
@@ -37,9 +48,9 @@ const form = useForm({
   <Head title="Eintragen" />
 
   <ViewLayout>
-    <p>{{ von }}</p>
-    <p>{{ bis }}</p>
-    <p>{{ zeitraum_liste }}</p>
+    <p>{{ form.von }}</p>
+    <p>{{ form.bis }}</p>
+    <p>{{ zeitraum }}</p>
 
     <div class="container mx-auto p-4 sm:p-6 lg:p-8">
       <!-- Submitted -->
@@ -241,33 +252,21 @@ const form = useForm({
                       name="zeitraum"
                       class="form-select"
                       id="f_zeitraum"
-                      v-model="form.zeitraum"
+                      v-model="zeitraum"
                       @focus="addNotEmpty"
                       @blur="removeNotEmpty"
                       required
                     >
                       <!-- Default -->
                       <option value="" class="form-select-option"></option>
-                      <!-- <option
-                        v-for="zeitraum in zeitraum_liste"
-                        :key="zeitraum"
-                        :value="zeitraum"
+                      <option
+                        v-for="item in zeitraum_liste"
+                        :key="item"
+                        :value="item"
                         class="form-select-option"
                       >
-                        {{ zeitraum }}
-                      </option> -->
-
-                      <option>{{ von }} - {{ bis }}</option>
-
-                      <!-- TODO -->
-
-                      <!-- <?php
-                      for($i = 0, $len = count($zeitraum_liste); $i < $len; ++$i) {
-                          $zeitraum_anzeige = substr($zeitraum_liste[$i][0], 8, 2) . "." . substr($zeitraum_liste[$i][0], 5, 2) . ". - " . 
-                              substr($zeitraum_liste[$i][1], 8, 2) . "." . substr($zeitraum_liste[$i][1], 5, 2) . ".";
-                          echo "<option value='". $i ."' class='form-select-option'>". $zeitraum_anzeige ."</option>";
-                      }
-                    ?> -->
+                        {{ item[0] + " - " + item[1] }}
+                      </option>
                     </select>
                     <InputError :message="form.errors.zeitraum" class="mt-2" />
                   </div>
@@ -330,18 +329,6 @@ const form = useForm({
                 </div>
               </form>
               <!-- <p>{{ screenshot }}</p> -->
-
-              <!-- TODO !!!!!!!!!!!!!!!!!!!!!!!!!! -->
-              <PrimaryButton
-                class="m-3 bg-green-700 hover:bg-green-600 active:bg-green-800"
-                @click="
-                  {
-                    console.log(zeitraum);
-                  }
-                "
-              >
-                <span class="text-lg">Check Zeitraum</span>
-              </PrimaryButton>
             </template>
           </Card>
         </section>
