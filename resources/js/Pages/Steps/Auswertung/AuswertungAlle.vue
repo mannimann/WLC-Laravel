@@ -29,9 +29,23 @@ const columns = [
     label: "Klasse",
     field: "klasse",
   },
+  // {
+  //   label: "Zeitraum",
+  //   field: "zeitraum",
+  // },
   {
-    label: "Zeitraum",
-    field: "zeitraum",
+    label: "Von",
+    field: "von",
+    type: "date",
+    dateInputFormat: "yyyy-MM-dd",
+    dateOutputFormat: "dd.MM.yyyy",
+  },
+  {
+    label: "Bis",
+    field: "bis",
+    type: "date",
+    dateInputFormat: "yyyy-MM-dd",
+    dateOutputFormat: "dd.MM.yyyy",
   },
   {
     label: "Schritte",

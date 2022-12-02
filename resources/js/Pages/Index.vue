@@ -48,9 +48,9 @@ const zeitraum = computed({
   <Head title="Eintragen" />
 
   <ViewLayout>
-    <p>{{ form.von }}</p>
+    <!-- <p>{{ form.von.split("-").reverse().join(".") }}</p>
     <p>{{ form.bis }}</p>
-    <p>{{ zeitraum }}</p>
+    <p>{{ zeitraum }}</p> -->
 
     <div class="container mx-auto p-4 sm:p-6 lg:p-8">
       <!-- Submitted -->
@@ -265,7 +265,11 @@ const zeitraum = computed({
                         :value="item"
                         class="form-select-option"
                       >
-                        {{ item[0] + " - " + item[1] }}
+                        {{
+                          item[0].split("-").reverse().join(".") +
+                          " - " +
+                          item[1].split("-").reverse().join(".")
+                        }}
                       </option>
                     </select>
                     <InputError :message="form.errors.zeitraum" class="mt-2" />

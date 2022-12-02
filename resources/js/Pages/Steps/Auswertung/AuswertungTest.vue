@@ -6,7 +6,7 @@
 import "vue-good-table-next/dist/vue-good-table-next.css";
 import { VueGoodTable } from "vue-good-table-next";
 import { useDark } from "@vueuse/core";
-import { ref, watch, onUpdated } from "vue";
+import { ref, watch, onUpdated, computed } from "vue";
 import Card from "@/Components/Card.vue";
 
 const props = defineProps(["steps"]);
@@ -42,11 +42,19 @@ const props = defineProps(["steps"]);
 
 // const theme = htmlElement.classList.contains("dark") ? "nocturnal" : "";
 
+// const zeitraumX = computed(() => {
+//   return steps.map((r) => {
+//     return { zeitraum: `${r.von} - ${r.bis}` };
+//   });
+//   // return [steps.von, steps.bis];
+// });
+
 const columns = [
   {
     label: "Id",
     field: "id",
     tdClass: "font-bold",
+    // thClass: "text-primary",
   },
   {
     label: "Name",
@@ -60,9 +68,23 @@ const columns = [
     label: "Klasse",
     field: "klasse",
   },
+  // {
+  //   label: "Zeitraum",
+  //   field: "zeitraum",
+  // },
   {
-    label: "Zeitraum",
-    field: "zeitraum",
+    label: "Von",
+    field: "von",
+    type: "date",
+    dateInputFormat: "yyyy-MM-dd",
+    dateOutputFormat: "dd.MM.yyyy",
+  },
+  {
+    label: "Bis",
+    field: "bis",
+    type: "date",
+    dateInputFormat: "yyyy-MM-dd",
+    dateOutputFormat: "dd.MM.yyyy",
   },
   {
     label: "Schritte",
