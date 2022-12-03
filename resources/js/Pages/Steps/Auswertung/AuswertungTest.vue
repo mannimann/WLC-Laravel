@@ -9,7 +9,7 @@ import { useDark } from "@vueuse/core";
 import { ref, watch, onUpdated, computed } from "vue";
 import Card from "@/Components/Card.vue";
 
-const props = defineProps(["steps"]);
+const props = defineProps(["data"]);
 
 // const isDark = ref(useDark());
 // watch(isDark.value, () => {
@@ -57,12 +57,12 @@ const columns = [
     // thClass: "text-primary",
   },
   {
-    label: "Name",
-    field: "name",
-  },
-  {
     label: "Vorname",
     field: "vorname",
+  },
+  {
+    label: "Name",
+    field: "name",
   },
   {
     label: "Klasse",
@@ -124,7 +124,7 @@ const columns = [
       <span class="dark:hidden">
         <VueGoodTable
           :columns="columns"
-          :rows="steps"
+          :rows="data"
           theme=""
           styleClass="vgt-table striped"
           :pagination-options="{
@@ -157,7 +157,7 @@ const columns = [
       <span class="hidden dark:inline">
         <VueGoodTable
           :columns="columns"
-          :rows="steps"
+          :rows="data"
           theme="nocturnal"
           styleClass="vgt-table striped"
           :pagination-options="{

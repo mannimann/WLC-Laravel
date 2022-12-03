@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Step extends Model
 {
-    use HasFactory;
+  use HasFactory;
+
+  // protected $fillable = ["vorname", "name", "klasse", "von", "bis", "schritte"];
+
+  protected $guarded = ["id", "created_at", "updated_at"];
 }

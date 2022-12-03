@@ -15,14 +15,40 @@ class StepController extends Controller
    */
   public function index()
   {
-    $steps = Step::get();
-    // $steps = Step::where("name", "qwe")->get();
-    // $steps = Step::where("name", "<>", "qwe")->get();
+    $steps_all = Step::get();
 
-    // dd($steps);
+    $steps_zeitraum = Step::selectRaw(
+      "von, bis, SUM(schritte) AS schritte_sum, COUNT(id) AS teilnehmer_count"
+    )
+      ->groupBy("von", "bis")
+      ->orderBy("von")
+      ->orderBy("bis")
+      ->get();
+
+    $steps_top = Step::selectRaw(
+      "vorname, name, klasse, SUM(schritte) AS schritte_sum"
+    )
+      ->groupBy("vorname", "name", "klasse")
+      ->orderByDesc("schritte_sum")
+      ->get();
+
+    // TODO: COUNT(DISTINCT vorname, name, klasse)
+    $steps_klassen = Step::selectRaw(
+      "klasse, SUM(schritte) AS schritte_sum, COUNT(DISTINCT vorname) AS teilnehmer_anzahl, SUM(schritte)/COUNT(DISTINCT vorname) AS schritte_pro_kopf"
+    )
+      ->groupBy("klasse")
+      ->having("teilnehmer_anzahl", ">", 0)
+      ->orderByDesc(Step::raw("schritte_pro_kopf"))
+      ->orderByDesc("teilnehmer_anzahl")
+      ->get();
+
+    // dd($all, $steps);
 
     return Inertia::render("Steps/Index", [
-      "steps" => $steps,
+      "steps_all" => $steps_all,
+      "steps_zeitraum" => $steps_zeitraum,
+      "steps_top" => $steps_top,
+      "steps_klassen" => $steps_klassen,
     ]);
   }
 

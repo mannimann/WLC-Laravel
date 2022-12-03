@@ -3,30 +3,9 @@ import "vue-good-table-next/dist/vue-good-table-next.css";
 import { VueGoodTable } from "vue-good-table-next";
 import Card from "@/Components/Card.vue";
 
-const props = defineProps(["steps"]);
+const props = defineProps(["data"]);
 
 const columns = [
-  {
-    label: "Id",
-    field: "id",
-    tdClass: "font-bold",
-  },
-  {
-    label: "Name",
-    field: "name",
-  },
-  {
-    label: "Vorname",
-    field: "vorname",
-  },
-  {
-    label: "Klasse",
-    field: "klasse",
-  },
-  // {
-  //   label: "Zeitraum",
-  //   field: "zeitraum",
-  // },
   {
     label: "Von",
     field: "von",
@@ -43,24 +22,13 @@ const columns = [
   },
   {
     label: "Schritte",
-    field: "schritte",
+    field: "schritte_sum",
     type: "number",
   },
   {
-    label: "Created At",
-    field: "created_at",
-    type: "date",
-    dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'",
-    dateOutputFormat: "MM.dd.yy - HH:mm:ss",
-    hidden: true,
-  },
-  {
-    label: "Updated At",
-    field: "updated_at",
-    type: "date",
-    dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'",
-    dateOutputFormat: "MM.dd.yy - HH:mm:ss",
-    hidden: true,
+    label: "Anzahl Teilnehmer",
+    field: "teilnehmer_count",
+    type: "number",
   },
 ];
 </script>
@@ -75,7 +43,7 @@ const columns = [
       <span class="dark:hidden">
         <VueGoodTable
           :columns="columns"
-          :rows="steps"
+          :rows="data"
           theme=""
           styleClass="vgt-table striped"
           :pagination-options="{
@@ -108,7 +76,7 @@ const columns = [
       <span class="hidden dark:inline">
         <VueGoodTable
           :columns="columns"
-          :rows="steps"
+          :rows="data"
           theme="nocturnal"
           styleClass="vgt-table striped"
           :pagination-options="{

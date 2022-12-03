@@ -9,7 +9,7 @@ function setActive() {
   isActive.value = !isActive.value;
 }
 
-const props = defineProps(["steps"]);
+const props = defineProps(["data"]);
 
 const columns = [
   {
@@ -109,7 +109,7 @@ const columns = [
           <span class="dark:hidden">
             <VueGoodTable
               :columns="columns"
-              :rows="steps"
+              :rows="data"
               theme=""
               styleClass="vgt-table striped"
               :pagination-options="{
@@ -142,7 +142,7 @@ const columns = [
           <span class="hidden dark:inline">
             <VueGoodTable
               :columns="columns"
-              :rows="steps"
+              :rows="data"
               theme="nocturnal"
               styleClass="vgt-table striped"
               :pagination-options="{

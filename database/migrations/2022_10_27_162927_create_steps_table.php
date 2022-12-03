@@ -14,8 +14,8 @@ return new class extends Migration {
   {
     Schema::create("steps", function (Blueprint $table) {
       $table->id();
-      $table->string("name");
       $table->string("vorname");
+      $table->string("name");
       $table->string("klasse");
       // $table->string("zeitraum"); // später noch ändern: Zeitraum in andere Tabelle auslagern -> von/bis
       $table->date("von");

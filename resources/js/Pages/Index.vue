@@ -68,7 +68,7 @@ const zeitraum = computed({
               >
                 <span class="text-lg">Zurück</span>
               </PrimaryButton>
-              <Link :href="route('dashboard')">
+              <Link :href="route('steps.index')">
                 <PrimaryButton
                   class="m-3 bg-green-700 hover:bg-green-600 active:bg-green-800"
                   value="Zur Auswertung"

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="container mx-auto overflow-hidden rounded-lg bg-secondarybg p-3 shadow-md dark:bg-secondarybg_dark"
+    class="container mx-auto h-fit overflow-hidden rounded-lg bg-secondarybg p-3 shadow-md dark:bg-secondarybg_dark"
   >
     <div class="pb-1 text-2xl font-bold">
       <slot name="header" />

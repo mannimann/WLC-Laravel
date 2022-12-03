@@ -8,7 +8,12 @@ import AuswertungAlle from "./Auswertung/AuswertungAlle.vue";
 import ViewLayout from "@/Layouts/ViewLayout.vue";
 import { Head } from "@inertiajs/inertia-vue3";
 
-const props = defineProps(["steps"]);
+const props = defineProps([
+  "steps_all",
+  "steps_zeitraum",
+  "steps_top",
+  "steps_klassen",
+]);
 </script>
 
 <template>
@@ -16,23 +21,23 @@ const props = defineProps(["steps"]);
 
   <ViewLayout>
     <div class="container mx-auto p-4 sm:p-6 lg:p-8">
-      <section class="mb-3">
-        <AuswertungTest :steps="steps" />
+      <section class="mb-3 hidden">
+        <AuswertungTest :data="steps_all" />
       </section>
 
       <section
         class="mb-3 grid grid-cols-1 justify-items-stretch gap-3 lg:grid-cols-2"
       >
-        <AuswertungZeitraum :steps="steps" />
-        <AuswertungPersonen :steps="steps" />
+        <AuswertungZeitraum :data="steps_zeitraum" />
+        <AuswertungPersonen :data="steps_top" />
       </section>
 
       <div class="mb-3">
-        <AuswertungKlassen :steps="steps" />
+        <AuswertungKlassen :data="steps_klassen" />
       </div>
 
       <div class="mb-3">
-        <AuswertungAlle :steps="steps" />
+        <AuswertungAlle :data="steps_all" />
       </div>
     </div>
   </ViewLayout>
