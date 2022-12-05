@@ -18,12 +18,12 @@ const columns = [
     tdClass: "font-bold",
   },
   {
-    label: "Name",
-    field: "name",
-  },
-  {
     label: "Vorname",
     field: "vorname",
+  },
+  {
+    label: "Name",
+    field: "name",
   },
   {
     label: "Klasse",

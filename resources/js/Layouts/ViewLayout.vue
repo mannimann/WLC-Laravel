@@ -42,16 +42,13 @@ const showingNavigationDropdown = ref(false);
           <div class="flex">
             <!-- Logo -->
             <div class="flex shrink-0 items-center">
-              <Link :href="route('index')">
+              <Link :href="route('home')">
                 <ApplicationLogo class="block h-9 w-auto" />
               </Link>
             </div>
             <!-- Navigation Links -->
             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-              <NavLink
-                :href="route('index')"
-                :active="route().current('index')"
-              >
+              <NavLink :href="route('home')" :active="route().current('home')">
                 Eintragen
               </NavLink>
               <NavLink
@@ -129,8 +126,8 @@ const showingNavigationDropdown = ref(false);
       >
         <div class="space-y-1 pt-2 pb-3">
           <ResponsiveNavLink
-            :href="route('index')"
-            :active="route().current('index')"
+            :href="route('home')"
+            :active="route().current('home')"
           >
             Eintragen
           </ResponsiveNavLink>

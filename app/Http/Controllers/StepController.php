@@ -17,32 +17,42 @@ class StepController extends Controller
   {
     $steps_all = Step::get();
 
-    $steps_zeitraum = Step::selectRaw(
-      "von, bis, SUM(schritte) AS schritte_sum, COUNT(id) AS teilnehmer_count"
+    $steps_zeitraum = Step::select(
+      "von",
+      "bis",
+      Step::raw("SUM(schritte) AS schritte_sum, COUNT(id) AS teilnehmer_count")
     )
       ->groupBy("von", "bis")
       ->orderBy("von")
       ->orderBy("bis")
       ->get();
 
-    $steps_top = Step::selectRaw(
-      "vorname, name, klasse, SUM(schritte) AS schritte_sum"
+    $steps_top = Step::select(
+      "vorname",
+      "name",
+      "klasse",
+      Step::raw("SUM(schritte) AS schritte_sum")
     )
       ->groupBy("vorname", "name", "klasse")
       ->orderByDesc("schritte_sum")
       ->get();
 
     // TODO: COUNT(DISTINCT vorname, name, klasse)
-    $steps_klassen = Step::selectRaw(
-      "klasse, SUM(schritte) AS schritte_sum, COUNT(DISTINCT vorname) AS teilnehmer_anzahl, SUM(schritte)/COUNT(DISTINCT vorname) AS schritte_pro_kopf"
+    $steps_klassen = Step::select(
+      "klasse",
+      Step::raw("SUM(schritte) AS schritte_sum"),
+      Step::raw("COUNT(DISTINCT vorname) AS teilnehmer_anzahl"),
+      Step::raw("SUM(schritte)/COUNT(DISTINCT vorname) AS schritte_pro_kopf")
+      // Step::distinct("vorname", "name", "klasse")->count()
     )
+      // ->addSelect(["klasse as Klasse"])
       ->groupBy("klasse")
       ->having("teilnehmer_anzahl", ">", 0)
-      ->orderByDesc(Step::raw("schritte_pro_kopf"))
+      ->orderByDesc("schritte_pro_kopf")
       ->orderByDesc("teilnehmer_anzahl")
       ->get();
 
-    // dd($all, $steps);
+    // dd($steps_klassen);
 
     return Inertia::render("Steps/Index", [
       "steps_all" => $steps_all,
