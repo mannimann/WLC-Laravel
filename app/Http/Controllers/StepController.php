@@ -45,6 +45,12 @@ class StepController extends Controller
       Step::raw("SUM(schritte)/COUNT(DISTINCT vorname) AS schritte_pro_kopf")
       // Step::distinct("vorname", "name", "klasse")->count()
     )
+      // ->addSelect([
+      //   "ta" => Step::select("vorname", "name", "klasse")
+      //     ->whereColumn("steps1.klasse", "steps2.klasse")
+      //     ->groupBy("vorname", "name", "klasse")
+      //     ->count(),
+      // ])
       // ->addSelect(["klasse as Klasse"])
       ->groupBy("klasse")
       ->having("teilnehmer_anzahl", ">", 0)
@@ -52,7 +58,7 @@ class StepController extends Controller
       ->orderByDesc("teilnehmer_anzahl")
       ->get();
 
-    // dd($steps_klassen);
+    dd($steps_klassen);
 
     return Inertia::render("Steps/Index", [
       "steps_all" => $steps_all,
