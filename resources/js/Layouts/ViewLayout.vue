@@ -7,6 +7,10 @@ import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
 import DarkModeButton from "@/Components/DarkModeButton.vue";
 import { Link } from "@inertiajs/inertia-vue3";
 
+// import { useColorMode } from "@vueuse/core";
+// const mode = useColorMode();
+// mode.value = "dark";
+
 // defineProps({
 //     canLogin: Boolean,
 //     canRegister: Boolean,
