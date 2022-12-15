@@ -48,6 +48,9 @@ Route::get("/dashboard", function () {
 // TODO: Routes umbauen -> Steps/Index wird nicht angezeigt, sondern nur "/"
 
 Route::get("/", HomeController::class)->name("home");
+// Route::get("/", function () {
+//   return Inertia::render("Dashboard");
+// })->name("home");
 
 Route::resource("/auswertung", StepController::class, [
   "names" => "steps",

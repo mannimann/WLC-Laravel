@@ -25,7 +25,7 @@ const showingNavigationDropdown = ref(false);
 <template>
   <div class="flex min-h-screen flex-col bg-primarybg dark:bg-primarybg_dark">
     <!-- Page Heading -->
-    <header class="bg-secondarybg shadow dark:bg-secondarybg_dark">
+    <header class="bg-secondary2bg shadow dark:bg-secondarybg_dark">
       <div class="mx-auto max-w-7xl px-4 pt-6 pb-0 sm:px-6 lg:px-8">
         <div v-if="$slots.header">
           <slot name="header" />
@@ -38,7 +38,7 @@ const showingNavigationDropdown = ref(false);
       </div>
     </header>
     <nav
-      class="border-b border-secondary bg-gradient-to-b from-secondarybg to-primarybg dark:border-secondary_dark dark:from-secondarybg_dark dark:to-primarybg_dark"
+      class="border-b border-secondary bg-gradient-to-b from-secondary2bg to-primarybg dark:border-secondary_dark dark:from-secondarybg_dark dark:to-primarybg_dark"
     >
       <!-- Primary Navigation Menu -->
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
