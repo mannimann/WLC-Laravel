@@ -15,8 +15,14 @@ class StepController extends Controller
    */
   public function index()
   {
+    /*
+     * Alle Daten
+     */
     $steps_all = Step::get();
 
+    /*
+     * Steps gruppiert nach Zeiträumen
+     */
     $steps_zeitraum = Step::select(
       "von",
       "bis",
@@ -28,43 +34,63 @@ class StepController extends Controller
       ->orderBy("bis")
       ->get();
 
+    // Footer bzw.  Zeile Gesamt
+    $zeitraum_gesamt = Step::select(
+      "von",
+      "bis",
+      Step::raw("SUM(schritte) AS schritte_sum"),
+      Step::raw("COUNT(id) AS teilnehmer_count")
+    )->get();
+    $zeitraum_gesamt[0]["von"] = "";
+    $zeitraum_gesamt[0]["bis"] = "";
+
+    $steps_zeitraum = $steps_zeitraum->toBase()->merge($zeitraum_gesamt);
+
+    /*
+     * Steps der besten Läufer
+     */
     $steps_top = Step::select(
       "vorname",
       "name",
       "klasse",
-      Step::raw("SUM(schritte) AS schritte_sum")
+      Step::raw("SUM(schritte) AS schritte_sum"),
+      Step::raw("ROW_NUMBER() OVER (ORDER BY SUM(schritte) DESC) AS ranking")
     )
+      ->withCasts(["ranking" => "integer"])
       ->groupBy("vorname", "name", "klasse")
       ->orderByDesc("schritte_sum")
       ->get();
 
+    /*
+     * Steps gruppiert nach Klassen
+     */
     // TODO: COUNT(DISTINCT vorname, name, klasse)
     $teilnehmer_anzahl =
-      "(SELECT COUNT(*) FROM steps AS steps2 GROUP BY vorname, name, klasse HAVING steps.klasse = steps2.klasse)";
+      "(SELECT COUNT(*) FROM steps AS steps2 WHERE steps.klasse = steps2.klasse GROUP BY vorname, name, klasse)";
     $steps_klassen = Step::select(
       "klasse",
       Step::raw("SUM(schritte) AS schritte_sum"),
       // Step::raw("COUNT(DISTINCT vorname) AS teilnehmer_anzahl"),
       Step::raw($teilnehmer_anzahl . " AS 'teilnehmer_anzahl'"),
-      Step::raw("SUM(schritte)/" . $teilnehmer_anzahl . " AS schritte_pro_kopf")
-
-      // Step::distinct("vorname", "name", "klasse")->count()
+      Step::raw(
+        "SUM(schritte)/" . $teilnehmer_anzahl . " AS schritte_pro_kopf"
+      ),
+      Step::raw(
+        "ROW_NUMBER() OVER (ORDER BY " .
+          $teilnehmer_anzahl .
+          " DESC, SUM(schritte)/" .
+          $teilnehmer_anzahl .
+          " DESC) AS ranking"
+      )
     )
-      // ->addSelect([
-      //   "ta" => Step::select("vorname", "name", "klasse")
-      //     ->whereColumn("steps1.klasse", "steps2.klasse")
-      //     ->groupBy("vorname", "name", "klasse")
-      //     ->count(),
-      // ])
-      // ->addSelect(["klasse as Klasse"])
-
+      ->withCasts(["ranking" => "integer"])
       ->groupBy("klasse")
       ->having("teilnehmer_anzahl", ">", 0)
       ->orderByDesc("schritte_pro_kopf")
       ->orderByDesc("teilnehmer_anzahl")
       ->get();
 
-    // dd($steps_klassen);
+    dd($steps_klassen);
 
     return Inertia::render("Steps/Index", [
       "steps_all" => $steps_all,

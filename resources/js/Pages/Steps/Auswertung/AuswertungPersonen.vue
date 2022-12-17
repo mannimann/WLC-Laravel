@@ -7,6 +7,12 @@ const props = defineProps(["data"]);
 
 const columns = [
   {
+    label: "#",
+    field: "ranking",
+    type: "number",
+    tdClass: "font-bold",
+  },
+  {
     label: "Vorname",
     field: "vorname",
   },
@@ -59,7 +65,7 @@ const columns = [
           }"
           :sort-options="{
             enabled: true,
-            // initialSortBy: { field: 'id', type: 'asc' },
+            initialSortBy: { field: 'ranking', type: 'asc' },
           }"
         >
           <template #emptystate>Keine Einträge vorhanden ...</template>
@@ -92,7 +98,7 @@ const columns = [
           }"
           :sort-options="{
             enabled: true,
-            // initialSortBy: { field: 'id', type: 'asc' },
+            initialSortBy: { field: 'ranking', type: 'asc' },
           }"
         >
           <template #emptystate>Keine Einträge vorhanden ...</template>

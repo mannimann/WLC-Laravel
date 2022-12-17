@@ -5,6 +5,10 @@ import Card from "@/Components/Card.vue";
 
 const props = defineProps(["data"]);
 
+const rowStyleClassSum = function (row) {
+  return row.von == "" ? "italic font-bold" : "";
+};
+
 const columns = [
   {
     label: "Von",
@@ -65,9 +69,11 @@ const columns = [
             placeholder: 'Suchen...',
           }"
           :sort-options="{
-            enabled: true,
+            enabled: false,
             // initialSortBy: { field: 'von', type: 'asc' },
           }"
+          :line-numbers="true"
+          :row-style-class="rowStyleClassSum"
         >
           <template #emptystate>Keine Einträge vorhanden ...</template>
         </VueGoodTable>
@@ -98,11 +104,16 @@ const columns = [
             placeholder: 'Suchen...',
           }"
           :sort-options="{
-            enabled: true,
+            enabled: false,
             // initialSortBy: { field: 'von', type: 'asc' },
           }"
+          :line-numbers="true"
+          :row-style-class="rowStyleClassSum"
         >
           <template #emptystate>Keine Einträge vorhanden ...</template>
+          <!-- <template #table-actions-bottom>
+            This will show up on the bottom of the table.
+          </template> -->
         </VueGoodTable>
       </span>
     </template>

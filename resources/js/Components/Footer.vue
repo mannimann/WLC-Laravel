@@ -11,7 +11,7 @@
       <div class="mt-1 mb-1">
         <p>
           Webseite erstellt von Jakob Mann (<a
-            href="redirect-mailto.php"
+            href="mailto:jm_jakobmann@web.de"
             target="_blank"
             >Kontakt</a
           >)

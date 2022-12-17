@@ -5,6 +5,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\StepController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
