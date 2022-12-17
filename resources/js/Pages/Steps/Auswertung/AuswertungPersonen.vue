@@ -59,7 +59,7 @@ const columns = [
           }"
           :sort-options="{
             enabled: true,
-            initialSortBy: { field: 'id', type: 'asc' },
+            // initialSortBy: { field: 'id', type: 'asc' },
           }"
         >
           <template #emptystate>Keine Einträge vorhanden ...</template>
@@ -92,7 +92,7 @@ const columns = [
           }"
           :sort-options="{
             enabled: true,
-            initialSortBy: { field: 'id', type: 'asc' },
+            // initialSortBy: { field: 'id', type: 'asc' },
           }"
         >
           <template #emptystate>Keine Einträge vorhanden ...</template>

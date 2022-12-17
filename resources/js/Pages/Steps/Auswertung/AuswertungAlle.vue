@@ -15,6 +15,7 @@ const columns = [
   {
     label: "Id",
     field: "id",
+    type: "number",
     tdClass: "font-bold",
   },
   {

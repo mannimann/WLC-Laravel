@@ -12,15 +12,10 @@ return new class extends Migration {
    */
   public function up()
   {
-    Schema::create("steps", function (Blueprint $table) {
+    Schema::create("klassen", function (Blueprint $table) {
       $table->id();
-      $table->string("vorname");
-      $table->string("name");
       $table->string("klasse");
-      $table->date("von");
-      $table->date("bis");
-      $table->integer("schritte");
-      // später hinzufügen: Schule / Schul-id
+      // später hinzufügen: Schule
       $table->timestamps();
     });
   }
@@ -32,6 +27,6 @@ return new class extends Migration {
    */
   public function down()
   {
-    Schema::dropIfExists("steps");
+    Schema::dropIfExists("klassen");
   }
 };
