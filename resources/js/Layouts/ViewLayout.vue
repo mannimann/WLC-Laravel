@@ -61,6 +61,12 @@ const showingNavigationDropdown = ref(false);
               >
                 Auswertung
               </NavLink>
+              <NavLink
+                :href="route('admin.index')"
+                :active="route().current('admin.index')"
+              >
+                Administration
+              </NavLink>
             </div>
           </div>
           <div class="hidden sm:ml-6 sm:flex sm:items-center">

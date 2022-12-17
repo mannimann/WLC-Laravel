@@ -5,7 +5,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\StepController;
-use App\Http\Controllers\ContactController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,16 +45,18 @@ Route::get("/dashboard", function () {
 //   return Inertia::render("Steps/Index");
 // })->name("steps");
 
-// TODO: DB-Inhalt in Auswertung anzeigen
-// TODO: Routes umbauen -> Steps/Index wird nicht angezeigt, sondern nur "/"
-
-Route::get("/", HomeController::class)->name("home");
 // Route::get("/", function () {
 //   return Inertia::render("Dashboard");
 // })->name("home");
 
+Route::get("/", HomeController::class)->name("home");
+
 Route::resource("/auswertung", StepController::class, [
   "names" => "steps",
 ])->only(["index", "store"]);
+
+Route::resource("/admin", AdminController::class, [
+  "names" => "admin",
+])->only(["index"]);
 
 require __DIR__ . "/auth.php";

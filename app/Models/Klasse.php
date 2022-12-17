@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Klasse extends Model
 {
-    use HasFactory;
+  use HasFactory;
+
+  protected $table = "klassen";
 }

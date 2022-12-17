@@ -26,10 +26,14 @@ class DatabaseSeeder extends Seeder
 
     // \App\Models\Step::factory(50)->create();
 
-    $anzahl = 50;
-    $wahrscheinlichkeit = 50;
     $von = ["2022-01-01", "2022-01-08", "2022-01-15", "2022-01-22"];
     $bis = ["2022-01-07", "2022-01-14", "2022-01-21", "2022-01-28"];
+
+    /*
+     * Steps
+     */
+    $anzahl = 50;
+    $wahrscheinlichkeit = 50;
 
     foreach (range(1, $anzahl) as $_) {
       $vorname = $faker->firstname();
@@ -50,6 +54,27 @@ class DatabaseSeeder extends Seeder
           ]);
         }
       }
+    }
+
+    /*
+     * Klassen
+     */
+    foreach (range(5, 12) as $stufe) {
+      foreach (["a", "b", "c"] as $nr) {
+        \App\Models\Klasse::factory()->create([
+          "klasse" => $stufe . $nr,
+        ]);
+      }
+    }
+
+    /*
+     * Zeiträume
+     */
+    for ($i = 0; $i < count($von); $i++) {
+      \App\Models\Zeitraum::factory()->create([
+        "von" => $von[$i],
+        "bis" => $bis[$i],
+      ]);
     }
   }
 }

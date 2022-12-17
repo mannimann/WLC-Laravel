@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Klasse;
 use App\Models\Step;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
