@@ -29,6 +29,7 @@ const columns = [
   {
     label: "Klasse",
     field: "klasse",
+    type: "number",
   },
   // {
   //   label: "Zeitraum",

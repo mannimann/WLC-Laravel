@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Klasse;
 use App\Models\Step;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -34,7 +35,7 @@ class StepController extends Controller
       ->orderBy("bis")
       ->get();
 
-    // Footer bzw.  Zeile Gesamt
+    // Footer bzw. Zeile Gesamt
     $zeitraum_gesamt = Step::select(
       "von",
       "bis",
@@ -64,33 +65,33 @@ class StepController extends Controller
     /*
      * Steps gruppiert nach Klassen
      */
-    // TODO: COUNT(DISTINCT vorname, name, klasse)
-    $teilnehmer_anzahl =
-      "(SELECT COUNT(*) FROM steps AS steps2 WHERE steps.klasse = steps2.klasse GROUP BY vorname, name, klasse)";
+    $klassen_sub = Step::select(
+      "s.klasse",
+      Step::raw("COUNT(*) AS 'teilnehmer_anzahl'")
+    )
+      ->fromSub(function ($query) {
+        $query->from("steps")->groupBy("vorname", "name", "klasse");
+      }, "s")
+      ->groupBy("s.klasse");
+
     $steps_klassen = Step::select(
-      "klasse",
+      "steps.klasse",
       Step::raw("SUM(schritte) AS schritte_sum"),
-      // Step::raw("COUNT(DISTINCT vorname) AS teilnehmer_anzahl"),
-      Step::raw($teilnehmer_anzahl . " AS 'teilnehmer_anzahl'"),
+      "teilnehmer_anzahl",
+      Step::raw("SUM(schritte)/teilnehmer_anzahl AS schritte_pro_kopf"),
       Step::raw(
-        "SUM(schritte)/" . $teilnehmer_anzahl . " AS schritte_pro_kopf"
-      ),
-      Step::raw(
-        "ROW_NUMBER() OVER (ORDER BY " .
-          $teilnehmer_anzahl .
-          " DESC, SUM(schritte)/" .
-          $teilnehmer_anzahl .
-          " DESC) AS ranking"
+        "ROW_NUMBER() OVER (ORDER BY SUM(schritte)/teilnehmer_anzahl DESC, teilnehmer_anzahl DESC) AS ranking"
       )
     )
+      ->joinSub($klassen_sub, "steps2", "steps.klasse", "=", "steps2.klasse")
       ->withCasts(["ranking" => "integer"])
-      ->groupBy("klasse")
+      ->groupBy("steps.klasse")
       ->having("teilnehmer_anzahl", ">", 0)
       ->orderByDesc("schritte_pro_kopf")
       ->orderByDesc("teilnehmer_anzahl")
       ->get();
 
-    dd($steps_klassen);
+    // dd($steps_klassen);
 
     return Inertia::render("Steps/Index", [
       "steps_all" => $steps_all,
