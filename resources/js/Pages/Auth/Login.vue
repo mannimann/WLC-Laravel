@@ -49,7 +49,7 @@ const submit = () => {
       </div>
 
       <div class="mt-4">
-        <InputLabel for="password" value="Password" />
+        <InputLabel for="password" value="Passwort" />
         <TextInput
           id="password"
           type="password"
@@ -64,7 +64,7 @@ const submit = () => {
       <div class="mt-4 block">
         <label class="flex items-center">
           <Checkbox name="remember" v-model:checked="form.remember" />
-          <span class="ml-2 text-sm text-gray-600">Remember me</span>
+          <span class="ml-2 text-sm text-gray-600">Eingeloggt bleiben</span>
         </label>
       </div>
 
@@ -74,7 +74,7 @@ const submit = () => {
           :href="route('password.request')"
           class="text-sm text-gray-600 underline hover:text-gray-900"
         >
-          Forgot your password?
+          Passwort vergessen?
         </Link>
 
         <PrimaryButton

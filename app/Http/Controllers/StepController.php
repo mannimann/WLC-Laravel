@@ -36,12 +36,20 @@ class StepController extends Controller
       ->get();
 
     // Footer bzw. Zeile Gesamt
+    $zeitraum_sub = Step::select(
+      Step::raw("COUNT(*) AS 'teilnehmer_count'")
+    )->fromSub(function ($query) {
+      $query->from("steps")->groupBy("vorname", "name", "klasse");
+    }, "s");
+
     $zeitraum_gesamt = Step::select(
       "von",
       "bis",
       Step::raw("SUM(schritte) AS schritte_sum"),
-      Step::raw("COUNT(id) AS teilnehmer_count")
-    )->get();
+      Step::raw("teilnehmer_count")
+    )
+      ->joinSub($zeitraum_sub, "steps2", Step::raw(1), "=", Step::raw(1))
+      ->get();
     $zeitraum_gesamt[0]["von"] = "";
     $zeitraum_gesamt[0]["bis"] = "";
 

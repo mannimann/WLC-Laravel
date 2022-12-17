@@ -5,16 +5,16 @@ import { Link } from "@inertiajs/inertia-vue3";
 
 <template>
   <div
-    class="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 bg-primarybg"
+    class="flex min-h-screen flex-col items-center bg-primarybg pt-6 dark:bg-primarybg_dark sm:justify-center sm:pt-0"
   >
     <div>
       <Link href="/">
-        <ApplicationLogo class="w-20 h-20 text-gray-500 fill-current" />
+        <ApplicationLogo class="h-20 w-20 fill-current" />
       </Link>
     </div>
 
     <div
-      class="w-full px-6 py-4 mt-6 overflow-hidden bg-gray-300 shadow-md sm:max-w-md sm:rounded-lg"
+      class="mt-6 w-full overflow-hidden bg-gray-300 px-6 py-4 shadow-md sm:max-w-md sm:rounded-lg"
     >
       <slot />
     </div>
