@@ -10,4 +10,6 @@ class Klasse extends Model
   use HasFactory;
 
   protected $table = "klassen";
+
+  protected $fillable = ["klasse"];
 }

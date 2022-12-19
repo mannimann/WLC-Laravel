@@ -2,10 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
+use App\Models\Klasse;
 use Illuminate\Http\Request;
 
 class KlasseController extends Controller
 {
+  /**
+   * Display a listing of the resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function index()
+  {
+    // return Inertia::render("Klasse/Index", [
+    //   "klassen" => Klasse::all(),
+    // ]);
+  }
+
   /**
    * Store a newly created resource in storage.
    *
@@ -17,16 +31,9 @@ class KlasseController extends Controller
     $validated = $request->validate([
       "klasse" => "required|string|max:10",
     ]);
-    $request->klasse()->create($validated); //TODO
+    Klasse::create($validated);
 
-    // $klasse = new Klasse();
-
-    // $klasse->klasse = request("klasse");
-    // $klasse->klasse = $validated;
-
-    // $klasse->save();
-
-    // error_log($klasse);
+    // error_log($validated["klasse"]);
 
     return redirect(route("admin.index"));
   }

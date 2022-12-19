@@ -10,4 +10,6 @@ class Zeitraum extends Model
   use HasFactory;
 
   protected $table = "zeitraeume";
+
+  protected $fillable = ["von", "bis"];
 }

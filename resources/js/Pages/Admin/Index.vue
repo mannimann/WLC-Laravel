@@ -3,6 +3,7 @@ import ViewLayout from "@/Layouts/ViewLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { useForm, Head } from "@inertiajs/inertia-vue3";
+import Klasse from "@/Pages/Admin/Klasse.vue";
 
 const props = defineProps(["klassen", "zeiträume"]);
 
@@ -20,8 +21,9 @@ const form_klasse = useForm({
     <div class="container mx-auto p-4 sm:p-6 lg:p-8">
       <h2 class="text-center text-3xl font-bold">ADMIN</h2>
       <div
-        class="mb-3 grid grid-cols-1 justify-items-stretch gap-3 lg:grid-cols-2"
+        class="mb-3 grid grid-cols-1 justify-items-stretch gap-8 lg:grid-cols-2"
       >
+        <!-- Klassen -->
         <section id="klassen">
           <h3>Klassen:</h3>
           <div class="mr-auto max-w-2xl py-2">
@@ -42,12 +44,18 @@ const form_klasse = useForm({
               <PrimaryButton class="mt-4">Hinzufügen</PrimaryButton>
             </form>
           </div>
-          <ul>
-            <li v-for="klasse in klassen" :key="klasse">
-              {{ klasse.klasse }}
-            </li>
-          </ul>
+
+          <!-- TODO -->
+          <div class="mt-6 divide-y rounded-lg bg-white shadow-sm">
+            <Klasse
+              v-for="klasse in klassen"
+              :key="klasse.id"
+              :klasse="klasse"
+            />
+          </div>
         </section>
+
+        <!-- Zeiträume -->
         <section id="zeiträume">
           <h3>Zeiträume:</h3>
           <ul>

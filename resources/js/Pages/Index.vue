@@ -70,7 +70,7 @@ const zeitraum = computed({
               </PrimaryButton>
               <Link :href="route('steps.index')">
                 <PrimaryButton
-                  class="m-3 bg-green-700 hover:bg-green-600 active:bg-green-800"
+                  class=""
                   value="Zur Auswertung"
                 >
                   <span class="text-lg">Zur Auswertung</span>
