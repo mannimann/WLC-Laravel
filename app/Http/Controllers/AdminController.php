@@ -16,7 +16,7 @@ class AdminController extends Controller
    */
   public function index()
   {
-    $klassen = Klasse::select("klasse")
+    $klassen = Klasse::select("*")
       ->orderBy("klasse")
       ->get();
 

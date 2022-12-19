@@ -37,4 +37,35 @@ class KlasseController extends Controller
 
     return redirect(route("admin.index"));
   }
+
+  /**
+   * Update the specified resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @param  \App\Models\Klasse  $klasse
+   * @return \Illuminate\Http\Response
+   */
+  public function update(Request $request, Klasse $klasse)
+  {
+    $validated = $request->validate([
+      "klasse" => "required|string|max:10",
+    ]);
+
+    $klasse->update($validated);
+
+    return redirect(route("admin.index"));
+  }
+
+  /**
+   * Remove the specified resource from storage.
+   *
+   * @param  \App\Models\Klasse  $klasse
+   * @return \Illuminate\Http\Response
+   */
+  public function destroy(Klasse $klasse)
+  {
+    $klasse->delete();
+
+    return redirect(route("admin.index"));
+  }
 }

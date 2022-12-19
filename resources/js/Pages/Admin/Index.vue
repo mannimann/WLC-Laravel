@@ -15,8 +15,6 @@ const form_klasse = useForm({
 <template>
   <Head title="Administration" />
 
-  <!-- TODO: an Chirps orientieren -->
-
   <ViewLayout>
     <div class="container mx-auto p-4 sm:p-6 lg:p-8">
       <h2 class="text-center text-3xl font-bold">ADMIN</h2>
@@ -25,8 +23,8 @@ const form_klasse = useForm({
       >
         <!-- Klassen -->
         <section id="klassen">
-          <h3>Klassen:</h3>
-          <div class="mr-auto max-w-2xl py-2">
+          <h3 class="text-xl font-bold">Klassen:</h3>
+          <div class="py-2">
             <form
               @submit.prevent="
                 form_klasse.post(route('klasse.store'), {
@@ -34,18 +32,22 @@ const form_klasse = useForm({
                 })
               "
             >
-              <input
-                v-model="form_klasse.klasse"
-                type="text"
-                placeholder="Klasse eingeben"
-                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              <div class="flex w-full">
+                <input
+                  v-model="form_klasse.klasse"
+                  type="text"
+                  placeholder="Klasse eingeben"
+                  class="block w-full rounded-md border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                />
+                <PrimaryButton class="mt-3">Hinzufügen</PrimaryButton>
+              </div>
+              <InputError
+                :message="form_klasse.errors.klasse"
+                class="mt-2 block"
               />
-              <InputError :klasse="form_klasse.errors.klasse" class="mt-2" />
-              <PrimaryButton class="mt-4">Hinzufügen</PrimaryButton>
             </form>
           </div>
 
-          <!-- TODO -->
           <div class="mt-6 divide-y rounded-lg bg-white shadow-sm">
             <Klasse
               v-for="klasse in klassen"
@@ -57,7 +59,7 @@ const form_klasse = useForm({
 
         <!-- Zeiträume -->
         <section id="zeiträume">
-          <h3>Zeiträume:</h3>
+          <h3 class="text-xl font-bold">Zeiträume:</h3>
           <ul>
             <li v-for="zeitraum in zeiträume" :key="zeitraum">
               {{ zeitraum.von }} - {{ zeitraum.bis }}
