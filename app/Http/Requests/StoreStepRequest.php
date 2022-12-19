@@ -24,9 +24,9 @@ class StoreStepRequest extends FormRequest
   public function rules()
   {
     return [
-      "vorname" => "required|string|min:3|max:50",
-      "name" => "required|string|min:3|max:50",
-      "klasse" => "required|string|max:10",
+      "vorname" => "required|string|min:3|max:35",
+      "name" => "required|string|min:3|max:35",
+      "klasse" => "required|string|max:10", // in_array:
       "von" => "required|date",
       "bis" => "required|date",
       "schritte" => "required|integer|gt:0",
