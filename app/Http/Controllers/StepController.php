@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Step;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
+use App\Http\Requests\StoreStepRequest;
 
 class StepController extends Controller
 {
@@ -124,7 +125,7 @@ class StepController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function store(Request $request)
+  public function store(StoreStepRequest $request)
   {
     // $validated = $request->validate([
     //   "vorname" => "required|string|max:50",
@@ -134,23 +135,27 @@ class StepController extends Controller
 
     // return redirect(route("steps.index"));
 
-    $step = new Step();
+    /* old and working: */
+    // $step = new Step();
 
-    $step->vorname = request("vorname");
-    $step->name = request("name");
-    $step->klasse = request("klasse");
-    $step->von = request("von");
-    $step->bis = request("bis");
-    $step->schritte = request("schritte");
+    // $step->vorname = request("vorname");
+    // $step->name = request("name");
+    // $step->klasse = request("klasse");
+    // $step->von = request("von");
+    // $step->bis = request("bis");
+    // $step->schritte = request("schritte");
 
-    $step->save();
+    // $step->save();
 
-    error_log($step);
+    // error_log($step);
 
     // error_log(request("vorname"));
     // error_log(request("name"));
     // error_log(request("klasse"));
     // error_log(request("schritte"));
+
+    /* new: */
+    Step::create($request->validated());
   }
 
   /**

@@ -69,10 +69,7 @@ const zeitraum = computed({
                 <span class="text-lg">Zurück</span>
               </PrimaryButton>
               <Link :href="route('steps.index')">
-                <PrimaryButton
-                  class=""
-                  value="Zur Auswertung"
-                >
+                <PrimaryButton class="" value="Zur Auswertung">
                   <span class="text-lg">Zur Auswertung</span>
                 </PrimaryButton>
               </Link>
@@ -189,7 +186,6 @@ const zeitraum = computed({
                     <input
                       type="text"
                       class="form-input"
-                      pattern="[\p{L} -]+"
                       name="vorname"
                       id="f_vorname"
                       v-model="form.vorname"
@@ -206,7 +202,6 @@ const zeitraum = computed({
                     <input
                       type="text"
                       class="form-input"
-                      pattern="[\p{L} -]+"
                       name="name"
                       id="f_name"
                       v-model="form.name"
@@ -272,7 +267,7 @@ const zeitraum = computed({
                         }}
                       </option>
                     </select>
-                    <InputError :message="form.errors.zeitraum" class="mt-2" />
+                    <InputError :message="form.errors.von" class="mt-2" />
                   </div>
 
                   <div class="mb-6">
@@ -280,7 +275,6 @@ const zeitraum = computed({
                     <input
                       type="text"
                       class="form-input"
-                      pattern="[0-9]+"
                       name="schritte"
                       id="f_schritte"
                       v-model="form.schritte"
