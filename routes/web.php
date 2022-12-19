@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\StepController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\KlasseController;
+use App\Http\Controllers\ZeitraumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +59,11 @@ Route::resource("/auswertung", StepController::class, [
 
 Route::resource("/admin", AdminController::class, [
   "names" => "admin",
-])->only(["index"]);
+])->only("index");
+
+Route::apiResources([
+  "klasse" => KlasseController::class,
+  "zeitraum" => ZeitraumController::class,
+]);
 
 require __DIR__ . "/auth.php";

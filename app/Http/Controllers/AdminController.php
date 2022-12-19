@@ -34,23 +34,6 @@ class AdminController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function store_klasse(Request $request)
-  {
-    $klasse = new Klasse();
-
-    $klasse->klasse = request("klasse");
-
-    $klasse->save();
-
-    error_log($klasse);
-  }
-
-  /**
-   * Store a newly created resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @return \Illuminate\Http\Response
-   */
   public function store_zeitraum(Request $request)
   {
     $zeitraum = new Zeitraum();

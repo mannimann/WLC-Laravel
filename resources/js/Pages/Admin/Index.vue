@@ -1,8 +1,14 @@
 <script setup>
 import ViewLayout from "@/Layouts/ViewLayout.vue";
-import { Head } from "@inertiajs/inertia-vue3";
+import InputError from "@/Components/InputError.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import { useForm, Head } from "@inertiajs/inertia-vue3";
 
 const props = defineProps(["klassen", "zeiträume"]);
+
+const form_klasse = useForm({
+  klasse: "",
+});
 </script>
 
 <template>
@@ -18,6 +24,24 @@ const props = defineProps(["klassen", "zeiträume"]);
       >
         <section id="klassen">
           <h3>Klassen:</h3>
+          <div class="mr-auto max-w-2xl py-2">
+            <form
+              @submit.prevent="
+                form_klasse.post(route('klasse.store'), {
+                  onSuccess: () => form_klasse.reset(),
+                })
+              "
+            >
+              <input
+                v-model="form_klasse.klasse"
+                type="text"
+                placeholder="Klasse eingeben"
+                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              />
+              <InputError :klasse="form_klasse.errors.klasse" class="mt-2" />
+              <PrimaryButton class="mt-4">Hinzufügen</PrimaryButton>
+            </form>
+          </div>
           <ul>
             <li v-for="klasse in klassen" :key="klasse">
               {{ klasse.klasse }}
