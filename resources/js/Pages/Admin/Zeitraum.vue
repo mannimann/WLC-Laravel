@@ -1,12 +1,15 @@
 <script setup>
 import InputError from "@/Components/InputError.vue";
+import Datepicker from "@vuepic/vue-datepicker";
 import { useForm, Link } from "@inertiajs/inertia-vue3";
 import { ref } from "vue";
+import "@vuepic/vue-datepicker/dist/main.css"; // TODO
 
-const props = defineProps(["klasse"]);
+const props = defineProps(["zeitraum"]);
 
 const form = useForm({
-  klasse: props.klasse.klasse,
+  von: props.zeitraum.von,
+  bis: props.zeitraum.bis,
 });
 const editing = ref(false);
 </script>
@@ -19,16 +22,22 @@ const editing = ref(false);
           v-if="editing"
           class="flex w-full"
           @submit.prevent="
-            form.put(route('klasse.update', klasse.id), {
+            form.put(route('zeitraum.update', zeitraum.id), {
               onSuccess: () => (editing = false),
             })
           "
         >
-          <input
-            v-model="form.klasse"
+          <!-- TODO -->
+          <Datepicker
+            v-model="form.von"
             class="rounded-md border-gray-300 text-xl text-gray-900 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
-          <InputError :message="form.errors.klasse" class="mt-2" />
+          <InputError :message="form.errors.von" class="mt-2" />
+          <input
+            v-model="form.bis"
+            class="rounded-md border-gray-300 text-xl text-gray-900 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+          />
+          <InputError :message="form.errors.bis" class="mt-2" />
           <div class="space-x-2">
             <!-- Speichern -->
             <button type="submit" class="mt-3 ml-3">
@@ -73,7 +82,9 @@ const editing = ref(false);
             </button>
           </div>
         </form>
-        <p v-else class="w-full text-lg text-gray-900">{{ klasse.klasse }}</p>
+        <p v-else class="w-full text-lg text-gray-900">
+          {{ zeitraum.von }} - {{ zeitraum.bis }}
+        </p>
 
         <!-- Bearbeiten -->
         <button
@@ -103,7 +114,7 @@ const editing = ref(false);
 
         <!-- Löschen -->
         <Link
-          :href="route('klasse.destroy', klasse.id)"
+          :href="route('zeitraum.destroy', zeitraum.id)"
           method="delete"
           as="button"
           class="block rounded px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100"

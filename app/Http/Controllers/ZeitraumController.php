@@ -25,4 +25,36 @@ class ZeitraumController extends Controller
 
     return redirect(route("admin.index"));
   }
+
+  /**
+   * Update the specified resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @param  \App\Models\Zeitraum  $zeitraum
+   * @return \Illuminate\Http\Response
+   */
+  public function update(Request $request, Zeitraum $zeitraum)
+  {
+    $validated = $request->validate([
+      "von" => "required",
+      "bis" => "required",
+    ]);
+
+    $zeitraum->update($validated);
+
+    return redirect(route("admin.index"));
+  }
+
+  /**
+   * Remove the specified resource from storage.
+   *
+   * @param  \App\Models\Zeitraum  $zeitraum
+   * @return \Illuminate\Http\Response
+   */
+  public function destroy(Zeitraum $zeitraum)
+  {
+    $zeitraum->delete();
+
+    return redirect(route("admin.index"));
+  }
 }

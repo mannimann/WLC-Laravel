@@ -4,6 +4,8 @@ import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { useForm, Head } from "@inertiajs/inertia-vue3";
 import Klasse from "@/Pages/Admin/Klasse.vue";
+import Zeitraum from "@/Pages/Admin/Zeitraum.vue";
+import Datepicker from "@vuepic/vue-datepicker";
 
 const props = defineProps(["klassen", "zeiträume"]);
 
@@ -60,11 +62,19 @@ const form_klasse = useForm({
         <!-- Zeiträume -->
         <section id="zeiträume">
           <h3 class="text-xl font-bold">Zeiträume:</h3>
-          <ul>
+          <!-- <ul>
             <li v-for="zeitraum in zeiträume" :key="zeitraum">
               {{ zeitraum.von }} - {{ zeitraum.bis }}
             </li>
-          </ul>
+          </ul> -->
+          <!-- <Datepicker /> -->
+          <div class="mt-6 divide-y rounded-lg bg-white shadow-sm">
+            <Zeitraum
+              v-for="zeitraum in zeiträume"
+              :key="zeitraum.id"
+              :zeitraum="zeitraum"
+            />
+          </div>
         </section>
       </div>
     </div>

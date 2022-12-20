@@ -23,6 +23,7 @@
     "vue": "^3.2.31"
   },
   "dependencies": {
+    "@vuepic/vue-datepicker": "^3.6.3",
     "@vueuse/core": "^9.5.0",
     "simple-datatables": "^4.0.7",
     "vue-good-table-next": "^0.2.1"

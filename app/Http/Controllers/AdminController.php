@@ -20,7 +20,7 @@ class AdminController extends Controller
       ->orderBy("klasse")
       ->get();
 
-    $zeiträume = Zeitraum::select("von", "bis")->get();
+    $zeiträume = Zeitraum::all();
 
     return Inertia::render("Admin/Index", [
       "klassen" => $klassen,
