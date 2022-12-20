@@ -36,8 +36,10 @@ class StoreStepRequest extends FormRequest
   public function messages()
   {
     return [
-      "von" => "Wähle einen gültigen Zeitraum aus.",
-      "bis" => "Wähle einen gültigen Zeitraum aus.",
+      "von.required" => "Zeitraum muss ausgefüllt werden.",
+      "bis.required" => "Zeitraum muss ausgefüllt werden.",
+      "von.date" => "Zeitraum muss ein gültiges Datum sein.",
+      "bis.date" => "Zeitraum muss ein gültiges Datum sein.",
     ];
   }
 }

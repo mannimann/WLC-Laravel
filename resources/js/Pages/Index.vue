@@ -9,6 +9,7 @@ import Card from "@/Components/Card.vue";
 const submit_disabled = ref(true); // TODO
 const submitted = ref(false);
 
+// Dropdown-Animation
 const isActive = ref(false);
 function setActive() {
   isActive.value = !isActive.value;
@@ -24,22 +25,21 @@ const form = useForm({
   screenshot: "",
 });
 
-const klassen_liste = ["5a", "5b", "5c"];
-const zeitraum_liste = [
-  ["2022-11-28", "2022-12-04"],
-  ["2022-11-29", "2022-12-05"],
-  ["2022-11-30", "2022-12-06"],
-];
+const props = defineProps(["klassen", "zeiträume"]);
 
 const zeitraum = computed({
   get() {
-    return [form.von, form.bis];
+    const zr = { von: form.von, bis: form.bis };
+    // console.log(zr);
+    return zr;
   },
-  set(newValue) {
+  set(zeitraum) {
     // TODO: check if empty
 
-    form.von = newValue[0];
-    form.bis = newValue[1];
+    // console.log(zeitraum);
+
+    form.von = zeitraum.von;
+    form.bis = zeitraum.bis;
   },
 });
 </script>
@@ -48,10 +48,6 @@ const zeitraum = computed({
   <Head title="Eintragen" />
 
   <ViewLayout>
-    <!-- <p>{{ form.von.split("-").reverse().join(".") }}</p>
-    <p>{{ form.bis }}</p>
-    <p>{{ zeitraum }}</p> -->
-
     <div class="container mx-auto p-4 sm:p-6 lg:p-8">
       <!-- Submitted -->
       <div v-if="submitted">
@@ -78,7 +74,7 @@ const zeitraum = computed({
         </Card>
       </div>
 
-      <!-- Normal Site -->
+      <!-- Main Content -->
       <div v-else>
         <!-- DescriptionCard -->
         <section id="DescriptionCard" class="mb-3">
@@ -191,7 +187,6 @@ const zeitraum = computed({
                       v-model="form.vorname"
                       @focus="addNotEmpty"
                       @blur="removeNotEmpty"
-                      required
                       autofocus
                     />
                     <InputError :message="form.errors.vorname" class="mt-2" />
@@ -207,7 +202,6 @@ const zeitraum = computed({
                       v-model="form.name"
                       @focus="addNotEmpty"
                       @blur="removeNotEmpty"
-                      required
                     />
                     <InputError :message="form.errors.name" class="mt-2" />
                   </div>
@@ -223,17 +217,16 @@ const zeitraum = computed({
                       v-model="form.klasse"
                       @focus="addNotEmpty"
                       @blur="removeNotEmpty"
-                      required
                     >
                       <!-- Default -->
                       <option value="" class="form-select-option"></option>
                       <option
-                        v-for="klasse in klassen_liste"
-                        :key="klasse"
-                        :value="klasse"
+                        v-for="klasse in klassen"
+                        :key="klasse.klasse"
+                        :value="klasse.klasse"
                         class="form-select-option"
                       >
-                        {{ klasse }}
+                        {{ klasse.klasse }}
                       </option>
                     </select>
                     <InputError :message="form.errors.klasse" class="mt-2" />
@@ -250,20 +243,19 @@ const zeitraum = computed({
                       v-model="zeitraum"
                       @focus="addNotEmpty"
                       @blur="removeNotEmpty"
-                      required
                     >
                       <!-- Default -->
                       <option value="" class="form-select-option"></option>
                       <option
-                        v-for="item in zeitraum_liste"
-                        :key="item"
-                        :value="item"
+                        v-for="zeitraum in zeiträume"
+                        :key="zeitraum"
+                        :value="zeitraum"
                         class="form-select-option"
                       >
                         {{
-                          item[0].split("-").reverse().join(".") +
+                          zeitraum.von.split("-").reverse().join(".") +
                           " - " +
-                          item[1].split("-").reverse().join(".")
+                          zeitraum.bis.split("-").reverse().join(".")
                         }}
                       </option>
                     </select>
@@ -280,7 +272,6 @@ const zeitraum = computed({
                       v-model="form.schritte"
                       @focus="addNotEmpty"
                       @blur="removeNotEmpty"
-                      required
                     />
                     <InputError :message="form.errors.schritte" class="mt-2" />
                   </div>
@@ -330,8 +321,6 @@ const zeitraum = computed({
                   >
                     <span class="text-lg">Eintragen</span>
                   </PrimaryButton>
-
-                  <!-- bei Bedarf hinzufügen: disabled -->
                 </div>
               </form>
               <!-- <p>{{ screenshot }}</p> -->

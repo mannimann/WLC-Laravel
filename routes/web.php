@@ -64,7 +64,7 @@ Route::resource("/auswertung", StepController::class, [
 Route::resource("/admin", AdminController::class, [
   "names" => "admin",
 ])->only("index");
-// Route::get("admin", [AdminController::class, "index"])->name("admin");
+// Route::get("/admin", [AdminController::class, "index"])->name("admin");
 
 Route::apiResources([
   "klasse" => KlasseController::class,

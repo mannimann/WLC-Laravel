@@ -16,10 +16,7 @@ class AdminController extends Controller
    */
   public function index()
   {
-    $klassen = Klasse::select("*")
-      ->orderBy("klasse")
-      ->get();
-
+    $klassen = Klasse::orderByRaw("LENGTH(klasse) ASC")->get();
     $zeiträume = Zeitraum::all();
 
     return Inertia::render("Admin/Index", [
