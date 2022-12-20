@@ -3,6 +3,7 @@ import ViewLayout from "@/Layouts/ViewLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { useForm, Head } from "@inertiajs/inertia-vue3";
+import { computed, ref } from "vue";
 import Klasse from "@/Pages/Admin/Klasse.vue";
 import Zeitraum from "@/Pages/Admin/Zeitraum.vue";
 import Datepicker from "@vuepic/vue-datepicker";
@@ -12,6 +13,28 @@ const props = defineProps(["klassen", "zeiträume"]);
 const form_klasse = useForm({
   klasse: "",
 });
+const form_zeitraum = useForm({
+  von: "",
+  bis: "",
+});
+
+/*const zeitraum = computed({
+  get() {
+    const zr = { von: form_zeitraum.von, bis: form_zeitraum.bis };
+    // console.log(zr);
+    return zr;
+  },
+  set(zeitraum) {
+    // TODO: check if empty
+
+    // console.log(zeitraum);
+
+    form_zeitraum.von = zeitraum.von;
+    form_zeitraum.bis = zeitraum.bis;
+  },
+});*/
+
+const zeitraum = ref("");
 </script>
 
 <template>
@@ -62,12 +85,33 @@ const form_klasse = useForm({
         <!-- Zeiträume -->
         <section id="zeiträume">
           <h3 class="text-xl font-bold">Zeiträume:</h3>
-          <!-- <ul>
-            <li v-for="zeitraum in zeiträume" :key="zeitraum">
-              {{ zeitraum.von }} - {{ zeitraum.bis }}
-            </li>
-          </ul> -->
-          <!-- <Datepicker /> -->
+          <div class="py-2">
+            <form
+              @submit.prevent="
+                form_zeitraum.post(route('zeitraum.store'), {
+                  onSuccess: () => form_zeitraum.reset(),
+                })
+              "
+            >
+              <div class="flex w-full">
+                <Datepicker
+                  v-model="zeitraum"
+                  type="date"
+                  range
+                  :enable-time-picker="false"
+                  placeholder="Zeitraum eingeben"
+                  class="block w-full rounded-md border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                />
+                <PrimaryButton class="mt-3">Hinzufügen</PrimaryButton>
+              </div>
+              <p>{{ zeitraum }}</p>
+              <InputError
+                :message="form_zeitraum.errors.von"
+                class="mt-2 block"
+              />
+            </form>
+          </div>
+
           <div class="mt-6 divide-y rounded-lg bg-white shadow-sm">
             <Zeitraum
               v-for="zeitraum in zeiträume"

@@ -3,7 +3,6 @@ import InputError from "@/Components/InputError.vue";
 import Datepicker from "@vuepic/vue-datepicker";
 import { useForm, Link } from "@inertiajs/inertia-vue3";
 import { ref } from "vue";
-import "@vuepic/vue-datepicker/dist/main.css"; // TODO
 
 const props = defineProps(["zeitraum"]);
 
