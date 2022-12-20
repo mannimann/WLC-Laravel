@@ -27,21 +27,4 @@ class AdminController extends Controller
       "zeiträume" => $zeiträume,
     ]);
   }
-
-  /**
-   * Store a newly created resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @return \Illuminate\Http\Response
-   */
-  public function store_zeitraum(Request $request)
-  {
-    $zeitraum = new Zeitraum();
-
-    $zeitraum->zeitraum = request("zeitraum");
-
-    $zeitraum->save();
-
-    error_log($zeitraum);
-  }
 }

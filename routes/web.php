@@ -57,9 +57,14 @@ Route::resource("/auswertung", StepController::class, [
   "names" => "steps",
 ])->only(["index", "store"]);
 
+// Route::prefix('admin')->middleware('auth')->group(function() {
+//   //
+// });
+
 Route::resource("/admin", AdminController::class, [
   "names" => "admin",
 ])->only("index");
+// Route::get("admin", [AdminController::class, "index"])->name("admin");
 
 Route::apiResources([
   "klasse" => KlasseController::class,
