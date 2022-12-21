@@ -93,6 +93,10 @@ const zeitraum = computed({
                   v-model="zeitraum"
                   type="date"
                   range
+                  format="dd.MM.yyyy"
+                  locale="de"
+                  cancelText="Abbrechen"
+                  selectText="Auswählen"
                   :enable-time-picker="false"
                   placeholder="Zeitraum eingeben"
                   class="block w-full rounded-md border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
