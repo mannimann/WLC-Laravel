@@ -2,7 +2,8 @@
 import InputError from "@/Components/InputError.vue";
 import Datepicker from "@vuepic/vue-datepicker";
 import { useForm, Link } from "@inertiajs/inertia-vue3";
-import { ref } from "vue";
+import { computed, ref } from "vue";
+import moment from "moment";
 
 const props = defineProps(["zeitraum"]);
 
@@ -10,6 +11,20 @@ const form = useForm({
   von: props.zeitraum.von,
   bis: props.zeitraum.bis,
 });
+
+const zeitraum_computed = computed({
+  get() {
+    const zr = [form.von, form.bis];
+    // console.log(zr);
+    return zr;
+  },
+  set(zeitraum) {
+    // console.log(zeitraum);
+    form.von = zeitraum[0];
+    form.bis = zeitraum[1];
+  },
+});
+
 const editing = ref(false);
 </script>
 
@@ -26,17 +41,15 @@ const editing = ref(false);
             })
           "
         >
-          <!-- TODO -->
           <Datepicker
-            v-model="form.von"
-            class="rounded-md border-gray-300 text-xl text-gray-900 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            v-model="zeitraum_computed"
+            type="date"
+            range
+            :enable-time-picker="false"
+            placeholder="Zeitraum eingeben"
+            class="block rounded-md border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
           <InputError :message="form.errors.von" class="mt-2" />
-          <input
-            v-model="form.bis"
-            class="rounded-md border-gray-300 text-xl text-gray-900 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-          />
-          <InputError :message="form.errors.bis" class="mt-2" />
           <div class="space-x-2">
             <!-- Speichern -->
             <button type="submit" class="mt-3 ml-3">
@@ -82,7 +95,8 @@ const editing = ref(false);
           </div>
         </form>
         <p v-else class="w-full text-lg text-gray-900">
-          {{ zeitraum.von }} - {{ zeitraum.bis }}
+          {{ moment(zeitraum.von).format("DD.MM.YYYY") }} -
+          {{ moment(zeitraum.bis).format("DD.MM.YYYY") }}
         </p>
 
         <!-- Bearbeiten -->

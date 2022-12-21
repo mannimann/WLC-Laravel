@@ -3,7 +3,7 @@ import ViewLayout from "@/Layouts/ViewLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { useForm, Head } from "@inertiajs/inertia-vue3";
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import Klasse from "@/Pages/Admin/Klasse.vue";
 import Zeitraum from "@/Pages/Admin/Zeitraum.vue";
 import Datepicker from "@vuepic/vue-datepicker";
@@ -20,22 +20,16 @@ const form_zeitraum = useForm({
 
 const zeitraum = computed({
   get() {
-    // const zr = { von: form_zeitraum.von, bis: form_zeitraum.bis };
     const zr = [form_zeitraum.von, form_zeitraum.bis];
     // console.log(zr);
     return zr;
   },
   set(zeitraum) {
-    // TODO: check if empty
-
     // console.log(zeitraum);
-
     form_zeitraum.von = zeitraum[0];
     form_zeitraum.bis = zeitraum[1];
   },
 });
-
-// const zeitraum = ref("");
 </script>
 
 <template>
@@ -105,6 +99,7 @@ const zeitraum = computed({
                 />
                 <PrimaryButton class="mt-3">Hinzufügen</PrimaryButton>
               </div>
+              <!-- TODO: entfernen -->
               <p>{{ zeitraum }}</p>
               <InputError
                 :message="form_zeitraum.errors.von"
