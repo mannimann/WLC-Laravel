@@ -31,22 +31,18 @@ const columns = [
     field: "klasse",
     type: "number",
   },
-  // {
-  //   label: "Zeitraum",
-  //   field: "zeitraum",
-  // },
   {
     label: "Von",
     field: "von",
     type: "date",
-    dateInputFormat: "yyyy-MM-dd",
+    dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'",
     dateOutputFormat: "dd.MM.yyyy",
   },
   {
     label: "Bis",
     field: "bis",
     type: "date",
-    dateInputFormat: "yyyy-MM-dd",
+    dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'",
     dateOutputFormat: "dd.MM.yyyy",
   },
   {

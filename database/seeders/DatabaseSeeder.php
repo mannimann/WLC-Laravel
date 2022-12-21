@@ -76,6 +76,12 @@ class DatabaseSeeder extends Seeder
         ]);
       }
     }
+    \App\Models\Klasse::factory()->create([
+      "klasse" => "Lehrer",
+    ]);
+    \App\Models\Klasse::factory()->create([
+      "klasse" => "Eltern",
+    ]);
 
     /*
      * Zeiträume
