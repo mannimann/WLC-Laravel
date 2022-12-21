@@ -99,8 +99,6 @@ const zeitraum = computed({
                 />
                 <PrimaryButton class="mt-3">Hinzufügen</PrimaryButton>
               </div>
-              <!-- TODO: entfernen -->
-              <p>{{ zeitraum }}</p>
               <InputError
                 :message="form_zeitraum.errors.von"
                 class="mt-2 block"
