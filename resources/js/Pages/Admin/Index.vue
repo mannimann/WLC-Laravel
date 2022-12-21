@@ -18,9 +18,10 @@ const form_zeitraum = useForm({
   bis: "",
 });
 
-/*const zeitraum = computed({
+const zeitraum = computed({
   get() {
-    const zr = { von: form_zeitraum.von, bis: form_zeitraum.bis };
+    // const zr = { von: form_zeitraum.von, bis: form_zeitraum.bis };
+    const zr = [form_zeitraum.von, form_zeitraum.bis];
     // console.log(zr);
     return zr;
   },
@@ -29,12 +30,12 @@ const form_zeitraum = useForm({
 
     // console.log(zeitraum);
 
-    form_zeitraum.von = zeitraum.von;
-    form_zeitraum.bis = zeitraum.bis;
+    form_zeitraum.von = zeitraum[0];
+    form_zeitraum.bis = zeitraum[1];
   },
-});*/
+});
 
-const zeitraum = ref("");
+// const zeitraum = ref("");
 </script>
 
 <template>

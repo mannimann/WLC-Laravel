@@ -16,8 +16,8 @@ class ZeitraumController extends Controller
   public function store(Request $request)
   {
     $validated = $request->validate([
-      "von" => "required|string|max:10",
-      "bis" => "required|string|max:10",
+      "von" => "required|date",
+      "bis" => "required|date",
     ]);
     Zeitraum::create($validated);
 
@@ -36,8 +36,8 @@ class ZeitraumController extends Controller
   public function update(Request $request, Zeitraum $zeitraum)
   {
     $validated = $request->validate([
-      "von" => "required",
-      "bis" => "required",
+      "von" => "required|date",
+      "bis" => "required|date",
     ]);
 
     $zeitraum->update($validated);
