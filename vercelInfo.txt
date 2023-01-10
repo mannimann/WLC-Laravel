@@ -1,14 +1,15 @@
 # Files for vercel:
-
 vercel.json
 api/index.php
 
 # in .gitignore remove:
-
 !/vendor/
 /vendor/\*
 !/vendor/tightenco/
 
 # and add:
-
 /vendor
+
+# Websites: 
+https://dev.to/kenean50/free-serverless-laravel-deployment-1e9n
+https://github.com/vercel-community/php
