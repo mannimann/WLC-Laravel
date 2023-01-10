@@ -6,7 +6,7 @@
 # /vendor
 !/vendor/
 /vendor/*
-!/vendor/tightenco/*
+!/vendor/tightenco/
 .env
 .env.backup
 .phpunit.result.cache
