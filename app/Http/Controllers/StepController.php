@@ -36,6 +36,7 @@ class StepController extends Controller
       ->get();
 
     // Footer bzw. Zeile Gesamt
+    // TODO: nur ausgeben, wenn Einträge vorhanden sind!
     $zeitraum_sub = Step::select(
       Step::raw("COUNT(*) AS 'teilnehmer_count'")
     )->fromSub(function ($query) {

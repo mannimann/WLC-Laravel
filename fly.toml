@@ -1,4 +1,4 @@
-# fly.toml file generated for wlc-laravel on 2023-01-21T16:32:44+01:00
+# fly.toml file generated for wlc-laravel on 2023-01-21T19:06:22+01:00
 
 app = "wlc-laravel"
 kill_signal = "SIGINT"
@@ -9,6 +9,10 @@ processes = []
   [build.args]
     NODE_VERSION = "14"
     PHP_VERSION = "8.1"
+
+[mounts]
+  source="database_vol"
+  destination="/var/www/html/database/database"
 
 [env]
   APP_ENV = "production"
