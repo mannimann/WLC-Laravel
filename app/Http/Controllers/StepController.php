@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use stdClass;
 use App\Models\Step;
 use Inertia\Inertia;
+use App\Models\Zeitraum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreStepRequest;
@@ -25,38 +27,91 @@ class StepController extends Controller
     /*
      * Steps gruppiert nach Zeiträumen
      */
-    $steps_zeitraum = Step::select(
-      "von",
-      "bis",
-      Step::raw("SUM(schritte) AS schritte_sum"),
-      Step::raw("COUNT(id) AS teilnehmer_count")
-    )
-      ->groupBy("von", "bis")
+    $zeiträume = Zeitraum::select("von", "bis")
       ->orderBy("von")
       ->orderBy("bis")
       ->get();
 
+    $steps_zeitraum = [];
+    foreach ($zeiträume as $z) {
+      $sz = Step::select(
+        Step::raw("SUM(schritte) AS schritte_sum"),
+        Step::raw("COUNT(id) AS teilnehmer_count"),
+        Step::raw("SUM(schritte)/COUNT(id) AS schritte_pro_kopf")
+      )
+        ->where("von", "=", $z->von)
+        ->where("bis", "=", $z->bis)
+        ->get();
+
+      $steps_zeitraum[] = [
+        "von" => $z->von,
+        "bis" => $z->bis,
+        "schritte_sum" => $sz[0]->schritte_sum > 0 ? $sz[0]->schritte_sum : 0,
+        "teilnehmer_count" =>
+          $sz[0]->teilnehmer_count > 0 ? $sz[0]->teilnehmer_count : 0,
+        "schritte_pro_kopf" =>
+          $sz[0]->schritte_pro_kopf > 0 ? $sz[0]->schritte_pro_kopf : 0,
+      ];
+    }
+
+    /////////////////
+
+    // $steps_zeitraum = Step::select(
+    //   "von",
+    //   "bis",
+    //   // Step::raw("(von||' - '||bis) AS zeitraum"),
+    //   Step::raw("SUM(schritte) AS schritte_sum"),
+    //   Step::raw("COUNT(id) AS teilnehmer_count"),
+    //   Step::raw("SUM(schritte)/COUNT(id) AS schritte_pro_kopf")
+    // )
+    //   // ->groupBy("zeitraum")
+    //   ->groupBy("von", "bis")
+    //   ->orderBy("von")
+    //   ->orderBy("bis")
+    //   ->get();
+
     // Footer bzw. Zeile Gesamt
     // TODO: nur ausgeben, wenn Einträge vorhanden sind!
-    $zeitraum_sub = Step::select(
-      Step::raw("COUNT(*) AS 'teilnehmer_count'")
-    )->fromSub(function ($query) {
-      $query->from("steps")->groupBy("vorname", "name", "klasse");
-    }, "s");
+    if ($steps_zeitraum > 0) {
+      error_log(">1");
 
-    $zeitraum_gesamt = Step::select(
-      "von",
-      "bis",
-      Step::raw("SUM(schritte) AS schritte_sum"),
-      Step::raw("teilnehmer_count")
-    )
-      ->joinSub($zeitraum_sub, "steps2", Step::raw(1), "=", Step::raw(1))
-      ->get();
-    $zeitraum_gesamt[0]["von"] = "";
-    $zeitraum_gesamt[0]["bis"] = "";
+      $zeitraum_sub = Step::select(
+        Step::raw("COUNT(*) AS 'teilnehmer_count'")
+      )->fromSub(function ($query) {
+        $query->from("steps")->groupBy("vorname", "name", "klasse");
+      }, "s");
 
-    $steps_zeitraum = $steps_zeitraum->toBase()->merge($zeitraum_gesamt);
+      $zeitraum_gesamt = Step::select(
+        // "von",
+        // "bis",
+        Step::raw("SUM(schritte) AS schritte_sum"),
+        Step::raw("teilnehmer_count"),
+        Step::raw("SUM(schritte)/COUNT(id) AS schritte_pro_kopf")
+      )
+        ->joinSub($zeitraum_sub, "steps2", Step::raw(1), "=", Step::raw(1))
+        ->get();
+      // $zeitraum_gesamt[0]["von"] = "";
+      // $zeitraum_gesamt[0]["bis"] = "";
 
+      $steps_zeitraum[] = [
+        "von" => "",
+        "bis" => "",
+        "schritte_sum" =>
+          $zeitraum_gesamt[0]->schritte_sum > 0
+            ? $zeitraum_gesamt[0]->schritte_sum
+            : 0,
+        "teilnehmer_count" =>
+          $zeitraum_gesamt[0]->teilnehmer_count > 0
+            ? $zeitraum_gesamt[0]->teilnehmer_count
+            : 0,
+        "schritte_pro_kopf" =>
+          $zeitraum_gesamt[0]->schritte_pro_kopf > 0
+            ? $zeitraum_gesamt[0]->schritte_pro_kopf
+            : 0,
+      ];
+
+      // $steps_zeitraum = $steps_zeitraum->toBase()->merge($zeitraum_gesamt);
+    }
     /*
      * Steps der besten Läufer
      */

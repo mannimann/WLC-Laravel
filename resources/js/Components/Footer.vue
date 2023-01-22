@@ -11,6 +11,7 @@
       <div class="mt-1 mb-1">
         <p>
           Webseite erstellt von Jakob Mann (<a
+            class="underline"
             href="mailto:jm_jakobmann@web.de"
             target="_blank"
             >Kontakt</a
@@ -20,13 +21,18 @@
       <div class="mt-1 mb-1">
         Icons erstellt von
         <a
+          class="underline"
           href="https://www.flaticon.com/de/autoren/freepik"
           target="_blank"
           title="Freepik"
           >Freepik</a
         >
         from
-        <a href="https://www.flaticon.com/de/" target="_blank" title="Flaticon"
+        <a
+          class="underline"
+          href="https://www.flaticon.com/de/"
+          target="_blank"
+          title="Flaticon"
           >www.flaticon.com</a
         >
       </div>

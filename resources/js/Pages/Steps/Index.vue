@@ -26,19 +26,20 @@ const props = defineProps([
       </section>
 
       <section
-        class="mb-3 grid grid-cols-1 justify-items-stretch gap-3 lg:grid-cols-2"
+        class="mb-3 grid grid-cols-1 justify-items-stretch gap-3 xl:grid-cols-2"
       >
-        <AuswertungZeitraum :data="steps_zeitraum" />
-        <AuswertungPersonen :data="steps_top" />
+        <div>
+          <AuswertungZeitraum class="mb-3" :data="steps_zeitraum" />
+          <AuswertungPersonen :data="steps_top" />
+        </div>
+        <AuswertungKlassen :data="steps_klassen" />
       </section>
 
-      <div class="mb-3">
-        <AuswertungKlassen :data="steps_klassen" />
-      </div>
+      <div class="mb-3"></div>
 
-      <div class="mb-3">
+      <section class="mb-3">
         <AuswertungAlle :data="steps_all" />
-      </div>
+      </section>
     </div>
   </ViewLayout>
 </template>

@@ -50,9 +50,9 @@ const columns = [
           styleClass="vgt-table striped"
           :pagination-options="{
             enabled: true,
-            perPage: 10,
+            perPage: 20,
             position: 'bottom',
-            perPageDropdown: [10, 25, 50],
+            perPageDropdown: [10, 20, 30, 50],
             dropdownAllowAll: true,
             nextLabel: 'Weiter',
             prevLabel: 'Zurück',
@@ -83,9 +83,9 @@ const columns = [
           styleClass="vgt-table striped"
           :pagination-options="{
             enabled: true,
-            perPage: 10,
+            perPage: 20,
             position: 'bottom',
-            perPageDropdown: [10, 25, 50],
+            perPageDropdown: [10, 20, 30, 50],
             dropdownAllowAll: true,
             nextLabel: 'Weiter',
             prevLabel: 'Zurück',
