@@ -1,11 +1,13 @@
 <script setup>
-import { ref } from "vue";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
-import NavLink from "@/Components/NavLink.vue";
-import Footer from "@/Components/Footer.vue";
-import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
 import DarkModeButton from "@/Components/DarkModeButton.vue";
+import Dropdown from "@/Components/Dropdown.vue";
+import DropdownLink from "@/Components/DropdownLink.vue";
+import Footer from "@/Components/Footer.vue";
+import NavLink from "@/Components/NavLink.vue";
+import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
 import { Link } from "@inertiajs/inertia-vue3";
+import { ref } from "vue";
 
 // import { useColorMode } from "@vueuse/core";
 // const mode = useColorMode();
@@ -50,6 +52,7 @@ const showingNavigationDropdown = ref(false);
                 <ApplicationLogo class="block h-9 w-auto" />
               </Link>
             </div>
+
             <!-- Navigation Links -->
             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
               <NavLink :href="route('home')" :active="route().current('home')">
@@ -62,6 +65,7 @@ const showingNavigationDropdown = ref(false);
                 Auswertung
               </NavLink>
               <NavLink
+                v-if="$page.props.auth.user"
                 :href="route('admin.index')"
                 :active="route().current('admin.index')"
               >
@@ -73,7 +77,49 @@ const showingNavigationDropdown = ref(false);
             <DarkModeButton />
             <!-- Login/Register -->
             <div class="relative ml-3">
-              <div v-if="canLogin" class="hidden px-6 py-4 sm:block">
+              <div v-if="$page.props.auth.user">
+                <Dropdown
+                  align="right"
+                  width="48"
+                  class="text-secondary underline dark:text-secondary_dark"
+                >
+                  <template #trigger>
+                    <span class="inline-flex rounded-md">
+                      <button
+                        type="button"
+                        class="inline-flex items-center rounded-md border border-transparent px-3 py-2 text-sm font-medium leading-4 transition duration-150 ease-in-out focus:outline-none"
+                      >
+                        {{ $page.props.auth.user.name }}
+
+                        <svg
+                          class="ml-2 -mr-0.5 h-4 w-4"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
+                      </button>
+                    </span>
+                  </template>
+
+                  <template #content>
+                    <DropdownLink
+                      :href="route('logout')"
+                      method="post"
+                      as="button"
+                    >
+                      Log Out
+                    </DropdownLink>
+                  </template>
+                </Dropdown>
+              </div>
+
+              <div v-else v-if="canLogin" class="hidden px-6 py-4 sm:block">
                 <Link
                   :href="route('login')"
                   class="text-sm text-secondary underline dark:text-secondary_dark"
@@ -127,39 +173,71 @@ const showingNavigationDropdown = ref(false);
         </div>
       </div>
       <!-- Responsive Navigation Menu -->
-      <div
-        :class="{
-          block: showingNavigationDropdown,
-          hidden: !showingNavigationDropdown,
-        }"
-        class="sm:hidden"
-      >
-        <div class="space-y-1 pt-2 pb-3">
-          <ResponsiveNavLink
-            :href="route('home')"
-            :active="route().current('home')"
-          >
-            Eintragen
-          </ResponsiveNavLink>
-          <ResponsiveNavLink
-            :href="route('steps.index')"
-            :active="route().current('steps.index')"
-          >
-            Auswertung
-          </ResponsiveNavLink>
-          <!-- Responsive Login/Register -->
-          <!-- TODO: dark-border-->
-          <div
-            v-if="canLogin"
-            class="space-y-1 border-t border-gray-700 pt-1 text-secondary underline dark:text-secondary_dark"
-          >
-            <ResponsiveNavLink :href="route('login')">Log in</ResponsiveNavLink>
-            <ResponsiveNavLink v-if="canRegister" :href="route('register')"
-              >Register</ResponsiveNavLink
+      <!-- TODO: Transition -->
+      <Transition name="hamburger">
+        <div v-show="showingNavigationDropdown" class="sm:hidden">
+          <div class="space-y-1 pt-2 pb-3">
+            <ResponsiveNavLink
+              :href="route('home')"
+              :active="route().current('home')"
             >
+              Eintragen
+            </ResponsiveNavLink>
+            <ResponsiveNavLink
+              :href="route('steps.index')"
+              :active="route().current('steps.index')"
+            >
+              Auswertung
+            </ResponsiveNavLink>
+            <ResponsiveNavLink
+              v-if="$page.props.auth.user"
+              :href="route('admin.index')"
+              :active="route().current('admin.index')"
+            >
+              Administration
+            </ResponsiveNavLink>
+
+            <!-- Responsive Login/Register -->
+            <!-- TODO: dark-border -->
+            <div v-if="$page.props.auth.user">
+              <div
+                class="space-y-1 border-t-4 border-gray-700 px-4 py-1 text-center text-secondary dark:text-secondary_dark"
+              >
+                <div
+                  class="text-base font-medium text-secondary dark:text-secondary_dark"
+                >
+                  {{ $page.props.auth.user.name }}
+                </div>
+                <div
+                  class="text-sm font-medium text-secondary dark:text-secondary_dark"
+                >
+                  {{ $page.props.auth.user.email }}
+                </div>
+              </div>
+
+              <div
+                class="space-y-1 border-t border-gray-700 pt-1 text-secondary underline dark:text-secondary_dark"
+              >
+                <ResponsiveNavLink :href="route('logout')" method="post">
+                  Log Out
+                </ResponsiveNavLink>
+              </div>
+            </div>
+            <div
+              v-else
+              v-if="canLogin"
+              class="space-y-1 border-t-4 border-gray-700 pt-1 text-secondary underline dark:text-secondary_dark"
+            >
+              <ResponsiveNavLink :href="route('login')"
+                >Log in</ResponsiveNavLink
+              >
+              <ResponsiveNavLink v-if="canRegister" :href="route('register')"
+                >Register</ResponsiveNavLink
+              >
+            </div>
           </div>
         </div>
-      </div>
+      </Transition>
     </nav>
     <!-- Page Content -->
     <main class="text-secondary dark:text-secondary_dark">
@@ -170,3 +248,20 @@ const showingNavigationDropdown = ref(false);
     </footer>
   </div>
 </template>
+
+<style scoped>
+.hamburger-enter-from,
+.hamburger-leave-to {
+  max-height: 0;
+  overflow: hidden;
+}
+.hamburger-enter-active,
+.hamburger-leave-active {
+  transition: all 0.3s ease-in-out;
+}
+.hamburger-enter-to,
+.hamburger-leave-from {
+  max-height: 100em;
+  overflow: hidden;
+}
+</style>

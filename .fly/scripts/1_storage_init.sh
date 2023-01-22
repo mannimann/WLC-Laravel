@@ -7,7 +7,7 @@
 # fi
 
 
-#  ggf. alles außer mkdir und touch ausklammern -> bei Problem: read-only DB
+#  ggf. alles außer mkdir und touch ausklammern -> bei Problem: read-only DBy
 FOLDER=/var/www/html/database/database
 if [ ! -d "$FOLDER" ]; then
     echo "$FOLDER is not a directory, initializing database" 

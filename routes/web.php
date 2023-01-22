@@ -20,14 +20,14 @@ use App\Http\Controllers\ZeitraumController;
 |
 */
 
-Route::get("/welcome", function () {
-  return Inertia::render("Welcome", [
-    "canLogin" => Route::has("login"),
-    "canRegister" => Route::has("register"),
-    "laravelVersion" => Application::VERSION,
-    "phpVersion" => PHP_VERSION,
-  ]);
-});
+// Route::get("/welcome", function () {
+//   return Inertia::render("Welcome", [
+//     "canLogin" => Route::has("login"),
+//     "canRegister" => Route::has("register"),
+//     "laravelVersion" => Application::VERSION,
+//     "phpVersion" => PHP_VERSION,
+//   ]);
+// });
 
 Route::get("/dashboard", function () {
   return Inertia::render("Dashboard");
@@ -57,14 +57,14 @@ Route::resource("/auswertung", StepController::class, [
   "names" => "steps",
 ])->only(["index", "store"]);
 
-// Route::prefix('admin')->middleware('auth')->group(function() {
-//   //
-// });
-
-Route::resource("/admin", AdminController::class, [
-  "names" => "admin",
-])->only("index");
-// Route::get("/admin", [AdminController::class, "index"])->name("admin");
+Route::prefix("admin")
+  ->middleware("auth", "verified")
+  ->group(function () {
+    Route::resource("/", AdminController::class, [
+      "names" => "admin",
+    ])->only("index");
+    // Route::get("/admin", [AdminController::class, "index"])->name("admin");
+  });
 
 Route::apiResources([
   "klasse" => KlasseController::class,
