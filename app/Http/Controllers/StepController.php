@@ -43,9 +43,12 @@ class StepController extends Controller
         ->where("bis", "=", $z->bis)
         ->get();
 
+      $zd =
+        date_format(date_create($z->von), "d.m.y") .
+        " - " .
+        date_format(date_create($z->bis), "d.m.y");
       $steps_zeitraum[] = [
-        "von" => $z->von,
-        "bis" => $z->bis,
+        "zeitraum" => $zd,
         "schritte_sum" => $sz[0]->schritte_sum > 0 ? $sz[0]->schritte_sum : 0,
         "teilnehmer_count" =>
           $sz[0]->teilnehmer_count > 0 ? $sz[0]->teilnehmer_count : 0,
@@ -82,8 +85,6 @@ class StepController extends Controller
       }, "s");
 
       $zeitraum_gesamt = Step::select(
-        // "von",
-        // "bis",
         Step::raw("SUM(schritte) AS schritte_sum"),
         Step::raw("teilnehmer_count"),
         Step::raw("SUM(schritte)/COUNT(id) AS schritte_pro_kopf")
@@ -94,8 +95,7 @@ class StepController extends Controller
       // $zeitraum_gesamt[0]["bis"] = "";
 
       $steps_zeitraum[] = [
-        "von" => "",
-        "bis" => "",
+        "zeitraum" => "Gesamt",
         "schritte_sum" =>
           $zeitraum_gesamt[0]->schritte_sum > 0
             ? $zeitraum_gesamt[0]->schritte_sum

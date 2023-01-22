@@ -6,29 +6,30 @@ import Card from "@/Components/Card.vue";
 const props = defineProps(["data"]);
 
 const rowStyleClassSum = function (row) {
-  return row.von == "" ? "italic font-bold" : "";
+  return row.zeitraum == "Gesamt" ? "italic font-bold" : "";
 };
 
 const columns = [
-  {
-    label: "Von",
-    field: "von",
-    type: "date",
-    dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'",
-    dateOutputFormat: "dd.MM.yyyy",
-  },
-  {
-    label: "Bis",
-    field: "bis",
-    type: "date",
-    dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'",
-    dateOutputFormat: "dd.MM.yyyy",
-  },
   // {
-  //   label: "Zeitraum",
-  //   field: "zeitraum",
-  //   type: "string",
+  //   label: "Von",
+  //   field: "von",
+  //   type: "date",
+  //   dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'",
+  //   dateOutputFormat: "dd.MM.yyyy",
   // },
+  // {
+  //   label: "Bis",
+  //   field: "bis",
+  //   type: "date",
+  //   dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'",
+  //   dateOutputFormat: "dd.MM.yyyy",
+  // },
+  {
+    label: "Zeitraum",
+    field: "zeitraum",
+    type: "string",
+    tdClass: "font-bold",
+  },
   {
     label: "Schritte gesamt",
     field: "schritte_sum",
