@@ -10,7 +10,7 @@ import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
 import "@vuepic/vue-datepicker/dist/main.css";
 
 const appName =
-  window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
+  window.document.getElementsByTagName("title")[0]?.innerText || "WLC";
 
 createInertiaApp({
   title: (title) => `${title} - ${appName}`,

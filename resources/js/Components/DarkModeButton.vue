@@ -6,7 +6,7 @@ const toggleDark = useToggle(isDark);
 </script>
 
 <template>
-  <button @click="toggleDark()">
+  <button @click="toggleDark()" class="focus:outline-none">
     <span class="dark:hidden"
       ><svg
         viewBox="0 0 24 24"

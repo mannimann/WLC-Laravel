@@ -122,13 +122,13 @@ const showingNavigationDropdown = ref(false);
               <div v-else v-if="canLogin" class="hidden px-6 py-4 sm:block">
                 <Link
                   :href="route('login')"
-                  class="text-sm text-secondary underline dark:text-secondary_dark"
+                  class="text-sm text-secondary underline focus:outline-none dark:text-secondary_dark"
                   >Log in</Link
                 >
                 <Link
                   v-if="canRegister"
                   :href="route('register')"
-                  class="ml-4 text-sm text-secondary underline dark:text-secondary_dark"
+                  class="ml-4 text-sm text-secondary underline focus:outline-none dark:text-secondary_dark"
                   >Register</Link
                 >
               </div>
