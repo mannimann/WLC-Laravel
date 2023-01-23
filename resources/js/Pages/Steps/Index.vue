@@ -20,7 +20,7 @@ const props = defineProps([
   <Head title="Auswertung" />
 
   <ViewLayout>
-    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+    <div class="mx-auto p-4 sm:p-6 lg:p-8">
       <section class="mb-3 hidden">
         <AuswertungTest :data="steps_all" />
       </section>
@@ -34,8 +34,6 @@ const props = defineProps([
         </div>
         <AuswertungKlassen :data="steps_klassen" />
       </section>
-
-      <div class="mb-3"></div>
 
       <section class="mb-3">
         <AuswertungAlle :data="steps_all" />

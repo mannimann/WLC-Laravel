@@ -28,6 +28,8 @@ const zeitraum_computed = computed({
 const editing = ref(false);
 </script>
 
+<!-- TODO: overflow -->
+
 <template>
   <div class="flex space-x-2 p-2 px-4">
     <div class="flex-1">
@@ -51,7 +53,7 @@ const editing = ref(false);
             selectText="Auswählen"
             :enable-time-picker="false"
             placeholder="Zeitraum eingeben"
-            class="block rounded-md border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            class="text-lg block rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
           <InputError :message="form.errors.von" class="mt-2" />
           <div class="space-x-2">
@@ -98,7 +100,7 @@ const editing = ref(false);
             </button>
           </div>
         </form>
-        <p v-else class="w-full text-lg text-gray-900">
+        <p v-else class="text-lg w-full text-gray-900">
           {{ moment(zeitraum.von).format("DD.MM.YYYY") }} -
           {{ moment(zeitraum.bis).format("DD.MM.YYYY") }}
         </p>

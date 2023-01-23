@@ -28,7 +28,7 @@ const showingNavigationDropdown = ref(false);
   <div class="flex min-h-screen flex-col bg-primarybg dark:bg-primarybg_dark">
     <!-- Page Heading -->
     <header class="bg-secondary2bg shadow dark:bg-secondarybg_dark">
-      <div class="mx-auto max-w-7xl px-4 pt-6 pb-0 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl px-5 pt-6 pb-0 sm:px-7 lg:px-9">
         <div v-if="$slots.header">
           <slot name="header" />
         </div>
@@ -43,7 +43,7 @@ const showingNavigationDropdown = ref(false);
       class="border-b border-secondary bg-gradient-to-b from-secondary2bg to-primarybg dark:border-secondary_dark dark:from-secondarybg_dark dark:to-primarybg_dark"
     >
       <!-- Primary Navigation Menu -->
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto px-5 sm:px-7 lg:px-9">
         <div class="flex h-16 justify-between">
           <div class="flex">
             <!-- Logo -->
@@ -119,7 +119,7 @@ const showingNavigationDropdown = ref(false);
                 </Dropdown>
               </div>
 
-              <div v-else v-if="canLogin" class="hidden px-6 py-4 sm:block">
+              <div v-else v-if="canLogin" class="hidden py-4 sm:block">
                 <Link
                   :href="route('login')"
                   class="text-sm text-secondary underline focus:outline-none dark:text-secondary_dark"

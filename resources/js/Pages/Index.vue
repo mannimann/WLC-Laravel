@@ -49,7 +49,7 @@ const zeitraum = computed({
   <Head title="Eintragen" />
 
   <ViewLayout>
-    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+    <div class="mx-auto p-4 sm:p-6 lg:p-8">
       <!-- Submitted -->
       <div v-if="submitted">
         <Card>
@@ -76,7 +76,7 @@ const zeitraum = computed({
       </div>
 
       <!-- Main Content -->
-      <div v-else>
+      <div v-else class="container mx-auto">
         <!-- DescriptionCard -->
         <section id="DescriptionCard" class="mb-3">
           <Card>
