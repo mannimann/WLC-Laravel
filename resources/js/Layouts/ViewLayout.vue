@@ -71,6 +71,13 @@ const showingNavigationDropdown = ref(false);
               >
                 Administration
               </NavLink>
+
+              <NavLink
+                :href="route('settings.index')"
+                :active="route().current('settings.index')"
+              >
+                Settings
+              </NavLink>
             </div>
           </div>
           <div class="hidden sm:ml-6 sm:flex sm:items-center">
