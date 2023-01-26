@@ -7,6 +7,7 @@ use App\Models\Step;
 use Inertia\Inertia;
 use App\Models\Zeitraum;
 use Illuminate\Http\Request;
+use Spatie\Valuestore\Valuestore;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreStepRequest;
 
@@ -19,6 +20,10 @@ class StepController extends Controller
    */
   public function index()
   {
+    $settings = Valuestore::make(
+      storage_path("../database/database/settings.json")
+    );
+
     /*
      * Alle Daten
      */
@@ -157,6 +162,7 @@ class StepController extends Controller
     // dd($steps_klassen);
 
     return Inertia::render("Steps/Index", [
+      "settings" => $settings->all(),
       "steps_all" => $steps_all,
       "steps_zeitraum" => $steps_zeitraum,
       "steps_top" => $steps_top,

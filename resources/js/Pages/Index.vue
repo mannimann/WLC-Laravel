@@ -26,7 +26,7 @@ const form = useForm({
   screenshot: "",
 });
 
-const props = defineProps(["klassen", "zeiträume"]);
+const props = defineProps(["settings", "klassen", "zeiträume"]);
 
 const zeitraum = computed({
   get() {
@@ -48,7 +48,7 @@ const zeitraum = computed({
 <template>
   <Head title="Eintragen" />
 
-  <ViewLayout>
+  <ViewLayout :title="settings.title">
     <div class="mx-auto p-4 sm:p-6 lg:p-8">
       <!-- Submitted -->
       <div v-if="submitted">
@@ -114,16 +114,22 @@ const zeitraum = computed({
               <Transition name="cardbody">
                 <div v-show="isActive">
                   <p>
-                    Die Challenge besteht darin, in den nächsten Wochen
-                    <span class="uppercase">so viele Schritte wie möglich</span>
-                    zu machen. Nutze eine App oder eine Fitness-Uhr, um die
-                    Schritte, die du jeden Tag machst, mitzählen zu lassen.
-                    <span class="uppercase">Jede Woche</span> kannst dem die
-                    Gesamtanzahl der erreichten Schritte
-                    <span class="uppercase">einmal hier eintragen</span> und für
-                    deine Klasse Schritte sammeln. Lade dazu am besten noch
-                    einen Screenshot mit deiner Schrittanzahl hoch. <br />Wir
-                    suchen die beste Klasse und den besten Läufer! <br /><br />
+                    <div v-if="settings.infotext">
+                      {{ settings.infotext }}
+                    </div>
+                    <div v-else>
+                      Die Challenge besteht darin, in den nächsten Wochen
+                      <span class="uppercase">so viele Schritte wie möglich</span>
+                      zu machen. Nutze eine App oder eine Fitness-Uhr, um die
+                      Schritte, die du jeden Tag machst, mitzählen zu lassen.
+                      <span class="uppercase">Jede Woche</span> kannst dem die
+                      Gesamtanzahl der erreichten Schritte
+                      <span class="uppercase">einmal hier eintragen</span> und für
+                      deine Klasse Schritte sammeln. Lade dazu am besten noch
+                      einen Screenshot mit deiner Schrittanzahl hoch. <br />Wir
+                      suchen die beste Klasse und den besten Läufer!<br />
+                    </div>
+                    <br />
                     <strong
                       >Also nimm die Beine in die Hand und los gehts!</strong
                     >
@@ -133,7 +139,7 @@ const zeitraum = computed({
                       class="aspect-video h-auto max-w-full"
                       width="560"
                       height="315"
-                      src="https://www.youtube.com/embed/6_xzDvSEzAw"
+                      :src="settings.videolink"
                       title="YouTube video player"
                       frameborder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

@@ -8,7 +8,7 @@ import Klasse from "@/Pages/Admin/Klasse.vue";
 import Zeitraum from "@/Pages/Admin/Zeitraum.vue";
 import Datepicker from "@vuepic/vue-datepicker";
 
-const props = defineProps(["klassen", "zeiträume"]);
+const props = defineProps(["settings", "klassen", "zeiträume"]);
 
 const form_klasse = useForm({
   klasse: "",
@@ -35,7 +35,7 @@ const zeitraum = computed({
 <template>
   <Head title="Administration" />
 
-  <ViewLayout>
+  <ViewLayout :title="settings.title">
     <div class="container mx-auto p-4 sm:p-6 lg:p-8">
       <h2 class="text-center text-3xl font-bold">ADMIN</h2>
       <div

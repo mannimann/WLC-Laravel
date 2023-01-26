@@ -18,6 +18,8 @@ import { ref } from "vue";
 //     canRegister: Boolean,
 // });
 
+const props = defineProps(["title"]);
+
 const canLogin = true;
 const canRegister = true;
 
@@ -34,7 +36,8 @@ const showingNavigationDropdown = ref(false);
         </div>
         <div v-else>
           <h1 class="text-center text-4xl font-bold uppercase lg:text-5xl">
-            Winterlauf Challenge
+            <div v-if="title">{{ title }}</div>
+            <div v-else>Winterlauf Challenge</div>
           </h1>
         </div>
       </div>
@@ -65,6 +68,12 @@ const showingNavigationDropdown = ref(false);
                 Auswertung
               </NavLink>
               <NavLink
+                :href="route('contact.index')"
+                :active="route().current('contact.index')"
+              >
+                Kontakt
+              </NavLink>
+              <NavLink
                 v-if="$page.props.auth.user"
                 :href="route('admin.index')"
                 :active="route().current('admin.index')"
@@ -76,7 +85,7 @@ const showingNavigationDropdown = ref(false);
                 :href="route('settings.index')"
                 :active="route().current('settings.index')"
               >
-                Settings
+                Einstellungen
               </NavLink>
             </div>
           </div>

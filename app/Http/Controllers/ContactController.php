@@ -6,7 +6,7 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Spatie\Valuestore\Valuestore;
 
-class SettingsController extends Controller
+class ContactController extends Controller
 {
   /**
    * Display a listing of the resource.
@@ -19,8 +19,7 @@ class SettingsController extends Controller
       storage_path("../database/database/settings.json")
     );
 
-    return Inertia::render("Settings/Index", [
-      //   "settings" => $settings->get("title"),
+    return Inertia::render("Contact/Index", [
       "settings" => $settings->all(),
     ]);
   }
@@ -32,14 +31,7 @@ class SettingsController extends Controller
    */
   public function create()
   {
-    copy(
-      "../database/database/settings_default.json",
-      "../database/database/settings.json"
-    );
-
-    return redirect()
-      ->back()
-      ->with(["notice" => "Einstellungen zurückgesetzt"]);
+    //
   }
 
   /**
@@ -50,32 +42,8 @@ class SettingsController extends Controller
    */
   public function store(Request $request)
   {
-    error_log($request);
-
-    $settings = Valuestore::make(
-      storage_path("../database/database/settings.json")
-    );
-
-    if ($request->title != "") {
-      $settings->put("title", $request->title);
-    }
-    if ($request->infotext != "") {
-      $settings->put("infotext", $request->infotext);
-    }
-    if ($request->videolink != "") {
-      $link = $request->videolink;
-      if (str_contains($request->videolink, "watch?v=")) {
-        $link = str_replace("watch?v=", "embed/", $link);
-      }
-      $settings->put("videolink", $link);
-    }
-    if ($request->email != "") {
-      $settings->put("email", $request->email);
-    }
-
-    return redirect()
-      ->back()
-      ->with(["notice" => "Einstellungen aktualisiert"]);
+    //TODO
+    error_log("email geschickt");
   }
 
   /**

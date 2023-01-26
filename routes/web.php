@@ -7,8 +7,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StepController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\KlasseController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ZeitraumController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,11 +32,11 @@ use App\Http\Controllers\ZeitraumController;
 //   ]);
 // });
 
-Route::get("/dashboard", function () {
-  return Inertia::render("Dashboard");
-})
+Route::resource("/dashboard", DashboardController::class, [
+  "names" => "dashboard",
+])
   ->middleware(["auth", "verified"])
-  ->name("dashboard");
+  ->only(["index"]);
 
 // Route::resource("/", StepController::class)
 //   //   ->name("steps")
@@ -58,8 +60,12 @@ Route::resource("/auswertung", StepController::class, [
   "names" => "steps",
 ])->only(["index", "store"]);
 
-Route::resource("/settings", SettingsController::class, [
+Route::resource("/einstellungen", SettingsController::class, [
   "names" => "settings",
+])->only(["index", "store", "create"]);
+
+Route::resource("/kontakt", ContactController::class, [
+  "names" => "contact",
 ])->only(["index", "store"]);
 
 Route::prefix("admin")

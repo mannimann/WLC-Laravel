@@ -9,6 +9,7 @@ import ViewLayout from "@/Layouts/ViewLayout.vue";
 import { Head } from "@inertiajs/inertia-vue3";
 
 const props = defineProps([
+  "settings",
   "steps_all",
   "steps_zeitraum",
   "steps_top",
@@ -19,7 +20,7 @@ const props = defineProps([
 <template>
   <Head title="Auswertung" />
 
-  <ViewLayout>
+  <ViewLayout :title="settings.title">
     <div class="mx-auto p-4 sm:p-6 lg:p-8">
       <section class="mb-3 hidden">
         <AuswertungTest :data="steps_all" />
