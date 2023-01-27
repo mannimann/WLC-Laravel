@@ -162,7 +162,7 @@ class StepController extends Controller
     // dd($steps_klassen);
 
     return Inertia::render("Steps/Index", [
-      "settings" => $settings->all(),
+      "settings.title" => $settings->get("title"),
       "steps_all" => $steps_all,
       "steps_zeitraum" => $steps_zeitraum,
       "steps_top" => $steps_top,

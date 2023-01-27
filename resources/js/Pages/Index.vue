@@ -113,23 +113,27 @@ const zeitraum = computed({
             <template v-slot:body>
               <Transition name="cardbody">
                 <div v-show="isActive">
-                  <p>
-                    <div v-if="settings.infotext">
-                      {{ settings.infotext }}
-                    </div>
-                    <div v-else>
+                  <div v-if="settings.infotext">
+                    <p class="whitespace-pre-line">{{ settings.infotext }}</p>
+                  </div>
+                  <div v-else>
+                    <p>
                       Die Challenge besteht darin, in den nächsten Wochen
-                      <span class="uppercase">so viele Schritte wie möglich</span>
+                      <span class="uppercase"
+                        >so viele Schritte wie möglich</span
+                      >
                       zu machen. Nutze eine App oder eine Fitness-Uhr, um die
                       Schritte, die du jeden Tag machst, mitzählen zu lassen.
                       <span class="uppercase">Jede Woche</span> kannst dem die
                       Gesamtanzahl der erreichten Schritte
-                      <span class="uppercase">einmal hier eintragen</span> und für
-                      deine Klasse Schritte sammeln. Lade dazu am besten noch
-                      einen Screenshot mit deiner Schrittanzahl hoch. <br />Wir
-                      suchen die beste Klasse und den besten Läufer!<br />
-                    </div>
-                    <br />
+                      <span class="uppercase">einmal hier eintragen</span> und
+                      für deine Klasse Schritte sammeln. Lade dazu am besten
+                      noch einen Screenshot mit deiner Schrittanzahl hoch.
+                      <br />Wir suchen die beste Klasse und den besten
+                      Läufer!<br />
+                    </p>
+                  </div>
+                  <p class="mt-3">
                     <strong
                       >Also nimm die Beine in die Hand und los gehts!</strong
                     >

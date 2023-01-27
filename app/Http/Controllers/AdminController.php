@@ -27,7 +27,7 @@ class AdminController extends Controller
       ->get();
 
     return Inertia::render("Admin/Index", [
-      "settings" => $settings->all(),
+      "settings.title" => $settings->get("title"),
       "klassen" => $klassen,
       "zeiträume" => $zeiträume,
     ]);

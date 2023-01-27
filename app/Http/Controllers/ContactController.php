@@ -20,7 +20,8 @@ class ContactController extends Controller
     );
 
     return Inertia::render("Contact/Index", [
-      "settings" => $settings->all(),
+      "settings.title" => $settings->get("title"),
+      "settings.email" => $settings->get("email"),
     ]);
   }
 

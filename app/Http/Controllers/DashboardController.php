@@ -20,7 +20,7 @@ class DashboardController extends Controller
     );
 
     return Inertia::render("Dashboard", [
-      "settings" => $settings->all(),
+      "settings.title" => $settings->get("title"),
     ]);
   }
 
