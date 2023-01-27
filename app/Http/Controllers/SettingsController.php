@@ -20,7 +20,6 @@ class SettingsController extends Controller
     );
 
     return Inertia::render("Settings/Index", [
-      //   "settings" => $settings->get("title"),
       "settings" => $settings->all(),
     ]);
   }

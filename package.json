@@ -27,6 +27,7 @@
     "@vueuse/core": "^9.5.0",
     "moment": "^2.29.4",
     "simple-datatables": "^4.0.7",
-    "vue-good-table-next": "^0.2.1"
+    "vue-good-table-next": "^0.2.1",
+    "vue-toastification": "^2.0.0-rc.5"
   }
 }

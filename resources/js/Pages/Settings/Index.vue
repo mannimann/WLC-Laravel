@@ -3,9 +3,10 @@ import ViewLayout from "@/Layouts/ViewLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { useForm, Head, Link } from "@inertiajs/inertia-vue3";
+import { useToast } from "vue-toastification";
 // import onUpdated from "vue";
 
-const props = defineProps(["settings", "notice"]);
+const props = defineProps(["settings"]);
 // onUpdated((form.title = props.settings.title));
 
 const form = useForm({
@@ -14,22 +15,33 @@ const form = useForm({
   videolink: props.settings.videolink,
   email: props.settings.email,
 });
+
+const toast = useToast();
+const showToast = function () {
+  toast.success("Aktualisieren erfolgreich!");
+};
+const showToastReset = function () {
+  toast.success("Daten zurückgesetzt!");
+};
+const showToastStandard = function () {
+  toast.success("Daten als Standard gespeichert!");
+};
 </script>
 
 <template>
   <Head title="Einstellungen" />
 
   <ViewLayout :title="settings.title">
-    <!-- TODO -->
-    {{ notice }}
     <section id="settings" class="mx-auto p-4 sm:p-6 lg:p-8">
       <h3 class="text-2xl font-bold">Einstellungen:</h3>
       <div class="py-2">
-        <!-- TODO: Feedback ob es geklappt hat -->
         <form
           @submit.prevent="
             form.post(route('settings.store'), {
               // onSuccess: () => form.reset(),
+              onSuccess: () => {
+                showToast();
+              },
             })
           "
         >
@@ -47,7 +59,7 @@ const form = useForm({
           </div>
           <InputError :message="form.errors.title" class="mt-2 block" />
 
-          <!-- TODO: mit Formatierungsoptionen? -> ENTER! -->
+          <!-- TODO: mit Formatierungsoptionen? -->
           <label for="infoText" class="text-xl font-bold text-primary"
             >Infotext:</label
           >
@@ -94,8 +106,16 @@ const form = useForm({
           <div class="mt-3">
             <PrimaryButton>Aktualisieren</PrimaryButton>
             <Link :href="route('settings.create')"
-              ><PrimaryButton :type="none">Zurücksetzen</PrimaryButton></Link
+              ><PrimaryButton type="button" @click="showToastReset"
+                >Zurücksetzen</PrimaryButton
+              ></Link
             >
+            <!-- TODO: -->
+            <!-- <Link :href="route('settings.create')"> -->
+            <PrimaryButton type="button" @click="showToastStandard"
+              >Als Standard speichern</PrimaryButton
+            >
+            <!-- </Link> -->
           </div>
         </form>
       </div>
