@@ -60,10 +60,6 @@ Route::resource("/auswertung", StepController::class, [
   "names" => "steps",
 ])->only(["index", "store"]);
 
-Route::resource("/einstellungen", SettingsController::class, [
-  "names" => "settings",
-])->only(["index", "store", "create"]);
-
 Route::resource("/kontakt", ContactController::class, [
   "names" => "contact",
 ])->only(["index", "store"]);
@@ -75,6 +71,10 @@ Route::prefix("admin")
       "names" => "admin",
     ])->only("index");
     // Route::get("/admin", [AdminController::class, "index"])->name("admin");
+
+    Route::resource("/einstellungen", SettingsController::class, [
+      "names" => "settings",
+    ])->only(["index", "store", "create"]);
   });
 
 Route::apiResources([

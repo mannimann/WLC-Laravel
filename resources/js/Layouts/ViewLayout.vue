@@ -80,8 +80,8 @@ const showingNavigationDropdown = ref(false);
               >
                 Administration
               </NavLink>
-
               <NavLink
+                v-if="$page.props.auth.user"
                 :href="route('settings.index')"
                 :active="route().current('settings.index')"
               >
@@ -206,15 +206,28 @@ const showingNavigationDropdown = ref(false);
               Auswertung
             </ResponsiveNavLink>
             <ResponsiveNavLink
+              :href="route('contact.index')"
+              :active="route().current('contact.index')"
+            >
+              Kontakt
+            </ResponsiveNavLink>
+
+            <ResponsiveNavLink
               v-if="$page.props.auth.user"
               :href="route('admin.index')"
               :active="route().current('admin.index')"
             >
               Administration
             </ResponsiveNavLink>
+            <ResponsiveNavLink
+              v-if="$page.props.auth.user"
+              :href="route('settings.index')"
+              :active="route().current('settings.index')"
+            >
+              Einstellungen
+            </ResponsiveNavLink>
 
             <!-- Responsive Login/Register -->
-            <!-- TODO: dark-border -->
             <div v-if="$page.props.auth.user">
               <div
                 class="space-y-1 border-t-4 border-gray-700 px-4 py-1 text-center text-secondary dark:text-secondary_dark"
