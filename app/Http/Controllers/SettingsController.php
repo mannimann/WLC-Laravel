@@ -32,7 +32,7 @@ class SettingsController extends Controller
   public function create()
   {
     copy(
-      "../database/database/settings_default.json",
+      "../database/settings_default.json",
       "../database/database/settings.json"
     );
 
