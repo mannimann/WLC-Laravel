@@ -14,6 +14,7 @@ const form = useForm({
   infotext: props.settings.infotext,
   videolink: props.settings.videolink,
   email: props.settings.email,
+  override: false,
 });
 
 const toast = useToast();
@@ -40,7 +41,8 @@ const showToastStandard = function () {
             form.post(route('settings.store'), {
               // onSuccess: () => form.reset(),
               onSuccess: () => {
-                showToast();
+                if (form.override) showToastStandard();
+                else showToast();
               },
             })
           "
@@ -104,18 +106,19 @@ const showToastStandard = function () {
           <InputError :message="form.errors.email" class="mt-2 block" />
 
           <div class="mt-3">
-            <PrimaryButton>Aktualisieren</PrimaryButton>
+            <PrimaryButton @click="form.override = false"
+              >Aktualisieren</PrimaryButton
+            >
+
             <Link :href="route('settings.create')"
               ><PrimaryButton type="button" @click="showToastReset"
                 >Zurücksetzen</PrimaryButton
               ></Link
             >
-            <!-- TODO: -->
-            <!-- <Link :href="route('settings.create')"> -->
-            <PrimaryButton type="button" @click="showToastStandard"
+
+            <PrimaryButton @click="form.override = true"
               >Als Standard speichern</PrimaryButton
             >
-            <!-- </Link> -->
           </div>
         </form>
       </div>

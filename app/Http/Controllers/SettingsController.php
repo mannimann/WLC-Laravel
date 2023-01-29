@@ -6,6 +6,8 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Spatie\Valuestore\Valuestore;
 
+use function PHPSTORM_META\override;
+
 class SettingsController extends Controller
 {
   /**
@@ -49,7 +51,7 @@ class SettingsController extends Controller
    */
   public function store(Request $request)
   {
-    error_log($request);
+    // error_log($request);
 
     $settings = Valuestore::make(
       storage_path("../database/database/settings.json")
@@ -70,6 +72,13 @@ class SettingsController extends Controller
     }
     if ($request->email != "") {
       $settings->put("email", $request->email);
+    }
+
+    if ($request->override == true) {
+      copy(
+        "../database/database/settings.json",
+        "../database/settings_default.json"
+      );
     }
 
     return redirect()
