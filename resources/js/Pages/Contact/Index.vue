@@ -87,6 +87,8 @@ let submitted = false;
             v-model="form.nachricht"
             placeholder="Deine Nachricht"
             name="message"
+            type="text"
+            rows="6"
             class="relative w-full rounded border-0 bg-white px-3 py-3 text-sm text-gray-600 placeholder-gray-400 shadow outline-none focus:outline-none focus:ring"
           />
           <InputError :message="form.errors.nachricht" class="mt-2 block" />

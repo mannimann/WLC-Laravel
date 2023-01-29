@@ -15,7 +15,9 @@ const props = defineProps(["settings", "messages"]);
       <h1 class="text-xl font-bold">Nachrichten</h1>
 
       <div class="mt-6 divide-y rounded-lg bg-white shadow-sm">
+        <div v-if="!messages">Keine Nachrichten vorhanden ...</div>
         <Message
+          v-else
           v-for="message in messages"
           :key="message.id"
           :message="message"
