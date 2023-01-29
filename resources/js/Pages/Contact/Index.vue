@@ -13,7 +13,7 @@ const form = useForm({
   nachricht: "",
 });
 
-const submitted = false;
+let submitted = false;
 </script>
 
 <template>
@@ -21,9 +21,19 @@ const submitted = false;
 
   <ViewLayout :title="settings.title">
     <div class="mx-auto p-4 sm:p-6 lg:p-8">
+      <div v-if="submitted" class="mt-10 text-center">
+        <h2 class="text-2xl">Vielen Dank!</h2>
+        <div class="text-md">Wir melden uns bald bei dir.</div>
+        <!-- TODO -->
+        <PrimaryButton type="button" @click="submitted = false"
+          >Neue Nachricht schreiben</PrimaryButton
+        >
+      </div>
+
       <form
+        v-else
         @submit.prevent="
-          form.post(route('contact.store'), {
+          form.post(route('messages.store'), {
             onSuccess: () => {
               // TODO
               submitted = true;
@@ -86,11 +96,6 @@ const submitted = false;
           <PrimaryButton>Nachricht senden</PrimaryButton>
         </div>
       </form>
-
-      <div v-if="submitted" class="mt-10 text-center">
-        <h2 class="text-2xl">Vielen Dank!</h2>
-        <div class="text-md">Wir melden uns bald bei dir.</div>
-      </div>
     </div>
   </ViewLayout>
 </template>

@@ -40,7 +40,7 @@ class SettingsController extends Controller
 
     return redirect()
       ->back()
-      ->with(["notice" => "Einstellungen zurückgesetzt"]);
+      ->with(["message" => "Einstellungen zurückgesetzt"]);
   }
 
   /**
@@ -83,7 +83,7 @@ class SettingsController extends Controller
 
     return redirect()
       ->back()
-      ->with(["notice" => "Einstellungen aktualisiert"]);
+      ->with(["message" => "Einstellungen aktualisiert"]);
   }
 
   /**

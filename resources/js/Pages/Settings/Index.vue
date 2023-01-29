@@ -27,6 +27,9 @@ const showToastReset = function () {
 const showToastStandard = function () {
   toast.success("Daten als Standard gespeichert!");
 };
+const showToastError = function () {
+  toast.error("Ups, das hat nicht funktioniert!");
+};
 </script>
 
 <template>
@@ -43,6 +46,9 @@ const showToastStandard = function () {
               onSuccess: () => {
                 if (form.override) showToastStandard();
                 else showToast();
+              },
+              onError: () => {
+                showToastError();
               },
             })
           "

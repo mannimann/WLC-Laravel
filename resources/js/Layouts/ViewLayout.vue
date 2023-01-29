@@ -6,8 +6,8 @@ import DropdownLink from "@/Components/DropdownLink.vue";
 import Footer from "@/Components/Footer.vue";
 import NavLink from "@/Components/NavLink.vue";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
-import { Link } from "@inertiajs/inertia-vue3";
-import { ref } from "vue";
+import { Link, usePage } from "@inertiajs/inertia-vue3";
+import { ref, computed } from "vue";
 
 // import { useColorMode } from "@vueuse/core";
 // const mode = useColorMode();
@@ -24,6 +24,17 @@ const canLogin = true;
 const canRegister = true;
 
 const showingNavigationDropdown = ref(false);
+
+const links = [
+  { name: "Eintragen", route: "home" },
+  { name: "Auswertung", route: "steps.index" },
+  { name: "Kontakt", route: "contact.index" },
+];
+const links_admin = [
+  { name: "Administration", route: "admin.index" },
+  { name: "Einstellungen", route: "settings.index" },
+  { name: "Nachrichten", route: "messages.index" },
+];
 </script>
 
 <template>
@@ -60,7 +71,27 @@ const showingNavigationDropdown = ref(false);
 
             <!-- Navigation Links -->
             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-              <NavLink :href="route('home')" :active="route().current('home')">
+              <NavLink
+                v-for="link in links"
+                :key="link.name"
+                :href="route(link.route)"
+                :active="route().current(link.route)"
+              >
+                <!-- v-if="link.auth ? $page.props.auth.user : ''" -->
+                {{ link.name }}
+              </NavLink>
+
+              <NavLink
+                v-if="$page.props.auth.user"
+                v-for="link in links_admin"
+                :key="link.name"
+                :href="route(link.route)"
+                :active="route().current(link.route)"
+              >
+                {{ link.name }}
+              </NavLink>
+
+              <!-- <NavLink :href="route('home')" :active="route().current('home')">
                 Eintragen
               </NavLink>
               <NavLink
@@ -88,7 +119,7 @@ const showingNavigationDropdown = ref(false);
                 :active="route().current('settings.index')"
               >
                 Einstellungen
-              </NavLink>
+              </NavLink> -->
             </div>
           </div>
           <div class="hidden sm:ml-6 sm:flex sm:items-center">
@@ -196,6 +227,26 @@ const showingNavigationDropdown = ref(false);
         <div v-show="showingNavigationDropdown" class="sm:hidden">
           <div class="space-y-1 pt-2 pb-3">
             <ResponsiveNavLink
+              v-for="link in links"
+              :key="link.name"
+              :href="route(link.route)"
+              :active="route().current(link.route)"
+            >
+              <!-- v-if="link.auth ? $page.props.auth.user : ''" -->
+              {{ link.name }}
+            </ResponsiveNavLink>
+
+            <ResponsiveNavLink
+              v-if="$page.props.auth.user"
+              v-for="link in links_admin"
+              :key="link.name"
+              :href="route(link.route)"
+              :active="route().current(link.route)"
+            >
+              {{ link.name }}
+            </ResponsiveNavLink>
+
+            <!-- <ResponsiveNavLink
               :href="route('home')"
               :active="route().current('home')"
             >
@@ -227,7 +278,7 @@ const showingNavigationDropdown = ref(false);
               :active="route().current('settings.index')"
             >
               Einstellungen
-            </ResponsiveNavLink>
+            </ResponsiveNavLink> -->
 
             <!-- Responsive Login/Register -->
             <div v-if="$page.props.auth.user">

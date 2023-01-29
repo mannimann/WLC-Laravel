@@ -8,6 +8,7 @@ use App\Http\Controllers\StepController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\KlasseController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ZeitraumController;
 use App\Http\Controllers\DashboardController;
@@ -62,7 +63,7 @@ Route::resource("/auswertung", StepController::class, [
 
 Route::resource("/kontakt", ContactController::class, [
   "names" => "contact",
-])->only(["index", "store"]);
+])->only(["index"]);
 
 Route::prefix("admin")
   ->middleware("auth", "verified")
@@ -75,6 +76,10 @@ Route::prefix("admin")
     Route::resource("/einstellungen", SettingsController::class, [
       "names" => "settings",
     ])->only(["index", "store", "create"]);
+
+    Route::resource("/nachrichten", MessageController::class, [
+      "names" => "messages",
+    ])->only(["index", "store", "update"]);
   });
 
 Route::apiResources([

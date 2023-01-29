@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
+use App\Models\Message;
 use Illuminate\Http\Request;
 use Spatie\Valuestore\Valuestore;
 
-class ContactController extends Controller
+class MessageController extends Controller
 {
   /**
    * Display a listing of the resource.
@@ -19,9 +20,9 @@ class ContactController extends Controller
       storage_path("../database/database/settings.json")
     );
 
-    return Inertia::render("Contact/Index", [
+    return Inertia::render("Nachrichten/Index", [
       "settings.title" => $settings->get("title"),
-      "settings.email" => $settings->get("email"),
+      "messages" => Message::latest()->get(),
     ]);
   }
 
@@ -43,7 +44,22 @@ class ContactController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    //TODO
+
+    $validated = $request->validate([
+      "name" => "required|string|max:50",
+      "klasse" => "required|string|max:10",
+      "email" => "required|email|max:50",
+      "nachricht" => "required|string|max:255",
+    ]);
+
+    Message::create($validated);
+
+    error_log("email geschickt");
+
+    return redirect()
+      ->back()
+      ->with(["message" => "Nachricht geschickt"]);
   }
 
   /**
