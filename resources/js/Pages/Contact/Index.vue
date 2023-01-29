@@ -31,7 +31,7 @@ const submitted = false;
             },
           })
         "
-        class="mx-auto w-1/2"
+        class="mx-auto w-full sm:w-3/4 md:w-2/3 lg:w-1/2"
       >
         <h1 class="text-xl font-bold">KONTAKT</h1>
         <p>

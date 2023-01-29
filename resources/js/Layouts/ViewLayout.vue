@@ -35,7 +35,9 @@ const showingNavigationDropdown = ref(false);
           <slot name="header" />
         </div>
         <div v-else>
-          <h1 class="text-center text-4xl font-bold uppercase lg:text-5xl">
+          <h1
+            class="text-center text-3xl font-bold uppercase md:text-4xl lg:text-5xl"
+          >
             <div v-if="title">{{ title }}</div>
             <div v-else>Winterlauf Challenge</div>
           </h1>
