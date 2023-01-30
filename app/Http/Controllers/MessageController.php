@@ -104,6 +104,9 @@ class MessageController extends Controller
    */
   public function destroy($id)
   {
-    //
+    Message::destroy($id);
+
+    // return redirect(route("messages.index"));
+    return redirect()->back();
   }
 }

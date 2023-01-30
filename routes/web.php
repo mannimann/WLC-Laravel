@@ -79,7 +79,7 @@ Route::prefix("admin")
 
     Route::resource("/nachrichten", MessageController::class, [
       "names" => "messages",
-    ])->only(["index", "store", "update"]);
+    ])->only(["index", "store", "update", "destroy"]);
   });
 
 Route::apiResources([

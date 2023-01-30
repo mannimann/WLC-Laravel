@@ -13,11 +13,10 @@ const props = defineProps(["settings", "messages"]);
   <ViewLayout :title="settings.title">
     <div class="mx-auto p-4 sm:p-6 lg:p-8">
       <h1 class="text-xl font-bold">Nachrichten</h1>
+      <div v-if="messages.length === 0">Keine Nachrichten vorhanden ...</div>
 
-      <div class="mt-6 divide-y rounded-lg bg-white shadow-sm">
-        <div v-if="!messages">Keine Nachrichten vorhanden ...</div>
+      <div v-else class="mt-6 divide-y rounded-lg bg-white shadow-sm">
         <Message
-          v-else
           v-for="message in messages"
           :key="message.id"
           :message="message"
