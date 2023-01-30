@@ -162,7 +162,7 @@ const links_admin = [
                       method="post"
                       as="button"
                     >
-                      Log Out
+                      Abmelden
                     </DropdownLink>
                   </template>
                 </Dropdown>
@@ -172,13 +172,13 @@ const links_admin = [
                 <Link
                   :href="route('login')"
                   class="text-sm text-secondary underline focus:outline-none dark:text-secondary_dark"
-                  >Log in</Link
+                  >Anmelden</Link
                 >
                 <Link
                   v-if="canRegister"
                   :href="route('register')"
                   class="ml-4 text-sm text-secondary underline focus:outline-none dark:text-secondary_dark"
-                  >Register</Link
+                  >Registrieren</Link
                 >
               </div>
             </div>
@@ -301,7 +301,7 @@ const links_admin = [
                 class="space-y-1 border-t border-gray-700 pt-1 text-secondary underline dark:text-secondary_dark"
               >
                 <ResponsiveNavLink :href="route('logout')" method="post">
-                  Log Out
+                  Abmelden
                 </ResponsiveNavLink>
               </div>
             </div>
@@ -311,10 +311,10 @@ const links_admin = [
               class="space-y-1 border-t-4 border-gray-700 pt-1 text-secondary underline dark:text-secondary_dark"
             >
               <ResponsiveNavLink :href="route('login')"
-                >Log in</ResponsiveNavLink
+                >Anmelden</ResponsiveNavLink
               >
               <ResponsiveNavLink v-if="canRegister" :href="route('register')"
-                >Register</ResponsiveNavLink
+                >Registrieren</ResponsiveNavLink
               >
             </div>
           </div>

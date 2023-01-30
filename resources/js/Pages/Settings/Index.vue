@@ -14,6 +14,7 @@ const form = useForm({
   infotext: props.settings.infotext,
   videolink: props.settings.videolink,
   email: props.settings.email,
+  eintragen_moeglich: props.settings.eintragen_moeglich,
   override: false,
 });
 
@@ -96,6 +97,19 @@ const showToastError = function () {
             <!-- <PrimaryButton class="mt-3">Hinzufügen</PrimaryButton> -->
           </div>
           <InputError :message="form.errors.videolink" class="mt-2 block" />
+
+          <label for="videolink" class="text-xl font-bold text-primary"
+            >Eintragen möglich:</label
+          >
+          <input
+            v-model="form.eintragen_moeglich"
+            type="checkbox"
+            class="toggle-primary toggle toggle-lg block"
+          />
+          <InputError
+            :message="form.errors.eintragen_moeglich"
+            class="mt-2 block"
+          />
 
           <label for="email" class="text-xl font-bold text-primary"
             >Kontakt-Email:</label

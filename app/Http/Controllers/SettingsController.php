@@ -73,6 +73,7 @@ class SettingsController extends Controller
     if ($request->email != "") {
       $settings->put("email", $request->email);
     }
+    $settings->put("eintragen_moeglich", $request->eintragen_moeglich);
 
     if ($request->override == true) {
       copy(
