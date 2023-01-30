@@ -63,7 +63,7 @@ Route::resource("/auswertung", StepController::class, [
 
 Route::resource("/kontakt", ContactController::class, [
   "names" => "contact",
-])->only(["index"]);
+])->only(["index", "store"]);
 
 Route::prefix("admin")
   ->middleware("auth", "verified")
@@ -79,7 +79,7 @@ Route::prefix("admin")
 
     Route::resource("/nachrichten", MessageController::class, [
       "names" => "messages",
-    ])->only(["index", "store", "update", "destroy"]);
+    ])->only(["index", "update", "destroy"]);
   });
 
 Route::apiResources([

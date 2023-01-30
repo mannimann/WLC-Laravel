@@ -7,8 +7,7 @@ import { computed, ref, Transition } from "vue";
 import Card from "@/Components/Card.vue";
 import moment from "moment";
 
-const submit_disabled = ref(true); // TODO
-const submitted = ref(false);
+const submitted = ref(false); // überflüssig?
 
 // Dropdown-Animation
 const isActive = ref(false);
@@ -36,9 +35,7 @@ const zeitraum = computed({
   },
   set(zeitraum) {
     // TODO: check if empty
-
     // console.log(zeitraum);
-
     form.von = zeitraum.von;
     form.bis = zeitraum.bis;
   },
@@ -59,14 +56,14 @@ const zeitraum = computed({
           <template v-slot:body>
             <div class="mt-3 text-center">
               <PrimaryButton
-                class="m-3 bg-green-700 hover:bg-green-600 active:bg-green-800"
+                class="m-3"
                 value="Zurück"
                 @click="submitted = !submitted"
               >
                 <span class="text-lg">Zurück</span>
               </PrimaryButton>
               <Link :href="route('steps.index')">
-                <PrimaryButton class="" value="Zur Auswertung">
+                <PrimaryButton class="m-3" value="Zur Auswertung">
                   <span class="text-lg">Zur Auswertung</span>
                 </PrimaryButton>
               </Link>
@@ -199,6 +196,7 @@ const zeitraum = computed({
                       @focus="addNotEmpty"
                       @blur="removeNotEmpty"
                       autofocus
+                      autocomplete="vorname"
                     />
                     <InputError :message="form.errors.vorname" class="mt-2" />
                   </div>
@@ -213,6 +211,7 @@ const zeitraum = computed({
                       v-model="form.name"
                       @focus="addNotEmpty"
                       @blur="removeNotEmpty"
+                      autocomplete="name"
                     />
                     <InputError :message="form.errors.name" class="mt-2" />
                   </div>
@@ -327,13 +326,16 @@ const zeitraum = computed({
                     eintragen!
                   </p>
                   <PrimaryButton
-                    class="m-3 bg-green-700 hover:bg-green-600 active:bg-green-800"
-                    :class="{ disabled: submit_disabled }"
+                    class="m-3 px-7"
+                    :class="{ 'btn-disabled': !settings.eintragen_moeglich }"
                     :disabled="form.processing"
                     value="Eintragen"
                   >
                     <span class="text-lg">Eintragen</span>
                   </PrimaryButton>
+                  <p v-if="!settings.eintragen_moeglich">
+                    Eintragen zurzeit nicht möglich
+                  </p>
                 </div>
               </form>
               <!-- <p>{{ screenshot }}</p> -->

@@ -3,6 +3,7 @@ import ViewLayout from "@/Layouts/ViewLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { useForm, Head, Link } from "@inertiajs/inertia-vue3";
+import { ref } from "vue";
 
 const props = defineProps(["settings"]);
 
@@ -13,7 +14,7 @@ const form = useForm({
   nachricht: "",
 });
 
-let submitted = false;
+const submitted = ref(false);
 </script>
 
 <template>
@@ -23,9 +24,8 @@ let submitted = false;
     <div class="mx-auto p-4 sm:p-6 lg:p-8">
       <div v-if="submitted" class="mt-10 text-center">
         <h2 class="text-2xl">Vielen Dank!</h2>
-        <div class="text-md">Wir melden uns bald bei dir.</div>
-        <!-- TODO -->
-        <PrimaryButton type="button" @click="submitted = false"
+        <div class="text-md mb-3">Wir melden uns bald bei dir.</div>
+        <PrimaryButton class="m-3" type="button" @click="submitted = false"
           >Neue Nachricht schreiben</PrimaryButton
         >
       </div>
@@ -33,9 +33,8 @@ let submitted = false;
       <form
         v-else
         @submit.prevent="
-          form.post(route('messages.store'), {
+          form.post(route('contact.store'), {
             onSuccess: () => {
-              // TODO
               submitted = true;
               form.reset();
             },
@@ -95,7 +94,7 @@ let submitted = false;
         </div>
 
         <div class="mb-3 pt-0">
-          <PrimaryButton>Nachricht senden</PrimaryButton>
+          <PrimaryButton class="m-3">Nachricht senden</PrimaryButton>
         </div>
       </form>
     </div>

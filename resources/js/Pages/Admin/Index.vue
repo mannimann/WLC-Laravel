@@ -2,6 +2,7 @@
 import ViewLayout from "@/Layouts/ViewLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import TextInput from "@/Components/TextInput.vue";
 import { useForm, Head } from "@inertiajs/inertia-vue3";
 import { computed } from "vue";
 import Klasse from "@/Pages/Admin/Klasse.vue";
@@ -53,13 +54,13 @@ const zeitraum = computed({
               "
             >
               <div class="flex w-full">
-                <input
+                <TextInput
                   v-model="form_klasse.klasse"
                   type="text"
                   placeholder="Klasse eingeben"
-                  class="text-lg block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  class="block w-full"
                 />
-                <PrimaryButton class="mt-3">Hinzufügen</PrimaryButton>
+                <PrimaryButton class="mx-3 my-1">Hinzufügen</PrimaryButton>
               </div>
               <InputError
                 :message="form_klasse.errors.klasse"
@@ -88,7 +89,7 @@ const zeitraum = computed({
                 })
               "
             >
-              <div class="flex w-full">
+              <div class="align-center flex w-full">
                 <Datepicker
                   v-model="zeitraum"
                   type="date"
@@ -101,7 +102,7 @@ const zeitraum = computed({
                   placeholder="Zeitraum eingeben"
                   class="text-lg block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
-                <PrimaryButton class="mt-3">Hinzufügen</PrimaryButton>
+                <PrimaryButton class="mx-3 my-1">Hinzufügen</PrimaryButton>
               </div>
               <InputError
                 :message="form_zeitraum.errors.von"

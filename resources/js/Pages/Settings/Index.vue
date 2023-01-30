@@ -112,17 +112,17 @@ const showToastError = function () {
           <InputError :message="form.errors.email" class="mt-2 block" />
 
           <div class="mt-3">
-            <PrimaryButton @click="form.override = false"
+            <PrimaryButton class="m-3" @click="form.override = false"
               >Aktualisieren</PrimaryButton
             >
 
             <Link :href="route('settings.create')"
-              ><PrimaryButton type="button" @click="showToastReset"
+              ><PrimaryButton class="m-3" type="button" @click="showToastReset"
                 >Zurücksetzen</PrimaryButton
               ></Link
             >
 
-            <PrimaryButton @click="form.override = true"
+            <PrimaryButton class="m-3" @click="form.override = true"
               >Als Standard speichern</PrimaryButton
             >
           </div>

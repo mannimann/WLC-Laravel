@@ -44,22 +44,7 @@ class MessageController extends Controller
    */
   public function store(Request $request)
   {
-    //TODO
-
-    $validated = $request->validate([
-      "name" => "required|string|max:50",
-      "klasse" => "required|string|max:10",
-      "email" => "required|email|max:50",
-      "nachricht" => "required|string|max:255",
-    ]);
-
-    Message::create($validated);
-
-    error_log("email geschickt");
-
-    return redirect()
-      ->back()
-      ->with(["message" => "Nachricht geschickt"]);
+    //
   }
 
   /**

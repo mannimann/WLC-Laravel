@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
+use App\Models\Message;
 use Illuminate\Http\Request;
 use Spatie\Valuestore\Valuestore;
 
@@ -43,7 +44,20 @@ class ContactController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    //TODO: send mail
+
+    $validated = $request->validate([
+      "name" => "required|string|max:50",
+      "klasse" => "required|string|max:10",
+      "email" => "required|email|max:50",
+      "nachricht" => "required|string|max:255",
+    ]);
+
+    Message::create($validated);
+
+    return redirect()
+      ->back()
+      ->with(["message" => "Nachricht geschickt"]);
   }
 
   /**
