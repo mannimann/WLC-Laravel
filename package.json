@@ -25,6 +25,7 @@
   "dependencies": {
     "@vuepic/vue-datepicker": "^3.6.3",
     "@vueuse/core": "^9.5.0",
+    "daisyui": "^2.49.0",
     "moment": "^2.29.4",
     "simple-datatables": "^4.0.7",
     "vue-good-table-next": "^0.2.1",
