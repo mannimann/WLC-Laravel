@@ -78,7 +78,7 @@ class MessageController extends Controller
    */
   public function update(Request $request, $id)
   {
-    //
+    Message::where("id", $id)->update(["erledigt" => $request->erledigt]);
   }
 
   /**

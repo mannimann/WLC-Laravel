@@ -188,34 +188,6 @@ class StepController extends Controller
    */
   public function store(StoreStepRequest $request)
   {
-    // $validated = $request->validate([
-    //   "vorname" => "required|string|max:50",
-    // ]);
-
-    // $request->steps()->create($validated);
-
-    // return redirect(route("steps.index"));
-
-    /* old and working: */
-    // $step = new Step();
-
-    // $step->vorname = request("vorname");
-    // $step->name = request("name");
-    // $step->klasse = request("klasse");
-    // $step->von = request("von");
-    // $step->bis = request("bis");
-    // $step->schritte = request("schritte");
-
-    // $step->save();
-
-    // error_log($step);
-
-    // error_log(request("vorname"));
-    // error_log(request("name"));
-    // error_log(request("klasse"));
-    // error_log(request("schritte"));
-
-    /* new: */
     Step::create($request->validated());
   }
 

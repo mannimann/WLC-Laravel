@@ -5,26 +5,45 @@ import { Link } from "@inertiajs/inertia-vue3";
 
 dayjs.extend(relativeTime);
 
-defineProps(["message"]);
+const props = defineProps(["message"]);
+
+const changeStatus = () => {
+  axios
+    .put(route("messages.update", props.message.id), {
+      erledigt: props.message.erledigt,
+    })
+    .then((response) => {
+      // console.log(response);
+    });
+};
 </script>
 
 <template>
-  <!-- TODO: Erledigt Checkbox -->
   <div class="flex space-x-2 p-6">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      class="h-6 w-6 -scale-x-100 text-gray-600"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      stroke-width="2"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+    <div class="flex flex-col justify-between pr-2">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6 -scale-x-100 text-gray-600"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+        />
+      </svg>
+      <input
+        type="checkbox"
+        class="checkbox-info checkbox"
+        true-value="1"
+        false-value="0"
+        v-model="message.erledigt"
+        @change="changeStatus"
       />
-    </svg>
+    </div>
     <div class="flex-1">
       <div class="flex items-center justify-between">
         <div>
@@ -36,7 +55,7 @@ defineProps(["message"]);
           dayjs(message.created_at).fromNow()
         }}</small>
       </div>
-      <p class="text-lg mt-4 text-gray-900">{{ message.nachricht }}</p>
+      <p class="mt-4 text-lg text-gray-900">{{ message.nachricht }}</p>
     </div>
 
     <!-- Löschen -->
