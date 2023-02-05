@@ -2,8 +2,9 @@
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Link } from "@inertiajs/inertia-vue3";
-import { ref } from "vue";
+import { useToast } from "vue-toastification";
 
+const emit = defineEmits(["messageDeleted"]);
 dayjs.extend(relativeTime);
 
 const props = defineProps(["message"]);
@@ -18,16 +19,24 @@ const changeStatus = () => {
     });
 };
 
-const deletedMessageId = ref(null);
+const toast = useToast();
+const showToastSuccess = function () {
+  toast.success("Nachricht gelöscht!");
+};
+
 const deleteMessage = () => {
   axios
     .delete(route("messages.destroy", props.message.id), {})
-    // TODO: Liste aktualisieren
     .then((response) => {
+      showToastSuccess();
       // console.log(response);
-      // props.message = props.message.filter((props.message) => props.message.id !== deletedMessageId);
+      // props.message = props.message.filter(props.message => props.message.id !== deletedMessageId);
       // show Toast
     });
+};
+
+const d = () => {
+  emit("messageDeleted", props.message.id);
 };
 </script>
 
@@ -72,18 +81,17 @@ const deleteMessage = () => {
     </div>
 
     <!-- Löschen -->
-    <!-- <Link
+    <Link
       :href="route('messages.destroy', message.id)"
       method="delete"
       as="button"
       class="block rounded px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100"
-    > -->
-    <label
+    >
+      <!-- <label
       for="my-modal"
       as="button"
       class="btn-ghost btn block rounded px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100"
-      @click="deletedMessageId = message.id"
-    >
+    > -->
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -98,8 +106,9 @@ const deleteMessage = () => {
           d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
         />
       </svg>
-    </label>
-    <!-- </Link> -->
+      <!-- </label> -->
+    </Link>
+    <button type="button" @click="d">[]</button>
   </div>
 
   <Teleport to="body">
@@ -110,13 +119,20 @@ const deleteMessage = () => {
         <p class="py-4">Soll die Nachricht wirklich gelöscht werden?</p>
         <div class="modal-action">
           <label for="my-modal" class="btn" as="button">Abbrechen</label>
-          <label
-            for="my-modal"
-            class="btn-error btn"
-            @click="deleteMessage"
-            as="button"
+          <label as="button" for="my-modal" class="btn-error btn" @click="d"
             >Löschen</label
           >
+          <!-- class="block rounded px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100" -->
+          <!-- <label as="button" for="my-modal">
+            <Link
+              :href="route('messages.destroy', message.id)"
+              method="delete"
+              as="button"
+              class="btn-error btn"
+              @click="showToastSuccess"
+              >Löschen</Link
+            ></label
+          > -->
         </div>
       </div>
     </div>

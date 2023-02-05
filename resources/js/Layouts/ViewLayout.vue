@@ -300,7 +300,11 @@ const links_admin = [
               <div
                 class="space-y-1 border-t border-gray-700 pt-1 text-secondary underline dark:text-secondary_dark"
               >
-                <ResponsiveNavLink :href="route('logout')" method="post">
+                <ResponsiveNavLink
+                  :href="route('logout')"
+                  method="post"
+                  as="button"
+                >
                   Abmelden
                 </ResponsiveNavLink>
               </div>

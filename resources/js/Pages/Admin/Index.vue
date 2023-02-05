@@ -60,7 +60,12 @@ const zeitraum = computed({
                   placeholder="Klasse eingeben"
                   class="block w-full"
                 />
-                <PrimaryButton class="mx-3 my-1">Hinzufügen</PrimaryButton>
+                <PrimaryButton class="mx-3 my-1 hidden sm:block"
+                  >Hinzufügen</PrimaryButton
+                >
+                <PrimaryButton class="mx-3 my-1 px-5 text-lg sm:hidden"
+                  >+</PrimaryButton
+                >
               </div>
               <InputError
                 :message="form_klasse.errors.klasse"
@@ -100,9 +105,14 @@ const zeitraum = computed({
                   selectText="Auswählen"
                   :enable-time-picker="false"
                   placeholder="Zeitraum eingeben"
-                  class="text-lg block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  class="block w-full rounded-md border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
-                <PrimaryButton class="mx-3 my-1">Hinzufügen</PrimaryButton>
+                <PrimaryButton class="mx-3 my-1 hidden sm:block"
+                  >Hinzufügen</PrimaryButton
+                >
+                <PrimaryButton class="mx-3 my-1 px-5 text-lg sm:hidden"
+                  >+</PrimaryButton
+                >
               </div>
               <InputError
                 :message="form_zeitraum.errors.von"

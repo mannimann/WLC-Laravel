@@ -4,6 +4,7 @@ import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { useForm, Head, Link } from "@inertiajs/inertia-vue3";
 import { ref } from "vue";
+import { useToast } from "vue-toastification";
 
 const props = defineProps(["settings"]);
 
@@ -15,6 +16,14 @@ const form = useForm({
 });
 
 const submitted = ref(false);
+
+const toast = useToast();
+const showToastSuccess = function () {
+  toast.success("Nachricht gesendet!");
+};
+const showToastError = function () {
+  toast.error("Ups, das hat nicht funktioniert!");
+};
 </script>
 
 <template>
@@ -24,7 +33,7 @@ const submitted = ref(false);
     <div class="mx-auto p-4 sm:p-6 lg:p-8">
       <div v-if="submitted" class="mt-10 text-center">
         <h2 class="text-2xl">Vielen Dank!</h2>
-        <div class="text-md mb-3">Wir melden uns bald bei dir.</div>
+        <div class="text-md mb-3">Wir kümmern uns um dein Anliegen.</div>
         <PrimaryButton class="m-3" type="button" @click="submitted = false"
           >Neue Nachricht schreiben</PrimaryButton
         >
@@ -35,8 +44,12 @@ const submitted = ref(false);
         @submit.prevent="
           form.post(route('contact.store'), {
             onSuccess: () => {
+              showToastSuccess();
               submitted = true;
               form.reset();
+            },
+            onError: () => {
+              showToastError();
             },
           })
         "
@@ -94,7 +107,9 @@ const submitted = ref(false);
         </div>
 
         <div class="mb-3 pt-0">
-          <PrimaryButton class="m-3">Nachricht senden</PrimaryButton>
+          <PrimaryButton class="m-3" :disabled="form.processing"
+            >Nachricht senden</PrimaryButton
+          >
         </div>
       </form>
     </div>
