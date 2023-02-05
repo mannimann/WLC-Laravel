@@ -24,20 +24,20 @@ const showToastSuccess = function () {
   toast.success("Nachricht gelöscht!");
 };
 
-const deleteMessage = () => {
-  axios
-    .delete(route("messages.destroy", props.message.id), {})
-    .then((response) => {
-      showToastSuccess();
-      // console.log(response);
-      // props.message = props.message.filter(props.message => props.message.id !== deletedMessageId);
-      // show Toast
-    });
-};
+// const deleteMessage = () => {
+//   axios
+//     .delete(route("messages.destroy", props.message.id), {})
+//     .then((response) => {
+//       showToastSuccess();
+//       // console.log(response);
+//       // props.message = props.message.filter(props.message => props.message.id !== deletedMessageId);
+//       // show Toast
+//     });
+// };
 
-const d = () => {
-  emit("messageDeleted", props.message.id);
-};
+// const d = () => {
+//   emit("messageDeleted", props.message.id);
+// };
 </script>
 
 <template>
@@ -108,10 +108,10 @@ const d = () => {
       </svg>
       <!-- </label> -->
     </Link>
-    <button type="button" @click="d">[]</button>
+    <!-- <button type="button" @click="d">[]</button> -->
   </div>
 
-  <Teleport to="body">
+  <!-- <Teleport to="body">
     <input type="checkbox" id="my-modal" class="modal-toggle" />
     <div class="modal">
       <div class="modal-box">
@@ -122,8 +122,8 @@ const d = () => {
           <label as="button" for="my-modal" class="btn-error btn" @click="d"
             >Löschen</label
           >
-          <!-- class="block rounded px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100" -->
-          <!-- <label as="button" for="my-modal">
+          class="block rounded px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100"
+          <label as="button" for="my-modal">
             <Link
               :href="route('messages.destroy', message.id)"
               method="delete"
@@ -132,9 +132,9 @@ const d = () => {
               @click="showToastSuccess"
               >Löschen</Link
             ></label
-          > -->
+          >
         </div>
       </div>
     </div>
-  </Teleport>
+  </Teleport> -->
 </template>
