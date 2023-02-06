@@ -1,37 +1,25 @@
 <script setup>
 import { Teleport } from "vue";
-
-const show = (opts = {}) => {
-  return new Promise((resolve, reject) => {
-    let resolvePromise = resolve;
-    let rejectPromise = reject;
-  });
-};
+const emit = defineEmits(["answer"]);
 
 const _cancel = () => {
-  resolvePromise(false);
+  emit("answer", false);
 };
 const _confirm = () => {
-  resolvePromise(true);
+  emit("answer", true);
 };
 </script>
 
 <template>
   <Teleport to="body">
-    <input type="checkbox" id="my-modal" class="modal-toggle" />
+    <input type="checkbox" id="my-modal" class="modal-toggle" checked />
     <div class="modal">
       <div class="modal-box">
         <h3 class="text-lg font-bold">Wirklich löschen?</h3>
         <p class="py-4">Soll die Nachricht wirklich gelöscht werden?</p>
         <div class="modal-action">
-          <label as="button" for="my-modal" class="btn" @click="_cancel"
-            >Abbrechen</label
-          >
-          <label
-            as="button"
-            for="my-modal"
-            class="btn-error btn"
-            @click="_confirm"
+          <label as="button" class="btn" @click="_cancel">Abbrechen</label>
+          <label as="button" class="btn-error btn" @click="_confirm"
             >Löschen</label
           >
         </div>

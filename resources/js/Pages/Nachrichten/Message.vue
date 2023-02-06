@@ -1,22 +1,20 @@
 <script setup>
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { Link } from "@inertiajs/inertia-vue3";
 import { useToast } from "vue-toastification";
 import { ref } from "vue";
+import { useConfirmDialog } from "@vueuse/core";
+import { Inertia } from "@inertiajs/inertia";
 
+// TODO: Deutsch
 dayjs.extend(relativeTime);
 
 const props = defineProps(["message"]);
 
 const changeStatus = () => {
-  axios
-    .put(route("messages.update", props.message.id), {
-      erledigt: props.message.erledigt,
-    })
-    .then((response) => {
-      console.log(props.message.id);
-    });
+  Inertia.put(route("messages.update", props.message.id), {
+    erledigt: props.message.erledigt,
+  });
 };
 
 const toast = useToast();
@@ -24,15 +22,20 @@ const showToastSuccess = function () {
   toast.success("Nachricht gelöscht!");
 };
 
-// TODO
-let messageId = ref(props.message.id);
-
-const d = () => {
-  console.log(messageId);
-};
+// Delete Modal
+const revaled = ref(false);
+const dialog = useConfirmDialog(revaled);
+dialog.onConfirm(() => {
+  Inertia.delete(route("messages.destroy", props.message.id));
+  showToastSuccess();
+});
+dialog.onCancel(() => {
+  // console.log("abbrechen");
+});
 </script>
 
 <template>
+  <!-- TODO: Layout -->
   <div class="flex space-x-2 p-6">
     <div class="flex flex-col justify-between pr-2">
       <svg
@@ -73,17 +76,7 @@ const d = () => {
     </div>
 
     <!-- Löschen -->
-    <!-- <Link
-      :href="route('messages.destroy', message.id)"
-      method="delete"
-      as="button"
-      class="block rounded px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100"
-    > -->
-    <label
-      for="my-modal"
-      as="button"
-      class="btn-ghost btn block rounded px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100"
-    >
+    <button type="button" :disabled="revaled" @click="dialog.reveal">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -98,35 +91,26 @@ const d = () => {
           d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
         />
       </svg>
-    </label>
-    <!-- </Link> -->
+    </button>
   </div>
 
-  <Teleport to="body">
-    <input type="checkbox" id="my-modal" class="modal-toggle" />
-    <div class="modal">
-      <div class="modal-box">
-        <h3 class="text-lg font-bold">Wirklich löschen?</h3>
-        <p class="py-4">Soll die Nachricht wirklich gelöscht werden?</p>
-        <div class="modal-action">
-          <label for="my-modal" class="btn" as="button">Abbrechen</label>
-          <!-- TODO -->
-          <label as="button" for="my-modal" class="btn-error btn" @click="d"
-            >Show Id</label
-          >
-          <Link
-            for="my-modal"
-            :href="route('messages.destroy', message.id)"
-            method="delete"
-            as="button"
-            class="btn-error btn"
-            @click="showToastSuccess"
-            >Löschen</Link
-          >
-          <!-- </label> -->
-          <!-- class="block rounded px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100" -->
+  <div v-if="revaled">
+    <Teleport to="body">
+      <input type="checkbox" id="my-modal" class="modal-toggle" checked />
+      <div class="modal">
+        <div class="modal-box">
+          <h3 class="text-lg font-bold">Wirklich löschen?</h3>
+          <p class="py-4">Soll die Nachricht wirklich gelöscht werden?</p>
+          <div class="modal-action">
+            <label as="button" class="btn" @click="dialog.cancel"
+              >Abbrechen</label
+            >
+            <label as="button" class="btn-error btn" @click="dialog.confirm"
+              >Löschen</label
+            >
+          </div>
         </div>
       </div>
-    </div>
-  </Teleport>
+    </Teleport>
+  </div>
 </template>
