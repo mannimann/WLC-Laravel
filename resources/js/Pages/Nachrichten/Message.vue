@@ -7,7 +7,7 @@ import { useConfirmDialog } from "@vueuse/core";
 import { Inertia } from "@inertiajs/inertia";
 
 // TODO: Deutsch
-dayjs.extend(relativeTime);
+// dayjs.extend(relativeTime);
 
 const props = defineProps(["message"]);
 
@@ -69,7 +69,8 @@ dialog.onCancel(() => {
         </div>
         <small class="ml-2 text-sm text-gray-600">{{ message.email }}</small>
         <small class="ml-2 text-sm text-gray-600">{{
-          dayjs(message.created_at).fromNow()
+          // dayjs(message.created_at).fromNow()
+          dayjs(message.created_at).format("DD.MM.YY HH:mm")
         }}</small>
       </div>
       <p class="mt-4 text-lg text-gray-900">{{ message.nachricht }}</p>
