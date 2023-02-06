@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Message;
+use App\Mail\NewMessage;
 use Illuminate\Http\Request;
 use Spatie\Valuestore\Valuestore;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -44,8 +46,6 @@ class ContactController extends Controller
    */
   public function store(Request $request)
   {
-    //TODO: send mail
-
     $validated = $request->validate([
       "name" => "required|string|max:50",
       "klasse" => "required|string|max:10",
@@ -54,6 +54,9 @@ class ContactController extends Controller
     ]);
 
     Message::create($validated);
+
+    //TODO: send mail
+    // Mail::to($validated->email)->send(new NewMessage($validated));
 
     return redirect()
       ->back()
