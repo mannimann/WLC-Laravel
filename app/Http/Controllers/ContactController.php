@@ -48,9 +48,9 @@ class ContactController extends Controller
   {
     $validated = $request->validate([
       "name" => "required|string|max:50",
-      "klasse" => "required|string|max:10",
+      "klasse" => "required|string|max:15",
       "email" => "required|email|max:50",
-      "nachricht" => "required|string|max:255",
+      "nachricht" => "required|string|max:500",
     ]);
 
     Message::create($validated);
