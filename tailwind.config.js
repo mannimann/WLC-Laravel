@@ -16,11 +16,25 @@ module.exports = {
         sans: ["Nunito", ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        primary: "#ff8d00",
+        primary: "#e88915",
         secondary: "#252832",
-        primarybg: "#7395AE",
-        secondarybg: "#557994",
-        secondary2bg: "#557994",
+        primarybg: "#dcf3ff",
+        secondarybg: "#EAF8FF",
+        secondary2bg: "#a0cff5",
+
+        // Ice-Blue
+        // primary: "#257ca3",
+        // secondary: "#396d7c",
+        // primarybg: "#EAF8FF",
+        // secondarybg: "#dcf3ff",
+        // secondary2bg: "#dcf3ff",
+
+        // gut, aber Verbesserungswürdig
+        // primary: "#e88915",
+        // secondary: "#252832",
+        // primarybg: "#7395AE",
+        // secondarybg: "#557994",
+        // secondary2bg: "#557994",
 
         // primary: "#D4814B",
         // // primary: "#ffa500",
