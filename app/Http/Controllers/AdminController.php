@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Step;
 use Inertia\Inertia;
 use App\Models\Klasse;
 use App\Models\Zeitraum;
@@ -31,5 +32,20 @@ class AdminController extends Controller
       "klassen" => $klassen,
       "zeiträume" => $zeiträume,
     ]);
+  }
+
+  /**
+   * Remove the specified resource from storage.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function destroy()
+  {
+    Step::truncate();
+
+    return redirect()
+      ->back()
+      ->with(["message" => "Alle Daten gelöscht"]);
   }
 }

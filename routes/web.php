@@ -71,7 +71,7 @@ Route::prefix("admin")
   ->group(function () {
     Route::resource("/", AdminController::class, [
       "names" => "home",
-    ])->only("index");
+    ])->only("index", "destroy");
     // Route::get("/admin", [AdminController::class, "index"])->name("admin");
 
     Route::resource("/einstellungen", SettingsController::class, [

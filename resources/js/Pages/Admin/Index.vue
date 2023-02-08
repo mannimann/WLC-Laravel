@@ -4,11 +4,14 @@ import AdminLayout from "@/Layouts/AdminLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
-import { useForm, Head } from "@inertiajs/inertia-vue3";
-import { computed } from "vue";
 import Klasse from "@/Pages/Admin/Klasse.vue";
 import Zeitraum from "@/Pages/Admin/Zeitraum.vue";
 import Datepicker from "@vuepic/vue-datepicker";
+import { useForm, Head } from "@inertiajs/inertia-vue3";
+import { computed, ref } from "vue";
+import { useToast } from "vue-toastification";
+import { useConfirmDialog } from "@vueuse/core";
+import { Inertia } from "@inertiajs/inertia";
 
 const props = defineProps(["settings", "klassen", "zeiträume"]);
 
@@ -31,6 +34,22 @@ const zeitraum = computed({
     form_zeitraum.von = zeitraum[0];
     form_zeitraum.bis = zeitraum[1];
   },
+});
+
+const toast = useToast();
+const showToastSuccess = function () {
+  toast.success("Alle Schritt-Daten gelöscht!");
+};
+
+// Alle eingetragenen Schritt-Daten löschen
+const revaled = ref(false);
+const dialog = useConfirmDialog(revaled);
+dialog.onConfirm(() => {
+  Inertia.delete(route("admin.home.destroy"));
+  showToastSuccess();
+});
+dialog.onCancel(() => {
+  // console.log("abbrechen");
 });
 </script>
 
@@ -133,7 +152,40 @@ const zeitraum = computed({
             </div>
           </section>
         </div>
+        <button
+          type="button"
+          :disabled="revaled"
+          @click="dialog.reveal"
+          class="btn-error btn mt-5"
+        >
+          Alle Schritt-Daten löschen
+        </button>
       </div>
     </AdminLayout>
   </ViewLayout>
+
+  <div v-if="revaled">
+    <Teleport to="body">
+      <input type="checkbox" id="my-modal" class="modal-toggle" checked />
+      <div class="modal">
+        <div class="modal-box">
+          <h3 class="text-lg font-bold">Alles löschen?</h3>
+          <p class="pt-4">
+            Sollen alle eingetragenen Schritt-Daten wirklich gelöscht werden?
+          </p>
+          <p class="pb-4">
+            Dieser Vorgang kann nicht rückgängig gemacht werden!
+          </p>
+          <div class="modal-action">
+            <label as="button" class="btn" @click="dialog.cancel"
+              >Abbrechen</label
+            >
+            <label as="button" class="btn-error btn" @click="dialog.confirm"
+              >Löschen</label
+            >
+          </div>
+        </div>
+      </div>
+    </Teleport>
+  </div>
 </template>
