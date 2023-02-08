@@ -62,24 +62,8 @@ class StepController extends Controller
       ];
     }
 
-    /////////////////
-
-    // $steps_zeitraum = Step::select(
-    //   "von",
-    //   "bis",
-    //   // Step::raw("(von||' - '||bis) AS zeitraum"),
-    //   Step::raw("SUM(schritte) AS schritte_sum"),
-    //   Step::raw("COUNT(id) AS teilnehmer_count"),
-    //   Step::raw("SUM(schritte)/COUNT(id) AS schritte_pro_kopf")
-    // )
-    //   // ->groupBy("zeitraum")
-    //   ->groupBy("von", "bis")
-    //   ->orderBy("von")
-    //   ->orderBy("bis")
-    //   ->get();
-
     // Footer bzw. Zeile Gesamt
-    // TODO: nur ausgeben, wenn Einträge vorhanden sind!
+    // TODO: nur ausgeben, wenn Einträge vorhanden sind! -> DONE?
     if ($steps_zeitraum > 0) {
       $zeitraum_sub = Step::select(
         Step::raw("COUNT(*) AS 'teilnehmer_count'")
@@ -94,8 +78,6 @@ class StepController extends Controller
       )
         ->joinSub($zeitraum_sub, "steps2", Step::raw(1), "=", Step::raw(1))
         ->get();
-      // $zeitraum_gesamt[0]["von"] = "";
-      // $zeitraum_gesamt[0]["bis"] = "";
 
       $steps_zeitraum[] = [
         "zeitraum" => "Gesamt",
@@ -112,8 +94,6 @@ class StepController extends Controller
             ? $zeitraum_gesamt[0]->schritte_pro_kopf
             : 0,
       ];
-
-      // $steps_zeitraum = $steps_zeitraum->toBase()->merge($zeitraum_gesamt);
     }
     /*
      * Steps der besten Läufer
@@ -159,8 +139,6 @@ class StepController extends Controller
       ->orderByDesc("teilnehmer_anzahl")
       ->get();
 
-    // dd($steps_klassen);
-
     return Inertia::render("Steps/Index", [
       "settings.title" => $settings->get("title"),
       "steps_all" => $steps_all,
@@ -188,7 +166,25 @@ class StepController extends Controller
    */
   public function store(StoreStepRequest $request)
   {
+    $duplicate = Step::Where("vorname", $request->vorname)
+      ->where("name", $request->name)
+      ->where("klasse", $request->klasse)
+      ->where("von", $request->von)
+      ->where("bis", $request->bis)
+      ->count();
+
+    if ($duplicate > 0) {
+      return redirect()
+        ->back()
+        ->withErrors([
+          "message" => "Du hast dich für diesen Zeitraum bereits eingetragen!",
+        ]);
+    }
+
     Step::create($request->validated());
+    return redirect()
+      ->back()
+      ->with(["message" => "Daten erfolgreich eingetragen"]);
   }
 
   /**

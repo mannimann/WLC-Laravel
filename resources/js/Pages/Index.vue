@@ -6,8 +6,9 @@ import { useForm, Head, Link } from "@inertiajs/inertia-vue3";
 import { computed, ref, Transition } from "vue";
 import Card from "@/Components/Card.vue";
 import moment from "moment";
+import { useToast } from "vue-toastification";
 
-const submitted = ref(false); // überflüssig?
+const submitted = ref(false);
 
 // Dropdown-Animation
 const isActive = ref(false);
@@ -40,6 +41,15 @@ const zeitraum = computed({
     form.bis = zeitraum.bis;
   },
 });
+
+const toast = useToast();
+const showToastSuccess = function () {
+  toast.success("Daten erfolgreich eingetragen!");
+};
+const showToastError = function (message) {
+  if (message) toast.error(message);
+  // toast.error("Du hast dich für diesen Zeitraum bereits eingetragen!");
+};
 </script>
 
 <template>
@@ -49,7 +59,7 @@ const zeitraum = computed({
     <div class="mx-auto p-4 sm:p-6 lg:p-8">
       <!-- Submitted -->
       <div v-if="submitted">
-        <Card>
+        <Card class="container mx-auto p-8 text-center">
           <template v-slot:header>
             <h3>Daten erfolgreich eingetragen</h3>
           </template>
@@ -176,8 +186,12 @@ const zeitraum = computed({
                 @submit.prevent="
                   form.post(route('steps.store'), {
                     onSuccess: () => {
+                      showToastSuccess();
                       form.reset();
                       submitted = true;
+                    },
+                    onError: () => {
+                      showToastError(form.errors.message);
                     },
                   })
                 "

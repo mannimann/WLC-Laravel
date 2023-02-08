@@ -2,7 +2,7 @@
 import ViewLayout from "@/Layouts/ViewLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import { useForm, Head, Link } from "@inertiajs/inertia-vue3";
+import { useForm, Head } from "@inertiajs/inertia-vue3";
 import { ref } from "vue";
 import { useToast } from "vue-toastification";
 

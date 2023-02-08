@@ -1,6 +1,6 @@
 <script setup>
 import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
+// import relativeTime from "dayjs/plugin/relativeTime";
 import { useToast } from "vue-toastification";
 import { ref } from "vue";
 import { useConfirmDialog } from "@vueuse/core";
@@ -35,9 +35,7 @@ dialog.onCancel(() => {
 </script>
 
 <template>
-  <!-- TODO: Layout -->
   <div class="p-4">
-    <!-- <div id="obere Zeile" class="flex justify-between pr-2"> -->
     <div
       id="obere Zeile"
       class="grid grid-flow-col grid-rows-2 pr-2 md:grid-flow-row md:grid-cols-3 md:grid-rows-none"
@@ -86,7 +84,6 @@ dialog.onCancel(() => {
         <p class="text-lg text-gray-900">{{ message.nachricht }}</p>
       </div>
 
-      <!-- Löschen -->
       <button
         type="button"
         :disabled="revaled"
