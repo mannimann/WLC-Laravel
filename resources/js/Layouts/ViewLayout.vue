@@ -8,6 +8,7 @@ import NavLink from "@/Components/NavLink.vue";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
 import { Link, usePage } from "@inertiajs/inertia-vue3";
 import { ref, computed } from "vue";
+import Hamburger from "@/Components/Hamburger.vue";
 
 // import { useColorMode } from "@vueuse/core";
 // const mode = useColorMode();
@@ -188,41 +189,14 @@ const links_admin = [
             <DarkModeButton />
             <button
               @click="showingNavigationDropdown = !showingNavigationDropdown"
-              class="inline-flex items-center justify-center rounded-md p-2 text-secondary transition duration-150 ease-in-out hover:bg-primarybg hover:text-primary focus:bg-primarybg focus:text-primary focus:outline-none dark:text-secondary_dark dark:hover:bg-primarybg_dark dark:hover:text-primary_dark dark:focus:bg-primarybg_dark dark:focus:text-primary_dark"
+              class="inline-flex items-center justify-center rounded-md p-1 text-secondary transition duration-150 ease-in-out hover:bg-primarybg hover:text-primary focus:bg-primarybg focus:text-primary focus:outline-none dark:text-secondary_dark dark:hover:bg-primarybg_dark dark:hover:text-primary_dark dark:focus:bg-primarybg_dark dark:focus:text-primary_dark"
             >
-              <svg
-                class="h-6 w-6"
-                stroke="currentColor"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  :class="{
-                    hidden: showingNavigationDropdown,
-                    'inline-flex': !showingNavigationDropdown,
-                  }"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-                <path
-                  :class="{
-                    hidden: !showingNavigationDropdown,
-                    'inline-flex': showingNavigationDropdown,
-                  }"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
+              <Hamburger :active="showingNavigationDropdown" class="h-8 w-8" />
             </button>
           </div>
         </div>
       </div>
       <!-- Responsive Navigation Menu -->
-      <!-- TODO: Transition -->
       <Transition name="hamburger">
         <div v-show="showingNavigationDropdown" class="sm:hidden">
           <div class="space-y-1 pt-2 pb-3">
