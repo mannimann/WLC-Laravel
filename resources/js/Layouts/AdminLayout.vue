@@ -20,7 +20,7 @@ const links_admin = [
 
 <template>
   <nav
-    class="touch-auto overflow-auto border-b border-secondary dark:border-secondary_dark sm:px-9"
+    class="touch-auto overflow-y-hidden overflow-x-scroll whitespace-nowrap border-b border-secondary dark:border-secondary_dark sm:px-9"
   >
     <!-- Primary Navigation Menu -->
     <div class="mx-auto px-5 sm:px-7 lg:px-9">
