@@ -67,9 +67,10 @@ Route::resource("/kontakt", ContactController::class, [
 
 Route::prefix("admin")
   ->middleware("auth", "verified")
+  ->name("admin.")
   ->group(function () {
     Route::resource("/", AdminController::class, [
-      "names" => "admin",
+      "names" => "home",
     ])->only("index");
     // Route::get("/admin", [AdminController::class, "index"])->name("admin");
 

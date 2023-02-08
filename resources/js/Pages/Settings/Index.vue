@@ -1,5 +1,6 @@
 <script setup>
 import ViewLayout from "@/Layouts/ViewLayout.vue";
+import AdminLayout from "@/Layouts/AdminLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { useForm, Head, Link } from "@inertiajs/inertia-vue3";
@@ -17,7 +18,7 @@ const form = useForm({
 });
 
 const toast = useToast();
-const showToast = function () {
+const showToastSuccess = function () {
   toast.success("Aktualisieren erfolgreich!");
 };
 const showToastReset = function () {
@@ -35,112 +36,113 @@ const showToastError = function () {
   <Head title="Einstellungen" />
 
   <ViewLayout :title="settings.title">
-    <section id="settings" class="mx-auto p-4 sm:p-6 lg:p-8">
-      <h3 class="text-2xl font-bold">Einstellungen:</h3>
-      <div class="py-2">
-        <form
-          @submit.prevent="
-            form.post(route('settings.store'), {
-              // onSuccess: () => form.reset(),
-              onSuccess: () => {
-                if (form.override) showToastStandard();
-                else showToast();
-              },
-              onError: () => {
-                showToastError();
-              },
-            })
-          "
-        >
-          <label for="title" class="text-xl font-bold text-primary"
-            >Titel:</label
+    <AdminLayout>
+      <section id="settings" class="mx-auto p-4 sm:p-6 lg:p-8">
+        <h3 class="text-2xl font-bold">Einstellungen:</h3>
+        <div class="py-2">
+          <form
+            class="space-y-2"
+            @submit.prevent="
+              form.post(route('admin.settings.store'), {
+                onSuccess: () => {
+                  if (form.override) showToastStandard();
+                  else showToastSuccess();
+                },
+                onError: () => {
+                  showToastError();
+                },
+              })
+            "
           >
-          <div class="flex w-full">
-            <input
-              v-model="form.title"
-              type="text"
-              placeholder="Titel eingeben"
-              class="block w-full rounded-md border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            />
-            <!-- <PrimaryButton class="mt-3">Hinzufügen</PrimaryButton> -->
-          </div>
-          <InputError :message="form.errors.title" class="mt-2 block" />
-
-          <!-- TODO: mit Formatierungsoptionen? -->
-          <label for="infoText" class="text-xl font-bold text-primary"
-            >Infotext:</label
-          >
-          <div class="flex w-full">
-            <textarea
-              v-model="form.infotext"
-              type="text"
-              rows="4"
-              placeholder="Infotext eingeben"
-              class="block w-full rounded-md border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            />
-            <!-- <PrimaryButton class="mt-3">Hinzufügen</PrimaryButton> -->
-          </div>
-          <InputError :message="form.errors.infotext" class="mt-2 block" />
-
-          <label for="videolink" class="text-xl font-bold text-primary"
-            >Video-Link:</label
-          >
-          <div class="flex w-full">
-            <input
-              v-model="form.videolink"
-              type="text"
-              placeholder="Videolink einfügen"
-              class="block w-full rounded-md border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            />
-            <!-- <PrimaryButton class="mt-3">Hinzufügen</PrimaryButton> -->
-          </div>
-          <InputError :message="form.errors.videolink" class="mt-2 block" />
-
-          <label for="videolink" class="text-xl font-bold text-primary"
-            >Eintragen möglich:</label
-          >
-          <input
-            v-model="form.eintragen_moeglich"
-            type="checkbox"
-            class="toggle-primary toggle toggle-lg block"
-          />
-          <InputError
-            :message="form.errors.eintragen_moeglich"
-            class="mt-2 block"
-          />
-
-          <label for="email" class="text-xl font-bold text-primary"
-            >Kontakt-Email:</label
-          >
-          <div class="flex w-full">
-            <input
-              v-model="form.email"
-              type="email"
-              placeholder="Kontakt-Email einfügen"
-              class="block w-full rounded-md border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            />
-            <!-- <PrimaryButton class="mt-3">Hinzufügen</PrimaryButton> -->
-          </div>
-          <InputError :message="form.errors.email" class="mt-2 block" />
-
-          <div class="mt-3">
-            <PrimaryButton class="m-3" @click="form.override = false"
-              >Aktualisieren</PrimaryButton
+            <label for="title" class="text-xl font-bold text-primary"
+              >Titel:</label
             >
+            <div class="flex w-full">
+              <input
+                v-model="form.title"
+                type="text"
+                placeholder="Titel eingeben"
+                class="block w-full rounded-md border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              />
+            </div>
+            <InputError :message="form.errors.title" class="mt-2 block" />
 
-            <Link :href="route('settings.create')"
-              ><PrimaryButton class="m-3" type="button" @click="showToastReset"
-                >Zurücksetzen</PrimaryButton
-              ></Link
+            <!-- TODO: mit Formatierungsoptionen? -->
+            <label for="infoText" class="text-xl font-bold text-primary"
+              >Infotext:</label
             >
+            <div class="flex w-full">
+              <textarea
+                v-model="form.infotext"
+                type="text"
+                rows="4"
+                placeholder="Infotext eingeben"
+                class="block w-full rounded-md border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              />
+            </div>
+            <InputError :message="form.errors.infotext" class="mt-2 block" />
 
-            <PrimaryButton class="m-3" @click="form.override = true"
-              >Als Standard speichern</PrimaryButton
+            <label for="videolink" class="text-xl font-bold text-primary"
+              >Video-Link:</label
             >
-          </div>
-        </form>
-      </div>
-    </section>
+            <div class="flex w-full">
+              <input
+                v-model="form.videolink"
+                type="text"
+                placeholder="Videolink einfügen"
+                class="block w-full rounded-md border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              />
+            </div>
+            <InputError :message="form.errors.videolink" class="mt-2 block" />
+
+            <label for="videolink" class="text-xl font-bold text-primary"
+              >Eintragen möglich:</label
+            >
+            <input
+              v-model="form.eintragen_moeglich"
+              type="checkbox"
+              class="toggle-primary toggle toggle-lg block"
+            />
+            <InputError
+              :message="form.errors.eintragen_moeglich"
+              class="mt-2 block"
+            />
+
+            <label for="email" class="text-xl font-bold text-primary"
+              >Kontakt-Email:</label
+            >
+            <div class="flex w-full">
+              <input
+                v-model="form.email"
+                type="email"
+                placeholder="Kontakt-Email einfügen"
+                class="block w-full rounded-md border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              />
+            </div>
+            <InputError :message="form.errors.email" class="mt-2 block" />
+
+            <div class="mt-3">
+              <PrimaryButton class="m-3" @click="form.override = false"
+                >Aktualisieren</PrimaryButton
+              >
+
+              <Link :href="route('admin.settings.create')"
+                ><PrimaryButton
+                  class="m-3"
+                  type="button"
+                  @click="showToastReset"
+                  >Zurücksetzen</PrimaryButton
+                ></Link
+              >
+
+              <PrimaryButton class="m-3" @click="form.override = true"
+                >Als Standard speichern</PrimaryButton
+              >
+            </div>
+          </form>
+        </div>
+      </section>
+    </AdminLayout>
   </ViewLayout>
 </template>
 

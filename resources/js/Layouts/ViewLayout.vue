@@ -31,11 +31,11 @@ const links = [
   { name: "Auswertung", route: "steps.index" },
   { name: "Kontakt", route: "contact.index" },
 ];
-const links_admin = [
-  { name: "Administration", route: "admin.index" },
-  { name: "Einstellungen", route: "settings.index" },
-  { name: "Nachrichten", route: "messages.index" },
-];
+// const links_admin = [
+//   { name: "Admin", route: "admin.home.index" },
+//   { name: "Einstellungen", route: "admin.settings.index" },
+//   { name: "Nachrichten", route: "admin.messages.index" },
+// ];
 </script>
 
 <template>
@@ -71,18 +71,20 @@ const links_admin = [
             </div>
 
             <!-- Navigation Links -->
-            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+            <div
+              class="hidden space-x-4 sm:-my-px sm:ml-10 sm:flex md:space-x-8"
+            >
               <NavLink
                 v-for="link in links"
                 :key="link.name"
                 :href="route(link.route)"
-                :active="route().current(link.route)"
+                :active="route().current(link.route + '*')"
               >
                 <!-- v-if="link.auth ? $page.props.auth.user : ''" -->
                 {{ link.name }}
               </NavLink>
 
-              <NavLink
+              <!-- <NavLink
                 v-if="$page.props.auth.user"
                 v-for="link in links_admin"
                 :key="link.name"
@@ -90,37 +92,15 @@ const links_admin = [
                 :active="route().current(link.route)"
               >
                 {{ link.name }}
-              </NavLink>
-
-              <!-- <NavLink :href="route('home')" :active="route().current('home')">
-                Eintragen
-              </NavLink>
-              <NavLink
-                :href="route('steps.index')"
-                :active="route().current('steps.index')"
-              >
-                Auswertung
-              </NavLink>
-              <NavLink
-                :href="route('contact.index')"
-                :active="route().current('contact.index')"
-              >
-                Kontakt
-              </NavLink>
-              <NavLink
-                v-if="$page.props.auth.user"
-                :href="route('admin.index')"
-                :active="route().current('admin.index')"
-              >
-                Administration
-              </NavLink>
-              <NavLink
-                v-if="$page.props.auth.user"
-                :href="route('settings.index')"
-                :active="route().current('settings.index')"
-              >
-                Einstellungen
               </NavLink> -->
+
+              <NavLink
+                v-if="$page.props.auth.user"
+                :href="route('admin.home.index')"
+                :active="route().current('admin*')"
+              >
+                Admin
+              </NavLink>
             </div>
           </div>
           <div class="hidden sm:ml-6 sm:flex sm:items-center">
@@ -212,11 +192,10 @@ const links_admin = [
               :href="route(link.route)"
               :active="route().current(link.route)"
             >
-              <!-- v-if="link.auth ? $page.props.auth.user : ''" -->
               {{ link.name }}
             </ResponsiveNavLink>
 
-            <ResponsiveNavLink
+            <!-- <ResponsiveNavLink
               v-if="$page.props.auth.user"
               v-for="link in links_admin"
               :key="link.name"
@@ -224,41 +203,15 @@ const links_admin = [
               :active="route().current(link.route)"
             >
               {{ link.name }}
-            </ResponsiveNavLink>
-
-            <!-- <ResponsiveNavLink
-              :href="route('home')"
-              :active="route().current('home')"
-            >
-              Eintragen
-            </ResponsiveNavLink>
-            <ResponsiveNavLink
-              :href="route('steps.index')"
-              :active="route().current('steps.index')"
-            >
-              Auswertung
-            </ResponsiveNavLink>
-            <ResponsiveNavLink
-              :href="route('contact.index')"
-              :active="route().current('contact.index')"
-            >
-              Kontakt
-            </ResponsiveNavLink>
+            </ResponsiveNavLink> -->
 
             <ResponsiveNavLink
               v-if="$page.props.auth.user"
-              :href="route('admin.index')"
-              :active="route().current('admin.index')"
+              :href="route('admin.home.index')"
+              :active="route().current('admin*')"
             >
               Administration
             </ResponsiveNavLink>
-            <ResponsiveNavLink
-              v-if="$page.props.auth.user"
-              :href="route('settings.index')"
-              :active="route().current('settings.index')"
-            >
-              Einstellungen
-            </ResponsiveNavLink> -->
 
             <!-- Responsive Login/Register -->
             <div v-if="$page.props.auth.user">

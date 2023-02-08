@@ -1,5 +1,6 @@
 <script setup>
 import ViewLayout from "@/Layouts/ViewLayout.vue";
+import AdminLayout from "@/Layouts/AdminLayout.vue";
 import { Head } from "@inertiajs/inertia-vue3";
 import { useToast } from "vue-toastification";
 import { useConfirmDialog } from "@vueuse/core";
@@ -22,7 +23,7 @@ dialog.onConfirm(() => {
   props.messages.forEach((message) => {
     messageIds.push(message.id);
   });
-  Inertia.delete(route("messages.destroy", [messageIds]));
+  Inertia.delete(route("admin.messages.destroy", [messageIds]));
   showToastSuccess();
 });
 dialog.onCancel(() => {
@@ -34,28 +35,30 @@ dialog.onCancel(() => {
   <Head title="Nachrichten" />
 
   <ViewLayout :title="settings.title">
-    <div class="mx-auto p-4 sm:p-6 lg:p-8">
-      <h1 class="text-xl font-bold">Nachrichten</h1>
-      <div v-if="messages.length === 0">Keine Nachrichten vorhanden ...</div>
+    <AdminLayout>
+      <div class="mx-auto p-4 sm:p-6 lg:p-8">
+        <h3 class="text-2xl font-bold">Nachrichten:</h3>
+        <div v-if="messages.length === 0">Keine Nachrichten vorhanden ...</div>
 
-      <div v-else>
-        <div class="mt-6 divide-y rounded-lg bg-white shadow-sm">
-          <Message
-            v-for="message in messages"
-            :key="message.id"
-            :message="message"
-          />
+        <div v-else>
+          <div class="mt-6 divide-y rounded-lg bg-white shadow-sm">
+            <Message
+              v-for="message in messages"
+              :key="message.id"
+              :message="message"
+            />
+          </div>
+          <button
+            type="button"
+            :disabled="revaled"
+            @click="dialog.reveal"
+            class="btn-error btn mt-5"
+          >
+            Alle Nachrichten löschen
+          </button>
         </div>
-        <button
-          type="button"
-          :disabled="revaled"
-          @click="dialog.reveal"
-          class="btn-error btn mt-5"
-        >
-          Alle Nachrichten löschen
-        </button>
       </div>
-    </div>
+    </AdminLayout>
   </ViewLayout>
 
   <div v-if="revaled">
