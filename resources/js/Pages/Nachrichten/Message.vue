@@ -15,6 +15,7 @@ const changeStatus = () => {
   Inertia.put(route("messages.update", props.message.id), {
     erledigt: props.message.erledigt,
   });
+  if (props.message.erledigt == true) toast.success("Erledigt");
 };
 
 const toast = useToast();
@@ -81,7 +82,15 @@ dialog.onCancel(() => {
             @change="changeStatus"
           />
         </div>
-        <p class="text-lg text-gray-900">{{ message.nachricht }}</p>
+        <p
+          class="text-lg"
+          :class="{
+            'text-gray-400': message.erledigt,
+            'text-gray-900': !message.erledigt,
+          }"
+        >
+          {{ message.nachricht }}
+        </p>
       </div>
 
       <button
