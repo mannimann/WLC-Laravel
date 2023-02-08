@@ -98,7 +98,7 @@ class DatabaseSeeder extends Seeder
             "klasse" => $klasse,
             "von" => $zeiträume[$i]["von"],
             "bis" => $zeiträume[$i]["bis"],
-            "schritte" => $faker->numberBetween(10000, 130000),
+            "schritte" => $faker->numberBetween(20000, 130000),
           ]);
         }
       }
