@@ -89,11 +89,12 @@ class MessageController extends Controller
    */
   public function destroy($id)
   {
-    Message::destroy($id);
+    $ids = explode(",", $id);
+    Message::whereIn("id", $ids)->delete();
 
     return redirect(route("messages.index"))->with(
       "message",
-      "Nachricht erfolgreich gelöscht"
+      "Nachricht(en) erfolgreich gelöscht"
     );
   }
 }

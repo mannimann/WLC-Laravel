@@ -122,7 +122,7 @@ dialog.onCancel(() => {
       <input type="checkbox" id="my-modal" class="modal-toggle" checked />
       <div class="modal">
         <div class="modal-box">
-          <h3 class="text-lg font-bold">Wirklich löschen?</h3>
+          <h3 class="text-lg font-bold">Nachricht löschen?</h3>
           <p class="py-4">Soll die Nachricht wirklich gelöscht werden?</p>
           <div class="modal-action">
             <label as="button" class="btn" @click="dialog.cancel"

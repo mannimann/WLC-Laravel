@@ -158,6 +158,11 @@ const links_admin = [
                   </template>
 
                   <template #content>
+                    <div
+                      class="px-4 py-1 text-center text-sm font-medium text-secondary dark:text-secondary_dark"
+                    >
+                      {{ $page.props.auth.user.email }}
+                    </div>
                     <DropdownLink
                       :href="route('logout')"
                       method="post"
@@ -172,13 +177,13 @@ const links_admin = [
               <div v-else v-if="canLogin" class="hidden py-4 sm:block">
                 <Link
                   :href="route('login')"
-                  class="text-sm text-secondary underline focus:outline-none dark:text-secondary_dark"
+                  class="text-sm text-secondary underline hover:text-primary focus:outline-none dark:text-secondary_dark dark:hover:text-primary_dark"
                   >Anmelden</Link
                 >
                 <Link
                   v-if="canRegister"
                   :href="route('register')"
-                  class="ml-4 text-sm text-secondary underline focus:outline-none dark:text-secondary_dark"
+                  class="ml-4 text-sm text-secondary underline hover:text-primary focus:outline-none dark:text-secondary_dark dark:hover:text-primary_dark"
                   >Registrieren</Link
                 >
               </div>
@@ -279,6 +284,7 @@ const links_admin = [
                   :href="route('logout')"
                   method="post"
                   as="button"
+                  class="w-full text-left"
                 >
                   Abmelden
                 </ResponsiveNavLink>
