@@ -23,7 +23,7 @@ class ZeitraumController extends Controller
 
     // error_log($validated["klasse"]);
 
-    return redirect(route("admin.index"));
+    return redirect(route("admin.home.index"));
   }
 
   /**
@@ -42,7 +42,7 @@ class ZeitraumController extends Controller
 
     $zeitraum->update($validated);
 
-    return redirect(route("admin.index"));
+    return redirect(route("admin.home.index"));
   }
 
   /**
@@ -55,6 +55,6 @@ class ZeitraumController extends Controller
   {
     $zeitraum->delete();
 
-    return redirect(route("admin.index"));
+    return redirect(route("admin.home.index"));
   }
 }

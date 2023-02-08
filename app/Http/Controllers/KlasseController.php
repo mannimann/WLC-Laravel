@@ -34,7 +34,7 @@ class KlasseController extends Controller
 
     // error_log($validated["klasse"]);
 
-    return redirect(route("admin.index"));
+    return redirect(route("admin.home.index"));
   }
 
   /**
@@ -52,7 +52,7 @@ class KlasseController extends Controller
 
     $klasse->update($validated);
 
-    return redirect(route("admin.index"));
+    return redirect(route("admin.home.index"));
   }
 
   /**
@@ -65,6 +65,6 @@ class KlasseController extends Controller
   {
     $klasse->delete();
 
-    return redirect(route("admin.index"));
+    return redirect(route("admin.home.index"));
   }
 }

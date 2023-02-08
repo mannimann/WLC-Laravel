@@ -61,7 +61,7 @@ const zeitraum = computed({
                     v-model="form_klasse.klasse"
                     type="text"
                     placeholder="Klasse eingeben"
-                    class="block w-full"
+                    class="block w-full text-lg"
                   />
                   <PrimaryButton class="mx-3 my-1 hidden sm:block"
                     >Hinzufügen</PrimaryButton
@@ -88,7 +88,7 @@ const zeitraum = computed({
 
           <!-- Zeiträume -->
           <section id="zeiträume">
-            <h3 class="text-xl font-bold">Zeiträume:</h3>
+            <h4 class="text-xl font-bold">Zeiträume:</h4>
             <div class="py-2">
               <form
                 @submit.prevent="

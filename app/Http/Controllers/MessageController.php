@@ -92,7 +92,7 @@ class MessageController extends Controller
     $ids = explode(",", $id);
     Message::whereIn("id", $ids)->delete();
 
-    return redirect(route("messages.index"))->with(
+    return redirect(route("admin.messages.index"))->with(
       "message",
       "Nachricht(en) erfolgreich gelöscht"
     );

@@ -19,7 +19,9 @@ const links_admin = [
 </script>
 
 <template>
-  <nav class="border-b border-secondary dark:border-secondary_dark sm:px-9">
+  <nav
+    class="touch-auto overflow-auto border-b border-secondary dark:border-secondary_dark sm:px-9"
+  >
     <!-- Primary Navigation Menu -->
     <div class="mx-auto px-5 sm:px-7 lg:px-9">
       <div class="flex h-16 justify-between">

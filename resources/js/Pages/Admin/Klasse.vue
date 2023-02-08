@@ -1,5 +1,6 @@
 <script setup>
 import InputError from "@/Components/InputError.vue";
+import TextInput from "@/Components/TextInput.vue";
 import { useForm, Link } from "@inertiajs/inertia-vue3";
 import { ref } from "vue";
 
@@ -24,21 +25,20 @@ const editing = ref(false);
             })
           "
         >
-          <input
+          <TextInput
             v-model="form.klasse"
-            class="rounded-md border-gray-300 text-xl text-gray-900 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            class="w-full rounded-md border-gray-300 text-lg text-gray-900 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
           <InputError :message="form.errors.klasse" class="mt-2" />
-          <div class="space-x-2">
+          <div class="mt-3 space-x-2">
             <!-- Speichern -->
-            <button type="submit" class="mt-3 ml-3">
+            <button type="submit" class="btn-ghost btn ml-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
-                stroke="currentColor"
-                class="h-6 w-6"
+                class="h-6 w-6 stroke-gray-700"
               >
                 <path
                   stroke-linecap="round"
@@ -49,7 +49,7 @@ const editing = ref(false);
             </button>
             <!-- Abbrechen -->
             <button
-              class="mt-3"
+              class="btn-ghost btn"
               @click="
                 editing = false;
                 form.reset();
@@ -61,8 +61,7 @@ const editing = ref(false);
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
-                stroke="currentColor"
-                class="h-6 w-6"
+                class="h-6 w-6 stroke-gray-700"
               >
                 <path
                   stroke-linecap="round"
@@ -78,11 +77,7 @@ const editing = ref(false);
         <!-- Bearbeiten -->
         <button
           class="block rounded px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100"
-          :class="
-            editing
-              ? 'disabled cursor-default text-gray-400 hover:bg-transparent focus:bg-transparent'
-              : ''
-          "
+          :class="editing ? 'disabled hidden' : ''"
           @click="editing = true"
         >
           <svg

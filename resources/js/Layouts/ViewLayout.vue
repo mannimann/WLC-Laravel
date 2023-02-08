@@ -57,7 +57,7 @@ const links = [
       </div>
     </header>
     <nav
-      class="border-b border-secondary bg-gradient-to-b from-secondary2bg to-primarybg dark:border-secondary_dark dark:from-secondarybg_dark dark:to-primarybg_dark"
+      class="touch-auto overflow-auto border-b border-secondary bg-gradient-to-b from-secondary2bg to-primarybg dark:border-secondary_dark dark:from-secondarybg_dark dark:to-primarybg_dark"
     >
       <!-- Primary Navigation Menu -->
       <div class="mx-auto px-5 sm:px-7 lg:px-9">
