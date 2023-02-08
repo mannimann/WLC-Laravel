@@ -187,6 +187,7 @@ const links_admin = [
           <!-- Hamburger -->
           <div class="-mr-2 flex items-center sm:hidden">
             <DarkModeButton />
+
             <button
               @click="showingNavigationDropdown = !showingNavigationDropdown"
               class="inline-flex items-center justify-center rounded-md p-1 text-secondary transition duration-150 ease-in-out hover:bg-primarybg hover:text-primary focus:bg-primarybg focus:text-primary focus:outline-none dark:text-secondary_dark dark:hover:bg-primarybg_dark dark:hover:text-primary_dark dark:focus:bg-primarybg_dark dark:focus:text-primary_dark"
