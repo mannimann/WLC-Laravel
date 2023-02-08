@@ -49,6 +49,13 @@ const props = defineProps(["data"]);
 //   // return [steps.von, steps.bis];
 // });
 
+const methods = {
+  formatNumber: (number) => {
+    let nf = new Intl.NumberFormat("de-DE");
+    return nf.format(number);
+  },
+};
+
 const columns = [
   {
     label: "Id",
@@ -88,6 +95,7 @@ const columns = [
     label: "Schritte",
     field: "schritte",
     type: "number",
+    formatFn: methods.formatNumber,
   },
   {
     label: "Created At",

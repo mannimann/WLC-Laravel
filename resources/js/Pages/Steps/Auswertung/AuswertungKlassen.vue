@@ -5,6 +5,13 @@ import Card from "@/Components/Card.vue";
 
 const props = defineProps(["data"]);
 
+const methods = {
+  formatNumber: (number) => {
+    let nf = new Intl.NumberFormat("de-DE");
+    return nf.format(number);
+  },
+};
+
 const columns = [
   {
     label: "#",
@@ -21,16 +28,19 @@ const columns = [
     label: "Schritte pro Kopf",
     field: "schritte_pro_kopf",
     type: "number",
+    formatFn: methods.formatNumber,
   },
   {
     label: "Schritte Gesamt",
     field: "schritte_sum",
     type: "number",
+    formatFn: methods.formatNumber,
   },
   {
     label: "Anzahl Teilnehmer",
     field: "teilnehmer_anzahl",
     type: "number",
+    formatFn: methods.formatNumber,
   },
 ];
 </script>

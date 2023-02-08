@@ -9,21 +9,14 @@ const rowStyleClassSum = function (row) {
   return row.zeitraum == "Gesamt" ? "italic font-bold" : "";
 };
 
+const methods = {
+  formatNumber: (number) => {
+    let nf = new Intl.NumberFormat("de-DE");
+    return nf.format(number);
+  },
+};
+
 const columns = [
-  // {
-  //   label: "Von",
-  //   field: "von",
-  //   type: "date",
-  //   dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'",
-  //   dateOutputFormat: "dd.MM.yyyy",
-  // },
-  // {
-  //   label: "Bis",
-  //   field: "bis",
-  //   type: "date",
-  //   dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'",
-  //   dateOutputFormat: "dd.MM.yyyy",
-  // },
   {
     label: "Zeitraum",
     field: "zeitraum",
@@ -34,16 +27,19 @@ const columns = [
     label: "Schritte gesamt",
     field: "schritte_sum",
     type: "number",
+    formatFn: methods.formatNumber,
   },
   {
     label: "Teilnehmer",
     field: "teilnehmer_count",
     type: "number",
+    formatFn: methods.formatNumber,
   },
   {
     label: "Schritte pro Kopf",
     field: "schritte_pro_kopf",
     type: "number",
+    formatFn: methods.formatNumber,
   },
 ];
 </script>

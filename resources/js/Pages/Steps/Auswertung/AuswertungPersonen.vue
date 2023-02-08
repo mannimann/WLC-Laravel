@@ -5,6 +5,13 @@ import Card from "@/Components/Card.vue";
 
 const props = defineProps(["data"]);
 
+const methods = {
+  formatNumber: (number) => {
+    let nf = new Intl.NumberFormat("de-DE");
+    return nf.format(number);
+  },
+};
+
 const columns = [
   {
     label: "#",
@@ -29,6 +36,7 @@ const columns = [
     label: "Schritte Gesamt",
     field: "schritte_sum",
     type: "number",
+    formatFn: methods.formatNumber,
   },
 ];
 </script>
