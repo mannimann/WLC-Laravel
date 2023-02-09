@@ -26,11 +26,9 @@ const form_zeitraum = useForm({
 const zeitraum = computed({
   get() {
     const zr = [form_zeitraum.von, form_zeitraum.bis];
-    // console.log(zr);
     return zr;
   },
   set(zeitraum) {
-    // console.log(zeitraum);
     form_zeitraum.von = zeitraum[0];
     form_zeitraum.bis = zeitraum[1];
   },
@@ -59,52 +57,20 @@ dialog.onCancel(() => {
   <ViewLayout :title="settings.title">
     <AdminLayout>
       <div class="mx-auto p-4 sm:p-6 lg:p-8">
-        <h3 class="pb-2 text-2xl font-bold">Admin:</h3>
+        <h3 class="text-2xl font-bold">Administration:</h3>
+
+        <button
+          type="button"
+          :disabled="revaled"
+          @click="dialog.reveal"
+          class="btn-error btn my-5"
+        >
+          Alle Schritt-Daten löschen
+        </button>
 
         <div
           class="mb-3 grid grid-cols-1 justify-items-stretch gap-8 lg:grid-cols-2"
         >
-          <!-- Klassen -->
-          <section id="klassen">
-            <h4 class="text-xl font-bold">Klassen:</h4>
-            <div class="py-2">
-              <form
-                @submit.prevent="
-                  form_klasse.post(route('klasse.store'), {
-                    onSuccess: () => form_klasse.reset(),
-                  })
-                "
-              >
-                <div class="flex w-full">
-                  <TextInput
-                    v-model="form_klasse.klasse"
-                    type="text"
-                    placeholder="Klasse eingeben"
-                    class="block w-full text-lg"
-                  />
-                  <PrimaryButton class="mx-3 my-1 hidden sm:block"
-                    >Hinzufügen</PrimaryButton
-                  >
-                  <PrimaryButton class="mx-3 my-1 px-5 text-lg sm:hidden"
-                    >+</PrimaryButton
-                  >
-                </div>
-                <InputError
-                  :message="form_klasse.errors.klasse"
-                  class="mt-2 block"
-                />
-              </form>
-            </div>
-
-            <div class="mt-6 divide-y rounded-lg bg-white shadow-sm">
-              <Klasse
-                v-for="klasse in klassen"
-                :key="klasse.id"
-                :klasse="klasse"
-              />
-            </div>
-          </section>
-
           <!-- Zeiträume -->
           <section id="zeiträume">
             <h4 class="text-xl font-bold">Zeiträume:</h4>
@@ -151,15 +117,48 @@ dialog.onCancel(() => {
               />
             </div>
           </section>
+
+          <!-- Klassen -->
+          <section id="klassen">
+            <h4 class="text-xl font-bold">Klassen:</h4>
+            <div class="py-2">
+              <form
+                @submit.prevent="
+                  form_klasse.post(route('klasse.store'), {
+                    onSuccess: () => form_klasse.reset(),
+                  })
+                "
+              >
+                <div class="flex w-full">
+                  <TextInput
+                    v-model="form_klasse.klasse"
+                    type="text"
+                    placeholder="Klasse eingeben"
+                    class="block w-full text-lg"
+                  />
+                  <PrimaryButton class="mx-3 my-1 hidden sm:block"
+                    >Hinzufügen</PrimaryButton
+                  >
+                  <PrimaryButton class="mx-3 my-1 px-5 text-lg sm:hidden"
+                    >+</PrimaryButton
+                  >
+                </div>
+                <InputError
+                  :message="form_klasse.errors.klasse"
+                  class="mt-2 block"
+                />
+              </form>
+            </div>
+
+            <div class="mt-6 divide-y rounded-lg bg-white shadow-sm">
+              <Klasse
+                v-for="klasse in klassen"
+                :key="klasse.id"
+                :klasse="klasse"
+              />
+            </div>
+          </section>
         </div>
-        <button
-          type="button"
-          :disabled="revaled"
-          @click="dialog.reveal"
-          class="btn-error btn mt-5"
-        >
-          Alle Schritt-Daten löschen
-        </button>
       </div>
     </AdminLayout>
   </ViewLayout>

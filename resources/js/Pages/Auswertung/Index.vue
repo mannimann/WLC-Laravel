@@ -1,10 +1,10 @@
 <script setup>
-import AuswertungTest from "./Auswertung/AuswertungTest.vue";
-import AuswertungCharts from "./Auswertung/AuswertungCharts.vue";
-import AuswertungZeitraum from "./Auswertung/AuswertungZeitraum.vue";
-import AuswertungPersonen from "./Auswertung/AuswertungPersonen.vue";
-import AuswertungKlassen from "./Auswertung/AuswertungKlassen.vue";
-import AuswertungAlle from "./Auswertung/AuswertungAlle.vue";
+import AuswertungTest from "./AuswertungTest.vue";
+import AuswertungCharts from "./AuswertungCharts.vue";
+import AuswertungZeitraum from "./AuswertungZeitraum.vue";
+import AuswertungPersonen from "./AuswertungPersonen.vue";
+import AuswertungKlassen from "./AuswertungKlassen.vue";
+import AuswertungAlle from "./AuswertungAlle.vue";
 
 import ViewLayout from "@/Layouts/ViewLayout.vue";
 import { Head } from "@inertiajs/inertia-vue3";

@@ -21,9 +21,9 @@ class ZeitraumController extends Controller
     ]);
     Zeitraum::create($validated);
 
-    // error_log($validated["klasse"]);
-
-    return redirect(route("admin.home.index"));
+    return redirect()
+      ->back()
+      ->with(["message" => "Zeitraum erfolgreich erstellt"]);
   }
 
   /**
@@ -42,7 +42,9 @@ class ZeitraumController extends Controller
 
     $zeitraum->update($validated);
 
-    return redirect(route("admin.home.index"));
+    return redirect()
+      ->back()
+      ->with(["message" => "Zeitraum erfolgreich geändert"]);
   }
 
   /**
@@ -55,6 +57,8 @@ class ZeitraumController extends Controller
   {
     $zeitraum->delete();
 
-    return redirect(route("admin.home.index"));
+    return redirect()
+      ->back()
+      ->with(["message" => "Zeitraum erfolgreich gelöscht"]);
   }
 }

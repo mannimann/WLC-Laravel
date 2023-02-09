@@ -6,21 +6,16 @@ import { ref } from "vue";
 
 const showingNavigationDropdown = ref(false);
 
-const links = [
-  { name: "Eintragen", route: "home" },
-  { name: "Auswertung", route: "steps.index" },
-  { name: "Kontakt", route: "contact.index" },
-];
 const links_admin = [
-  { name: "Administration", route: "admin.home.index" },
-  { name: "Einstellungen", route: "admin.settings.index" },
-  { name: "Nachrichten", route: "admin.messages.index" },
+  { name: "Daten", route: "admin.home.index" },
+  { name: "Einstellungen", route: "admin.einstellungen.index" },
+  { name: "Nachrichten", route: "admin.nachrichten.index" },
 ];
 </script>
 
 <template>
   <nav
-    class="touch-auto overflow-y-hidden overflow-x-scroll whitespace-nowrap border-b border-secondary dark:border-secondary_dark sm:px-9"
+    class="scrollbar-hide touch-auto overflow-y-hidden overflow-x-scroll whitespace-nowrap border-b border-secondary dark:border-secondary_dark sm:px-9"
   >
     <!-- Primary Navigation Menu -->
     <div class="mx-auto px-5 sm:px-7 lg:px-9">
@@ -47,3 +42,13 @@ const links_admin = [
     <slot />
   </main>
 </template>
+
+<style scoped>
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+</style>

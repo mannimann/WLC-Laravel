@@ -32,9 +32,9 @@ class KlasseController extends Controller
     ]);
     Klasse::create($validated);
 
-    // error_log($validated["klasse"]);
-
-    return redirect(route("admin.home.index"));
+    return redirect()
+      ->back()
+      ->with(["message" => "Klasse erfolgreich erstellt"]);
   }
 
   /**
@@ -52,7 +52,9 @@ class KlasseController extends Controller
 
     $klasse->update($validated);
 
-    return redirect(route("admin.home.index"));
+    return redirect()
+      ->back()
+      ->with(["message" => "Klasse erfolgreich geändert"]);
   }
 
   /**
@@ -65,6 +67,8 @@ class KlasseController extends Controller
   {
     $klasse->delete();
 
-    return redirect(route("admin.home.index"));
+    return redirect()
+      ->back()
+      ->with(["message" => "Klasse erfolgreich gelöschtt"]);
   }
 }

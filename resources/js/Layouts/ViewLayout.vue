@@ -6,18 +6,9 @@ import DropdownLink from "@/Components/DropdownLink.vue";
 import Footer from "@/Components/Footer.vue";
 import NavLink from "@/Components/NavLink.vue";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
-import { Link, usePage } from "@inertiajs/inertia-vue3";
-import { ref, computed } from "vue";
+import { Link } from "@inertiajs/inertia-vue3";
+import { ref } from "vue";
 import Hamburger from "@/Components/Hamburger.vue";
-
-// import { useColorMode } from "@vueuse/core";
-// const mode = useColorMode();
-// mode.value = "dark";
-
-// defineProps({
-//     canLogin: Boolean,
-//     canRegister: Boolean,
-// });
 
 const props = defineProps(["title"]);
 
@@ -27,15 +18,10 @@ const canRegister = true;
 const showingNavigationDropdown = ref(false);
 
 const links = [
-  { name: "Eintragen", route: "home" },
-  { name: "Auswertung", route: "steps.index" },
-  { name: "Kontakt", route: "contact.index" },
+  { name: "Eintragen", route: "eintragen.index" },
+  { name: "Auswertung", route: "auswertung.index" },
+  { name: "Kontakt", route: "kontakt.index" },
 ];
-// const links_admin = [
-//   { name: "Admin", route: "admin.home.index" },
-//   { name: "Einstellungen", route: "admin.settings.index" },
-//   { name: "Nachrichten", route: "admin.messages.index" },
-// ];
 </script>
 
 <template>
@@ -80,19 +66,8 @@ const links = [
                 :href="route(link.route)"
                 :active="route().current(link.route + '*')"
               >
-                <!-- v-if="link.auth ? $page.props.auth.user : ''" -->
                 {{ link.name }}
               </NavLink>
-
-              <!-- <NavLink
-                v-if="$page.props.auth.user"
-                v-for="link in links_admin"
-                :key="link.name"
-                :href="route(link.route)"
-                :active="route().current(link.route)"
-              >
-                {{ link.name }}
-              </NavLink> -->
 
               <NavLink
                 v-if="$page.props.auth.user"
@@ -183,7 +158,7 @@ const links = [
         </div>
       </div>
       <!-- Responsive Navigation Menu -->
-      <Transition name="hamburger">
+      <Transition name="dropdownmenu">
         <div v-show="showingNavigationDropdown" class="sm:hidden">
           <div class="space-y-1 pt-2 pb-3">
             <ResponsiveNavLink
@@ -194,16 +169,6 @@ const links = [
             >
               {{ link.name }}
             </ResponsiveNavLink>
-
-            <!-- <ResponsiveNavLink
-              v-if="$page.props.auth.user"
-              v-for="link in links_admin"
-              :key="link.name"
-              :href="route(link.route)"
-              :active="route().current(link.route)"
-            >
-              {{ link.name }}
-            </ResponsiveNavLink> -->
 
             <ResponsiveNavLink
               v-if="$page.props.auth.user"
@@ -270,17 +235,17 @@ const links = [
 </template>
 
 <style scoped>
-.hamburger-enter-from,
-.hamburger-leave-to {
+.dropdownmenu-enter-from,
+.dropdownmenu-leave-to {
   max-height: 0;
   overflow: hidden;
 }
-.hamburger-enter-active,
-.hamburger-leave-active {
+.dropdownmenu-enter-active,
+.dropdownmenu-leave-active {
   transition: all 0.3s ease-in-out;
 }
-.hamburger-enter-to,
-.hamburger-leave-from {
+.dropdownmenu-enter-to,
+.dropdownmenu-leave-from {
   max-height: 100em;
   overflow: hidden;
 }

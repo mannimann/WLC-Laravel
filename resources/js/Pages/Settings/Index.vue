@@ -43,7 +43,7 @@ const showToastError = function () {
           <form
             class="space-y-2"
             @submit.prevent="
-              form.post(route('admin.settings.store'), {
+              form.post(route('admin.einstellungen.store'), {
                 onSuccess: () => {
                   if (form.override) showToastStandard();
                   else showToastSuccess();
@@ -126,7 +126,7 @@ const showToastError = function () {
                 >Aktualisieren</PrimaryButton
               >
 
-              <Link :href="route('admin.settings.create')"
+              <Link :href="route('admin.einstellungen.create')"
                 ><PrimaryButton
                   class="m-3"
                   type="button"

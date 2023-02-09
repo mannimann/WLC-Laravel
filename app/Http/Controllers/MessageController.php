@@ -79,6 +79,10 @@ class MessageController extends Controller
   public function update(Request $request, $id)
   {
     Message::where("id", $id)->update(["erledigt" => $request->erledigt]);
+
+    return redirect()
+      ->back()
+      ->with(["message" => "Nachricht erfolgreich geändert"]);
   }
 
   /**
@@ -92,9 +96,8 @@ class MessageController extends Controller
     $ids = explode(",", $id);
     Message::whereIn("id", $ids)->delete();
 
-    return redirect(route("admin.messages.index"))->with(
-      "message",
-      "Nachricht(en) erfolgreich gelöscht"
-    );
+    return redirect()
+      ->back()
+      ->with("message", "Nachricht(en) erfolgreich gelöscht");
   }
 }

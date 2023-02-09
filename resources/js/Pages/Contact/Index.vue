@@ -42,7 +42,7 @@ const showToastError = function () {
       <form
         v-else
         @submit.prevent="
-          form.post(route('contact.store'), {
+          form.post(route('kontakt.store'), {
             onSuccess: () => {
               showToastSuccess();
               submitted = true;

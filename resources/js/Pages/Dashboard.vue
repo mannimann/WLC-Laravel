@@ -15,7 +15,7 @@ const props = defineProps(["settings"]);
           <div
             class="bg-secondarybg p-6 text-center text-xl text-primary dark:bg-secondarybg_dark dark:text-primary_dark"
           >
-            Einloggen erfolgreich!
+            Anmeldung erfolgreich!
           </div>
         </div>
       </div>

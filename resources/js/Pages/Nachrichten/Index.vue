@@ -23,7 +23,7 @@ dialog.onConfirm(() => {
   props.messages.forEach((message) => {
     messageIds.push(message.id);
   });
-  Inertia.delete(route("admin.messages.destroy", [messageIds]));
+  Inertia.delete(route("admin.nachrichten.destroy", [messageIds]));
   showToastSuccess();
 });
 dialog.onCancel(() => {

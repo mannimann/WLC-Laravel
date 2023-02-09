@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use stdClass;
 use App\Models\Step;
 use Inertia\Inertia;
 use App\Models\Zeitraum;
 use Illuminate\Http\Request;
 use Spatie\Valuestore\Valuestore;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\StoreStepRequest;
 
-class StepController extends Controller
+class AuswertungController extends Controller
 {
   /**
    * Display a listing of the resource.
@@ -63,7 +60,6 @@ class StepController extends Controller
     }
 
     // Footer bzw. Zeile Gesamt
-    // TODO: nur ausgeben, wenn Einträge vorhanden sind! -> DONE?
     if ($steps_zeitraum > 0) {
       $zeitraum_sub = Step::select(
         Step::raw("COUNT(*) AS 'teilnehmer_count'")
@@ -139,7 +135,7 @@ class StepController extends Controller
       ->orderByDesc("teilnehmer_anzahl")
       ->get();
 
-    return Inertia::render("Steps/Index", [
+    return Inertia::render("Auswertung/Index", [
       "settings.title" => $settings->get("title"),
       "steps_all" => $steps_all,
       "steps_zeitraum" => $steps_zeitraum,
@@ -164,27 +160,9 @@ class StepController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function store(StoreStepRequest $request)
+  public function store(Request $request)
   {
-    $duplicate = Step::Where("vorname", $request->vorname)
-      ->where("name", $request->name)
-      ->where("klasse", $request->klasse)
-      ->where("von", $request->von)
-      ->where("bis", $request->bis)
-      ->count();
-
-    if ($duplicate > 0) {
-      return redirect()
-        ->back()
-        ->withErrors([
-          "message" => "Du hast dich für diesen Zeitraum bereits eingetragen!",
-        ]);
-    }
-
-    Step::create($request->validated());
-    return redirect()
-      ->back()
-      ->with(["message" => "Daten erfolgreich eingetragen"]);
+    //
   }
 
   /**

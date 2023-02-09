@@ -4,7 +4,8 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\StepController;
+use App\Http\Controllers\EintragenController;
+use App\Http\Controllers\AuswertungController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\KlasseController;
 use App\Http\Controllers\ContactController;
@@ -57,12 +58,16 @@ Route::resource("/dashboard", DashboardController::class, [
 
 Route::get("/", HomeController::class)->name("home");
 
-Route::resource("/auswertung", StepController::class, [
-  "names" => "steps",
+Route::resource("/eintragen", EintragenController::class, [
+  "names" => "eintragen",
 ])->only(["index", "store"]);
 
+Route::resource("/auswertung", AuswertungController::class, [
+  "names" => "auswertung",
+])->only(["index"]);
+
 Route::resource("/kontakt", ContactController::class, [
-  "names" => "contact",
+  "names" => "kontakt",
 ])->only(["index", "store"]);
 
 Route::prefix("admin")
@@ -75,11 +80,11 @@ Route::prefix("admin")
     // Route::get("/admin", [AdminController::class, "index"])->name("admin");
 
     Route::resource("/einstellungen", SettingsController::class, [
-      "names" => "settings",
+      "names" => "einstellungen",
     ])->only(["index", "store", "create"]);
 
     Route::resource("/nachrichten", MessageController::class, [
-      "names" => "messages",
+      "names" => "nachrichten",
     ])->only(["index", "update", "destroy"]);
   });
 

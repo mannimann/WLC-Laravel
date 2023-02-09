@@ -5,10 +5,6 @@ import Card from "@/Components/Card.vue";
 
 const props = defineProps(["data"]);
 
-const rowStyleClassSum = function (row) {
-  return row.zeitraum == "Gesamt" ? "italic font-bold" : "";
-};
-
 const methods = {
   formatNumber: (number) => {
     let nf = new Intl.NumberFormat("de-DE");
@@ -18,26 +14,31 @@ const methods = {
 
 const columns = [
   {
-    label: "Zeitraum",
-    field: "zeitraum",
-    type: "string",
+    label: "#",
+    field: "ranking",
+    type: "number",
     tdClass: "font-bold",
   },
   {
-    label: "Schritte gesamt",
+    label: "Klasse",
+    field: "klasse",
+    type: "number",
+  },
+  {
+    label: "Schritte pro Kopf",
+    field: "schritte_pro_kopf",
+    type: "number",
+    formatFn: methods.formatNumber,
+  },
+  {
+    label: "Schritte Gesamt",
     field: "schritte_sum",
     type: "number",
     formatFn: methods.formatNumber,
   },
   {
-    label: "Teilnehmer",
-    field: "teilnehmer_count",
-    type: "number",
-    formatFn: methods.formatNumber,
-  },
-  {
-    label: "Schritte pro Kopf",
-    field: "schritte_pro_kopf",
+    label: "Anzahl Teilnehmer",
+    field: "teilnehmer_anzahl",
     type: "number",
     formatFn: methods.formatNumber,
   },
@@ -47,7 +48,7 @@ const columns = [
 <template>
   <Card>
     <template v-slot:header>
-      <h3>Gesamtanzahl Schritte im Zeitraum:</h3>
+      <h3>Gesamtanzahl Schritte nach Klasse:</h3>
     </template>
 
     <template v-slot:body>
@@ -59,7 +60,7 @@ const columns = [
           styleClass="vgt-table striped"
           :pagination-options="{
             enabled: true,
-            perPage: 10,
+            perPage: 20,
             position: 'bottom',
             perPageDropdown: [10, 20, 30, 50],
             dropdownAllowAll: true,
@@ -76,11 +77,9 @@ const columns = [
             placeholder: 'Suchen...',
           }"
           :sort-options="{
-            enabled: false,
-            // initialSortBy: { field: 'von', type: 'asc' },
+            enabled: true,
+            initialSortBy: { field: 'ranking', type: 'asc' },
           }"
-          :line-numbers="true"
-          :row-style-class="rowStyleClassSum"
         >
           <template #emptystate>Keine Einträge vorhanden ...</template>
         </VueGoodTable>
@@ -111,16 +110,11 @@ const columns = [
             placeholder: 'Suchen...',
           }"
           :sort-options="{
-            enabled: false,
-            // initialSortBy: { field: 'von', type: 'asc' },
+            enabled: true,
+            initialSortBy: { field: 'ranking', type: 'asc' },
           }"
-          :line-numbers="true"
-          :row-style-class="rowStyleClassSum"
         >
           <template #emptystate>Keine Einträge vorhanden ...</template>
-          <!-- <template #table-actions-bottom>
-            This will show up on the bottom of the table.
-          </template> -->
         </VueGoodTable>
       </span>
     </template>

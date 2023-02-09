@@ -5,6 +5,10 @@ import Card from "@/Components/Card.vue";
 
 const props = defineProps(["data"]);
 
+const rowStyleClassSum = function (row) {
+  return row.zeitraum == "Gesamt" ? "italic font-bold" : "";
+};
+
 const methods = {
   formatNumber: (number) => {
     let nf = new Intl.NumberFormat("de-DE");
@@ -14,31 +18,26 @@ const methods = {
 
 const columns = [
   {
-    label: "#",
-    field: "ranking",
-    type: "number",
+    label: "Zeitraum",
+    field: "zeitraum",
+    type: "string",
     tdClass: "font-bold",
   },
   {
-    label: "Klasse",
-    field: "klasse",
-    type: "number",
-  },
-  {
-    label: "Schritte pro Kopf",
-    field: "schritte_pro_kopf",
-    type: "number",
-    formatFn: methods.formatNumber,
-  },
-  {
-    label: "Schritte Gesamt",
+    label: "Schritte gesamt",
     field: "schritte_sum",
     type: "number",
     formatFn: methods.formatNumber,
   },
   {
-    label: "Anzahl Teilnehmer",
-    field: "teilnehmer_anzahl",
+    label: "Teilnehmer",
+    field: "teilnehmer_count",
+    type: "number",
+    formatFn: methods.formatNumber,
+  },
+  {
+    label: "Schritte pro Kopf",
+    field: "schritte_pro_kopf",
     type: "number",
     formatFn: methods.formatNumber,
   },
@@ -48,7 +47,7 @@ const columns = [
 <template>
   <Card>
     <template v-slot:header>
-      <h3>Gesamtanzahl Schritte nach Klasse:</h3>
+      <h3>Gesamtanzahl Schritte im Zeitraum:</h3>
     </template>
 
     <template v-slot:body>
@@ -60,7 +59,7 @@ const columns = [
           styleClass="vgt-table striped"
           :pagination-options="{
             enabled: true,
-            perPage: 20,
+            perPage: 10,
             position: 'bottom',
             perPageDropdown: [10, 20, 30, 50],
             dropdownAllowAll: true,
@@ -77,9 +76,11 @@ const columns = [
             placeholder: 'Suchen...',
           }"
           :sort-options="{
-            enabled: true,
-            initialSortBy: { field: 'ranking', type: 'asc' },
+            enabled: false,
+            // initialSortBy: { field: 'von', type: 'asc' },
           }"
+          :line-numbers="true"
+          :row-style-class="rowStyleClassSum"
         >
           <template #emptystate>Keine Einträge vorhanden ...</template>
         </VueGoodTable>
@@ -93,7 +94,7 @@ const columns = [
           styleClass="vgt-table striped"
           :pagination-options="{
             enabled: true,
-            perPage: 20,
+            perPage: 10,
             position: 'bottom',
             perPageDropdown: [10, 20, 30, 50],
             dropdownAllowAll: true,
@@ -110,9 +111,11 @@ const columns = [
             placeholder: 'Suchen...',
           }"
           :sort-options="{
-            enabled: true,
-            initialSortBy: { field: 'ranking', type: 'asc' },
+            enabled: false,
+            // initialSortBy: { field: 'von', type: 'asc' },
           }"
+          :line-numbers="true"
+          :row-style-class="rowStyleClassSum"
         >
           <template #emptystate>Keine Einträge vorhanden ...</template>
         </VueGoodTable>
