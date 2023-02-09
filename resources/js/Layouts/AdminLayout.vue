@@ -15,7 +15,7 @@ const links_admin = [
 
 <template>
   <nav
-    class="scrollbar-hide touch-auto overflow-y-hidden overflow-x-scroll whitespace-nowrap border-b border-secondary dark:border-secondary_dark sm:px-9"
+    class="scrollbar-hide -mx-2 touch-auto overflow-y-hidden overflow-x-scroll whitespace-nowrap border-b border-secondary dark:border-secondary_dark sm:mx-0 sm:px-11"
   >
     <!-- Primary Navigation Menu -->
     <div class="mx-auto px-5 sm:px-7 lg:px-9">

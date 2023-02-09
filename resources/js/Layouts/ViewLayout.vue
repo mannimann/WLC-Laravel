@@ -50,10 +50,10 @@ const links = [
         <div class="flex h-16 justify-between">
           <div class="flex">
             <!-- Logo -->
-            <div class="flex shrink-0 items-center">
-              <Link :href="route('home')">
+            <div class="-my-px flex shrink-0">
+              <NavLink :href="route('home')" :active="route().current('home')">
                 <ApplicationLogo class="block h-9 w-auto" />
-              </Link>
+              </NavLink>
             </div>
 
             <!-- Navigation Links -->

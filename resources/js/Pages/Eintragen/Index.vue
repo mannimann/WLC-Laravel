@@ -61,17 +61,45 @@ const showToastError = function (message) {
             <h3>Daten erfolgreich eingetragen</h3>
           </template>
           <template v-slot:body>
-            <div class="mt-3 text-center">
+            <div class="m-3 text-center">
               <PrimaryButton
                 class="m-3"
                 value="Zurück"
                 @click="submitted = !submitted"
               >
-                <span class="text-lg">Zurück</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="mr-2 h-6 w-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"
+                  />
+                </svg>
+                Zurück
               </PrimaryButton>
               <Link :href="route('auswertung.index')">
-                <PrimaryButton class="m-3" value="Zur Auswertung">
-                  <span class="text-lg">Zur Auswertung</span>
+                <PrimaryButton class="m-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="mr-2 h-6 w-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"
+                    />
+                  </svg>
+                  Zur Auswertung
                 </PrimaryButton>
               </Link>
             </div>
@@ -333,12 +361,26 @@ const showToastError = function (message) {
                     eintragen!
                   </p>
                   <PrimaryButton
-                    class="m-3 px-7"
+                    class="m-3"
                     :class="{ 'btn-disabled': !settings.eintragen_moeglich }"
                     :disabled="form.processing"
                     value="Eintragen"
                   >
-                    <span class="text-lg">Eintragen</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="mr-2 h-6 w-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
+                      />
+                    </svg>
+                    Eintragen
                   </PrimaryButton>
                   <p v-if="!settings.eintragen_moeglich">
                     Eintragen zurzeit nicht möglich
