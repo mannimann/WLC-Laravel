@@ -9,6 +9,7 @@ import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
 
 // my imports
 import Toast from "vue-toastification";
+import PrimeVue from "primevue/config";
 
 import "@vuepic/vue-datepicker/dist/main.css";
 import "vue-toastification/dist/index.css";
@@ -45,6 +46,7 @@ createInertiaApp({
         icon: true,
         rtl: false,
       })
+      .use(PrimeVue)
       .mount(el);
   },
 });

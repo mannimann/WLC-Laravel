@@ -1,5 +1,6 @@
 <script setup>
 import AuswertungTest from "./Auswertung/AuswertungTest.vue";
+import AuswertungCharts from "./Auswertung/AuswertungCharts.vue";
 import AuswertungZeitraum from "./Auswertung/AuswertungZeitraum.vue";
 import AuswertungPersonen from "./Auswertung/AuswertungPersonen.vue";
 import AuswertungKlassen from "./Auswertung/AuswertungKlassen.vue";
@@ -29,12 +30,26 @@ const props = defineProps([
       <section
         class="mb-3 grid grid-cols-1 justify-items-stretch gap-3 xl:grid-cols-2"
       >
+        <div><AuswertungCharts /></div>
         <div>
-          <AuswertungZeitraum class="mb-3" :data="steps_zeitraum" />
+          <AuswertungZeitraum :data="steps_zeitraum" />
+        </div>
+        <div>
           <AuswertungPersonen :data="steps_top" />
         </div>
-        <AuswertungKlassen :data="steps_klassen" />
+        <div>
+          <AuswertungKlassen :data="steps_klassen" />
+        </div>
       </section>
+      <!-- <section
+      class="mb-3 grid grid-cols-1 justify-items-stretch gap-3 xl:grid-cols-2"
+    >
+      <div>
+        <AuswertungZeitraum class="mb-3" :data="steps_zeitraum" />
+        <AuswertungPersonen :data="steps_top" />
+      </div>
+      <AuswertungKlassen :data="steps_klassen" />
+    </section> -->
 
       <section class="mb-3">
         <AuswertungAlle :data="steps_all" />
