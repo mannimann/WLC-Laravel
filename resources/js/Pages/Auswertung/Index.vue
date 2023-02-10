@@ -1,6 +1,7 @@
 <script setup>
 import AuswertungTest from "./AuswertungTest.vue";
-import AuswertungCharts from "./AuswertungCharts.vue";
+import AuswertungVBarChart from "./AuswertungVBarChart.vue";
+import AuswertungHBarChart from "./AuswertungHBarChart.vue";
 import AuswertungZeitraum from "./AuswertungZeitraum.vue";
 import AuswertungPersonen from "./AuswertungPersonen.vue";
 import AuswertungKlassen from "./AuswertungKlassen.vue";
@@ -16,6 +17,32 @@ const props = defineProps([
   "steps_top",
   "steps_klassen",
 ]);
+
+const topTeilnehmer = props.steps_klassen
+  .sort((a, b) => {
+    return b.teilnehmer_anzahl - a.teilnehmer_anzahl;
+  })
+  .slice(0, 10);
+const dataTeilnehmer = topTeilnehmer.map((entry) => entry.teilnehmer_anzahl);
+const labelsTeilnehmer = topTeilnehmer.map((entry) => entry.klasse);
+
+const topLäufer = props.steps_top
+  .sort((a, b) => {
+    return b.schritte_sum - a.schritte_sum;
+  })
+  .slice(0, 5);
+const dataLäufer = topLäufer.map((entry) => entry.schritte_sum);
+const labelsLäufer = topLäufer.map(
+  (entry) => entry.vorname + " " + entry.name + " - " + entry.klasse
+);
+
+const topKlassen = props.steps_klassen
+  .sort((a, b) => {
+    return b.schritte_pro_kopf - a.schritte_pro_kopf;
+  })
+  .slice(0, 5);
+const dataKlassen = topKlassen.map((entry) => entry.schritte_pro_kopf);
+const labelsKlassen = topKlassen.map((entry) => entry.klasse);
 </script>
 
 <template>
@@ -30,16 +57,27 @@ const props = defineProps([
       <section
         class="mb-3 grid grid-cols-1 justify-items-stretch gap-3 xl:grid-cols-2"
       >
-        <div><AuswertungCharts /></div>
-        <div>
-          <AuswertungZeitraum :data="steps_zeitraum" />
-        </div>
-        <div>
-          <AuswertungPersonen :data="steps_top" />
-        </div>
-        <div>
-          <AuswertungKlassen :data="steps_klassen" />
-        </div>
+        <AuswertungHBarChart
+          title="Top 10 Teilnehmeranzahl"
+          :data="dataTeilnehmer"
+          :labels="labelsTeilnehmer"
+        />
+        <AuswertungZeitraum :data="steps_zeitraum" />
+
+        <AuswertungVBarChart
+          title="Top 5 Läufer"
+          :data="dataLäufer"
+          :labels="labelsLäufer"
+        />
+        <AuswertungVBarChart
+          title="Top 5 Klassen"
+          :data="dataKlassen"
+          :labels="labelsKlassen"
+        />
+
+        <AuswertungPersonen :data="steps_top" />
+
+        <AuswertungKlassen :data="steps_klassen" />
       </section>
       <!-- <section
       class="mb-3 grid grid-cols-1 justify-items-stretch gap-3 xl:grid-cols-2"
