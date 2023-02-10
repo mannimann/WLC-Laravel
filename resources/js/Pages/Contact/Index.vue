@@ -33,7 +33,7 @@ const showToastError = function () {
     <div class="mx-auto p-4 sm:p-6 lg:p-8">
       <div v-if="submitted" class="mt-10 text-center">
         <h2 class="text-2xl">Vielen Dank!</h2>
-        <div class="text-md mb-3">Wir kümmern uns um dein Anliegen.</div>
+        <div class="mb-3 text-md">Wir kümmern uns um dein Anliegen.</div>
         <PrimaryButton class="m-3" type="button" @click="submitted = false"
           >Neue Nachricht schreiben</PrimaryButton
         >
@@ -108,13 +108,13 @@ const showToastError = function () {
 
         <div class="mb-3 pt-0">
           <PrimaryButton class="m-3" :disabled="form.processing"
-            ><svg
+            >Nachricht senden<svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              class="mr-2 h-6 w-6"
+              class="ml-2 h-6 w-6"
             >
               <path
                 stroke-linecap="round"
@@ -122,8 +122,7 @@ const showToastError = function () {
                 d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
               />
             </svg>
-            Nachricht senden</PrimaryButton
-          >
+          </PrimaryButton>
         </div>
       </form>
     </div>
