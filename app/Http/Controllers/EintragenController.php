@@ -68,6 +68,8 @@ class EintragenController extends Controller
         ]);
     }
 
+    error_log($request->screenshot);
+
     Step::create($request->validated());
     return redirect()
       ->back()

@@ -47,6 +47,66 @@ const showToastError = function (message) {
   if (message) toast.error(message);
   // toast.error("Du hast dich für diesen Zeitraum bereits eingetragen!");
 };
+
+const e = () => {
+  console.log(form.screenshot);
+};
+
+const addNotEmpty = (e) => {
+  e.target.parentElement.classList.add("form-not-empty");
+};
+const removeNotEmpty = (e) => {
+  e.target.value === ""
+    ? e.target.parentElement.classList.remove("form-not-empty")
+    : null;
+};
+
+// Bilder verkleinern (clientseitig)
+const fileChanged = (e) => {
+  form.screenshot = "";
+  for (var i = 0; i < e.target.files.length; i++) {
+    var file = e.target.files[i];
+    if (file.type == "image/jpeg" || file.type == "image/png") {
+      var reader = new FileReader();
+      reader.onload = (readerEvent) => {
+        var image = new Image();
+        image.onload = (imageEvent) => {
+          var max_size = 860;
+          var w = image.width;
+          var h = image.height;
+          if (w > h) {
+            if (w > max_size) {
+              h *= max_size / w;
+              w = max_size;
+            }
+          } else {
+            if (h > max_size) {
+              w *= max_size / h;
+              h = max_size;
+            }
+          }
+          var canvas = document.createElement("canvas");
+          canvas.width = w;
+          canvas.height = h;
+          canvas.getContext("2d").drawImage(image, 0, 0, w, h);
+          if (file.type == "image/jpeg") {
+            var dataURL = canvas.toDataURL("image/jpeg", 1);
+          } else {
+            var dataURL = canvas.toDataURL("image/png");
+          }
+          // document.getElementById('f_screenshot_hidden').value += dataURL + '|';
+          form.screenshot += dataURL + "|";
+        };
+        image.src = readerEvent.target.result;
+      };
+      reader.readAsDataURL(file);
+    } else {
+      e.target.value = "";
+      alert("Bitte wählen Sie nur Bilder im JPG- oder PNG-Format aus.");
+      return false;
+    }
+  }
+};
 </script>
 
 <template>
@@ -386,7 +446,6 @@ const showToastError = function (message) {
                   </p>
                 </div>
               </form>
-              <!-- <p>{{ screenshot }}</p> -->
             </template>
           </Card>
         </section>
@@ -417,63 +476,3 @@ const showToastError = function (message) {
   overflow: hidden;
 }
 </style>
-
-<script>
-export default {
-  methods: {
-    addNotEmpty(e) {
-      e.target.parentElement.classList.add("form-not-empty");
-    },
-    removeNotEmpty(e) {
-      e.target.value === ""
-        ? e.target.parentElement.classList.remove("form-not-empty")
-        : null;
-    },
-    // Bilder verkleinern (clientseitig)
-    fileChanged(e) {
-      for (var i = 0; i < e.target.files.length; i++) {
-        var file = e.target.files[i];
-        if (file.type == "image/jpeg" || file.type == "image/png") {
-          var reader = new FileReader();
-          reader.onload = (readerEvent) => {
-            var image = new Image();
-            image.onload = (imageEvent) => {
-              var max_size = 860;
-              var w = image.width;
-              var h = image.height;
-              if (w > h) {
-                if (w > max_size) {
-                  h *= max_size / w;
-                  w = max_size;
-                }
-              } else {
-                if (h > max_size) {
-                  w *= max_size / h;
-                  h = max_size;
-                }
-              }
-              var canvas = document.createElement("canvas");
-              canvas.width = w;
-              canvas.height = h;
-              canvas.getContext("2d").drawImage(image, 0, 0, w, h);
-              if (file.type == "image/jpeg") {
-                var dataURL = canvas.toDataURL("image/jpeg", 1);
-              } else {
-                var dataURL = canvas.toDataURL("image/png");
-              }
-              // document.getElementById('f_screenshot_hidden').value += dataURL + '|';
-              this.screenshot += dataURL + "|";
-            };
-            image.src = readerEvent.target.result;
-          };
-          reader.readAsDataURL(file);
-        } else {
-          e.target.value = "";
-          alert("Bitte wählen Sie nur Bilder im JPG- oder PNG-Format aus.");
-          return false;
-        }
-      }
-    },
-  },
-};
-</script>
