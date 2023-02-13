@@ -57,22 +57,23 @@ class SettingsController extends Controller
       storage_path("../database/database/settings.json")
     );
 
-    if ($request->title != "") {
-      $settings->put("title", $request->title);
+    $validated = $request->validate([
+      "email" => "required|email:rfc,dns",
+      "title" => "required|string|max:30",
+    ]);
+
+    $settings->put("title", $validated["title"]);
+
+    $settings->put("infotext", $request->infotext);
+
+    $link = $request->videolink;
+    if (str_contains($request->videolink, "watch?v=")) {
+      $link = str_replace("watch?v=", "embed/", $link);
     }
-    if ($request->infotext != "") {
-      $settings->put("infotext", $request->infotext);
-    }
-    if ($request->videolink != "") {
-      $link = $request->videolink;
-      if (str_contains($request->videolink, "watch?v=")) {
-        $link = str_replace("watch?v=", "embed/", $link);
-      }
-      $settings->put("videolink", $link);
-    }
-    if ($request->email != "") {
-      $settings->put("email", $request->email);
-    }
+    $settings->put("videolink", $link);
+
+    $settings->put("email", $validated["email"]);
+
     $settings->put("eintragen_moeglich", $request->eintragen_moeglich);
 
     if ($request->override == true) {

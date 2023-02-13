@@ -12,9 +12,13 @@ import { Inertia } from "@inertiajs/inertia";
 const props = defineProps(["message"]);
 
 const changeStatus = () => {
-  Inertia.put(route("admin.nachrichten.update", props.message.id), {
-    erledigt: props.message.erledigt,
-  });
+  Inertia.put(
+    route("admin.nachrichten.update", props.message.id),
+    {
+      erledigt: props.message.erledigt,
+    },
+    { preserveState: true, preserveScroll: true }
+  );
   if (props.message.erledigt == true) toast.success("Erledigt");
 };
 
@@ -27,7 +31,10 @@ const showToastSuccess = function () {
 const revaled = ref(false);
 const dialog = useConfirmDialog(revaled);
 dialog.onConfirm(() => {
-  Inertia.delete(route("admin.nachrichten.destroy", props.message.id));
+  Inertia.delete(route("admin.nachrichten.destroy", props.message.id), {
+    preserveState: true,
+    preserveScroll: true,
+  });
   showToastSuccess();
 });
 dialog.onCancel(() => {

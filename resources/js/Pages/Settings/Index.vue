@@ -149,6 +149,7 @@ const showToastError = function () {
 <style scoped>
 /* DaisyUI styles to override Tailwindcss/forms -> Animation stuck */
 .toggle {
+  background: none;
   flex-shrink: 0;
   --tglbg: hsl(var(--b1));
   --handleoffset: 1.5rem /* 24px */;
