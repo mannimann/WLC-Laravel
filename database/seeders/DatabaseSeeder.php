@@ -99,6 +99,7 @@ class DatabaseSeeder extends Seeder
             "von" => $zeiträume[$i]["von"],
             "bis" => $zeiträume[$i]["bis"],
             "schritte" => $faker->numberBetween(20000, 130000),
+            // "screenshot" => "",
           ]);
         }
       }

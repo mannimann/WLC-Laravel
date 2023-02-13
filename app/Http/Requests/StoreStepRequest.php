@@ -23,6 +23,7 @@ class StoreStepRequest extends FormRequest
    */
   public function rules()
   {
+    // $screenshot = base64_encode("screenshot");
     return [
       "vorname" => "required|string|min:3|max:35",
       "name" => "required|string|min:3|max:35",
@@ -30,6 +31,8 @@ class StoreStepRequest extends FormRequest
       "von" => "required|date",
       "bis" => "required|date",
       "schritte" => "required|integer|gt:0",
+      "screenshot" => "",
+      // $screenshot => "nullable|file|mimes:jpeg,jpg,png",
     ];
   }
 

@@ -48,10 +48,6 @@ const showToastError = function (message) {
   // toast.error("Du hast dich für diesen Zeitraum bereits eingetragen!");
 };
 
-const e = () => {
-  console.log(form.screenshot);
-};
-
 const addNotEmpty = (e) => {
   e.target.parentElement.classList.add("form-not-empty");
 };
@@ -94,9 +90,9 @@ const fileChanged = (e) => {
           } else {
             var dataURL = canvas.toDataURL("image/png");
           }
-          console.log(dataURL);
           // document.getElementById('f_screenshot_hidden').value += dataURL + '|';
-          form.screenshot += dataURL + "|";
+          form.screenshot = dataURL;
+          // form.screenshot += dataURL + "|";
         };
         image.src = readerEvent.target.result;
       };

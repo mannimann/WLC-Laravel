@@ -74,6 +74,10 @@ const columns = [
     dateOutputFormat: "MM.dd.yy - HH:mm:ss",
     hidden: true,
   },
+  {
+    label: "Screenshot",
+    field: "screenshot",
+  },
 ];
 </script>
 

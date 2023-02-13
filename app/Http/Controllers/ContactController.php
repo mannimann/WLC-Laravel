@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Message;
-use App\Mail\NewMessage;
+use Error;
 use Illuminate\Http\Request;
 use Spatie\Valuestore\Valuestore;
 use Illuminate\Support\Facades\Mail;
@@ -46,6 +46,10 @@ class ContactController extends Controller
    */
   public function store(Request $request)
   {
+    $settings = Valuestore::make(
+      storage_path("../database/database/settings.json")
+    );
+
     $validated = $request->validate([
       "name" => "required|string|max:50",
       "klasse" => "required|string|max:15",
@@ -55,8 +59,21 @@ class ContactController extends Controller
 
     Message::create($validated);
 
-    //TODO: send mail
-    // Mail::to($validated->email)->send(new NewMessage($validated));
+    //Send Email
+    $message =
+      "Name: " .
+      $validated["name"] .
+      "\n" .
+      "Klasse: " .
+      $validated["klasse"] .
+      "\n\n" .
+      $validated["nachricht"];
+
+    Mail::raw($message, function ($mail) use ($settings, $validated) {
+      $mail->to($settings->get("email"));
+      $mail->from($validated["email"]);
+      $mail->subject($settings->get("title") . " - Kontaktformular");
+    });
 
     return redirect()
       ->back()

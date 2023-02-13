@@ -21,7 +21,7 @@ return new class extends Migration {
       $table->date("bis");
       $table->integer("schritte");
       // später hinzufügen: Schule / Schul-id
-      $table->binary("screenshot");
+      $table->binary("screenshot")->nullable();
       $table->timestamps();
     });
   }
