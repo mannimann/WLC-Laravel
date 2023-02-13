@@ -72,7 +72,9 @@ class ContactController extends Controller
     Mail::raw($message, function ($mail) use ($settings, $validated) {
       $mail->to($settings->get("email"));
       $mail->from($validated["email"]);
-      $mail->subject($settings->get("title") . " - Kontaktformular");
+      $mail->subject(
+        $settings->get("title") . " - Neue Nachricht über Kontaktformular"
+      );
     });
 
     return redirect()

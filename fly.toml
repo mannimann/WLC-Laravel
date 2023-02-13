@@ -19,6 +19,10 @@ processes = []
   LOG_CHANNEL = "stderr"
   LOG_LEVEL = "info"
   LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
+  MAIL_MAILER="smtp"
+  MAIL_HOST="smtp-relay.sendinblue.com"
+  MAIL_PORT="587"
+  MAIL_ENCRYPTION="tls"
 
 [experimental]
   auto_rollback = true
