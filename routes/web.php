@@ -1,11 +1,10 @@
 <?php
 
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\EintragenController;
-use App\Http\Controllers\AuswertungController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\KlasseController;
 use App\Http\Controllers\ContactController;
@@ -13,6 +12,8 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ZeitraumController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EintragenController;
+use App\Http\Controllers\AuswertungController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,14 @@ Route::resource("/dashboard", DashboardController::class, [
 // Route::get("/", function () {
 //   return Inertia::render("Dashboard");
 // })->name("home");
+
+Route::get("send_test_email", function () {
+  Mail::raw("Sending emails with Mailgun and Laravel is easy!", function (
+    $message
+  ) {
+    $message->to("j-mann@mail.de");
+  });
+});
 
 Route::get("/", HomeController::class)->name("home");
 

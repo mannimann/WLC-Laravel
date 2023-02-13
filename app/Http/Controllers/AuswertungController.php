@@ -60,6 +60,7 @@ class AuswertungController extends Controller
     }
 
     // Footer bzw. Zeile Gesamt
+    // TODO
     if ($steps_zeitraum > 0) {
       $zeitraum_sub = Step::select(
         Step::raw("COUNT(*) AS 'teilnehmer_count'")

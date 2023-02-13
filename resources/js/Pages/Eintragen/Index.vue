@@ -94,6 +94,7 @@ const fileChanged = (e) => {
           } else {
             var dataURL = canvas.toDataURL("image/png");
           }
+          console.log(dataURL);
           // document.getElementById('f_screenshot_hidden').value += dataURL + '|';
           form.screenshot += dataURL + "|";
         };
