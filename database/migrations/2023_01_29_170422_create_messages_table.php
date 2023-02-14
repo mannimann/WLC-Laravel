@@ -19,7 +19,7 @@ return new class extends Migration {
       $table->string("klasse");
       $table->string("email");
       $table->string("nachricht");
-      $table->boolean("erledigt");
+      $table->boolean("erledigt")->default(false);
     });
   }
 
