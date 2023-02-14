@@ -46,6 +46,9 @@ const basicOptions = ref({
       // },
     },
   },
+  interaction: {
+    mode: "index",
+  },
 });
 </script>
 

@@ -14,8 +14,10 @@ const props = defineProps([
   "settings",
   "steps_all",
   "steps_zeitraum",
-  "steps_top",
+  "steps_läufer",
   "steps_klassen",
+  "steps_läufer_zeitraum",
+  "zeiträume",
 ]);
 
 const topTeilnehmer = props.steps_klassen
@@ -26,7 +28,7 @@ const topTeilnehmer = props.steps_klassen
 const dataTeilnehmer = topTeilnehmer.map((entry) => entry.teilnehmer_anzahl);
 const labelsTeilnehmer = topTeilnehmer.map((entry) => entry.klasse);
 
-const topLäufer = props.steps_top
+const topLäufer = props.steps_läufer
   .sort((a, b) => {
     return b.schritte_sum - a.schritte_sum;
   })
@@ -50,9 +52,9 @@ const labelsKlassen = topKlassen.map((entry) => entry.klasse);
 
   <ViewLayout :title="settings.title">
     <div class="mx-auto p-4 sm:p-6 lg:p-8">
-      <section class="mb-3 hidden">
+      <!-- <section class="mb-3">
         <AuswertungTest :data="steps_all" />
-      </section>
+      </section> -->
 
       <section
         class="mb-3 grid grid-cols-1 justify-items-stretch gap-3 xl:grid-cols-2"
@@ -75,22 +77,23 @@ const labelsKlassen = topKlassen.map((entry) => entry.klasse);
           :labels="labelsKlassen"
         />
 
-        <AuswertungPersonen :data="steps_top" />
+        <AuswertungPersonen :data="steps_läufer" />
 
         <AuswertungKlassen :data="steps_klassen" />
       </section>
+
       <!-- <section
       class="mb-3 grid grid-cols-1 justify-items-stretch gap-3 xl:grid-cols-2"
     >
       <div>
         <AuswertungZeitraum class="mb-3" :data="steps_zeitraum" />
-        <AuswertungPersonen :data="steps_top" />
+        <AuswertungPersonen :data="steps_läufer" />
       </div>
       <AuswertungKlassen :data="steps_klassen" />
     </section> -->
 
       <section class="mb-3">
-        <AuswertungAlle :data="steps_all" />
+        <AuswertungAlle :data="steps_läufer_zeitraum" :zeiträume="zeiträume" />
       </section>
     </div>
   </ViewLayout>

@@ -60,7 +60,7 @@ const columns = [
           styleClass="vgt-table striped"
           :pagination-options="{
             enabled: true,
-            perPage: 20,
+            perPage: 10,
             position: 'bottom',
             perPageDropdown: [10, 20, 30, 50],
             dropdownAllowAll: true,

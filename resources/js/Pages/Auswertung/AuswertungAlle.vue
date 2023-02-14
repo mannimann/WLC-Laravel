@@ -1,4 +1,5 @@
 <script setup>
+import dayjs from "dayjs";
 import "vue-good-table-next/dist/vue-good-table-next.css";
 import { VueGoodTable } from "vue-good-table-next";
 import Card from "@/Components/Card.vue";
@@ -9,7 +10,7 @@ function setActive() {
   isActive.value = !isActive.value;
 }
 
-const props = defineProps(["data"]);
+const props = defineProps(["data", "zeiträume"]);
 
 const methods = {
   formatNumber: (number) => {
@@ -20,8 +21,8 @@ const methods = {
 
 const columns = [
   {
-    label: "Id",
-    field: "id",
+    label: "#",
+    field: "ranking",
     type: "number",
     tdClass: "font-bold",
   },
@@ -39,46 +40,26 @@ const columns = [
     type: "number",
   },
   {
-    label: "Von",
-    field: "von",
-    type: "date",
-    dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'",
-    dateOutputFormat: "dd.MM.yyyy",
-  },
-  {
-    label: "Bis",
-    field: "bis",
-    type: "date",
-    dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'",
-    dateOutputFormat: "dd.MM.yyyy",
-  },
-  {
-    label: "Schritte",
-    field: "schritte",
+    label: "Schritte Gesamt",
+    field: "schritte_sum",
     type: "number",
     formatFn: methods.formatNumber,
   },
-  {
-    label: "Created At",
-    field: "created_at",
-    type: "date",
-    dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'",
-    dateOutputFormat: "MM.dd.yy - HH:mm:ss",
-    hidden: true,
-  },
-  {
-    label: "Updated At",
-    field: "updated_at",
-    type: "date",
-    dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'",
-    dateOutputFormat: "MM.dd.yy - HH:mm:ss",
-    hidden: true,
-  },
-  {
-    label: "Screenshot",
-    field: "screenshot",
-  },
 ];
+
+let i = 0;
+props.zeiträume.forEach((zeitraum) => {
+  i++;
+  columns.push({
+    label:
+      dayjs(zeitraum["von"]).format("DD.MM.") +
+      " - " +
+      dayjs(zeitraum["bis"]).format("DD.MM.YY"),
+    field: "zeitraum" + i,
+    type: "number",
+    formatFn: methods.formatNumber,
+  });
+});
 </script>
 
 <template>
