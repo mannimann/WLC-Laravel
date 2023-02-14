@@ -37,7 +37,7 @@ class StepService
         ->get();
 
       $zd =
-        date_format(date_create($z->von), "d.m.y") .
+        date_format(date_create($z->von), "d.m.") .
         " - " .
         date_format(date_create($z->bis), "d.m.y");
       $steps_zeitraum[] = [
