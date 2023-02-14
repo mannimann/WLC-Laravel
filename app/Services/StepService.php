@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\Step;
 use App\Models\Zeitraum;
-use Illuminate\Support\Facades\DB;
 
 class StepService
 {
