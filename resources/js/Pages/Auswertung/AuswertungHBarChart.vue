@@ -28,8 +28,12 @@ const basicOptions = ref({
     datalabels: {
       color: "#888",
       font: {
-        weight: "bold",
-        size: 24,
+        // weight: "bold",
+        size: 22,
+      },
+      formatter: function (value, context) {
+        let nf = new Intl.NumberFormat("de-DE");
+        return nf.format(value);
       },
     },
   },
@@ -37,11 +41,19 @@ const basicOptions = ref({
     x: {
       ticks: {
         color: "#888",
+        font: {
+          size: 16,
+          weight: "bold",
+        },
       },
     },
     y: {
       ticks: {
         color: "#888",
+        font: {
+          size: 16,
+          weight: "bold",
+        },
       },
       grid: {
         color: "#888",
@@ -53,7 +65,7 @@ const basicOptions = ref({
 
 <template>
   <div class="card">
-    <h5>{{ props.title }}</h5>
+    <h5 class="text-xl font-bold">{{ props.title }}</h5>
     <Chart
       type="bar"
       :data="basicData"
