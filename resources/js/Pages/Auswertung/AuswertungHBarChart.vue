@@ -1,9 +1,11 @@
 <script setup>
 import Chart from "primevue/chart";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 import { ref } from "vue";
 
 const props = defineProps(["title", "data", "labels"]);
 
+const plugins = [ChartDataLabels];
 const basicData = ref({
   labels: props.labels,
   datasets: [
@@ -22,6 +24,13 @@ const basicOptions = ref({
   plugins: {
     legend: {
       display: false,
+    },
+    datalabels: {
+      color: "#888",
+      font: {
+        weight: "bold",
+        size: 24,
+      },
     },
   },
   scales: {
@@ -45,6 +54,11 @@ const basicOptions = ref({
 <template>
   <div class="card">
     <h5>{{ props.title }}</h5>
-    <Chart type="bar" :data="basicData" :options="basicOptions" />
+    <Chart
+      type="bar"
+      :data="basicData"
+      :options="basicOptions"
+      :plugins="plugins"
+    />
   </div>
 </template>
