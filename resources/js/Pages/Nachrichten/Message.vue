@@ -23,19 +23,15 @@ const changeStatus = () => {
 };
 
 const toast = useToast();
-const showToastSuccess = function () {
-  toast.success("Nachricht gelöscht!");
-};
 
 // Delete Modal
 const revaled = ref(false);
 const dialog = useConfirmDialog(revaled);
 dialog.onConfirm(() => {
   Inertia.delete(route("admin.nachrichten.destroy", props.message.id), {
-    preserveState: true,
     preserveScroll: true,
   });
-  showToastSuccess();
+  toast.warning("Nachricht gelöscht!");
 });
 dialog.onCancel(() => {
   // console.log("abbrechen");
@@ -100,6 +96,7 @@ dialog.onCancel(() => {
         </p>
       </div>
 
+      <!-- Delete Button -->
       <button
         type="button"
         :disabled="revaled"

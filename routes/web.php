@@ -1,9 +1,6 @@
 <?php
 
-use Inertia\Inertia;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Application;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\KlasseController;
@@ -14,6 +11,7 @@ use App\Http\Controllers\ZeitraumController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EintragenController;
 use App\Http\Controllers\AuswertungController;
+use App\Http\Controllers\DBAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,6 +84,10 @@ Route::prefix("admin")
 
     Route::resource("/nachrichten", MessageController::class, [
       "names" => "nachrichten",
+    ])->only(["index", "update", "destroy"]);
+
+    Route::resource("/dbadmin", DBAdminController::class, [
+      "names" => "dbadmin",
     ])->only(["index", "update", "destroy"]);
   });
 

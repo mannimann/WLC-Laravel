@@ -12,7 +12,13 @@ class StepService
    */
   public function get_all()
   {
-    return Step::get();
+    return Step::orderBy("vorname")
+      ->orderBy("name")
+      ->orderByRaw("LENGTH(klasse) ASC")
+      ->orderBy("klasse")
+      ->orderBy("von")
+      ->orderBy("bis")
+      ->get();
   }
 
   /*

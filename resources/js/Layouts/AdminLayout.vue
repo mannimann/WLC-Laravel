@@ -1,15 +1,11 @@
 <script setup>
-import Dropdown from "@/Components/Dropdown.vue";
-import DropdownLink from "@/Components/DropdownLink.vue";
 import NavLink from "@/Components/NavLink.vue";
-import { ref } from "vue";
-
-const showingNavigationDropdown = ref(false);
 
 const links_admin = [
   { name: "Daten", route: "admin.home.index" },
   { name: "Einstellungen", route: "admin.einstellungen.index" },
   { name: "Nachrichten", route: "admin.nachrichten.index" },
+  { name: "DB-Admin", route: "admin.dbadmin.index" },
 ];
 </script>
 
