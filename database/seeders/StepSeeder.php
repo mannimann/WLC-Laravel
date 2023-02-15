@@ -76,7 +76,7 @@ class StepSeeder extends Seeder
     /*
      * Steps
      */
-    $anzahl = 75;
+    $anzahl = 135;
     $wahrscheinlichkeit = 70;
 
     foreach (range(1, $anzahl) as $_) {
