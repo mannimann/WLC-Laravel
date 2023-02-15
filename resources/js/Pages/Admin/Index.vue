@@ -35,8 +35,14 @@ const zeitraum = computed({
 });
 
 const toast = useToast();
-const showToastSuccess = function () {
-  toast.success("Alle Schritt-Daten gelöscht!");
+const showToastSuccess = (msg) => {
+  toast.success(msg);
+};
+const showToastWarning = (msg) => {
+  toast.warning(msg);
+};
+const showToastError = (msg) => {
+  toast.error(msg);
 };
 
 // Alle eingetragenen Schritt-Daten löschen
@@ -44,7 +50,7 @@ const revaled = ref(false);
 const dialog = useConfirmDialog(revaled);
 dialog.onConfirm(() => {
   Inertia.delete(route("admin.home.destroy"));
-  showToastSuccess();
+  showToastSuccess("Alle Schritt-Daten gelöscht!");
 });
 dialog.onCancel(() => {
   // console.log("abbrechen");
@@ -77,9 +83,22 @@ dialog.onCancel(() => {
             <div class="py-2">
               <form
                 @submit.prevent="
-                  form_zeitraum.post(route('zeitraum.store'), {
-                    onSuccess: () => form_zeitraum.reset(),
-                  })
+                  form_zeitraum.post(
+                    route('zeitraum.store'),
+                    {
+                      onSuccess: () => {
+                        showToastSuccess('Zeitraum hinzugefügt!');
+                        form_zeitraum.reset();
+                      },
+                      onError: (msg) => {
+                        if (msg.status == 'warning') {
+                          showToastWarning(msg.message);
+                        } else if (msg.status == 'error')
+                          showToastError(msg.message);
+                      },
+                    },
+                    { preserveScroll: true }
+                  )
                 "
               >
                 <div class="align-center flex w-full">
@@ -125,7 +144,13 @@ dialog.onCancel(() => {
               <form
                 @submit.prevent="
                   form_klasse.post(route('klasse.store'), {
-                    onSuccess: () => form_klasse.reset(),
+                    onSuccess: () => {
+                      showToastSuccess('Klasse hinzugefügt!');
+                      form_klasse.reset();
+                    },
+                    onError: (msg) => {
+                      if (msg.message) showToastWarning(msg.message);
+                    },
                   })
                 "
               >

@@ -3,13 +3,16 @@ import InputError from "@/Components/InputError.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { useForm, Link } from "@inertiajs/inertia-vue3";
 import { ref } from "vue";
+import { useToast } from "vue-toastification";
 
 const props = defineProps(["klasse"]);
 
 const form = useForm({
   klasse: props.klasse.klasse,
 });
+
 const editing = ref(false);
+const toast = useToast();
 </script>
 
 <template>
@@ -20,9 +23,16 @@ const editing = ref(false);
           v-if="editing"
           class="flex w-full"
           @submit.prevent="
-            form.put(route('klasse.update', klasse.id), {
-              onSuccess: () => (editing = false),
-            })
+            form.put(
+              route('klasse.update', klasse.id),
+              {
+                onSuccess: () => {
+                  editing = false;
+                  toast.success('Klasse geändert!');
+                },
+              },
+              { preserveScroll: true }
+            )
           "
         >
           <TextInput
@@ -102,6 +112,8 @@ const editing = ref(false);
           method="delete"
           as="button"
           class="block rounded px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100"
+          @click="toast.warning('Klasse gelöscht!')"
+          preserve-scroll
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

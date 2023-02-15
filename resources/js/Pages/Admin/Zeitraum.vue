@@ -1,9 +1,10 @@
 <script setup>
 import InputError from "@/Components/InputError.vue";
 import Datepicker from "@vuepic/vue-datepicker";
+import moment from "moment";
 import { useForm, Link } from "@inertiajs/inertia-vue3";
 import { computed, ref } from "vue";
-import moment from "moment";
+import { useToast } from "vue-toastification";
 
 const props = defineProps(["zeitraum"]);
 
@@ -26,6 +27,7 @@ const zeitraum_computed = computed({
 });
 
 const editing = ref(false);
+const toast = useToast();
 </script>
 
 <template>
@@ -36,9 +38,16 @@ const editing = ref(false);
           v-if="editing"
           class="flex w-full"
           @submit.prevent="
-            form.put(route('zeitraum.update', zeitraum.id), {
-              onSuccess: () => (editing = false),
-            })
+            form.put(
+              route('zeitraum.update', zeitraum.id),
+              {
+                onSuccess: () => {
+                  editing = false;
+                  toast.success('Zeitraum geändert!');
+                },
+              },
+              { preserveScroll: true }
+            )
           "
         >
           <Datepicker
@@ -129,6 +138,8 @@ const editing = ref(false);
           method="delete"
           as="button"
           class="block rounded px-4 py-2 text-left text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100"
+          @click="toast.warning('Zeitraum gelöscht!')"
+          preserve-scroll
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

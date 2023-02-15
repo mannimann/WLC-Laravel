@@ -30,11 +30,20 @@ class KlasseController extends Controller
     $validated = $request->validate([
       "klasse" => "required|string|max:10",
     ]);
-    Klasse::create($validated);
 
-    return redirect()
-      ->back()
-      ->with(["message" => "Klasse erfolgreich erstellt"]);
+    $klasse = Klasse::firstOrCreate($validated);
+
+    if ($klasse->wasRecentlyCreated) {
+      return redirect()
+        ->back()
+        ->with(["message" => "Klasse hinzugefügt!"]);
+    } else {
+      return redirect()
+        ->back()
+        ->withErrors([
+          "message" => "Klasse bereits vorhanden!",
+        ]);
+    }
   }
 
   /**
@@ -69,6 +78,6 @@ class KlasseController extends Controller
 
     return redirect()
       ->back()
-      ->with(["message" => "Klasse erfolgreich gelöschtt"]);
+      ->with(["message" => "Klasse erfolgreich gelöscht"]);
   }
 }

@@ -19,11 +19,36 @@ class ZeitraumController extends Controller
       "von" => "required|date",
       "bis" => "required|date",
     ]);
-    Zeitraum::create($validated);
 
-    return redirect()
-      ->back()
-      ->with(["message" => "Zeitraum erfolgreich erstellt"]);
+    $zeiträume = Zeitraum::select("von", "bis")->get();
+    foreach ($zeiträume as $zr) {
+      if (
+        ($validated["von"] >= $zr["von"] && $validated["von"] <= $zr["bis"]) ||
+        ($validated["bis"] >= $zr["von"] && $validated["bis"] <= $zr["bis"])
+      ) {
+        return redirect()
+          ->back()
+          ->withErrors([
+            "message" => "Zeiträume überschneiden sich!",
+            "status" => "error",
+          ]);
+      }
+    }
+
+    $zeitraum = Zeitraum::firstOrCreate($validated);
+
+    if ($zeitraum->wasRecentlyCreated) {
+      return redirect()
+        ->back()
+        ->with(["message" => "Zeitraum hinzugefügt!"]);
+    } else {
+      return redirect()
+        ->back()
+        ->withErrors([
+          "message" => "Zeitraum bereits vorhanden!",
+          "status" => "warning",
+        ]);
+    }
   }
 
   /**
