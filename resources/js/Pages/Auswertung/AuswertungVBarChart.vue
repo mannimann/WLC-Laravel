@@ -23,6 +23,7 @@ const basicData = ref({
   ],
 });
 
+// Chart Theme
 const key = ref(0);
 const color = useColorMode();
 const isLargeScreen = useMediaQuery("(min-width: 768px)");

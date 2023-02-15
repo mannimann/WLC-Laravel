@@ -12,6 +12,7 @@ function setActive() {
   isActive.value = !isActive.value;
 }
 
+// Table Theme
 const key = ref(0);
 const color = useColorMode();
 let theme = color.value === "dark" ? "nocturnal" : "";

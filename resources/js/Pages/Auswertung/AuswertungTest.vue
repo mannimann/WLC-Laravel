@@ -7,6 +7,9 @@ import { useColorMode } from "@vueuse/core";
 import { ref, watch } from "vue";
 import Card from "@/Components/Card.vue";
 
+const props = defineProps(["data"]);
+
+// Table Theme
 const key = ref(0);
 const color = useColorMode();
 let theme = color.value === "dark" ? "nocturnal" : "";
@@ -15,8 +18,6 @@ watch(color, (newColor) => {
   // re-render Table-Component
   key.value += 1;
 });
-
-const props = defineProps(["data"]);
 
 const methods = {
   formatNumber: (number) => {

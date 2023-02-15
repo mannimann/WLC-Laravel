@@ -6,6 +6,7 @@ import Card from "@/Components/Card.vue";
 
 const props = defineProps(["data"]);
 
+// Table Theme
 const key = ref(0);
 const color = useColorMode();
 let theme = color.value === "dark" ? "nocturnal" : "";
