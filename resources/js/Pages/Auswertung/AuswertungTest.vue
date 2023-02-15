@@ -1,53 +1,22 @@
 <script setup>
 // import Table from "./Table.vue";
-
 // import SimpleTable from "./SimpleTable.vue";
 
-import "vue-good-table-next/dist/vue-good-table-next.css";
 import { VueGoodTable } from "vue-good-table-next";
-import { useDark } from "@vueuse/core";
-import { ref, watch, onUpdated, computed } from "vue";
+import { useColorMode } from "@vueuse/core";
+import { ref, watch } from "vue";
 import Card from "@/Components/Card.vue";
 
+const key = ref(0);
+const color = useColorMode();
+let theme = color.value === "dark" ? "nocturnal" : "";
+watch(color, (newColor) => {
+  theme = newColor === "dark" ? "nocturnal" : "";
+  // re-render Table-Component
+  key.value += 1;
+});
+
 const props = defineProps(["data"]);
-
-// const isDark = ref(useDark());
-// watch(isDark.value, () => {
-//   console.log(useDark());
-// });
-
-// let theme = ref("bb");
-
-// const isDark = useDark({
-//   onChanged(dark) {
-//     theme.value = dark ? "nocturnal" : "";
-//     console.log(dark);
-//   }
-// });
-
-// onUpdated(() => {
-//   theme.value = dark ? "nocturnal" : "";
-//   console.log(dark);
-// });
-
-// const theme = isDark.value ? "nocturnal" : "";
-
-// const htmlElement = document.documentElement;
-// const he = htmlElement.classList.contains("dark");
-// console.log(htmlElement.classList.contains("dark"));
-
-// watch(he, () => {
-//   console.log(he);
-// });
-
-// const theme = htmlElement.classList.contains("dark") ? "nocturnal" : "";
-
-// const zeitraumX = computed(() => {
-//   return steps.map((r) => {
-//     return { zeitraum: `${r.von} - ${r.bis}` };
-//   });
-//   // return [steps.von, steps.bis];
-// });
 
 const methods = {
   formatNumber: (number) => {
@@ -121,7 +90,7 @@ const columns = [
 </script>
 
 <template>
-  <!-- <p>{{ theme }}</p> -->
+  <!-- <p>Color value: {{ color }} - Theme: {{ theme }}</p> -->
 
   <Card>
     <template v-slot:header>
@@ -131,71 +100,37 @@ const columns = [
       <!-- <SimpleTable :header="header" :rows="steps" /> -->
 
       <!-- styleClass="condensed" -->
-      <span class="dark:hidden">
-        <VueGoodTable
-          :columns="columns"
-          :rows="data"
-          theme=""
-          styleClass="vgt-table striped"
-          :pagination-options="{
-            enabled: true,
-            perPage: 10,
-            position: 'bottom',
-            perPageDropdown: [10, 20, 30, 50],
-            dropdownAllowAll: true,
-            nextLabel: 'Weiter',
-            prevLabel: 'Zurück',
-            rowsPerPageLabel: 'Anzahl pro Seite',
-            ofLabel: 'von',
-            allLabel: 'Alle',
-          }"
-          :search-options="{
-            enabled: true,
-            // trigger: 'enter',
-            skipDiacritics: true,
-            placeholder: 'Suchen...',
-          }"
-          :sort-options="{
-            enabled: true,
-            // initialSortBy: { field: 'id', type: 'asc' },
-          }"
-        >
-          <template #emptystate>Keine Einträge vorhanden ...</template>
-        </VueGoodTable>
-      </span>
-
-      <span class="hidden dark:inline">
-        <VueGoodTable
-          :columns="columns"
-          :rows="data"
-          theme="nocturnal"
-          styleClass="vgt-table striped"
-          :pagination-options="{
-            enabled: true,
-            perPage: 10,
-            position: 'bottom',
-            perPageDropdown: [10, 20, 30, 50],
-            dropdownAllowAll: true,
-            nextLabel: 'Weiter',
-            prevLabel: 'Zurück',
-            rowsPerPageLabel: 'Anzahl pro Seite',
-            ofLabel: 'von',
-            allLabel: 'Alle',
-          }"
-          :search-options="{
-            enabled: true,
-            // trigger: 'enter',
-            skipDiacritics: true,
-            placeholder: 'Suchen...',
-          }"
-          :sort-options="{
-            enabled: true,
-            // initialSortBy: { field: 'id', type: 'asc' },
-          }"
-        >
-          <template #emptystate>Keine Einträge vorhanden ...</template>
-        </VueGoodTable>
-      </span>
+      <VueGoodTable
+        :key="key"
+        :columns="columns"
+        :rows="data"
+        :theme="theme"
+        styleClass="vgt-table striped"
+        :pagination-options="{
+          enabled: true,
+          perPage: 10,
+          position: 'bottom',
+          perPageDropdown: [10, 20, 30, 50],
+          dropdownAllowAll: true,
+          nextLabel: 'Weiter',
+          prevLabel: 'Zurück',
+          rowsPerPageLabel: 'Anzahl pro Seite',
+          ofLabel: 'von',
+          allLabel: 'Alle',
+        }"
+        :search-options="{
+          enabled: true,
+          // trigger: 'enter',
+          skipDiacritics: true,
+          placeholder: 'Suchen...',
+        }"
+        :sort-options="{
+          enabled: true,
+          // initialSortBy: { field: 'id', type: 'asc' },
+        }"
+      >
+        <template #emptystate>Keine Einträge vorhanden ...</template>
+      </VueGoodTable>
 
       <!-- <div v-for="step in steps">
         {{ step }}

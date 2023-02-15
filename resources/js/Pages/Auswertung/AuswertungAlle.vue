@@ -1,16 +1,25 @@
 <script setup>
-import dayjs from "dayjs";
-import "vue-good-table-next/dist/vue-good-table-next.css";
 import { VueGoodTable } from "vue-good-table-next";
+import { useColorMode } from "@vueuse/core";
+import { ref, watch } from "vue";
 import Card from "@/Components/Card.vue";
-import { ref } from "vue";
+import dayjs from "dayjs";
+
+const props = defineProps(["data", "zeiträume"]);
 
 const isActive = ref(false);
 function setActive() {
   isActive.value = !isActive.value;
 }
 
-const props = defineProps(["data", "zeiträume"]);
+const key = ref(0);
+const color = useColorMode();
+let theme = color.value === "dark" ? "nocturnal" : "";
+watch(color, (newColor) => {
+  theme = newColor === "dark" ? "nocturnal" : "";
+  // re-render Table-Component
+  key.value += 1;
+});
 
 const methods = {
   formatNumber: (number) => {
@@ -97,71 +106,37 @@ props.zeiträume.forEach((zeitraum) => {
     <template v-slot:body>
       <Transition name="cardbody">
         <div v-show="isActive">
-          <span class="dark:hidden">
-            <VueGoodTable
-              :columns="columns"
-              :rows="data"
-              theme=""
-              styleClass="vgt-table striped"
-              :pagination-options="{
-                enabled: true,
-                perPage: 10,
-                position: 'bottom',
-                perPageDropdown: [10, 20, 30, 50, 100],
-                dropdownAllowAll: true,
-                nextLabel: 'Weiter',
-                prevLabel: 'Zurück',
-                rowsPerPageLabel: 'Anzahl pro Seite',
-                ofLabel: 'von',
-                allLabel: 'Alle',
-              }"
-              :search-options="{
-                enabled: true,
-                // trigger: 'enter',
-                skipDiacritics: true,
-                placeholder: 'Suchen...',
-              }"
-              :sort-options="{
-                enabled: true,
-                // initialSortBy: { field: 'id', type: 'asc' },
-              }"
-            >
-              <template #emptystate>Keine Einträge vorhanden ...</template>
-            </VueGoodTable>
-          </span>
-
-          <span class="hidden dark:inline">
-            <VueGoodTable
-              :columns="columns"
-              :rows="data"
-              theme="nocturnal"
-              styleClass="vgt-table striped"
-              :pagination-options="{
-                enabled: true,
-                perPage: 10,
-                position: 'bottom',
-                perPageDropdown: [10, 20, 30, 50, 100],
-                dropdownAllowAll: true,
-                nextLabel: 'Weiter',
-                prevLabel: 'Zurück',
-                rowsPerPageLabel: 'Anzahl pro Seite',
-                ofLabel: 'von',
-                allLabel: 'Alle',
-              }"
-              :search-options="{
-                enabled: true,
-                // trigger: 'enter',
-                skipDiacritics: true,
-                placeholder: 'Suchen...',
-              }"
-              :sort-options="{
-                enabled: true,
-                // initialSortBy: { field: 'id', type: 'asc' },
-              }"
-            >
-              <template #emptystate>Keine Einträge vorhanden ...</template>
-            </VueGoodTable>
-          </span>
+          <VueGoodTable
+            :key="key"
+            :columns="columns"
+            :rows="data"
+            :theme="theme"
+            styleClass="vgt-table striped"
+            :pagination-options="{
+              enabled: true,
+              perPage: 10,
+              position: 'bottom',
+              perPageDropdown: [10, 20, 30, 50, 100],
+              dropdownAllowAll: true,
+              nextLabel: 'Weiter',
+              prevLabel: 'Zurück',
+              rowsPerPageLabel: 'Anzahl pro Seite',
+              ofLabel: 'von',
+              allLabel: 'Alle',
+            }"
+            :search-options="{
+              enabled: true,
+              // trigger: 'enter',
+              skipDiacritics: true,
+              placeholder: 'Suchen...',
+            }"
+            :sort-options="{
+              enabled: true,
+              // initialSortBy: { field: 'id', type: 'asc' },
+            }"
+          >
+            <template #emptystate>Keine Einträge vorhanden ...</template>
+          </VueGoodTable>
         </div>
       </Transition>
     </template>

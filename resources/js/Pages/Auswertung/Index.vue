@@ -72,7 +72,7 @@ const labelsKlassen = topKlassen.map((entry) => entry.klasse);
           :labels="labelsLäufer"
         />
         <AuswertungVBarChart
-          title="Top 5 Klassen"
+          title="Top 5 Klassen (Schritte pro Kopf)"
           :data="dataKlassen"
           :labels="labelsKlassen"
         />
