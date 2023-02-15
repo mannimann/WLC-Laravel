@@ -83,22 +83,19 @@ dialog.onCancel(() => {
             <div class="py-2">
               <form
                 @submit.prevent="
-                  form_zeitraum.post(
-                    route('zeitraum.store'),
-                    {
-                      onSuccess: () => {
-                        showToastSuccess('Zeitraum hinzugefügt!');
-                        form_zeitraum.reset();
-                      },
-                      onError: (msg) => {
-                        if (msg.status == 'warning') {
-                          showToastWarning(msg.message);
-                        } else if (msg.status == 'error')
-                          showToastError(msg.message);
-                      },
+                  form_zeitraum.post(route('zeitraum.store'), {
+                    onSuccess: () => {
+                      showToastSuccess('Zeitraum hinzugefügt!');
+                      form_zeitraum.reset();
                     },
-                    { preserveScroll: true }
-                  )
+                    onError: (msg) => {
+                      if (msg.status == 'warning') {
+                        showToastWarning(msg.message);
+                      } else if (msg.status == 'error')
+                        showToastError(msg.message);
+                    },
+                    preserveScroll: true,
+                  })
                 "
               >
                 <div class="align-center flex w-full">
@@ -151,6 +148,7 @@ dialog.onCancel(() => {
                     onError: (msg) => {
                       if (msg.message) showToastWarning(msg.message);
                     },
+                    preserveScroll: true,
                   })
                 "
               >

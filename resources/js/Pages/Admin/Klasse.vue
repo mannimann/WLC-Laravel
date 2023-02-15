@@ -23,16 +23,13 @@ const toast = useToast();
           v-if="editing"
           class="flex w-full"
           @submit.prevent="
-            form.put(
-              route('klasse.update', klasse.id),
-              {
-                onSuccess: () => {
-                  editing = false;
-                  toast.success('Klasse geändert!');
-                },
+            form.put(route('klasse.update', klasse.id), {
+              onSuccess: () => {
+                editing = false;
+                toast.success('Klasse geändert!');
               },
-              { preserveScroll: true }
-            )
+              preserveScroll: true,
+            })
           "
         >
           <TextInput

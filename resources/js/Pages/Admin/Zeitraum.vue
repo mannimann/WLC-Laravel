@@ -38,16 +38,13 @@ const toast = useToast();
           v-if="editing"
           class="flex w-full"
           @submit.prevent="
-            form.put(
-              route('zeitraum.update', zeitraum.id),
-              {
-                onSuccess: () => {
-                  editing = false;
-                  toast.success('Zeitraum geändert!');
-                },
+            form.put(route('zeitraum.update', zeitraum.id), {
+              onSuccess: () => {
+                editing = false;
+                toast.success('Zeitraum geändert!');
               },
-              { preserveScroll: true }
-            )
+              preserveScroll: true,
+            })
           "
         >
           <Datepicker
