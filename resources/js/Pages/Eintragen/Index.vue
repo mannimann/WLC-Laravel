@@ -222,7 +222,7 @@ const fileChanged = (e) => {
                       Läufer!<br />
                     </p>
                   </div>
-                  <p class="mt-3">
+                  <p class="mt-3 mb-1">
                     <strong
                       >Also nimm die Beine in die Hand und los gehts!</strong
                     >
