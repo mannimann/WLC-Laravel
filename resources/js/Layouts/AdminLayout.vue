@@ -80,13 +80,13 @@ const setShadows = (e) => {
     <Transition>
       <div
         v-show="showLeftShadow"
-        class="pointer-events-none absolute inset-0 shadow-[1em_0em_1em_-1em_inset] shadow-secondary dark:shadow-secondary_dark"
+        class="pointer-events-none absolute inset-0 shadow-[1em_0em_1em_-0.8em_inset] shadow-secondary dark:shadow-secondary_dark"
       />
     </Transition>
     <Transition>
       <div
         v-show="showRightShadow"
-        class="pointer-events-none absolute inset-0 shadow-[-1em_0em_1em_-1em_inset] shadow-secondary dark:shadow-secondary_dark"
+        class="pointer-events-none absolute inset-0 shadow-[-1em_0em_1em_-0.8em_inset] shadow-secondary dark:shadow-secondary_dark"
       />
     </Transition>
   </div>
