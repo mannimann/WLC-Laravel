@@ -15,10 +15,18 @@ class ZeitraumController extends Controller
    */
   public function store(Request $request)
   {
-    $validated = $request->validate([
-      "von" => "required|date",
-      "bis" => "required|date",
-    ]);
+    $validated = $request->validate(
+      [
+        "von" => "required|date",
+        "bis" => "required|date",
+      ],
+      [
+        "von.required" => "Zeitraum muss ausgefüllt werden.",
+        "bis.required" => "Zeitraum muss ausgefüllt werden.",
+        "von.date" => "Zeitraum muss ein gültiges Datum sein.",
+        "bis.date" => "Zeitraum muss ein gültiges Datum sein.",
+      ]
+    );
 
     $zeiträume = Zeitraum::select("von", "bis")->get();
     foreach ($zeiträume as $zr) {
