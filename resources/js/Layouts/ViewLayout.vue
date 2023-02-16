@@ -25,9 +25,7 @@ const links = [
 </script>
 
 <template>
-  <div
-    class="flex min-h-screen flex-col overscroll-contain bg-primarybg dark:bg-primarybg_dark"
-  >
+  <div class="flex min-h-screen flex-col bg-primarybg dark:bg-primarybg_dark">
     <!-- Page Heading -->
     <header class="bg-secondary2bg shadow dark:bg-secondarybg_dark">
       <div class="mx-auto max-w-7xl px-5 pt-6 pb-0 sm:px-7 lg:px-9">
