@@ -45,7 +45,6 @@ const removeNotEmpty = (e) => {
     : null;
 };
 
-// TODO: bei doppelten Änderungen word Form nicht richtig zurückgesetzt
 const e = () => {
   form.reset();
   console.log("reset");
@@ -55,7 +54,6 @@ const submitForm = () => {
     onSuccess: () => {
       toast.success("Daten geändert!");
       dialog.confirm();
-      form.reset();
     },
     onError: () => {
       toast.warning(form.errors.message);
