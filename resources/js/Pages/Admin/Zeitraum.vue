@@ -1,7 +1,7 @@
 <script setup>
 import InputError from "@/Components/InputError.vue";
 import Datepicker from "@vuepic/vue-datepicker";
-import moment from "moment";
+import dayjs from "dayjs";
 import { useForm, Link } from "@inertiajs/inertia-vue3";
 import { computed, ref } from "vue";
 import { useToast } from "vue-toastification";
@@ -103,8 +103,8 @@ const toast = useToast();
           </div>
         </form>
         <p v-else class="w-full text-lg text-gray-900">
-          {{ moment(zeitraum.von).format("DD.MM.YYYY") }} -
-          {{ moment(zeitraum.bis).format("DD.MM.YYYY") }}
+          {{ dayjs(zeitraum.von).format("DD.MM.YYYY") }} -
+          {{ dayjs(zeitraum.bis).format("DD.MM.YYYY") }}
         </p>
 
         <!-- Bearbeiten -->
