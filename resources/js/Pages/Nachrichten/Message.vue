@@ -10,6 +10,7 @@ import { Inertia } from "@inertiajs/inertia";
 // dayjs.extend(relativeTime);
 
 const props = defineProps(["message"]);
+const toast = useToast();
 
 const changeStatus = () => {
   Inertia.put(
@@ -21,8 +22,6 @@ const changeStatus = () => {
   );
   if (props.message.erledigt == true) toast.success("Erledigt");
 };
-
-const toast = useToast();
 
 // Delete Modal
 const revaled = ref(false);

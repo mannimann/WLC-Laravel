@@ -68,6 +68,7 @@ class EintragenController extends Controller
         ]);
     }
 
+    // TODO
     error_log(base64_encode($request->screenshot));
 
     Step::create($request->validated());

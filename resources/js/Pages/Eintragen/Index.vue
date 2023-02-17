@@ -5,7 +5,7 @@ import InputError from "@/Components/InputError.vue";
 import { useForm, Head, Link } from "@inertiajs/inertia-vue3";
 import { computed, ref, Transition } from "vue";
 import Card from "@/Components/Card.vue";
-import moment from "moment";
+import dayjs from "dayjs";
 import { useToast } from "vue-toastification";
 
 const submitted = ref(false);
@@ -358,8 +358,8 @@ const fileChanged = (e) => {
                         :value="zeitraum"
                         class="form-select-option"
                       >
-                        {{ moment(zeitraum.von).format("DD.MM.YYYY") }} -
-                        {{ moment(zeitraum.bis).format("DD.MM.YYYY") }}
+                        {{ dayjs(zeitraum.von).format("DD.MM.YYYY") }} -
+                        {{ dayjs(zeitraum.bis).format("DD.MM.YYYY") }}
                       </option>
                     </select>
                     <InputError :message="form.errors.von" class="mt-2" />

@@ -14,7 +14,7 @@ const links_admin = [
 
 let scroller;
 let showLeftShadow = ref(false);
-let showRightShadow = ref(true);
+let showRightShadow = ref(false);
 const { width, height } = useWindowSize();
 onMounted(() => {
   scroller = document.getElementById("scroller");
