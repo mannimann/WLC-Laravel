@@ -2,7 +2,7 @@
 import InputError from "@/Components/InputError.vue";
 import dayjs from "dayjs";
 import { useToast } from "vue-toastification";
-import { ref, computed } from "vue";
+import { ref, computed, onUnmounted } from "vue";
 import { useConfirmDialog } from "@vueuse/core";
 import { useForm } from "@inertiajs/inertia-vue3";
 
@@ -45,19 +45,23 @@ const removeNotEmpty = (e) => {
     : null;
 };
 
-const e = () => {
+// TODO
+onUnmounted(() => {
   form.reset();
-  console.log("reset");
-};
+  console.log("unmounted");
+});
 const submitForm = () => {
   form.patch(route("admin.dbadmin.update", props.row.id), {
     onSuccess: () => {
       toast.success("Daten geändert!");
       dialog.confirm();
+      form.reset();
     },
     onError: () => {
       toast.warning(form.errors.message);
     },
+    preserveState: true,
+    preserveScroll: true,
   });
 };
 
@@ -74,16 +78,7 @@ dialog.onCancel(() => {
 
 <template>
   <!-- Modal toggle -->
-  <button
-    class="btn-ghost btn"
-    type="button"
-    @click="
-      {
-        e();
-        dialog.reveal();
-      }
-    "
-  >
+  <button class="btn-ghost btn" type="button" @click="dialog.reveal">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
