@@ -14,6 +14,7 @@ import PrimeVue from "primevue/config";
 import "@vuepic/vue-datepicker/dist/main.css";
 import "vue-toastification/dist/index.css";
 import "vue-good-table-next/dist/vue-good-table-next.css";
+// import 'flowbite';
 
 const appName =
   window.document.getElementsByTagName("title")[0]?.innerText || "WLC";
