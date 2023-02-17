@@ -120,6 +120,18 @@ const columns = [
       <div class="mx-auto p-4 sm:p-6 lg:p-8">
         <h3 class="mb-3 text-2xl font-bold">DB-Admin:</h3>
 
+        <!-- Modal toggle -->
+        <button
+          data-modal-target="staticModal"
+          data-modal-toggle="staticModal"
+          class="block rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          type="button"
+        >
+          Toggle modal
+        </button>
+
+        <EditModal />
+
         <Card>
           <template v-slot:header>
             <h3>DB-Inhalt:</h3>
