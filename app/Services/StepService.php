@@ -98,11 +98,11 @@ class StepService
   public function get_steps_läufer()
   {
     $steps_läufer = Step::select(
+      Step::raw("ROW_NUMBER() OVER (ORDER BY SUM(schritte) DESC) AS ranking"),
       "vorname",
       "name",
       "klasse",
-      Step::raw("SUM(schritte) AS schritte_sum"),
-      Step::raw("ROW_NUMBER() OVER (ORDER BY SUM(schritte) DESC) AS ranking")
+      Step::raw("SUM(schritte) AS schritte_sum")
     )
       ->withCasts(["ranking" => "integer"])
       ->groupBy("vorname", "name", "klasse")
@@ -127,13 +127,13 @@ class StepService
       ->groupBy("s.klasse");
 
     $steps_klassen = Step::select(
-      "steps.klasse",
-      Step::raw("SUM(schritte) AS schritte_sum"),
-      "teilnehmer_anzahl",
-      Step::raw("SUM(schritte)/teilnehmer_anzahl AS schritte_pro_kopf"),
       Step::raw(
         "ROW_NUMBER() OVER (ORDER BY SUM(schritte)/teilnehmer_anzahl DESC, teilnehmer_anzahl DESC) AS ranking"
-      )
+      ),
+      "steps.klasse",
+      Step::raw("SUM(schritte) AS schritte_sum"),
+      Step::raw("SUM(schritte)/teilnehmer_anzahl AS schritte_pro_kopf"),
+      "teilnehmer_anzahl"
     )
       ->joinSub($klassen_sub, "steps2", "steps.klasse", "=", "steps2.klasse")
       ->withCasts(["ranking" => "integer"])
@@ -172,11 +172,11 @@ class StepService
     }
 
     $steps_läufer_zeitraum = Step::from("steps As ges")->select(
+      Step::raw("ROW_NUMBER() OVER (ORDER BY SUM(schritte) DESC) AS ranking"),
       "vorname",
       "name",
       "klasse",
-      Step::raw("SUM(schritte) AS schritte_sum"),
-      Step::raw("ROW_NUMBER() OVER (ORDER BY SUM(schritte) DESC) AS ranking")
+      Step::raw("SUM(schritte) AS schritte_sum")
     );
 
     $i = 0;

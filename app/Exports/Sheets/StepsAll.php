@@ -19,7 +19,7 @@ class StepsAll implements FromCollection, WithTitle, WithHeadings
    */
   public function collection()
   {
-    return Step::select(
+    $steps = Step::select(
       "id",
       "vorname",
       "name",
@@ -27,7 +27,12 @@ class StepsAll implements FromCollection, WithTitle, WithHeadings
       "von",
       "bis",
       "schritte"
-    )->get();
+    )
+      ->withCasts(["von" => "date:d.m.Y"])
+      ->withCasts(["bis" => "date:d.m.Y"])
+      ->get();
+
+    return $steps;
   }
 
   /**
