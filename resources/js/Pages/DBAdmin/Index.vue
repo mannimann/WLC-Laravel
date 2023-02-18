@@ -33,7 +33,7 @@ const columns = [
     label: "Id",
     field: "id",
     type: "number",
-    tdClass: "font-bold",
+    // tdClass: "font-bold",
   },
   {
     label: "Vorname",
@@ -107,6 +107,12 @@ const del = ref(false);
     <AdminLayout>
       <div class="mx-auto p-4 sm:p-6 lg:p-8">
         <h3 class="mb-3 text-2xl font-bold">DB-Admin:</h3>
+
+        <a :href="route('admin.export')" target="_blank">
+          <button type="button" class="btn-primary btn mb-3">
+            Export als Excel
+          </button>
+        </a>
 
         <Card>
           <template v-slot:header>
