@@ -8,7 +8,7 @@ import AuswertungKlassen from "./AuswertungKlassen.vue";
 import AuswertungAlle from "./AuswertungAlle.vue";
 
 import ViewLayout from "@/Layouts/ViewLayout.vue";
-import { Head } from "@inertiajs/inertia-vue3";
+import { Head } from "@inertiajs/vue3";
 
 const props = defineProps([
   "settings",

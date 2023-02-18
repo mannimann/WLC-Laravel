@@ -7,11 +7,10 @@ import TextInput from "@/Components/TextInput.vue";
 import Klasse from "@/Pages/Admin/Klasse.vue";
 import Zeitraum from "@/Pages/Admin/Zeitraum.vue";
 import Datepicker from "@vuepic/vue-datepicker";
-import { useForm, Head } from "@inertiajs/inertia-vue3";
+import { useForm, Head, router } from "@inertiajs/vue3";
 import { computed, ref } from "vue";
 import { useToast } from "vue-toastification";
 import { useConfirmDialog } from "@vueuse/core";
-import { Inertia } from "@inertiajs/inertia";
 
 const props = defineProps(["settings", "klassen", "zeiträume"]);
 
@@ -49,7 +48,7 @@ const showToastError = (msg) => {
 const revaled = ref(false);
 const dialog = useConfirmDialog(revaled);
 dialog.onConfirm(() => {
-  Inertia.delete(route("admin.home.destroy"));
+  router.delete(route("admin.home.destroy"));
   showToastSuccess("Alle Schritt-Daten gelöscht!");
 });
 dialog.onCancel(() => {

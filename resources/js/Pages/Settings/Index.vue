@@ -3,7 +3,7 @@ import ViewLayout from "@/Layouts/ViewLayout.vue";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import { useForm, Head, Link } from "@inertiajs/inertia-vue3";
+import { useForm, Head, Link } from "@inertiajs/vue3";
 import { useToast } from "vue-toastification";
 
 const props = defineProps(["settings"]);

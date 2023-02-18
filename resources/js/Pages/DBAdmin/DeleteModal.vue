@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import { useToast } from "vue-toastification";
 import { ref } from "vue";
 import { useConfirmDialog } from "@vueuse/core";
-import { Inertia } from "@inertiajs/inertia";
+import { router } from "@inertiajs/vue3";
 
 const props = defineProps(["row"]);
 const toast = useToast();
@@ -19,7 +19,7 @@ const methods = {
 const revaled = ref(false);
 const dialog = useConfirmDialog(revaled);
 dialog.onConfirm(() => {
-  Inertia.delete(route("admin.dbadmin.destroy", props.row.id), {
+  router.delete(route("admin.dbadmin.destroy", props.row.id), {
     preserveScroll: true,
   });
   toast.warning("Eintrag gelöscht!");

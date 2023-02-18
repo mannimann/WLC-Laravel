@@ -2,7 +2,7 @@
 import ViewLayout from "@/Layouts/ViewLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import InputError from "@/Components/InputError.vue";
-import { useForm, Head, Link } from "@inertiajs/inertia-vue3";
+import { useForm, Head, Link } from "@inertiajs/vue3";
 import { computed, ref, Transition } from "vue";
 import Card from "@/Components/Card.vue";
 import dayjs from "dayjs";

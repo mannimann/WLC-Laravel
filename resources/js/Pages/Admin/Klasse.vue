@@ -1,7 +1,7 @@
 <script setup>
 import InputError from "@/Components/InputError.vue";
 import TextInput from "@/Components/TextInput.vue";
-import { useForm, Link } from "@inertiajs/inertia-vue3";
+import { useForm, Link } from "@inertiajs/vue3";
 import { ref } from "vue";
 import { useToast } from "vue-toastification";
 

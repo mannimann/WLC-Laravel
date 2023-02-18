@@ -1,6 +1,6 @@
 <script setup>
 import ViewLayout from "@/Layouts/ViewLayout.vue";
-import { Head, Link } from "@inertiajs/inertia-vue3";
+import { Head, Link } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 const props = defineProps(["settings"]);

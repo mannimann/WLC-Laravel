@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import { useToast } from "vue-toastification";
 import { ref } from "vue";
 import { useConfirmDialog } from "@vueuse/core";
-import { Inertia } from "@inertiajs/inertia";
+import { router } from "@inertiajs/vue3";
 
 // TODO: Deutsch
 // dayjs.extend(relativeTime);
@@ -13,7 +13,7 @@ const props = defineProps(["message"]);
 const toast = useToast();
 
 const changeStatus = () => {
-  Inertia.put(
+  router.put(
     route("admin.nachrichten.update", props.message.id),
     {
       erledigt: props.message.erledigt,
@@ -27,7 +27,7 @@ const changeStatus = () => {
 const revaled = ref(false);
 const dialog = useConfirmDialog(revaled);
 dialog.onConfirm(() => {
-  Inertia.delete(route("admin.nachrichten.destroy", props.message.id), {
+  router.delete(route("admin.nachrichten.destroy", props.message.id), {
     preserveScroll: true,
   });
   toast.warning("Nachricht gelöscht!");

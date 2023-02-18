@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import { useToast } from "vue-toastification";
 import { ref, computed, onUnmounted } from "vue";
 import { useConfirmDialog } from "@vueuse/core";
-import { useForm } from "@inertiajs/inertia-vue3";
+import { useForm } from "@inertiajs/vue3";
 
 const props = defineProps(["row", "klassen", "zeiträume"]);
 const toast = useToast();

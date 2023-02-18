@@ -2,7 +2,7 @@
 import InputError from "@/Components/InputError.vue";
 import Datepicker from "@vuepic/vue-datepicker";
 import dayjs from "dayjs";
-import { useForm, Link } from "@inertiajs/inertia-vue3";
+import { useForm, Link } from "@inertiajs/vue3";
 import { computed, ref } from "vue";
 import { useToast } from "vue-toastification";
 

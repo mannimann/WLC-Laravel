@@ -1,10 +1,9 @@
 <script setup>
 import ViewLayout from "@/Layouts/ViewLayout.vue";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
-import { Head } from "@inertiajs/inertia-vue3";
+import { Head, router } from "@inertiajs/vue3";
 import { useToast } from "vue-toastification";
 import { useConfirmDialog } from "@vueuse/core";
-import { Inertia } from "@inertiajs/inertia";
 import { ref } from "vue";
 import Message from "./Message.vue";
 
@@ -23,7 +22,7 @@ dialog.onConfirm(() => {
   props.messages.forEach((message) => {
     messageIds.push(message.id);
   });
-  Inertia.delete(route("admin.nachrichten.destroy", [messageIds]));
+  router.delete(route("admin.nachrichten.destroy", [messageIds]));
   showToastSuccess();
 });
 dialog.onCancel(() => {

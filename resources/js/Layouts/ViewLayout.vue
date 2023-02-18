@@ -6,7 +6,7 @@ import DropdownLink from "@/Components/DropdownLink.vue";
 import Footer from "@/Components/Footer.vue";
 import NavLink from "@/Components/NavLink.vue";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
-import { Link } from "@inertiajs/inertia-vue3";
+import { Link } from "@inertiajs/vue3";
 import { ref } from "vue";
 import Hamburger from "@/Components/Hamburger.vue";
 

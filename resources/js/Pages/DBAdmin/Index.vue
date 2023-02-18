@@ -4,7 +4,7 @@ import AdminLayout from "@/Layouts/AdminLayout.vue";
 import Card from "@/Components/Card.vue";
 import EditModal from "./EditModal.vue";
 import DeleteModal from "./DeleteModal.vue";
-import { Head } from "@inertiajs/inertia-vue3";
+import { Head } from "@inertiajs/vue3";
 import { VueGoodTable } from "vue-good-table-next";
 import { useColorMode } from "@vueuse/core";
 import { ref, watch } from "vue";
