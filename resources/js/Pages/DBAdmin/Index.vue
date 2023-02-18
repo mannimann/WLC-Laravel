@@ -92,7 +92,6 @@ const columns = [
   {
     label: "Aktionen",
     field: "actions",
-    // width: "10px",
   },
 ];
 
@@ -144,7 +143,7 @@ const del = ref(false);
             >
               <template #table-row="props">
                 <div v-if="props.column.field == 'actions'">
-                  <div class="flex">
+                  <div class="flex justify-end">
                     <button
                       class="btn-ghost btn px-2 sm:px-3 md:px-4"
                       type="button"
