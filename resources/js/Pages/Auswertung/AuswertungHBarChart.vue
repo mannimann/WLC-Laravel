@@ -1,10 +1,26 @@
 <script setup>
 import Card from "@/Components/Card.vue";
-import Chart from "primevue/chart";
 import ChartDataLabels from "chartjs-plugin-datalabels";
+import { Bar } from "vue-chartjs";
 import { ref, watch } from "vue";
-import { useColorMode } from "@vueuse/core";
-import { useMediaQuery } from "@vueuse/core";
+import { useColorMode, useMediaQuery } from "@vueuse/core";
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+} from "chart.js";
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale
+);
 
 const props = defineProps(["title", "data", "labels"]);
 
@@ -90,9 +106,8 @@ watch(
       <h3>{{ props.title }}</h3>
     </template>
     <template v-slot:body>
-      <Chart
+      <Bar
         :key="key"
-        type="bar"
         :data="basicData"
         :options="basicOptions"
         :plugins="plugins"
