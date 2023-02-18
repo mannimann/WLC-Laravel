@@ -18,6 +18,10 @@
   /* body {
     @apply transition-colors duration-700;
   } */
+  /* verhindere Scrollen wenn Modal geöffnet ist */
+  body.modal-open {
+    overflow: hidden;
+  }
 }
 
 @layer components {

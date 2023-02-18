@@ -2,6 +2,7 @@
 import dayjs from "dayjs";
 import { useToast } from "vue-toastification";
 import { router } from "@inertiajs/vue3";
+import { onMounted, onUnmounted } from "vue";
 
 const props = defineProps(["row"]);
 const emit = defineEmits(["close"]);
@@ -24,6 +25,13 @@ const confirm = () => {
 const cancel = () => {
   emit("close");
 };
+
+onMounted(() => {
+  document.body.classList.add("modal-open");
+});
+onUnmounted(() => {
+  document.body.classList.remove("modal-open");
+});
 </script>
 
 <template>
@@ -31,10 +39,10 @@ const cancel = () => {
   <div
     class="fixed inset-0 z-50 flex h-full items-center justify-center overflow-y-auto overflow-x-hidden bg-black bg-opacity-40 p-4"
   >
-    <div class="relative h-full w-full max-w-2xl md:h-auto">
+    <div class="relative h-modal w-full max-w-2xl md:h-auto">
       <!-- Modal content -->
       <div
-        class="relative rounded-2xl bg-secondarybg shadow dark:bg-secondarybg_dark"
+        class="relative mb-4 rounded-2xl bg-secondarybg shadow dark:bg-secondarybg_dark"
       >
         <!-- Modal header -->
         <div

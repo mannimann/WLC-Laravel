@@ -26,14 +26,19 @@ const changeStatus = () => {
 // Delete Modal
 const revaled = ref(false);
 const dialog = useConfirmDialog(revaled);
+dialog.onReveal(() => {
+  document.body.classList.add("modal-open");
+});
 dialog.onConfirm(() => {
   router.delete(route("admin.nachrichten.destroy", props.message.id), {
     preserveScroll: true,
   });
+  document.body.classList.remove("modal-open");
   toast.warning("Nachricht gelöscht!");
 });
 dialog.onCancel(() => {
   // console.log("abbrechen");
+  document.body.classList.remove("modal-open");
 });
 </script>
 

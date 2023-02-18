@@ -18,15 +18,19 @@ const showToastSuccess = function () {
 const revaled = ref(false);
 const dialog = useConfirmDialog(revaled);
 let messageIds = [];
+dialog.onReveal(() => {
+  document.body.classList.add("modal-open");
+});
 dialog.onConfirm(() => {
   props.messages.forEach((message) => {
     messageIds.push(message.id);
   });
   router.delete(route("admin.nachrichten.destroy", [messageIds]));
+  document.body.classList.remove("modal-open");
   showToastSuccess();
 });
 dialog.onCancel(() => {
-  // console.log("abbrechen");
+  document.body.classList.remove("modal-open");
 });
 </script>
 
