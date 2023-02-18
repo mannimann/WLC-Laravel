@@ -2,16 +2,54 @@
 
 namespace App\Exports;
 
-use App\Models\Step;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use App\Exports\Sheets\StepsAll;
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class StepExport implements FromCollection
+class StepExport implements WithMultipleSheets
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function collection()
-    {
-        return Step::all();
-    }
+  use Exportable;
+
+  public function sheets(): array
+  {
+    $sheets = [];
+
+    $sheets[] = new StepsAll();
+
+    return $sheets;
+  }
+
+  //   protected $sheets;
+
+  //   /**
+  //    * @return array
+  //    */
+  //   public function sheets(): array
+  //   {
+  //     $sheets = [];
+
+  //     // for ($month = 1; $month <= 12; $month++) {
+  //     //   $sheets[] = new Step($this->year, $month);
+  //     // }
+  //     $sheets[0] = Step::all();
+  //     return $sheets;
+  //     // return Step::all();
+  //   }
+
+  //   /**
+  //    * @return string
+  //    */
+  //   public function title(): string
+  //   {
+  //     return "Month ";
+  //   }
+
+  //   /**
+  //    * @return \Illuminate\Support\Collection
+  //    */
+  //   public function collection()
+  //   {
+  //     $file = StepExport::sheets();
+  //     return $file;
+  //   }
 }
