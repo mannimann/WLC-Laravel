@@ -35,7 +35,7 @@ const columns = [
     field: "vorname",
   },
   {
-    label: "Name",
+    label: "Nachname",
     field: "name",
   },
   {
