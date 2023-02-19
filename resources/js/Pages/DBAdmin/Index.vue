@@ -111,28 +111,34 @@ const screenshotHeight = ref(80);
       <div class="mx-auto p-4 sm:p-6 lg:p-8">
         <h3 class="mb-3 text-2xl font-bold">DB-Admin:</h3>
 
-        <div class="my-3 flex space-x-6">
+        <div class="mb-3 flex flex-wrap">
           <a :href="route('admin.export')" target="_blank">
-            <button type="button" class="btn-primary btn" :disabled="modalOpen">
+            <button
+              type="button"
+              class="btn-primary btn m-3 h-fit"
+              :disabled="modalOpen"
+            >
               Export als Excel
             </button>
           </a>
-          <button
-            type="button"
-            class="btn-error btn"
-            @click="
-              modalOpen = true;
-              modalType = 'deleteAll';
-            "
-            :disabled="modalOpen"
-          >
-            Alle Schritt-Daten löschen
-          </button>
+          <div>
+            <button
+              type="button"
+              class="btn-error btn m-3 h-fit"
+              @click="
+                modalOpen = true;
+                modalType = 'deleteAll';
+              "
+              :disabled="modalOpen"
+            >
+              Alle Schritt-Daten löschen
+            </button>
+          </div>
         </div>
 
         <Card>
           <template v-slot:header>
-            <div class="flex justify-between">
+            <div class="flex justify-between space-x-3">
               <h4 class="text-xl">Einträge bearbeiten oder löschen:</h4>
               <div>
                 <label
