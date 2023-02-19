@@ -379,7 +379,7 @@ const fileChanged = (e) => {
                     <InputError :message="form.errors.schritte" class="mt-2" />
                   </div>
 
-                  <!-- TODO: Screenshot -->
+                  <!-- TODO -->
                   <div class="mb-6 flex overflow-hidden">
                     <div class="mt-4">
                       <label
@@ -395,7 +395,6 @@ const fileChanged = (e) => {
                       id="f_screenshot"
                       @change="fileChanged"
                     />
-                    <!-- multiple="multiple" -->
                     <InputError
                       :message="form.errors.screenshot"
                       class="mt-2"
@@ -407,8 +406,6 @@ const fileChanged = (e) => {
                     >
                       {{ form.progress.percentage }}%
                     </progress>
-
-                    <!-- <input type="hidden" name="screenshot" id="f_screenshot_hidden" value="" /> -->
                   </div>
                 </div>
 
