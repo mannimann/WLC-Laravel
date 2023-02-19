@@ -2,8 +2,10 @@
 import ViewLayout from "@/Layouts/ViewLayout.vue";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import Card from "@/Components/Card.vue";
+import ScreenshotModal from "./ScreenshotModal.vue";
 import EditModal from "./EditModal.vue";
 import DeleteModal from "./DeleteModal.vue";
+import DeleteAllModal from "./DeleteAllModal.vue";
 import { Head } from "@inertiajs/vue3";
 import { VueGoodTable } from "vue-good-table-next";
 import { useColorMode } from "@vueuse/core";
@@ -87,7 +89,7 @@ const columns = [
   {
     label: "Screenshot",
     field: "screenshot",
-    hidden: true,
+    // hidden: true,
   },
   {
     label: "Aktionen",
@@ -96,8 +98,9 @@ const columns = [
 ];
 
 const row = ref(null);
-const edit = ref(false);
-const del = ref(false);
+const modalOpen = ref(false);
+const modalType = ref(null);
+const screenshotHeight = ref(80);
 </script>
 
 <template>
@@ -108,15 +111,46 @@ const del = ref(false);
       <div class="mx-auto p-4 sm:p-6 lg:p-8">
         <h3 class="mb-3 text-2xl font-bold">DB-Admin:</h3>
 
-        <a :href="route('admin.export')" target="_blank">
-          <button type="button" class="btn-primary btn mb-3">
-            Export als Excel
+        <div class="my-3 flex space-x-6">
+          <a :href="route('admin.export')" target="_blank">
+            <button type="button" class="btn-primary btn" :disabled="modalOpen">
+              Export als Excel
+            </button>
+          </a>
+          <button
+            type="button"
+            class="btn-error btn"
+            @click="
+              modalOpen = true;
+              modalType = 'deleteAll';
+            "
+            :disabled="modalOpen"
+          >
+            Alle Schritt-Daten löschen
           </button>
-        </a>
+        </div>
 
         <Card>
           <template v-slot:header>
-            <h4 class="text-xl">Einträge bearbeiten oder löschen:</h4>
+            <div class="flex justify-between">
+              <h4 class="text-xl">Einträge bearbeiten oder löschen:</h4>
+              <div>
+                <label
+                  for="minmax-range"
+                  class="block text-sm font-medium text-secondary dark:text-secondary_dark"
+                  >Screenshot-Größe: (Zum Vergrößern Bild anklicken)</label
+                >
+                <input
+                  id="minmax-range"
+                  type="range"
+                  min="40"
+                  max="500"
+                  :value="screenshotHeight"
+                  class="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-300 dark:bg-gray-700"
+                  @input="screenshotHeight = $event.target.value"
+                />
+              </div>
+            </div>
           </template>
           <template v-slot:body>
             <VueGoodTable
@@ -148,16 +182,34 @@ const del = ref(false);
               }"
             >
               <template #table-row="props">
+                <div v-if="props.column.field == 'screenshot'">
+                  <button
+                    type="button"
+                    @click="
+                      modalOpen = true;
+                      modalType = 'image';
+                      row = props.row;
+                    "
+                    :disabled="modalOpen"
+                  >
+                    <img
+                      :src="props.row.screenshot"
+                      alt=""
+                      :style="{ height: screenshotHeight + 'px' }"
+                    />
+                  </button>
+                </div>
                 <div v-if="props.column.field == 'actions'">
                   <div class="flex justify-end">
                     <button
                       class="btn-ghost btn px-2 sm:px-3 md:px-4"
                       type="button"
                       @click="
-                        edit = true;
+                        modalOpen = true;
+                        modalType = 'edit';
                         row = props.row;
                       "
-                      :disabled="edit || del"
+                      :disabled="modalOpen"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -179,10 +231,11 @@ const del = ref(false);
                       class="btn-ghost btn px-2 sm:px-3 md:px-4"
                       type="button"
                       @click="
-                        del = true;
+                        modalOpen = true;
+                        modalType = 'delete';
                         row = props.row;
                       "
-                      :disabled="edit || del"
+                      :disabled="modalOpen"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -212,17 +265,23 @@ const del = ref(false);
 
   <Teleport to="body">
     <Transition>
-      <div v-if="edit || del">
-        <div v-if="edit">
+      <div v-if="modalOpen">
+        <div v-if="modalType === 'image'">
+          <ScreenshotModal :row="row" @close="modalOpen = false" />
+        </div>
+        <div v-if="modalType === 'edit'">
           <EditModal
             :row="row"
             :klassen="klassen"
             :zeiträume="zeiträume"
-            @close="edit = false"
+            @close="modalOpen = false"
           />
         </div>
-        <div v-if="del">
-          <DeleteModal :row="row" @close="del = false" />
+        <div v-if="modalType === 'delete'">
+          <DeleteModal :row="row" @close="modalOpen = false" />
+        </div>
+        <div v-if="modalType === 'deleteAll'">
+          <DeleteAllModal @close="modalOpen = false" />
         </div>
       </div>
     </Transition>

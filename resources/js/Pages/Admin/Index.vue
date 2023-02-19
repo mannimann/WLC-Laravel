@@ -7,10 +7,9 @@ import TextInput from "@/Components/TextInput.vue";
 import Klasse from "@/Pages/Admin/Klasse.vue";
 import Zeitraum from "@/Pages/Admin/Zeitraum.vue";
 import Datepicker from "@vuepic/vue-datepicker";
-import { useForm, Head, router } from "@inertiajs/vue3";
-import { computed, ref } from "vue";
+import { useForm, Head } from "@inertiajs/vue3";
+import { computed } from "vue";
 import { useToast } from "vue-toastification";
-import { useConfirmDialog } from "@vueuse/core";
 
 const props = defineProps(["settings", "klassen", "zeiträume"]);
 
@@ -43,17 +42,6 @@ const showToastWarning = (msg) => {
 const showToastError = (msg) => {
   toast.error(msg);
 };
-
-// Alle eingetragenen Schritt-Daten löschen
-const revaled = ref(false);
-const dialog = useConfirmDialog(revaled);
-dialog.onConfirm(() => {
-  router.delete(route("admin.home.destroy"));
-  showToastSuccess("Alle Schritt-Daten gelöscht!");
-});
-dialog.onCancel(() => {
-  // console.log("abbrechen");
-});
 </script>
 
 <template>
@@ -63,15 +51,6 @@ dialog.onCancel(() => {
     <AdminLayout>
       <div class="mx-auto p-4 sm:p-6 lg:p-8">
         <h3 class="text-2xl font-bold">Administration:</h3>
-
-        <button
-          type="button"
-          :disabled="revaled"
-          @click="dialog.reveal"
-          class="btn-error btn my-5"
-        >
-          Alle Schritt-Daten löschen
-        </button>
 
         <div
           class="mb-3 grid grid-cols-1 justify-items-stretch gap-8 lg:grid-cols-2"
@@ -184,29 +163,4 @@ dialog.onCancel(() => {
       </div>
     </AdminLayout>
   </ViewLayout>
-
-  <div v-if="revaled">
-    <Teleport to="body">
-      <input type="checkbox" id="my-modal" class="modal-toggle" checked />
-      <div class="modal">
-        <div class="modal-box">
-          <h3 class="text-lg font-bold">Alles löschen?</h3>
-          <p class="pt-4">
-            Sollen alle eingetragenen Schritt-Daten wirklich gelöscht werden?
-          </p>
-          <p class="pb-4">
-            Dieser Vorgang kann nicht rückgängig gemacht werden!
-          </p>
-          <div class="modal-action">
-            <label as="button" class="btn" @click="dialog.cancel"
-              >Abbrechen</label
-            >
-            <label as="button" class="btn-error btn" @click="dialog.confirm"
-              >Löschen</label
-            >
-          </div>
-        </div>
-      </div>
-    </Teleport>
-  </div>
 </template>

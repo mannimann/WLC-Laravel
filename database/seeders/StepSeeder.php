@@ -86,14 +86,16 @@ class StepSeeder extends Seeder
 
       for ($i = 0; $i < count($zeiträume); $i++) {
         if (rand(0, 100) < $wahrscheinlichkeit) {
+          $schritte = $faker->numberBetween(20000, 130000);
+
           Step::factory()->create([
             "vorname" => $vorname,
             "name" => $name,
             "klasse" => $klasse,
             "von" => $zeiträume[$i]["von"],
             "bis" => $zeiträume[$i]["bis"],
-            "schritte" => $faker->numberBetween(20000, 130000),
-            // "screenshot" => "",
+            "schritte" => $schritte,
+            "screenshot" => $faker->imageUrl(640, 640, $schritte, false),
           ]);
         }
       }
