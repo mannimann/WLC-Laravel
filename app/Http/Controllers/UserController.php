@@ -23,6 +23,7 @@ class UserController extends Controller
     if (auth()->user()->permission_level < 2) {
       return Inertia::render("AccessDenied", [
         "settings.title" => $settings->get("title"),
+        "admin_layout" => true,
       ]);
     }
 

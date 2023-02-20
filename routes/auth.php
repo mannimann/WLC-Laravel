@@ -14,29 +14,14 @@ use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 
 Route::middleware("guest")->group(function () {
-  $users = User::count();
-  if ($users >= 2) {
-    Route::get("register", function () {
-      $settings = Valuestore::make(
-        storage_path("../database/database/settings.json")
-      );
+  Route::get("register", [RegisteredUserController::class, "create"])
+    ->middleware("blockRegister")
+    ->name("register");
 
-      return Inertia::render("AccessDenied", [
-        "settings.title" => $settings->get("title"),
-      ]);
-    })->name("register");
-
-    Route::post("register", [
-      RegisteredUserController::class,
-      "store",
-    ])->middleware("auth");
-  } else {
-    Route::get("register", [RegisteredUserController::class, "create"])->name(
-      "register"
-    );
-
-    Route::post("register", [RegisteredUserController::class, "store"]);
-  }
+  Route::post("register", [
+    RegisteredUserController::class,
+    "store",
+  ])->middleware("blockRegister");
 
   Route::get("login", [AuthenticatedSessionController::class, "create"])->name(
     "login"
