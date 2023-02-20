@@ -25,16 +25,5 @@ class UserSeeder extends Seeder
         ["password" => Hash::make(config("admin.admin_password"))]
       );
     }
-
-    User::firstOrCreate(
-      [
-        "name" => "Test01",
-        "email" => "test01@mail.de",
-        "permission_level" => 2,
-      ],
-      [
-        "password" => Hash::make("1234asdf"),
-      ]
-    );
   }
 }
