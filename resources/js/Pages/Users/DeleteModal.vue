@@ -10,7 +10,7 @@ const toast = useToast();
 
 const confirm = () => {
   router.delete(route("admin.users.destroy", props.row.id), {
-    onSuccess: () => toast.warning("Nutzer gelöscht!"),
+    onSuccess: () => toast.success("Nutzer gelöscht!"),
     onError: (msg) => {
       toast.error(msg.message);
     },

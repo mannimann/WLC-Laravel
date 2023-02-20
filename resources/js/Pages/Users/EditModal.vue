@@ -1,43 +1,28 @@
 <script setup>
-import InputError from "@/Components/InputError.vue";
 import dayjs from "dayjs";
+import InputError from "@/Components/InputError.vue";
 import { useToast } from "vue-toastification";
-import { computed, onMounted, onUnmounted } from "vue";
 import { useForm } from "@inertiajs/vue3";
+import { onMounted, onUnmounted } from "vue";
 
 const props = defineProps(["row"]);
 const emit = defineEmits(["close"]);
 const toast = useToast();
 
-const methods = {
-  formatNumber: (number) => {
-    let nf = new Intl.NumberFormat("de-DE");
-    return nf.format(number);
-  },
-};
-
 const form = useForm({
-  vorname: props.row.vorname,
-  name: props.row.name,
-  klasse: props.row.klasse,
-  von: props.row.von,
-  bis: props.row.bis,
-  schritte: props.row.schritte,
+  permission_level: props.row.permission_level,
+  type: "permission",
 });
 
-const submitForm = () => {
-  form.patch(route("admin.dbadmin.update", props.row.id), {
-    onSuccess: () => {
-      toast.success("Daten geändert!");
-      emit("close");
-      form.reset();
+const confirm = () => {
+  form.patch(route("admin.users.update", props.row.id), {
+    onSuccess: () => toast.success("Berechtigung geändert!"),
+    onError: (msg) => {
+      toast.error(msg.message);
     },
-    onError: () => {
-      toast.warning(form.errors.message);
-    },
-    preserveState: true,
     preserveScroll: true,
   });
+  emit("close");
 };
 const cancel = () => {
   emit("close");
@@ -65,7 +50,7 @@ onUnmounted(() => {
         <div
           class="flex items-start justify-between rounded-t border-b p-6 dark:border-gray-600"
         >
-          <h3 class="text-lg font-bold">Eintrag bearbeiten</h3>
+          <h3 class="text-lg font-bold">Permission Level ändern?</h3>
           <button
             type="button"
             class="ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
@@ -90,124 +75,55 @@ onUnmounted(() => {
           <p
             class="text-base leading-relaxed text-secondary dark:text-secondary_dark"
           >
-            Folgender Eintrag wird bearbeitet:
+            Soll die Zugriffsberechtigung des Nutzers geändert werden?
           </p>
           <p
             class="text-base leading-relaxed text-secondary dark:text-secondary_dark"
           >
-            TEST
+            {{ row.name }} ({{ row.email }})<br />
+            Erstellt am:
+            {{ dayjs(row.created_at).format("DD.MM.YY HH:mm") }} Uhr<br />
+            Permission Level: {{ row.permission_level }}
           </p>
-
+          <p
+            class="text-sm leading-relaxed text-secondary dark:text-secondary_dark"
+          >
+            Hinweis: Die Zugriffsberechtigung eines Nutzers mit dem gleichen
+            Level wie man selbst lässt sich nicht mehr verändern!
+          </p>
           <form
             class="pt-6"
-            name="insertData"
-            id="insertData"
-            @submit.prevent="submitForm()"
+            name="setPermission"
+            id="setPermission"
+            @submit.prevent="confirm"
           >
-            <div
-              class="mb-1 grid grid-cols-1 justify-items-stretch gap-3 md:grid-cols-2"
-            >
-              <div class="form-not-empty mb-6">
-                <label for="f_vorname" class="form-label">Vorname:</label>
-                <input
-                  type="text"
-                  class="form-input"
-                  name="vorname"
-                  id="f_vorname"
-                  v-model="form.vorname"
-                  @focus="addNotEmpty"
-                  @blur="removeNotEmpty"
-                  autofocus
-                  autocomplete="vorname"
-                />
-                <InputError :message="form.errors.vorname" class="mt-2" />
-              </div>
-
-              <div class="form-not-empty mb-6">
-                <label for="f_name" class="form-label">Nachname:</label>
-                <input
-                  type="text"
-                  class="form-input"
-                  name="name"
-                  id="f_name"
-                  v-model="form.name"
-                  @focus="addNotEmpty"
-                  @blur="removeNotEmpty"
-                  autocomplete="name"
-                />
-                <InputError :message="form.errors.name" class="mt-2" />
-              </div>
-
-              <div class="form-not-empty mb-6">
-                <label for="f_klasse" class="form-label cursor-default"
-                  >Klasse:</label
-                >
-                <select
-                  name="klasse"
-                  class="form-select"
-                  id="f_klasse"
-                  v-model="form.klasse"
-                  @focus="addNotEmpty"
-                  @blur="removeNotEmpty"
-                >
-                  <option
-                    v-for="klasse in klassen"
-                    :key="klasse.klasse"
-                    :value="klasse.klasse"
-                    class="form-select-option"
-                  >
-                    {{ klasse.klasse }}
-                  </option>
-                </select>
-                <InputError :message="form.errors.klasse" class="mt-2" />
-              </div>
-
-              <div class="form-not-empty mb-6">
-                <label for="f_zeitraum" class="form-label cursor-default"
-                  >Zeitraum:</label
-                >
-                <select
-                  name="zeitraum"
-                  class="form-select"
-                  id="f_zeitraum"
-                  v-model="zeitraum"
-                  @focus="addNotEmpty"
-                  @blur="removeNotEmpty"
-                >
-                  <option
-                    v-for="zeitraum in zeiträume"
-                    :key="zeitraum"
-                    :value="zeitraum"
-                    class="form-select-option"
-                  >
-                    {{ dayjs(zeitraum.von).format("DD.MM.YYYY") }} -
-                    {{ dayjs(zeitraum.bis).format("DD.MM.YYYY") }}
-                  </option>
-                </select>
-                <InputError :message="form.errors.von" class="mt-2" />
-              </div>
-
-              <div class="form-not-empty mb-6">
-                <label for="f_schritte" class="form-label">Schritte:</label>
-                <input
-                  type="text"
-                  class="form-input"
-                  name="schritte"
-                  id="f_schritte"
-                  v-model="form.schritte"
-                  @focus="addNotEmpty"
-                  @blur="removeNotEmpty"
-                />
-                <InputError :message="form.errors.schritte" class="mt-2" />
-              </div>
+            <div class="form-not-empty">
+              <label for="f_permission_level" class="form-label"
+                >Permission Level:</label
+              >
+              <select
+                name="permission_level"
+                class="form-select"
+                id="f_permission_level"
+                v-model="form.permission_level"
+                @focus="addNotEmpty"
+                @blur="removeNotEmpty"
+              >
+                <option value="3" class="form-select-option">3</option>
+                <option value="2" class="form-select-option">2</option>
+                <option value="1" class="form-select-option">1</option>
+              </select>
+              <InputError
+                :message="form.errors.permission_level"
+                class="mt-2"
+              />
             </div>
           </form>
         </div>
-
         <!-- Modal footer -->
         <div class="flex items-center justify-end space-x-2 rounded-b p-6">
           <button type="button" class="btn" @click="cancel">Abbrechen</button>
-          <button type="submit" form="insertData" class="btn-primary btn">
+          <button type="submit" form="setPermission" class="btn-warning btn">
             Ändern
           </button>
         </div>

@@ -67,6 +67,7 @@ const activate = (props) => {
   router.patch(
     route("admin.users.update", props.row.id),
     {
+      type: "active",
       active: 0,
     },
     {
@@ -85,6 +86,7 @@ const deactivate = (props) => {
   router.patch(
     route("admin.users.update", props.row.id),
     {
+      type: "active",
       active: 1,
     },
     {
