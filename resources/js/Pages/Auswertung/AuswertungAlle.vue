@@ -133,7 +133,7 @@ props.zeiträume.forEach((zeitraum) => {
             }"
             :sort-options="{
               enabled: true,
-              // initialSortBy: { field: 'id', type: 'asc' },
+              initialSortBy: { field: 'ranking', type: 'asc' },
             }"
           >
             <template #emptystate>Keine Einträge vorhanden ...</template>

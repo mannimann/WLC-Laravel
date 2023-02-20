@@ -183,7 +183,7 @@ const screenshotHeight = ref(80);
               }"
               :sort-options="{
                 enabled: true,
-                // initialSortBy: { field: 'id', type: 'asc' },
+                initialSortBy: { field: 'vorname', type: 'asc' },
               }"
             >
               <template #table-row="props">
