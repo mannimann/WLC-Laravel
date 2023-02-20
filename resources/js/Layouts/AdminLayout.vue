@@ -10,7 +10,10 @@ const links_admin = [
   { name: "Einstellungen", route: "admin.einstellungen.index" },
   { name: "Nachrichten", route: "admin.nachrichten.index" },
   { name: "DB-Admin", route: "admin.dbadmin.index" },
-  { name: "Nutzer", route: "admin.users.index" },
+  {
+    name: "Nutzer",
+    route: "admin.users.index",
+  },
 ];
 
 let scroller;
@@ -98,12 +101,14 @@ const setShadows = (e) => {
 </template>
 
 <style scoped>
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
+@media (max-width: 767px) {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .v-enter-active,
