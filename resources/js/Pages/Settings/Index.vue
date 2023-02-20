@@ -3,10 +3,11 @@ import ViewLayout from "@/Layouts/ViewLayout.vue";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import { useForm, Head, Link } from "@inertiajs/vue3";
+import { useForm, Head, router } from "@inertiajs/vue3";
 import { useToast } from "vue-toastification";
 
 const props = defineProps(["settings"]);
+const toast = useToast();
 
 const form = useForm({
   title: props.settings.title,
@@ -17,18 +18,23 @@ const form = useForm({
   override: false,
 });
 
-const toast = useToast();
-const showToastSuccess = function () {
-  toast.success("Aktualisieren erfolgreich!");
+const submitForm = () => {
+  form.post(route("admin.einstellungen.store"), {
+    onSuccess: () => {
+      if (form.override) toast.success("Daten als Standard gespeichert!");
+      else toast.success("Aktualisieren erfolgreich!");
+    },
+    onError: (msg) => toast.error(msg.message),
+    preserveScroll: true,
+  });
 };
-const showToastReset = function () {
-  toast.success("Daten zurückgesetzt!");
-};
-const showToastStandard = function () {
-  toast.success("Daten als Standard gespeichert!");
-};
-const showToastError = function () {
-  toast.error("Ups, das hat nicht funktioniert!");
+
+const resetSettings = () => {
+  router.get(route("admin.einstellungen.create"), "", {
+    onSuccess: () => toast.success("Daten zurückgesetzt!"),
+    onError: (msg) => toast.error(msg.message),
+    preserveScroll: true,
+  });
 };
 </script>
 
@@ -40,20 +46,7 @@ const showToastError = function () {
       <section id="settings" class="mx-auto p-4 sm:p-6 lg:p-8">
         <h3 class="text-2xl font-bold">Einstellungen:</h3>
         <div class="py-2">
-          <form
-            class="space-y-2"
-            @submit.prevent="
-              form.post(route('admin.einstellungen.store'), {
-                onSuccess: () => {
-                  if (form.override) showToastStandard();
-                  else showToastSuccess();
-                },
-                onError: () => {
-                  showToastError();
-                },
-              })
-            "
-          >
+          <form class="space-y-2" @submit.prevent="submitForm">
             <label for="title" class="text-xl font-bold text-primary"
               >Titel:</label
             >
@@ -126,13 +119,8 @@ const showToastError = function () {
                 >Aktualisieren</PrimaryButton
               >
 
-              <Link :href="route('admin.einstellungen.create')"
-                ><PrimaryButton
-                  class="m-3"
-                  type="button"
-                  @click="showToastReset"
-                  >Zurücksetzen</PrimaryButton
-                ></Link
+              <PrimaryButton class="m-3" type="button" @click="resetSettings"
+                >Zurücksetzen</PrimaryButton
               >
 
               <PrimaryButton class="m-3" @click="form.override = true"
