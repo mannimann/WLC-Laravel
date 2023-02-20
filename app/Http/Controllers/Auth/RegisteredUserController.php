@@ -40,10 +40,13 @@ class RegisteredUserController extends Controller
       "password" => ["required", "confirmed", Rules\Password::defaults()],
     ]);
 
+    $user_count = User::count();
+
     $user = User::create([
       "name" => $request->name,
       "email" => $request->email,
       "password" => Hash::make($request->password),
+      "permission_level" => $user_count < 2 ? 2 : 1,
     ]);
 
     event(new Registered($user));

@@ -51,8 +51,6 @@ class SettingsController extends Controller
    */
   public function store(Request $request)
   {
-    // error_log($request);
-
     $settings = Valuestore::make(
       storage_path("../database/database/settings.json")
     );

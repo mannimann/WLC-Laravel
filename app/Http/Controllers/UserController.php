@@ -148,7 +148,6 @@ class UserController extends Controller
     }
 
     User::where("id", $id)->delete();
-    error_log("Nutzer {$id} gelöscht");
 
     return redirect()
       ->back()

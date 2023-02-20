@@ -52,11 +52,11 @@ Route::resource("/kontakt", ContactController::class, [
 Route::resource("/dashboard", DashboardController::class, [
   "names" => "dashboard",
 ])
-  ->middleware(["auth", "verified"])
+  ->middleware(["auth"])
   ->only(["index"]);
 
 Route::prefix("admin")
-  ->middleware("auth", "verified")
+  ->middleware("auth")
   ->name("admin.")
   ->group(function () {
     Route::resource("/", AdminController::class, [
