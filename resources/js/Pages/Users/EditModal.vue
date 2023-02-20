@@ -16,13 +16,15 @@ const form = useForm({
 
 const confirm = () => {
   form.patch(route("admin.users.update", props.row.id), {
-    onSuccess: () => toast.success("Berechtigung geändert!"),
+    onSuccess: () => {
+      toast.success("Berechtigung geändert!");
+      emit("close");
+    },
     onError: (msg) => {
       toast.error(msg.message);
     },
     preserveScroll: true,
   });
-  emit("close");
 };
 const cancel = () => {
   emit("close");
