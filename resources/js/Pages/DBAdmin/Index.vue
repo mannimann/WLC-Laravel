@@ -268,26 +268,35 @@ const screenshotHeight = ref(80);
   </ViewLayout>
 
   <Teleport to="body">
-    <Transition>
-      <div v-if="modalOpen">
-        <div v-if="modalType === 'image'">
-          <ScreenshotModal :row="row" @close="modalOpen = false" />
-        </div>
-        <div v-if="modalType === 'edit'">
-          <EditModal
-            :row="row"
-            :klassen="klassen"
-            :zeiträume="zeiträume"
-            @close="modalOpen = false"
-          />
-        </div>
-        <div v-if="modalType === 'delete'">
-          <DeleteModal :row="row" @close="modalOpen = false" />
-        </div>
-        <div v-if="modalType === 'deleteAll'">
-          <DeleteAllModal @close="modalOpen = false" />
-        </div>
+    <Transition name="fade" mode="out-in">
+      <div v-if="modalOpen && modalType === 'image'">
+        <ScreenshotModal :row="row" @close="modalOpen = false" />
+      </div>
+      <div v-else-if="modalOpen && modalType === 'edit'">
+        <EditModal
+          :row="row"
+          :klassen="klassen"
+          :zeiträume="zeiträume"
+          @close="modalOpen = false"
+        />
+      </div>
+      <div v-else-if="modalOpen && modalType === 'delete'">
+        <DeleteModal :row="row" @close="modalOpen = false" />
+      </div>
+      <div v-else-if="modalOpen && modalType === 'deleteAll'">
+        <DeleteAllModal @close="modalOpen = false" />
       </div>
     </Transition>
   </Teleport>
 </template>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
