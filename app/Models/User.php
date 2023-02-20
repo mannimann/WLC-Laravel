@@ -18,7 +18,7 @@ class User extends Authenticatable
    *  @var Array
    */
   protected $attributes = [
-    "permission_level" => 1,
+    "permission_level" => 0,
   ];
 
   /**

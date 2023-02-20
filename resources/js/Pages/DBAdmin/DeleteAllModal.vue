@@ -7,8 +7,10 @@ const emit = defineEmits(["close"]);
 const toast = useToast();
 
 const confirm = () => {
-  router.delete(route("admin.home.destroy"));
-  toast.warning("Alle Schritt-Daten gelöscht!");
+  router.delete(route("admin.home.destroy"), {
+    onSuccess: () => toast.warning("Alle Schritt-Daten gelöscht!"),
+    onError: (msg) => toast.error(msg.message),
+  });
   emit("close");
 };
 const cancel = () => {

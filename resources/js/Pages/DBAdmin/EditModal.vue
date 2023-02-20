@@ -52,8 +52,9 @@ const submitForm = () => {
       emit("close");
       form.reset();
     },
-    onError: () => {
-      toast.warning(form.errors.message);
+    onError: (msg) => {
+      if (msg.message) toast.error(msg.message);
+      else toast.warning(form.errors.message);
     },
     preserveState: true,
     preserveScroll: true,

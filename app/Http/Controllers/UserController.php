@@ -90,7 +90,7 @@ class UserController extends Controller
 
     // Set Permission Level
     if ($request->type == "permission") {
-      if ($request->permission_level <= 0 || $request->permission_level > 3) {
+      if ($request->permission_level < 0 || $request->permission_level > 3) {
         return redirect()
           ->back()
           ->withErrors([

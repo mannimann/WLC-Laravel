@@ -8,11 +8,7 @@ import { ref } from "vue";
 import Message from "./Message.vue";
 
 const props = defineProps(["settings", "messages"]);
-
 const toast = useToast();
-const showToastSuccess = function () {
-  toast.success("Alle Nachrichten gelöscht!");
-};
 
 // Alle Nachrichten löschen
 const revaled = ref(false);
@@ -25,9 +21,11 @@ dialog.onConfirm(() => {
   props.messages.forEach((message) => {
     messageIds.push(message.id);
   });
-  router.delete(route("admin.nachrichten.destroy", [messageIds]));
+  router.delete(route("admin.nachrichten.destroy", [messageIds]), {
+    onSuccess: () => toast.success("Alle Nachrichten gelöscht!"),
+    onError: (msg) => toast.error(msg.message),
+  });
   document.body.classList.remove("modal-open");
-  showToastSuccess();
 });
 dialog.onCancel(() => {
   document.body.classList.remove("modal-open");
@@ -44,13 +42,6 @@ dialog.onCancel(() => {
         <div v-if="messages.length === 0">Keine Nachrichten vorhanden ...</div>
 
         <div v-else>
-          <div class="mt-6 divide-y rounded-lg bg-white shadow-sm">
-            <Message
-              v-for="message in messages"
-              :key="message.id"
-              :message="message"
-            />
-          </div>
           <button
             type="button"
             :disabled="revaled"
@@ -59,6 +50,13 @@ dialog.onCancel(() => {
           >
             Alle Nachrichten löschen
           </button>
+          <div class="mt-6 divide-y rounded-lg bg-white shadow-sm">
+            <Message
+              v-for="message in messages"
+              :key="message.id"
+              :message="message"
+            />
+          </div>
         </div>
       </div>
     </AdminLayout>

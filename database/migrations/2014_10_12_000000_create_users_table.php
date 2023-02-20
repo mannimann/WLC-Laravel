@@ -20,7 +20,7 @@ return new class extends Migration {
       $table->string("password");
       $table->rememberToken();
       $table->tinyInteger("active")->default(1);
-      $table->tinyInteger("permission_level")->default(1);
+      $table->tinyInteger("permission_level")->default(0);
       $table->timestamps();
     });
   }

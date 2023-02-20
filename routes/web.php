@@ -61,20 +61,39 @@ Route::prefix("admin")
   ->group(function () {
     Route::resource("/", AdminController::class, [
       "names" => "home",
-    ])->only("index", "destroy");
-    // Route::get("/admin", [AdminController::class, "index"])->name("admin");
+    ])->only("index");
+    Route::resource("/", AdminController::class, [
+      "names" => "home",
+    ])
+      ->middleware(["adminReadOnly"])
+      ->only("destroy");
 
     Route::resource("/einstellungen", SettingsController::class, [
       "names" => "einstellungen",
-    ])->only(["index", "store", "create"]);
+    ])->only(["index"]);
+    Route::resource("/einstellungen", SettingsController::class, [
+      "names" => "einstellungen",
+    ])
+      ->middleware(["adminReadOnly"])
+      ->only(["store", "create"]);
 
     Route::resource("/nachrichten", MessageController::class, [
       "names" => "nachrichten",
-    ])->only(["index", "update", "destroy"]);
+    ])->only(["index"]);
+    Route::resource("/nachrichten", MessageController::class, [
+      "names" => "nachrichten",
+    ])
+      ->middleware(["adminReadOnly"])
+      ->only(["update", "destroy"]);
 
     Route::resource("/dbadmin", DBAdminController::class, [
       "names" => "dbadmin",
-    ])->only(["index", "update", "destroy"]);
+    ])->only(["index"]);
+    Route::resource("/dbadmin", DBAdminController::class, [
+      "names" => "dbadmin",
+    ])
+      ->middleware(["adminReadOnly"])
+      ->only(["update", "destroy"]);
 
     Route::resource("/users", UserController::class, [
       "names" => "users",
@@ -83,9 +102,11 @@ Route::prefix("admin")
     Route::get("/export", [ExcelController::class, "export"])->name("export");
   });
 
-Route::apiResources([
-  "klasse" => KlasseController::class,
-  "zeitraum" => ZeitraumController::class,
-]);
+Route::group(["middleware" => "adminReadOnly"], function () {
+  Route::apiResources([
+    "klasse" => KlasseController::class,
+    "zeitraum" => ZeitraumController::class,
+  ]);
+});
 
 require __DIR__ . "/auth.php";

@@ -12,6 +12,7 @@ import { computed } from "vue";
 import { useToast } from "vue-toastification";
 
 const props = defineProps(["settings", "klassen", "zeiträume"]);
+const toast = useToast();
 
 const form_klasse = useForm({
   klasse: "",
@@ -31,17 +32,6 @@ const zeitraum = computed({
     form_zeitraum.bis = zeitraum[1];
   },
 });
-
-const toast = useToast();
-const showToastSuccess = (msg) => {
-  toast.success(msg);
-};
-const showToastWarning = (msg) => {
-  toast.warning(msg);
-};
-const showToastError = (msg) => {
-  toast.error(msg);
-};
 </script>
 
 <template>
@@ -63,14 +53,13 @@ const showToastError = (msg) => {
                 @submit.prevent="
                   form_zeitraum.post(route('zeitraum.store'), {
                     onSuccess: () => {
-                      showToastSuccess('Zeitraum hinzugefügt!');
+                      toast.success('Zeitraum hinzugefügt!');
                       form_zeitraum.reset();
                     },
                     onError: (msg) => {
                       if (msg.status == 'warning') {
-                        showToastWarning(msg.message);
-                      } else if (msg.status == 'error')
-                        showToastError(msg.message);
+                        toast.warning(msg.message);
+                      } else toast.error(msg.message);
                     },
                     preserveScroll: true,
                   })
@@ -120,11 +109,11 @@ const showToastError = (msg) => {
                 @submit.prevent="
                   form_klasse.post(route('klasse.store'), {
                     onSuccess: () => {
-                      showToastSuccess('Klasse hinzugefügt!');
+                      toast.success('Klasse hinzugefügt!');
                       form_klasse.reset();
                     },
                     onError: (msg) => {
-                      if (msg.message) showToastWarning(msg.message);
+                      toast.error(msg.message);
                     },
                     preserveScroll: true,
                   })

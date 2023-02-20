@@ -18,9 +18,15 @@ const changeStatus = () => {
     {
       erledigt: props.message.erledigt,
     },
-    { preserveState: true, preserveScroll: true }
+    {
+      onSuccess: () => {
+        if (props.message.erledigt == true) toast.success("Erledigt");
+      },
+      onError: (msg) => toast.error(msg.message),
+      preserveState: true,
+      preserveScroll: true,
+    }
   );
-  if (props.message.erledigt == true) toast.success("Erledigt");
 };
 
 // Delete Modal
@@ -31,13 +37,13 @@ dialog.onReveal(() => {
 });
 dialog.onConfirm(() => {
   router.delete(route("admin.nachrichten.destroy", props.message.id), {
+    onSuccess: () => toast.warning("Nachricht gelöscht!"),
+    onError: (msg) => toast.error(msg.message),
     preserveScroll: true,
   });
   document.body.classList.remove("modal-open");
-  toast.warning("Nachricht gelöscht!");
 });
 dialog.onCancel(() => {
-  // console.log("abbrechen");
   document.body.classList.remove("modal-open");
 });
 </script>

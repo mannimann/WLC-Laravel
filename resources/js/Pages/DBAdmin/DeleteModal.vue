@@ -17,9 +17,10 @@ const methods = {
 
 const confirm = () => {
   router.delete(route("admin.dbadmin.destroy", props.row.id), {
+    onSuccess: () => toast.warning("Eintrag gelöscht!"),
+    onError: (msg) => toast.error(msg.message),
     preserveScroll: true,
   });
-  toast.warning("Eintrag gelöscht!");
   emit("close");
 };
 const cancel = () => {
