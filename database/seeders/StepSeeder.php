@@ -23,55 +23,65 @@ class StepSeeder extends Seeder
 
     // $zeiträume = Zeitraum::select("von", "bis")->get();
 
-    $zeiträume = [
-      [
-        "von" => "2023-01-02T00:00:00.000Z",
-        "bis" => "2023-01-08T00:00:00.000Z",
-      ],
-      [
-        "von" => "2023-01-09T00:00:00.000Z",
-        "bis" => "2023-01-15T00:00:00.000Z",
-      ],
-      [
-        "von" => "2023-01-16T00:00:00.000Z",
-        "bis" => "2023-01-22T00:00:00.000Z",
-      ],
-      [
-        "von" => "2023-01-23T00:00:00.000Z",
-        "bis" => "2023-01-29T00:00:00.000Z",
-      ],
-    ];
-
     /*
      * Zeiträume
      */
-    for ($i = 0; $i < count($zeiträume); $i++) {
-      Zeitraum::factory()->create([
-        "von" => $zeiträume[$i]["von"],
-        "bis" => $zeiträume[$i]["bis"],
-      ]);
+    $zeiträume = collect(Zeitraum::select("von", "bis")->get());
+    if (count($zeiträume) == 0) {
+      $zeiträume = [
+        [
+          "von" => "2023-01-02T00:00:00.000Z",
+          "bis" => "2023-01-08T00:00:00.000Z",
+        ],
+        [
+          "von" => "2023-01-09T00:00:00.000Z",
+          "bis" => "2023-01-15T00:00:00.000Z",
+        ],
+        [
+          "von" => "2023-01-16T00:00:00.000Z",
+          "bis" => "2023-01-22T00:00:00.000Z",
+        ],
+        [
+          "von" => "2023-01-23T00:00:00.000Z",
+          "bis" => "2023-01-29T00:00:00.000Z",
+        ],
+      ];
+
+      for ($i = 0; $i < count($zeiträume); $i++) {
+        Zeitraum::factory()->create([
+          "von" => $zeiträume[$i]["von"],
+          "bis" => $zeiträume[$i]["bis"],
+        ]);
+      }
     }
 
     /*
      * Klassen
      */
-    $klassen = [];
-    foreach (range(5, 12) as $stufe) {
-      foreach (["a", "b", "c"] as $nr) {
-        Klasse::factory()->create([
-          "klasse" => $stufe . $nr,
-        ]);
-        $klassen[] = $stufe . $nr;
+    $klassen = collect(
+      Klasse::select("klasse")
+        ->get()
+        ->pluck("klasse")
+    );
+    if (count($klassen) == 0) {
+      $klassen = [];
+      foreach (range(5, 12) as $stufe) {
+        foreach (["a", "b", "c"] as $nr) {
+          Klasse::factory()->create([
+            "klasse" => $stufe . $nr,
+          ]);
+          $klassen[] = $stufe . $nr;
+        }
       }
+      Klasse::factory()->create([
+        "klasse" => "Lehrer",
+      ]);
+      $klassen[] = "Lehrer";
+      Klasse::factory()->create([
+        "klasse" => "Eltern",
+      ]);
+      $klassen[] = "Eltern";
     }
-    Klasse::factory()->create([
-      "klasse" => "Lehrer",
-    ]);
-    $klassen[] = "Lehrer";
-    Klasse::factory()->create([
-      "klasse" => "Eltern",
-    ]);
-    $klassen[] = "Eltern";
 
     /*
      * Steps
