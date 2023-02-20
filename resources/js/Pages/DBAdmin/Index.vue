@@ -89,7 +89,6 @@ const columns = [
   {
     label: "Screenshot",
     field: "screenshot",
-    // hidden: true,
   },
   {
     label: "Aktionen",
@@ -189,21 +188,20 @@ const screenshotHeight = ref(80);
             >
               <template #table-row="props">
                 <div v-if="props.column.field == 'screenshot'">
-                  <button
-                    type="button"
-                    @click="
-                      modalOpen = true;
-                      modalType = 'image';
-                      row = props.row;
-                    "
-                    :disabled="modalOpen"
-                  >
-                    <img
-                      :src="props.row.screenshot"
-                      alt=""
-                      :style="{ height: screenshotHeight + 'px' }"
-                    />
-                  </button>
+                  <div class="flex justify-end">
+                    <button
+                      type="button"
+                      @click="
+                        modalOpen = true;
+                        modalType = 'image';
+                        row = props.row;
+                      "
+                      :disabled="modalOpen"
+                      :style="{ width: screenshotHeight + 'px' }"
+                    >
+                      <img :src="props.row.screenshot" alt="" class="h-full" />
+                    </button>
+                  </div>
                 </div>
                 <div v-if="props.column.field == 'actions'">
                   <div class="flex justify-end">

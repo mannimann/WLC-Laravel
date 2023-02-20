@@ -3,7 +3,7 @@ import ViewLayout from "@/Layouts/ViewLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import InputError from "@/Components/InputError.vue";
 import { useForm, Head, Link } from "@inertiajs/vue3";
-import { computed, ref, Transition } from "vue";
+import { computed, ref, Transition, onMounted, onUnmounted } from "vue";
 import Card from "@/Components/Card.vue";
 import dayjs from "dayjs";
 import { useToast } from "vue-toastification";
@@ -57,53 +57,79 @@ const removeNotEmpty = (e) => {
     : null;
 };
 
+const events = ["dragenter", "dragleave", "dragover", "drop"];
+onMounted(() => {
+  events.forEach((event) =>
+    document.body // .getElementById("dropzone")
+      .addEventListener(event, (e) => e.preventDefault())
+  );
+});
+onUnmounted(() => {
+  events.forEach((event) =>
+    document.body // .getElementById("dropzone")
+      .removeEventListener(event, (e) => e.preventDefault())
+  );
+});
+
 // Bilder verkleinern (clientseitig)
-const fileChanged = (e) => {
+const filename = ref(null);
+const shrinkFile = (file) => {
   form.screenshot = "";
-  for (var i = 0; i < e.target.files.length; i++) {
-    var file = e.target.files[i];
-    if (file.type == "image/jpeg" || file.type == "image/png") {
-      var reader = new FileReader();
-      reader.onload = (readerEvent) => {
-        var image = new Image();
-        image.onload = (imageEvent) => {
-          var max_size = 860;
-          var w = image.width;
-          var h = image.height;
-          if (w > h) {
-            if (w > max_size) {
-              h *= max_size / w;
-              w = max_size;
-            }
-          } else {
-            if (h > max_size) {
-              w *= max_size / h;
-              h = max_size;
-            }
-          }
-          var canvas = document.createElement("canvas");
-          canvas.width = w;
-          canvas.height = h;
-          canvas.getContext("2d").drawImage(image, 0, 0, w, h);
-          if (file.type == "image/jpeg") {
-            var dataURL = canvas.toDataURL("image/jpeg", 1);
-          } else {
-            var dataURL = canvas.toDataURL("image/png");
-          }
-          // document.getElementById('f_screenshot_hidden').value += dataURL + '|';
-          form.screenshot = dataURL;
-          // form.screenshot += dataURL + "|";
-        };
-        image.src = readerEvent.target.result;
-      };
-      reader.readAsDataURL(file);
-    } else {
-      e.target.value = "";
-      alert("Bitte wählen Sie nur Bilder im JPG- oder PNG-Format aus.");
-      return false;
-    }
-  }
+  var reader = new FileReader();
+  reader.onload = (readerEvent) => {
+    var image = new Image();
+    image.onload = (imageEvent) => {
+      var max_size = 640;
+      var w = image.width;
+      var h = image.height;
+      if (w > h) {
+        if (w > max_size) {
+          h *= max_size / w;
+          w = max_size;
+        }
+      } else {
+        if (h > max_size) {
+          w *= max_size / h;
+          h = max_size;
+        }
+      }
+      var canvas = document.createElement("canvas");
+      canvas.width = w;
+      canvas.height = h;
+      canvas.getContext("2d").drawImage(image, 0, 0, w, h);
+      if (file.type == "image/jpeg") {
+        var dataURL = canvas.toDataURL("image/jpeg", 1);
+      } else {
+        var dataURL = canvas.toDataURL("image/png");
+      }
+      form.screenshot = dataURL;
+      filename.value = file.name;
+    };
+    image.src = readerEvent.target.result;
+  };
+  reader.readAsDataURL(file);
 };
+
+function handleDrop(e) {
+  const file = e.dataTransfer?.files[0];
+  if (file.type == "image/jpeg" || file.type == "image/png") {
+    shrinkFile(file);
+  } else {
+    alert("Bitte wählen Sie nur Bilder im JPG- oder PNG-Format aus.");
+    return false;
+  }
+}
+function handleUpload(e) {
+  const file = e.target?.files[0];
+  if (file.type == "image/jpeg" || file.type == "image/png") {
+    shrinkFile(file);
+  } else {
+    alert("Bitte wählen Sie nur Bilder im JPG- oder PNG-Format aus.");
+    return false;
+  }
+}
+
+const entering = ref(false);
 </script>
 
 <template>
@@ -379,65 +405,76 @@ const fileChanged = (e) => {
                     <InputError :message="form.errors.schritte" class="mt-2" />
                   </div>
 
-                  <div class="mb-6 flex overflow-hidden">
-                    <div
-                      class="mt-4 hover:text-primary dark:hover:text-primary_dark"
-                    >
+                  <div class="mb-6">
+                    <div class="flex overflow-hidden py-1">
                       <label
                         for="f_screenshot"
-                        class="mr-3 cursor-pointer text-[14px] uppercase"
+                        class="mr-3 mt-4 cursor-pointer text-[14px] uppercase hover:text-primary dark:hover:text-primary_dark"
                         >Screenshot:</label
                       >
-                    </div>
-
-                    <!-- TODO -->
-                    <div
-                      class="form-input flex w-full items-center justify-center p-0"
-                      @drop="fileChanged"
-                      @dragover="fileChanged"
-                    >
-                      <label
-                        for="f_screenshot"
-                        class="dark:hover:bg-bray-800 flex w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                      <div
+                        class="form-input flex w-full items-center justify-center p-0 transition-all"
                       >
-                        <div class="flex items-center justify-center p-1">
-                          <svg
-                            aria-hidden="true"
-                            class="mx-2 hidden h-6 w-6 text-gray-400 md:block"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                            ></path>
-                          </svg>
-                          <p class="text-gray-500 dark:text-gray-400">
-                            Klicken oder Drag and Drop
-                            <span class="text-sm"> (nur PNG oder JPG) </span>
-                          </p>
-                        </div>
-                        <input
-                          type="file"
-                          class="hidden"
-                          name="screenshot"
-                          id="f_screenshot"
-                          @change="fileChanged"
-                        />
-                      </label>
+                        <label
+                          id="dropzone"
+                          for="f_screenshot"
+                          class="flex w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 hover:bg-gray-100 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                          :class="
+                            entering
+                              ? 'bg-gray-100 dark:border-gray-500 dark:bg-gray-600'
+                              : 'bg-gray-50 dark:border-gray-600 dark:bg-gray-700'
+                          "
+                          @drop.prevent="
+                            handleDrop($event);
+                            entering = false;
+                          "
+                          @dragenter="entering = true"
+                          @dragleave="entering = false"
+                        >
+                          <div class="pointer-events-none">
+                            <p
+                              v-if="filename"
+                              class="flex items-center justify-center p-1 text-primary dark:text-primary_dark"
+                            >
+                              {{ filename }}
+                            </p>
+                            <div
+                              v-else
+                              class="flex items-center justify-center p-1"
+                            >
+                              <svg
+                                aria-hidden="true"
+                                class="mx-2 hidden h-6 w-6 text-gray-400 md:block"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                                ></path>
+                              </svg>
+                              <p class="text-gray-500 dark:text-gray-400">
+                                Klicken oder Drag and Drop
+                                <span class="text-sm">
+                                  (nur PNG oder JPG)
+                                </span>
+                              </p>
+                            </div>
+                            <input
+                              type="file"
+                              class="hidden"
+                              name="screenshot"
+                              id="f_screenshot"
+                              @change="handleUpload"
+                            />
+                          </div>
+                        </label>
+                      </div>
                     </div>
-
-                    <!-- <input
-                      type="file"
-                      class="form-input cursor-pointer"
-                      name="screenshot_big"
-                      id="f_screenshot"
-                      @change="fileChanged"
-                    /> -->
 
                     <InputError
                       :message="form.errors.screenshot"
@@ -487,6 +524,7 @@ const fileChanged = (e) => {
             </template>
           </Card>
         </section>
+        <img :src="form.screenshot" />
       </div>
     </div>
   </ViewLayout>
