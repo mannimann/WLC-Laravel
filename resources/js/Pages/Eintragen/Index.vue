@@ -379,22 +379,66 @@ const fileChanged = (e) => {
                     <InputError :message="form.errors.schritte" class="mt-2" />
                   </div>
 
-                  <!-- TODO -->
                   <div class="mb-6 flex overflow-hidden">
-                    <div class="mt-4">
+                    <div
+                      class="mt-4 hover:text-primary dark:hover:text-primary_dark"
+                    >
                       <label
                         for="f_screenshot"
                         class="mr-3 cursor-pointer text-[14px] uppercase"
                         >Screenshot:</label
                       >
                     </div>
-                    <input
+
+                    <!-- TODO -->
+                    <div
+                      class="form-input flex w-full items-center justify-center p-0"
+                      @drop="fileChanged"
+                      @dragover="fileChanged"
+                    >
+                      <label
+                        for="f_screenshot"
+                        class="dark:hover:bg-bray-800 flex w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                      >
+                        <div class="flex items-center justify-center p-1">
+                          <svg
+                            aria-hidden="true"
+                            class="mx-2 hidden h-6 w-6 text-gray-400 md:block"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                            ></path>
+                          </svg>
+                          <p class="text-gray-500 dark:text-gray-400">
+                            Klicken oder Drag and Drop
+                            <span class="text-sm"> (nur PNG oder JPG) </span>
+                          </p>
+                        </div>
+                        <input
+                          type="file"
+                          class="hidden"
+                          name="screenshot"
+                          id="f_screenshot"
+                          @change="fileChanged"
+                        />
+                      </label>
+                    </div>
+
+                    <!-- <input
                       type="file"
                       class="form-input cursor-pointer"
                       name="screenshot_big"
                       id="f_screenshot"
                       @change="fileChanged"
-                    />
+                    /> -->
+
                     <InputError
                       :message="form.errors.screenshot"
                       class="mt-2"
