@@ -35,28 +35,6 @@ use App\Http\Controllers\AuswertungController;
 //   ]);
 // });
 
-Route::resource("/dashboard", DashboardController::class, [
-  "names" => "dashboard",
-])
-  ->middleware(["auth", "verified"])
-  ->only(["index"]);
-
-// Route::resource("/", StepController::class)
-//   //   ->name("steps")
-//   ->only(["index", "store"]);
-
-// Route::get("/auswertung", function () {
-//   return Inertia::render("Auswertung/Index");
-// })->name("auswertung");
-
-// Route::get("/steps", function () {
-//   return Inertia::render("Steps/Index");
-// })->name("steps");
-
-// Route::get("/", function () {
-//   return Inertia::render("Dashboard");
-// })->name("home");
-
 Route::get("/", HomeController::class)->name("home");
 
 Route::resource("/eintragen", EintragenController::class, [
@@ -70,6 +48,12 @@ Route::resource("/auswertung", AuswertungController::class, [
 Route::resource("/kontakt", ContactController::class, [
   "names" => "kontakt",
 ])->only(["index", "store"]);
+
+Route::resource("/dashboard", DashboardController::class, [
+  "names" => "dashboard",
+])
+  ->middleware(["auth", "verified"])
+  ->only(["index"]);
 
 Route::prefix("admin")
   ->middleware("auth", "verified")
