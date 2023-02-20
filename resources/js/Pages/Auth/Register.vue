@@ -6,6 +6,8 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 
+const props = defineProps(["expires", "signature"]);
+
 const form = useForm({
   name: "",
   email: "",
@@ -15,9 +17,15 @@ const form = useForm({
 });
 
 const submit = () => {
-  form.post(route("register"), {
-    onFinish: () => form.reset("password", "password_confirmation"),
-  });
+  form.post(
+    route("register", {
+      expires: props.expires,
+      signature: props.signature,
+    }),
+    {
+      onFinish: () => form.reset("password", "password_confirmation"),
+    }
+  );
 };
 </script>
 

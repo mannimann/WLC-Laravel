@@ -111,6 +111,16 @@ const deactivate = (props) => {
       <div class="mx-auto p-4 sm:p-6 lg:p-8">
         <h3 class="mb-3 text-2xl font-bold">Nutzer:</h3>
 
+        <p>
+          <span class="font-bold text-primary dark:text-primary_dark"
+            >Hinweis:</span
+          >
+          Wenn weniger als <strong>zwei</strong> Nutzer eingetragen sind, ist
+          eine Registrierung über den Registrieren-Button möglich!<br />
+          Weitere Nutzer können nur über einen Registrierungslink hinzugefügt
+          werden.
+        </p>
+
         <button
           type="button"
           class="btn-primary btn m-3 mb-6 h-fit"

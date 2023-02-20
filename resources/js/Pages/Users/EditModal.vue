@@ -111,9 +111,14 @@ onUnmounted(() => {
                 @focus="addNotEmpty"
                 @blur="removeNotEmpty"
               >
-                <option value="3" class="form-select-option">3</option>
-                <option value="2" class="form-select-option">2</option>
-                <option value="1" class="form-select-option">1</option>
+                <option value="3" class="form-select-option">3 - Admin</option>
+                <option value="2" class="form-select-option">
+                  2 - Nutzer verwalten
+                </option>
+                <option value="1" class="form-select-option">
+                  1 - Schreiben
+                </option>
+                <option value="0" class="form-select-option">0 - Lesen</option>
               </select>
               <InputError
                 :message="form.errors.permission_level"

@@ -19,9 +19,19 @@ class RegisteredUserController extends Controller
    *
    * @return \Inertia\Response
    */
-  public function create()
+  public function create(Request $request)
   {
-    return Inertia::render("Auth/Register");
+    if ($request->hasValidSignature()) {
+      return Inertia::render("Auth/Register", [
+        "expires" => $request->expires,
+        "signature" => $request->signature,
+      ]);
+    } else {
+      return Inertia::render("Auth/Register", [
+        "expires" => "",
+        "signature" => "",
+      ]);
+    }
   }
 
   /**
