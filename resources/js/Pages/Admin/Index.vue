@@ -50,7 +50,7 @@ const showToastError = (msg) => {
   <ViewLayout :title="settings.title">
     <AdminLayout>
       <div class="mx-auto p-4 sm:p-6 lg:p-8">
-        <h3 class="text-2xl font-bold">Administration:</h3>
+        <h3 class="mb-3 text-2xl font-bold">Administration:</h3>
 
         <div
           class="mb-3 grid grid-cols-1 justify-items-stretch gap-8 lg:grid-cols-2"
