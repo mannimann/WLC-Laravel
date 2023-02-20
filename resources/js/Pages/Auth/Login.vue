@@ -6,6 +6,7 @@ import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
+import { ref } from "vue";
 
 defineProps({
   canResetPassword: Boolean,
@@ -18,8 +19,11 @@ const form = useForm({
   remember: false,
 });
 
+const err = ref(null);
+
 const submit = () => {
   form.post(route("login"), {
+    onError: (msg) => (err.value = msg.message),
     onFinish: () => form.reset("password"),
   });
 };
@@ -34,6 +38,10 @@ const submit = () => {
     </div>
 
     <form @submit.prevent="submit">
+      <div v-if="err">
+        <InputError class="mt-2" :message="err" />
+      </div>
+
       <div>
         <InputLabel for="email" value="Email" />
         <TextInput
