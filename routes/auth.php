@@ -1,8 +1,5 @@
 <?php
 
-use App\Models\User;
-use Inertia\Inertia;
-use Spatie\Valuestore\Valuestore;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\VerifyEmailController;

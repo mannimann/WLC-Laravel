@@ -6,8 +6,9 @@ use App\Models\User;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use Spatie\Valuestore\Valuestore;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Http\RedirectResponse;
 
 class UserController extends Controller
 {
@@ -42,6 +43,16 @@ class UserController extends Controller
       "settings.title" => $settings->get("title"),
       "users" => $users->values(),
     ]);
+  }
+
+  /**
+   * Show the form for creating a new resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function create()
+  {
+    return URL::temporarySignedRoute("register", now()->addDays(7), []);
   }
 
   /**

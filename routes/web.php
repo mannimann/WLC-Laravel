@@ -78,7 +78,7 @@ Route::prefix("admin")
 
     Route::resource("/users", UserController::class, [
       "names" => "users",
-    ])->only(["index", "update", "destroy"]);
+    ])->only(["index", "create", "update", "destroy"]);
 
     Route::get("/export", [ExcelController::class, "export"])->name("export");
   });

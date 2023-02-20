@@ -4,6 +4,7 @@ import AdminLayout from "@/Layouts/AdminLayout.vue";
 import Card from "@/Components/Card.vue";
 import EditModal from "./EditModal.vue";
 import DeleteModal from "./DeleteModal.vue";
+import RegisterModal from "./RegisterModal.vue";
 import { Head, router } from "@inertiajs/vue3";
 import { VueGoodTable } from "vue-good-table-next";
 import { useColorMode } from "@vueuse/core";
@@ -109,6 +110,18 @@ const deactivate = (props) => {
     <AdminLayout>
       <div class="mx-auto p-4 sm:p-6 lg:p-8">
         <h3 class="mb-3 text-2xl font-bold">Nutzer:</h3>
+
+        <button
+          type="button"
+          class="btn-primary btn m-3 mb-6 h-fit"
+          @click="
+            modalOpen = true;
+            modalType = 'register';
+          "
+          :disabled="modalOpen"
+        >
+          Registrierungslink erzeugen
+        </button>
 
         <Card>
           <template v-slot:header>
@@ -272,6 +285,9 @@ const deactivate = (props) => {
       </div>
       <div v-else-if="modalOpen && modalType === 'delete'">
         <DeleteModal :row="row" @close="modalOpen = false" />
+      </div>
+      <div v-else-if="modalOpen && modalType === 'register'">
+        <RegisterModal @close="modalOpen = false" />
       </div>
     </Transition>
   </Teleport>
