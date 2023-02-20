@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\KlasseController;
@@ -89,6 +90,10 @@ Route::prefix("admin")
 
     Route::resource("/dbadmin", DBAdminController::class, [
       "names" => "dbadmin",
+    ])->only(["index", "update", "destroy"]);
+
+    Route::resource("/users", UserController::class, [
+      "names" => "users",
     ])->only(["index", "update", "destroy"]);
 
     Route::get("/export", [ExcelController::class, "export"])->name("export");

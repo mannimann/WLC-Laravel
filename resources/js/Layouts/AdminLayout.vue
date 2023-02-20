@@ -10,6 +10,7 @@ const links_admin = [
   { name: "Einstellungen", route: "admin.einstellungen.index" },
   { name: "Nachrichten", route: "admin.nachrichten.index" },
   { name: "DB-Admin", route: "admin.dbadmin.index" },
+  { name: "Nutzer", route: "admin.users.index" },
 ];
 
 let scroller;
