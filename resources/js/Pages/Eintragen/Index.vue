@@ -45,7 +45,6 @@ const showToastSuccess = function () {
 };
 const showToastError = function (message) {
   if (message) toast.error(message);
-  // toast.error("Du hast dich für diesen Zeitraum bereits eingetragen!");
 };
 
 const addNotEmpty = (e) => {

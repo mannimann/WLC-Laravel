@@ -19,10 +19,6 @@ class StepSeeder extends Seeder
   {
     $faker = app(Generator::class);
 
-    // Step::factory(50)->create();
-
-    // $zeiträume = Zeitraum::select("von", "bis")->get();
-
     /*
      * Zeiträume
      */
