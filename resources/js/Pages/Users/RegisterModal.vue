@@ -30,7 +30,7 @@ const newLink = () => {
     });
 };
 
-const copyURL = async (mytext) => {
+const copyURL = async () => {
   try {
     await navigator.clipboard.writeText(link.value);
     toast.success("Link kopiert!");
@@ -78,9 +78,13 @@ const copyURL = async (mytext) => {
         <div
           class="space-y-6 p-6 text-base leading-relaxed text-secondary dark:text-secondary_dark"
         >
-          <p class="">
+          <p class="leading-tight">
             Neuen Registrierungslink erzeugen:<br />
             <span class="text-sm">(Der Link ist 7 Tage lang gültig.)</span>
+          </p>
+          <p class="text-sm">
+            Hinweis: Neue Nutzer haben zunächst nur Lese-Rechte. Diese können
+            nach der Registrierung angepasst werden.
           </p>
           <textarea
             id="url"
