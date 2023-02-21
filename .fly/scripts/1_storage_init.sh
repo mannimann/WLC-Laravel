@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # FOLDER=/var/www/html/storage/app
 # if [ ! -d "$FOLDER" ]; then
 #     echo "$FOLDER is not a directory, copying storage_ content to storage"
