@@ -17,7 +17,7 @@ const form = useForm({
 const confirm = () => {
   form.patch(route("admin.users.update", props.row.id), {
     onSuccess: () => {
-      toast.success("Berechtigung geändert!");
+      toast.success("Berechtigungs-Level geändert!");
       emit("close");
     },
     onError: (msg) => {
@@ -52,7 +52,7 @@ onUnmounted(() => {
         <div
           class="flex items-start justify-between rounded-t border-b p-6 dark:border-gray-600"
         >
-          <h3 class="text-lg font-bold">Permission Level ändern?</h3>
+          <h3 class="text-lg font-bold">Berechtigungs-Level ändern?</h3>
           <button
             type="button"
             class="ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
@@ -77,7 +77,7 @@ onUnmounted(() => {
           <p
             class="text-base leading-relaxed text-secondary dark:text-secondary_dark"
           >
-            Soll die Zugriffsberechtigung des Nutzers geändert werden?
+            Soll das Berechtigungs-Level des Nutzers geändert werden?
           </p>
           <p
             class="text-base leading-relaxed text-secondary dark:text-secondary_dark"
@@ -85,23 +85,23 @@ onUnmounted(() => {
             {{ row.name }} ({{ row.email }})<br />
             Erstellt am:
             {{ dayjs(row.created_at).format("DD.MM.YY HH:mm") }} Uhr<br />
-            Permission Level: {{ row.permission_level }}
+            Berechtigungs-Level: {{ row.permission_level }}
           </p>
           <p
             class="text-sm leading-relaxed text-secondary dark:text-secondary_dark"
           >
-            Hinweis: Die Zugriffsberechtigung eines Nutzers mit dem gleichen
+            Hinweis: Das Berechtigungs-Level eines Nutzers mit dem gleichen
             Level wie man selbst lässt sich nicht mehr verändern!
           </p>
           <form
-            class="pt-6"
+            class="pt-6 text-secondary dark:text-secondary_dark"
             name="setPermission"
             id="setPermission"
             @submit.prevent="confirm"
           >
             <div class="form-not-empty">
               <label for="f_permission_level" class="form-label"
-                >Permission Level:</label
+                >Berechtigungs-Level:</label
               >
               <select
                 name="permission_level"

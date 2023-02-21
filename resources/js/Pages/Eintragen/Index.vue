@@ -524,7 +524,6 @@ const entering = ref(false);
             </template>
           </Card>
         </section>
-        <img :src="form.screenshot" />
       </div>
     </div>
   </ViewLayout>

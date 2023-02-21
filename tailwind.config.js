@@ -51,6 +51,7 @@ module.exports = {
       },
     },
     fontSize: {
+      xs: "0.8rem",
       sm: "0.9rem",
       base: "1.15rem",
       md: "1.15rem",
@@ -66,7 +67,7 @@ module.exports = {
   daisyui: {
     themes: [
       {
-        mytheme: {
+        dark: {
           primary: "#15803d",
           secondary: "#edad1a",
           accent: "#e06902",
@@ -79,7 +80,6 @@ module.exports = {
         },
       },
       // "light",
-      // "dark",
     ],
   },
 

@@ -116,7 +116,11 @@ const links = [
                     <div
                       class="px-4 py-1 text-center text-sm font-medium text-secondary dark:text-secondary_dark"
                     >
-                      {{ $page.props.auth.user.email }}
+                      <p>{{ $page.props.auth.user.email }}</p>
+                      <p class="mt-1 text-xs">
+                        Berechtigungs-Level:
+                        {{ $page.props.auth.user.permission_level }}
+                      </p>
                     </div>
                     <DropdownLink
                       :href="route('logout')"
@@ -192,6 +196,12 @@ const links = [
                   class="text-sm font-medium text-secondary dark:text-secondary_dark"
                 >
                   {{ $page.props.auth.user.email }}
+                </div>
+                <div
+                  class="text-xs font-medium text-secondary dark:text-secondary_dark"
+                >
+                  Berechtigungs-Level:
+                  {{ $page.props.auth.user.permission_level }}
                 </div>
               </div>
 

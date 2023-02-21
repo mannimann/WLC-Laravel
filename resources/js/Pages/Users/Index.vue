@@ -45,7 +45,7 @@ const columns = [
     dateOutputFormat: "MM.dd.yyyy - HH:mm 'Uhr'",
   },
   {
-    label: "Permission Level",
+    label: "Berechtigungs-Level",
     field: "permission_level",
     type: "number",
   },
