@@ -94,7 +94,7 @@ onUnmounted(() => {
             Level wie man selbst lässt sich nicht mehr verändern!
           </p>
           <form
-            class="pt-6 text-secondary dark:text-secondary_dark"
+            class="pt-6"
             name="setPermission"
             id="setPermission"
             @submit.prevent="confirm"
