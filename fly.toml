@@ -11,21 +11,22 @@ processes = []
     PHP_VERSION = "8.1"
 
 [mounts]
-  source="database_vol"
-  destination="/var/www/html/database/database"
+  source = "database_vol"
+  destination = "/var/www/html/database/database"
 
 [deploy]
   release_command = "php /var/www/html/artisan migrate --force"
 
 [env]
   APP_ENV = "production"
+  APP_DEBUG = "false"
   LOG_CHANNEL = "stderr"
   LOG_LEVEL = "info"
   LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
-  MAIL_MAILER="smtp"
-  MAIL_HOST="smtp-relay.sendinblue.com"
-  MAIL_PORT="587"
-  MAIL_ENCRYPTION="tls"
+  MAIL_MAILER = "smtp"
+  MAIL_HOST = "smtp-relay.sendinblue.com"
+  MAIL_PORT = "587"
+  MAIL_ENCRYPTION = "tls"
 
 [experimental]
   auto_rollback = true
