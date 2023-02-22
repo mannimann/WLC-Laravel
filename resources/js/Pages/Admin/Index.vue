@@ -60,7 +60,7 @@ const zeitraum = computed({
                     onError: (msg) => {
                       if (msg.status == 'warning') {
                         toast.warning(msg.message);
-                      } else toast.error(msg.message);
+                      } else if (msg.message) toast.error(msg.message);
                     },
                     preserveScroll: true,
                   })

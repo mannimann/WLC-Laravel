@@ -43,7 +43,9 @@ const toast = useToast();
                 toast.success('Zeitraum geändert!');
                 editing = false;
               },
-              onError: (msg) => toast.error(msg.message),
+              onError: (msg) => {
+                if (msg.message) toast.error(msg.message);
+              },
               preserveScroll: true,
             })
           "

@@ -29,7 +29,9 @@ const toast = useToast();
                 toast.success('Klasse geändert!');
                 editing = false;
               },
-              onError: (msg) => toast.error(msg.message),
+              onError: (msg) => {
+                if (msg.message) toast.error(msg.message);
+              },
               preserveScroll: true,
             })
           "
@@ -38,13 +40,13 @@ const toast = useToast();
             class="grid w-full grid-cols-1 content-center gap-2 sm:grid-cols-2"
           >
             <TextInput v-model="form.klasse" class="p-2 text-lg" />
-
             <select
               v-model="form.kategorie"
               class="rounded-md border border-gray-300 text-lg text-gray-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             >
               <option value="Schüler">Schüler</option>
               <option value="Erwachsene">Erwachsene</option>
+              <option value="Erwasdfchsene">Erwacsdfhsene</option>
             </select>
             <InputError :message="form.errors.klasse" class="mt-2" />
             <InputError :message="form.errors.kategorie" class="mt-2" />

@@ -24,7 +24,9 @@ const submitForm = () => {
       if (form.override) toast.success("Daten als Standard gespeichert!");
       else toast.success("Aktualisieren erfolgreich!");
     },
-    onError: (msg) => toast.error(msg.message),
+    onError: (msg) => {
+      if (msg.message) toast.error(msg.message);
+    },
     preserveScroll: true,
   });
 };

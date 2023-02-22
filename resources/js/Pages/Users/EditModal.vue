@@ -21,7 +21,7 @@ const confirm = () => {
       emit("close");
     },
     onError: (msg) => {
-      toast.error(msg.message);
+      if (msg.message) toast.error(msg.message);
     },
     preserveScroll: true,
   });
