@@ -199,7 +199,11 @@ const screenshotHeight = ref(80);
                       :disabled="modalOpen"
                       :style="{ width: screenshotHeight + 'px' }"
                     >
-                      <img :src="props.row.screenshot" alt="" class="h-full" />
+                      <img
+                        :src="props.row.screenshot"
+                        alt="Screenshot"
+                        class="h-full"
+                      />
                     </button>
                   </div>
                 </div>

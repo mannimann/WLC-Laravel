@@ -21,6 +21,7 @@ class StepService
       "von",
       "bis",
       "schritte",
+      "screenshot",
       "steps.created_at",
       "steps.updated_at"
     )
