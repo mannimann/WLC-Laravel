@@ -8,6 +8,7 @@ import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
 
 // my imports
 import Toast from "vue-toastification";
+import { MotionPlugin } from "@vueuse/motion";
 
 import "@vuepic/vue-datepicker/dist/main.css";
 import "vue-toastification/dist/index.css";
@@ -29,6 +30,7 @@ createInertiaApp({
     return createApp({ render: () => h(App, props) })
       .use(plugin)
       .use(ZiggyVue, Ziggy)
+      .use(MotionPlugin)
       .use(Toast, {
         transition: "Vue-Toastification__bounce",
         // transition: "Vue-Toastification__slideBlurred",

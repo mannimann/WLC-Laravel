@@ -80,33 +80,39 @@ const labelsKlassen = topKlassen.map((entry) => entry.klasse);
           title="Top 10 Teilnehmeranzahl"
           :data="dataTeilnehmer"
           :labels="labelsTeilnehmer"
+          v-motion-fade-visible
         />
-        <AuswertungZeitraum :data="steps_zeitraum" />
+        <AuswertungZeitraum :data="steps_zeitraum" v-motion-fade-visible />
       </section>
 
       <section
         class="mb-10 grid grid-cols-1 justify-items-stretch gap-3 xl:grid-cols-2"
+        v-motion-slide-visible-bottom
       >
         <AuswertungVBarChart
           title="Top 5 Klassen (Schritte pro Kopf)"
           :data="dataKlassen"
           :labels="labelsKlassen"
+          v-motion-fade-visible
         />
-        <AuswertungKlassen :data="steps_klassen" />
+        <AuswertungKlassen :data="steps_klassen" v-motion-fade-visible />
       </section>
 
       <section
         class="mb-10 grid grid-cols-1 justify-items-stretch gap-3 xl:grid-cols-2"
+        v-motion-slide-visible-bottom
       >
         <div class="mb-10 space-y-3 md:mb-0">
           <AuswertungVBarChart
             title="Top 5 Schüler"
             :data="dataLäuferSchüler"
             :labels="labelsLäuferSchüler"
+            v-motion-fade-visible
           />
           <AuswertungPersonen
             title="Top Schüler"
             :data="steps_läufer_schüler"
+            v-motion-fade-visible
           />
         </div>
 
@@ -115,16 +121,22 @@ const labelsKlassen = topKlassen.map((entry) => entry.klasse);
             title="Top 5 Erwachsene"
             :data="dataLäuferErwachsene"
             :labels="labelsLäuferErwachsene"
+            v-motion-fade-visible
           />
           <AuswertungPersonen
             title="Top Erwachsene"
             :data="steps_läufer_erwachsene"
+            v-motion-fade-visible
           />
         </div>
       </section>
 
-      <section class="mb-3">
-        <AuswertungAlle :data="steps_läufer_zeitraum" :zeiträume="zeiträume" />
+      <section class="mb-3" v-motion-slide-visible-bottom>
+        <AuswertungAlle
+          :data="steps_läufer_zeitraum"
+          :zeiträume="zeiträume"
+          v-motion-fade-visible
+        />
       </section>
     </div>
   </ViewLayout>

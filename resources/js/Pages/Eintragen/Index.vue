@@ -137,7 +137,7 @@ const entering = ref(false);
   <ViewLayout :title="settings.title">
     <div class="mx-auto p-4 sm:p-6 lg:p-8">
       <!-- Submitted -->
-      <div v-if="submitted">
+      <div v-if="submitted" v-motion-fade-visible>
         <Card class="container mx-auto p-8 text-center">
           <template v-slot:header>
             <h3>Daten erfolgreich eingetragen</h3>
@@ -192,7 +192,7 @@ const entering = ref(false);
       <!-- Main Content -->
       <div v-else class="container mx-auto">
         <!-- DescriptionCard -->
-        <section id="DescriptionCard" class="mb-3">
+        <section id="DescriptionCard" class="mb-3" v-motion-fade-visible>
           <Card>
             <template v-slot:header>
               <div
@@ -271,7 +271,7 @@ const entering = ref(false);
         </section>
 
         <!-- InputCard -->
-        <section id="InputCard" class="mb-3">
+        <section id="InputCard" class="mb-3" v-motion-fade-visible>
           <Card>
             <template v-slot:header>
               <h3>Daten eingeben:</h3>

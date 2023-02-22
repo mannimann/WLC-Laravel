@@ -54,6 +54,7 @@ const showToastError = function () {
           })
         "
         class="mx-auto w-full sm:w-3/4 md:w-2/3 lg:w-1/2"
+        v-motion-fade-visible
       >
         <h1 class="text-xl font-bold">KONTAKT</h1>
         <p>

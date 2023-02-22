@@ -95,7 +95,7 @@ const setShadows = (e) => {
     </Transition>
   </div>
   <!-- Page Content -->
-  <main>
+  <main v-motion-fade-visible>
     <slot />
   </main>
 </template>

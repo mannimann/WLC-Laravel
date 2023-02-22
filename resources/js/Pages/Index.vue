@@ -12,6 +12,7 @@ const props = defineProps(["settings"]);
   <ViewLayout :title="settings.title">
     <div
       class="relative flex pt-10 pb-5 text-center sm:min-h-[65vh] sm:items-center sm:pt-0"
+      v-motion-fade-visible
     >
       <div
         class="absolute top-1/2 left-1/2 h-3/4 w-full -translate-y-1/2 -translate-x-1/2 animate-pulse rounded-[50%] bg-secondary2bg blur-2xl filter dark:bg-secondarybg_dark sm:w-5/6 md:h-2/3"
