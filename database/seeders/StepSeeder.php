@@ -104,7 +104,11 @@ class StepSeeder extends Seeder
             "von" => $zeiträume[$i]["von"],
             "bis" => $zeiträume[$i]["bis"],
             "schritte" => $schritte,
-            "screenshot" => $faker->imageUrl(640, 640, $schritte, false),
+            "screenshot" =>
+              "data:image/jpg;base64," .
+              base64_encode(
+                file_get_contents($faker->imageUrl(480, 480, $schritte, false))
+              ),
           ]);
         }
       }
