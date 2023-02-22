@@ -46,7 +46,6 @@ const toast = useToast();
             >
               <option value="Schüler">Schüler</option>
               <option value="Erwachsene">Erwachsene</option>
-              <option value="Erwasdfchsene">Erwacsdfhsene</option>
             </select>
             <InputError :message="form.errors.klasse" class="mt-2" />
             <InputError :message="form.errors.kategorie" class="mt-2" />
