@@ -31,7 +31,7 @@ const showToastError = function () {
 
   <ViewLayout :title="settings.title">
     <div class="mx-auto p-4 sm:p-6 lg:p-8">
-      <div v-if="submitted" class="mt-10 text-center">
+      <div v-if="submitted" class="mt-10 text-center" v-motion-fade-visible>
         <h2 class="text-2xl">Vielen Dank!</h2>
         <div class="mb-3 text-md">Wir kümmern uns um dein Anliegen.</div>
         <PrimaryButton class="m-3" type="button" @click="submitted = false"
