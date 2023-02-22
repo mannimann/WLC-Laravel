@@ -28,6 +28,7 @@ const columns = [
   {
     label: "Id",
     field: "id",
+    hidden: true,
   },
   {
     label: "Name",
