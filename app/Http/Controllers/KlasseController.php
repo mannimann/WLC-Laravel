@@ -14,9 +14,7 @@ class KlasseController extends Controller
    */
   public function index()
   {
-    // return Inertia::render("Klasse/Index", [
-    //   "klassen" => Klasse::all(),
-    // ]);
+    //
   }
 
   /**
@@ -29,21 +27,24 @@ class KlasseController extends Controller
   {
     $validated = $request->validate([
       "klasse" => "required|string|max:10",
+      "kategorie" => "required|string|max:15|in:Schüler,Erwachsene",
     ]);
 
-    $klasse = Klasse::firstOrCreate($validated);
+    $klasse_count = Klasse::where("klasse", "=", $validated["klasse"])->count();
 
-    if ($klasse->wasRecentlyCreated) {
-      return redirect()
-        ->back()
-        ->with(["message" => "Klasse hinzugefügt!"]);
-    } else {
+    if ($klasse_count > 0) {
       return redirect()
         ->back()
         ->withErrors([
           "message" => "Klasse bereits vorhanden!",
         ]);
     }
+
+    Klasse::create($validated);
+
+    return redirect()
+      ->back()
+      ->with(["message" => "Klasse hinzugefügt!"]);
   }
 
   /**
@@ -57,7 +58,24 @@ class KlasseController extends Controller
   {
     $validated = $request->validate([
       "klasse" => "required|string|max:10",
+      "kategorie" => "required|string|max:15|in:Schüler,Erwachsene",
     ]);
+
+    $klasse_old = Klasse::where("klasse", "=", $validated["klasse"])
+      ->limit(1)
+      ->get();
+
+    if (
+      count($klasse_old) > 0 &&
+      ($klasse["id"] != $klasse_old[0]["id"] ||
+        $klasse_old[0]["kategorie"] == $validated["kategorie"])
+    ) {
+      return redirect()
+        ->back()
+        ->withErrors([
+          "message" => "Klasse bereits vorhanden!",
+        ]);
+    }
 
     $klasse->update($validated);
 

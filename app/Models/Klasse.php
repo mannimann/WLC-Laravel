@@ -11,5 +11,5 @@ class Klasse extends Model
 
   protected $table = "klassen";
 
-  protected $fillable = ["klasse"];
+  protected $fillable = ["klasse", "kategorie"];
 }

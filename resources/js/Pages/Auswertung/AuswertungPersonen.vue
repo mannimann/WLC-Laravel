@@ -4,7 +4,7 @@ import { useColorMode } from "@vueuse/core";
 import { ref, watch } from "vue";
 import Card from "@/Components/Card.vue";
 
-const props = defineProps(["data"]);
+const props = defineProps(["title", "data"]);
 
 // Table Theme
 const key = ref(0);
@@ -55,7 +55,7 @@ const columns = [
 <template>
   <Card>
     <template v-slot:header>
-      <h3>Top Läufer:</h3>
+      <h3>{{ title }}:</h3>
     </template>
 
     <template v-slot:body>

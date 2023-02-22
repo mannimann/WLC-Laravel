@@ -16,6 +16,7 @@ const toast = useToast();
 
 const form_klasse = useForm({
   klasse: "",
+  kategorie: "Schüler",
 });
 const form_zeitraum = useForm({
   von: "",
@@ -113,19 +114,32 @@ const zeitraum = computed({
                       form_klasse.reset();
                     },
                     onError: (msg) => {
-                      toast.error(msg.message);
+                      if (msg.message) toast.error(msg.message);
                     },
                     preserveScroll: true,
                   })
                 "
               >
                 <div class="flex w-full">
-                  <TextInput
-                    v-model="form_klasse.klasse"
-                    type="text"
-                    placeholder="Klasse eingeben"
-                    class="block w-full text-lg"
-                  />
+                  <div
+                    class="grid w-full grid-cols-1 content-center gap-2 sm:grid-cols-2"
+                  >
+                    <TextInput
+                      v-model="form_klasse.klasse"
+                      type="text"
+                      placeholder="Klasse eingeben"
+                      class="block w-full text-lg"
+                    />
+                    <select
+                      name="kategorie"
+                      v-model="form_klasse.kategorie"
+                      placeholder="Kategorie"
+                      class="rounded-md border-gray-300 text-lg text-gray-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    >
+                      <option value="Schüler">Schüler</option>
+                      <option value="Erwachsene">Erwachsene</option>
+                    </select>
+                  </div>
                   <PrimaryButton class="mx-3 my-1 hidden sm:block"
                     >Hinzufügen</PrimaryButton
                   >
@@ -135,6 +149,10 @@ const zeitraum = computed({
                 </div>
                 <InputError
                   :message="form_klasse.errors.klasse"
+                  class="mt-2 block"
+                />
+                <InputError
+                  :message="form_klasse.errors.kategorie"
                   class="mt-2 block"
                 />
               </form>

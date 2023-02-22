@@ -7,7 +7,7 @@ use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
-class StepsLäufer implements FromCollection, WithTitle, WithHeadings
+class StepsLäuferErwachsene implements FromCollection, WithTitle, WithHeadings
 {
   public function headings(): array
   {
@@ -20,7 +20,7 @@ class StepsLäufer implements FromCollection, WithTitle, WithHeadings
   public function collection()
   {
     $service = new StepService();
-    $steps = $service->get_steps_läufer();
+    $steps = $service->get_steps_läufer_erwachsene();
     return collect($steps);
   }
 
@@ -29,6 +29,6 @@ class StepsLäufer implements FromCollection, WithTitle, WithHeadings
    */
   public function title(): string
   {
-    return "Einzelpersonen";
+    return "Erwachsene";
   }
 }

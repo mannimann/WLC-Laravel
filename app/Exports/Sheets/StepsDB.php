@@ -7,11 +7,21 @@ use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class StepsAll implements FromCollection, WithTitle, WithHeadings
+class StepsDB implements FromCollection, WithTitle, WithHeadings
 {
   public function headings(): array
   {
-    return ["Vorname", "Name", "Klasse", "Kategorie", "Von", "Bis", "Schritte"];
+    return [
+      "id",
+      "vorname",
+      "name",
+      "klasse",
+      "von",
+      "bis",
+      "schritte",
+      "created_at",
+      "updated_at",
+    ];
   }
 
   /**
@@ -20,18 +30,16 @@ class StepsAll implements FromCollection, WithTitle, WithHeadings
   public function collection()
   {
     $steps = Step::select(
+      "id",
       "vorname",
       "name",
-      "steps.klasse",
-      "kategorie",
+      "klasse",
       "von",
       "bis",
-      "schritte"
-    )
-      ->join("klassen", "steps.klasse", "=", "klassen.klasse")
-      ->withCasts(["von" => "date:d.m.Y"])
-      ->withCasts(["bis" => "date:d.m.Y"])
-      ->get();
+      "schritte",
+      "created_at",
+      "updated_at"
+    )->get();
 
     return $steps;
   }
@@ -41,6 +49,6 @@ class StepsAll implements FromCollection, WithTitle, WithHeadings
    */
   public function title(): string
   {
-    return "Alle Einträge";
+    return "Datenbankinhalt";
   }
 }

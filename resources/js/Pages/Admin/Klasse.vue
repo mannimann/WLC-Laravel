@@ -9,6 +9,7 @@ const props = defineProps(["klasse"]);
 
 const form = useForm({
   klasse: props.klasse.klasse,
+  kategorie: props.klasse.kategorie,
 });
 
 const editing = ref(false);
@@ -21,23 +22,33 @@ const toast = useToast();
       <div class="flex items-center justify-between">
         <form
           v-if="editing"
-          class="flex w-full"
+          class="flex w-full flex-wrap sm:flex-nowrap"
           @submit.prevent="
             form.put(route('klasse.update', klasse.id), {
               onSuccess: () => {
                 toast.success('Klasse geändert!');
+                editing = false;
               },
               onError: (msg) => toast.error(msg.message),
               preserveScroll: true,
-            });
-            editing = false;
+            })
           "
         >
-          <TextInput
-            v-model="form.klasse"
-            class="w-full rounded-md border-gray-300 text-lg text-gray-900 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-          />
-          <InputError :message="form.errors.klasse" class="mt-2" />
+          <div
+            class="grid w-full grid-cols-1 content-center gap-2 sm:grid-cols-2"
+          >
+            <TextInput v-model="form.klasse" class="p-2 text-lg" />
+
+            <select
+              v-model="form.kategorie"
+              class="rounded-md border border-gray-300 text-lg text-gray-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            >
+              <option value="Schüler">Schüler</option>
+              <option value="Erwachsene">Erwachsene</option>
+            </select>
+            <InputError :message="form.errors.klasse" class="mt-2" />
+            <InputError :message="form.errors.kategorie" class="mt-2" />
+          </div>
           <div class="mt-3 space-x-2">
             <!-- Speichern -->
             <button type="submit" class="btn-ghost btn ml-2">
@@ -80,7 +91,10 @@ const toast = useToast();
             </button>
           </div>
         </form>
-        <p v-else class="w-full text-lg text-gray-900">{{ klasse.klasse }}</p>
+        <div v-else class="grid w-full text-lg text-gray-900 sm:grid-cols-2">
+          <p>{{ klasse.klasse }}</p>
+          <p>{{ klasse.kategorie }}</p>
+        </div>
 
         <!-- Bearbeiten -->
         <button
@@ -108,7 +122,10 @@ const toast = useToast();
         <button
           @click="
             router.delete(route('klasse.destroy', klasse.id), {
-              onSuccess: () => toast.warning('Klasse gelöscht!'),
+              onSuccess: () =>
+                toast.warning(`Klasse ${klasse.klasse} gelöscht!`, {
+                  timeout: 5000,
+                }),
               onError: (msg) => toast.error(msg.message),
               preserveScroll: true,
             })

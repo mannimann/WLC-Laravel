@@ -65,16 +65,19 @@ class StepSeeder extends Seeder
         foreach (["a", "b", "c"] as $nr) {
           Klasse::factory()->create([
             "klasse" => $stufe . $nr,
+            "kategorie" => "Schüler",
           ]);
           $klassen[] = $stufe . $nr;
         }
       }
       Klasse::factory()->create([
         "klasse" => "Lehrer",
+        "kategorie" => "Erwachsene",
       ]);
       $klassen[] = "Lehrer";
       Klasse::factory()->create([
         "klasse" => "Eltern",
+        "kategorie" => "Erwachsene",
       ]);
       $klassen[] = "Eltern";
     }

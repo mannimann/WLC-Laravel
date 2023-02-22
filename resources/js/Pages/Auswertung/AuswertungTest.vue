@@ -48,6 +48,11 @@ const columns = [
     type: "number",
   },
   {
+    label: "Kategorie",
+    field: "kategorie",
+    type: "number",
+  },
+  {
     label: "Von",
     field: "von",
     type: "date",
@@ -83,10 +88,10 @@ const columns = [
     dateOutputFormat: "MM.dd.yy - HH:mm:ss",
     hidden: true,
   },
-  {
-    label: "Screenshot",
-    field: "screenshot",
-  },
+  // {
+  //   label: "Screenshot",
+  //   field: "screenshot",
+  // },
 ];
 </script>
 

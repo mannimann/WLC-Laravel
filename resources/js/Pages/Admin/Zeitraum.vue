@@ -36,16 +36,16 @@ const toast = useToast();
       <div class="flex items-center justify-between">
         <form
           v-if="editing"
-          class="flex w-full"
+          class="flex w-full flex-wrap sm:flex-nowrap"
           @submit.prevent="
             form.put(route('zeitraum.update', zeitraum.id), {
               onSuccess: () => {
                 toast.success('Zeitraum geändert!');
+                editing = false;
               },
               onError: (msg) => toast.error(msg.message),
               preserveScroll: true,
-            });
-            editing = false;
+            })
           "
         >
           <Datepicker
@@ -61,6 +61,7 @@ const toast = useToast();
             class="my-auto block w-full rounded-md border-gray-300 text-lg shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
           <InputError :message="form.errors.von" class="mt-2" />
+
           <div class="mt-3 space-x-2">
             <!-- Speichern -->
             <button type="submit" class="btn-ghost btn ml-2">
@@ -134,7 +135,15 @@ const toast = useToast();
         <button
           @click="
             router.delete(route('zeitraum.destroy', zeitraum.id), {
-              onSuccess: () => toast.warning('Zeitraum gelöscht!'),
+              onSuccess: () =>
+                toast.warning(
+                  `Zeitraum ${dayjs(zeitraum.von).format(
+                    'DD.MM.YYYY'
+                  )} - ${dayjs(zeitraum.bis).format('DD.MM.YYYY')} gelöscht!`,
+                  {
+                    timeout: 5000,
+                  }
+                ),
               onError: (msg) => toast.error(msg.message),
               preserveScroll: true,
             })

@@ -58,7 +58,7 @@ const columns = [
 <template>
   <Card>
     <template v-slot:header>
-      <h3>Gesamtanzahl Schritte im Zeitraum:</h3>
+      <h3>Gesamtanzahl Schritte im Zeitraum</h3>
     </template>
 
     <template v-slot:body>

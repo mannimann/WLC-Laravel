@@ -14,12 +14,14 @@ const props = defineProps([
   "settings",
   "steps_all",
   "steps_zeitraum",
-  "steps_läufer",
+  "steps_läufer_schüler",
+  "steps_läufer_erwachsene",
   "steps_klassen",
   "steps_läufer_zeitraum",
   "zeiträume",
 ]);
 
+// Auswertung Teilnehmeranzahl
 const topTeilnehmer = props.steps_klassen
   .sort((a, b) => {
     return b.teilnehmer_anzahl - a.teilnehmer_anzahl;
@@ -28,16 +30,31 @@ const topTeilnehmer = props.steps_klassen
 const dataTeilnehmer = topTeilnehmer.map((entry) => entry.teilnehmer_anzahl);
 const labelsTeilnehmer = topTeilnehmer.map((entry) => entry.klasse);
 
-const topLäufer = props.steps_läufer
+// Auswertung Schüler
+const topLäuferSchüler = props.steps_läufer_schüler
   .sort((a, b) => {
     return b.schritte_sum - a.schritte_sum;
   })
   .slice(0, 5);
-const dataLäufer = topLäufer.map((entry) => entry.schritte_sum);
-const labelsLäufer = topLäufer.map(
+const dataLäuferSchüler = topLäuferSchüler.map((entry) => entry.schritte_sum);
+const labelsLäuferSchüler = topLäuferSchüler.map(
   (entry) => entry.vorname + " " + entry.name + " - " + entry.klasse
 );
 
+// Auswertung Erwachsene
+const topLäuferErwachsene = props.steps_läufer_erwachsene
+  .sort((a, b) => {
+    return b.schritte_sum - a.schritte_sum;
+  })
+  .slice(0, 5);
+const dataLäuferErwachsene = topLäuferErwachsene.map(
+  (entry) => entry.schritte_sum
+);
+const labelsLäuferErwachsene = topLäuferErwachsene.map(
+  (entry) => entry.vorname + " " + entry.name + " - " + entry.klasse
+);
+
+// Auswertung Klassen
 const topKlassen = props.steps_klassen
   .sort((a, b) => {
     return b.schritte_pro_kopf - a.schritte_pro_kopf;
@@ -57,7 +74,7 @@ const labelsKlassen = topKlassen.map((entry) => entry.klasse);
       </section> -->
 
       <section
-        class="mb-3 grid grid-cols-1 justify-items-stretch gap-3 xl:grid-cols-2"
+        class="mb-10 grid grid-cols-1 justify-items-stretch gap-3 xl:grid-cols-2"
       >
         <AuswertungHBarChart
           title="Top 10 Teilnehmeranzahl"
@@ -65,32 +82,46 @@ const labelsKlassen = topKlassen.map((entry) => entry.klasse);
           :labels="labelsTeilnehmer"
         />
         <AuswertungZeitraum :data="steps_zeitraum" />
+      </section>
 
-        <AuswertungVBarChart
-          title="Top 5 Läufer"
-          :data="dataLäufer"
-          :labels="labelsLäufer"
-        />
+      <section
+        class="mb-10 grid grid-cols-1 justify-items-stretch gap-3 xl:grid-cols-2"
+      >
         <AuswertungVBarChart
           title="Top 5 Klassen (Schritte pro Kopf)"
           :data="dataKlassen"
           :labels="labelsKlassen"
         />
-
-        <AuswertungPersonen :data="steps_läufer" />
-
         <AuswertungKlassen :data="steps_klassen" />
       </section>
 
-      <!-- <section
-      class="mb-3 grid grid-cols-1 justify-items-stretch gap-3 xl:grid-cols-2"
-    >
-      <div>
-        <AuswertungZeitraum class="mb-3" :data="steps_zeitraum" />
-        <AuswertungPersonen :data="steps_läufer" />
-      </div>
-      <AuswertungKlassen :data="steps_klassen" />
-    </section> -->
+      <section
+        class="mb-10 grid grid-cols-1 justify-items-stretch gap-3 xl:grid-cols-2"
+      >
+        <div class="mb-10 space-y-3 md:mb-0">
+          <AuswertungVBarChart
+            title="Top 5 Schüler"
+            :data="dataLäuferSchüler"
+            :labels="labelsLäuferSchüler"
+          />
+          <AuswertungPersonen
+            title="Top Schüler"
+            :data="steps_läufer_schüler"
+          />
+        </div>
+
+        <div class="space-y-3">
+          <AuswertungVBarChart
+            title="Top 5 Erwachsene"
+            :data="dataLäuferErwachsene"
+            :labels="labelsLäuferErwachsene"
+          />
+          <AuswertungPersonen
+            title="Top Erwachsene"
+            :data="steps_läufer_erwachsene"
+          />
+        </div>
+      </section>
 
       <section class="mb-3">
         <AuswertungAlle :data="steps_läufer_zeitraum" :zeiträume="zeiträume" />

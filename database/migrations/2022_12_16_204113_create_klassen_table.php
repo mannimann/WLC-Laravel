@@ -15,6 +15,7 @@ return new class extends Migration {
     Schema::create("klassen", function (Blueprint $table) {
       $table->id();
       $table->string("klasse");
+      $table->string("kategorie");
       // später hinzufügen: Schule
       $table->timestamps();
     });

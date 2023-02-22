@@ -40,9 +40,14 @@ class AuswertungController extends Controller
     $steps_zeitraum = $steps->get_steps_zeitraum();
 
     /*
-     * Steps der besten Läufer
+     * Steps der besten Schüler
      */
-    $steps_läufer = $steps->get_steps_läufer();
+    $steps_läufer_schüler = $steps->get_steps_läufer_schüler();
+
+    /*
+     * Steps der besten Erwachsenen
+     */
+    $steps_läufer_erwachsene = $steps->get_steps_läufer_erwachsene();
 
     /*
      * Steps gruppiert nach Klassen
@@ -58,7 +63,8 @@ class AuswertungController extends Controller
       "settings.title" => $settings->get("title"),
       "steps_all" => $steps_all,
       "steps_zeitraum" => $steps_zeitraum,
-      "steps_läufer" => $steps_läufer,
+      "steps_läufer_schüler" => $steps_läufer_schüler,
+      "steps_läufer_erwachsene" => $steps_läufer_erwachsene,
       "steps_klassen" => $steps_klassen,
       "steps_läufer_zeitraum" => $steps_läufer_zeitraum,
       "zeiträume" => $zeiträume,

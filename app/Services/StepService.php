@@ -12,10 +12,23 @@ class StepService
    */
   public function get_all()
   {
-    return Step::orderBy("vorname")
+    return Step::select(
+      "steps.id",
+      "vorname",
+      "name",
+      "steps.klasse",
+      "kategorie",
+      "von",
+      "bis",
+      "schritte",
+      "steps.created_at",
+      "steps.updated_at"
+    )
+      ->join("klassen", "steps.klasse", "=", "klassen.klasse")
+      ->orderBy("vorname")
       ->orderBy("name")
-      ->orderByRaw("LENGTH(klasse) ASC")
-      ->orderBy("klasse")
+      ->orderByRaw("LENGTH(steps.klasse) ASC")
+      ->orderBy("steps.klasse")
       ->orderBy("von")
       ->orderBy("bis")
       ->get();
@@ -93,19 +106,43 @@ class StepService
   }
 
   /*
-   * Steps der besten Läufer
+   * Steps der besten Schüler
    */
-  public function get_steps_läufer()
+  public function get_steps_läufer_schüler()
   {
     $steps_läufer = Step::select(
       Step::raw("ROW_NUMBER() OVER (ORDER BY SUM(schritte) DESC) AS ranking"),
       "vorname",
       "name",
-      "klasse",
+      "steps.klasse",
       Step::raw("SUM(schritte) AS schritte_sum")
     )
+      ->join("klassen", "steps.klasse", "=", "klassen.klasse")
+      ->where("kategorie", "=", "Schüler")
       ->withCasts(["ranking" => "integer"])
-      ->groupBy("vorname", "name", "klasse")
+      ->groupBy("vorname", "name", "steps.klasse")
+      ->orderByDesc("schritte_sum")
+      ->get();
+
+    return $steps_läufer;
+  }
+
+  /*
+   * Steps der besten Erwachsenen
+   */
+  public function get_steps_läufer_erwachsene()
+  {
+    $steps_läufer = Step::select(
+      Step::raw("ROW_NUMBER() OVER (ORDER BY SUM(schritte) DESC) AS ranking"),
+      "vorname",
+      "name",
+      "steps.klasse",
+      Step::raw("SUM(schritte) AS schritte_sum")
+    )
+      ->join("klassen", "steps.klasse", "=", "klassen.klasse")
+      ->where("kategorie", "=", "Erwachsene")
+      ->withCasts(["ranking" => "integer"])
+      ->groupBy("vorname", "name", "steps.klasse")
       ->orderByDesc("schritte_sum")
       ->get();
 

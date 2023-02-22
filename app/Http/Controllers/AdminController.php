@@ -22,10 +22,12 @@ class AdminController extends Controller
       storage_path("../database/database/settings.json")
     );
 
-    $klassen = Klasse::orderByRaw("LENGTH(klasse) ASC")
+    $klassen = Klasse::select("id", "klasse", "kategorie")
+      ->orderByRaw("LENGTH(klasse) ASC")
       ->orderBy("klasse")
       ->get();
-    $zeiträume = Zeitraum::orderBy("von")
+    $zeiträume = Zeitraum::select("id", "von", "bis")
+      ->orderBy("von")
       ->orderBy("bis")
       ->get();
 
