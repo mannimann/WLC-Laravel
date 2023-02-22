@@ -110,7 +110,7 @@ const labelsKlassen = topKlassen.map((entry) => entry.klasse);
             v-motion-slide-visible-bottom
           />
           <AuswertungPersonen
-            title="Top Schüler"
+            title="Platzierungen Schüler"
             :data="steps_läufer_schüler"
             v-motion-slide-visible-bottom
           />
@@ -124,7 +124,7 @@ const labelsKlassen = topKlassen.map((entry) => entry.klasse);
             v-motion-slide-visible-bottom
           />
           <AuswertungPersonen
-            title="Top Erwachsene"
+            title="Platzierungen Erwachsene"
             :data="steps_läufer_erwachsene"
             v-motion-slide-visible-bottom
           />
