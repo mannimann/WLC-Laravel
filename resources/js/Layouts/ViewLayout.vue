@@ -28,19 +28,21 @@ const links = [
   <div class="flex min-h-screen flex-col bg-primarybg dark:bg-primarybg_dark">
     <!-- Page Heading -->
     <header class="bg-secondary2bg shadow dark:bg-secondarybg_dark">
-      <div class="mx-auto max-w-7xl px-5 pt-6 pb-0 sm:px-7 lg:px-9">
-        <div v-if="$slots.header">
-          <slot name="header" />
+      <Link :href="route('home')">
+        <div class="mx-auto max-w-7xl px-5 pt-6 pb-0 sm:px-7 lg:px-9">
+          <div v-if="$slots.header">
+            <slot name="header" />
+          </div>
+          <div v-else>
+            <h1
+              class="text-center text-3xl font-bold uppercase md:text-4xl lg:text-5xl"
+            >
+              <div v-if="title">{{ title }}</div>
+              <div v-else>Winterlauf Challenge</div>
+            </h1>
+          </div>
         </div>
-        <div v-else>
-          <h1
-            class="text-center text-3xl font-bold uppercase md:text-4xl lg:text-5xl"
-          >
-            <div v-if="title">{{ title }}</div>
-            <div v-else>Winterlauf Challenge</div>
-          </h1>
-        </div>
-      </div>
+      </Link>
     </header>
     <nav
       class="border-b border-secondary bg-gradient-to-b from-secondary2bg to-primarybg dark:border-secondary_dark dark:from-secondarybg_dark dark:to-primarybg_dark"

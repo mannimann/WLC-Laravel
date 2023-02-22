@@ -306,7 +306,7 @@ const entering = ref(false);
                 <div
                   class="mb-1 grid grid-cols-1 justify-items-stretch gap-3 md:grid-cols-2"
                 >
-                  <div class="mb-6">
+                  <div class="mb-6" v-motion-slide-visible-once-left>
                     <label for="f_vorname" class="form-label">Vorname:</label>
                     <input
                       type="text"
@@ -322,7 +322,7 @@ const entering = ref(false);
                     <InputError :message="form.errors.vorname" class="mt-2" />
                   </div>
 
-                  <div class="mb-6">
+                  <div class="mb-6" v-motion-slide-visible-once-right>
                     <label for="f_name" class="form-label">Nachname:</label>
                     <input
                       type="text"
@@ -337,7 +337,7 @@ const entering = ref(false);
                     <InputError :message="form.errors.name" class="mt-2" />
                   </div>
 
-                  <div class="mb-6">
+                  <div class="mb-6" v-motion-slide-visible-once-left>
                     <label for="f_klasse" class="form-label cursor-default"
                       >Klasse:</label
                     >
@@ -363,7 +363,7 @@ const entering = ref(false);
                     <InputError :message="form.errors.klasse" class="mt-2" />
                   </div>
 
-                  <div class="mb-6">
+                  <div class="mb-6" v-motion-slide-visible-once-right>
                     <label for="f_zeitraum" class="form-label cursor-default"
                       >Zeitraum:</label
                     >
@@ -390,7 +390,7 @@ const entering = ref(false);
                     <InputError :message="form.errors.von" class="mt-2" />
                   </div>
 
-                  <div class="mb-6">
+                  <div class="mb-6" v-motion-slide-visible-once-left>
                     <label for="f_schritte" class="form-label">Schritte:</label>
                     <input
                       type="text"
@@ -404,7 +404,7 @@ const entering = ref(false);
                     <InputError :message="form.errors.schritte" class="mt-2" />
                   </div>
 
-                  <div class="mb-6">
+                  <div class="mb-6" v-motion-slide-visible-once-right>
                     <div class="flex overflow-hidden py-1">
                       <label
                         for="f_screenshot"
@@ -499,6 +499,7 @@ const entering = ref(false);
                     :class="{ 'btn-disabled': !settings.eintragen_moeglich }"
                     :disabled="form.processing"
                     value="Eintragen"
+                    v-motion-pop-visible-once
                     >Eintragen
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

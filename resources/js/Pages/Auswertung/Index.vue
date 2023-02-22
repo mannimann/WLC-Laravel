@@ -75,6 +75,7 @@ const labelsKlassen = topKlassen.map((entry) => entry.klasse);
 
       <section
         class="mb-10 grid grid-cols-1 justify-items-stretch gap-3 xl:grid-cols-2"
+        v-motion-slide-visible-bottom
       >
         <AuswertungHBarChart
           title="Top 10 Teilnehmeranzahl"
@@ -100,33 +101,32 @@ const labelsKlassen = topKlassen.map((entry) => entry.klasse);
 
       <section
         class="mb-10 grid grid-cols-1 justify-items-stretch gap-3 xl:grid-cols-2"
-        v-motion-slide-visible-bottom
       >
-        <div class="mb-10 space-y-3 md:mb-0">
+        <div class="mb-10 space-y-3 md:mb-0" v-motion-fade-visible>
           <AuswertungVBarChart
             title="Top 5 Schüler"
             :data="dataLäuferSchüler"
             :labels="labelsLäuferSchüler"
-            v-motion-fade-visible
+            v-motion-slide-visible-bottom
           />
           <AuswertungPersonen
             title="Top Schüler"
             :data="steps_läufer_schüler"
-            v-motion-fade-visible
+            v-motion-slide-visible-bottom
           />
         </div>
 
-        <div class="space-y-3">
+        <div class="space-y-3" v-motion-fade-visible>
           <AuswertungVBarChart
             title="Top 5 Erwachsene"
             :data="dataLäuferErwachsene"
             :labels="labelsLäuferErwachsene"
-            v-motion-fade-visible
+            v-motion-slide-visible-bottom
           />
           <AuswertungPersonen
             title="Top Erwachsene"
             :data="steps_läufer_erwachsene"
-            v-motion-fade-visible
+            v-motion-slide-visible-bottom
           />
         </div>
       </section>

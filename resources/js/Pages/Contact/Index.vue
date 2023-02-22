@@ -108,7 +108,10 @@ const showToastError = function () {
         </div>
 
         <div class="mb-3 pt-0">
-          <PrimaryButton class="m-3" :disabled="form.processing"
+          <PrimaryButton
+            class="m-3"
+            :disabled="form.processing"
+            v-motion-pop-visible-once
             >Nachricht senden<svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
