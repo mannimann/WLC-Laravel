@@ -1,4 +1,5 @@
 <!-- TODO: redirect -->
+<script setup></script>
 
 <template>
   <div
@@ -10,11 +11,11 @@
     <div class="grid grid-cols-1 md:grid-cols-2">
       <div class="mt-1 mb-1">
         <p>
-          Webseite erstellt von Jakob Mann (<a
-            class="underline"
-            href="mailto:jm_jakobmann@web.de"
-            target="_blank"
-            >Kontakt</a
+          Webseite erstellt von Jakob Mann (<span
+            style="unicode-bidi: bidi-override; direction: rtl"
+            class="text-blue-700 dark:text-blue-600"
+          >
+            ed.bew@nnambokaj_mj </span
           >)
         </p>
       </div>
