@@ -1,6 +1,3 @@
-<!-- TODO: redirect -->
-<script setup></script>
-
 <template>
   <div
     class="h-6 bg-gradient-to-b from-primarybg to-secondary2bg dark:from-primarybg_dark dark:to-secondarybg_dark"
