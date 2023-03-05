@@ -8,15 +8,18 @@
   <div
     class="bg-secondary2bg pt-1 pb-3 text-center text-secondary dark:bg-secondarybg_dark dark:text-secondary_dark"
   >
-    <div class="grid grid-cols-1 md:grid-cols-2">
+    <div class="mx-2 grid grid-cols-1 md:grid-cols-2">
       <div class="mt-1 mb-1">
         <p>
-          Webseite erstellt von Jakob Mann (<span
-            style="unicode-bidi: bidi-override; direction: rtl"
-            class="text-blue-700 dark:text-blue-600"
+          Webseite erstellt von Jakob Mann
+          <span class="whitespace-nowrap"
+            >(<span
+              style="unicode-bidi: bidi-override; direction: rtl"
+              class="text-blue-700 dark:text-blue-600"
+            >
+              ed.bew@nnambokaj_mj </span
+            >)</span
           >
-            ed.bew@nnambokaj_mj </span
-          >)
         </p>
       </div>
       <div class="mt-1 mb-1">
