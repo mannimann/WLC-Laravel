@@ -53,6 +53,18 @@ class EintragenController extends Controller
    */
   public function store(StoreStepRequest $request)
   {
+    $settings = Valuestore::make(
+      storage_path("../database/database/settings.json")
+    );
+
+    if ($settings->get("eintragen_moeglich") != true) {
+      return redirect()
+        ->back()
+        ->withErrors([
+          "message" => "Eintragen zurzeit nicht möglich!",
+        ]);
+    }
+
     $duplicate = Step::Where("vorname", $request->vorname)
       ->where("name", $request->name)
       ->where("klasse", $request->klasse)
