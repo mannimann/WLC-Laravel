@@ -80,7 +80,7 @@ const copyURL = async () => {
         >
           <p class="leading-tight">
             Neuen Registrierungslink erzeugen:<br />
-            <span class="text-sm">(Der Link ist 7 Tage lang gültig.)</span>
+            <span class="text-sm">(Der Link ist 30 Tage lang gültig.)</span>
           </p>
           <p class="text-sm">
             Hinweis: Neue Nutzer haben zunächst nur Lese-Rechte. Diese können

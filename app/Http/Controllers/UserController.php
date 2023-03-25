@@ -52,7 +52,7 @@ class UserController extends Controller
    */
   public function create()
   {
-    return URL::temporarySignedRoute("register", now()->addDays(7), []);
+    return URL::temporarySignedRoute("register", now()->addDays(30), []);
   }
 
   /**
