@@ -20,12 +20,14 @@ const props = defineProps(["settings"]);
       <div class="container relative mx-5 my-auto p-2 sm:m-auto sm:p-10">
         <h2
           class="p-5 text-xl font-bold uppercase md:text-2xl lg:text-3xl"
-          v-motion-pop-visible
+          v-motion-pop
         >
-          Wilkommen zur {{ props.settings.title }}!
+          Wilkommen zur
+          <span v-if="props.settings.title">{{ props.settings.title }}</span
+          ><span v-else>Winterlauf Challenge</span>!
         </h2>
         <div class="flex flex-wrap justify-center">
-          <div v-motion-slide-visible-left>
+          <div v-motion-slide-left>
             <Link :href="route('eintragen.index')">
               <PrimaryButton class="m-3">
                 <svg
@@ -46,7 +48,7 @@ const props = defineProps(["settings"]);
               </PrimaryButton>
             </Link>
           </div>
-          <div v-motion-slide-visible-right>
+          <div v-motion-slide-right>
             <Link :href="route('auswertung.index')">
               <PrimaryButton class="m-3">
                 <svg
