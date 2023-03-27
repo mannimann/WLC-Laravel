@@ -14,14 +14,20 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Nunito", ...defaultTheme.fontFamily.sans],
+        sans: ["Libre Franklin", ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        primary: "#e88915",
+        primary: "#FFFFFF",
         secondary: "#252832",
-        primarybg: "#dcf3ff",
-        secondarybg: "#EAF8FF",
-        secondary2bg: "#a0cff5",
+        primarybg: "#B0E7F1",
+        secondarybg: "#6FD3E6",
+        secondary2bg: "#6FD3E6",
+
+        // primary: "#e88915",
+        // secondary: "#252832",
+        // primarybg: "#dcf3ff",
+        // secondarybg: "#EAF8FF",
+        // secondary2bg: "#a0cff5",
 
         // Ice-Blue
         // primary: "#257ca3",

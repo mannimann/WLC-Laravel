@@ -75,63 +75,62 @@ const labelsKlassen = topKlassen.map((entry) => entry.klasse);
 
       <section
         class="mb-10 grid grid-cols-1 justify-items-stretch gap-3 xl:grid-cols-2"
-        v-motion-slide-visible-bottom
+        v-motion-slide-bottom
       >
         <AuswertungHBarChart
           title="Top 10 Teilnehmeranzahl"
           :data="dataTeilnehmer"
           :labels="labelsTeilnehmer"
-          v-motion-fade-visible
+          v-motion-fade
         />
-        <AuswertungZeitraum :data="steps_zeitraum" v-motion-fade-visible />
+        <AuswertungZeitraum :data="steps_zeitraum" v-motion-fade />
       </section>
 
       <section
         class="mb-10 grid grid-cols-1 justify-items-stretch gap-3 xl:grid-cols-2"
-        v-motion-slide-visible-bottom
       >
         <AuswertungVBarChart
           title="Top 5 Klassen (Schritte pro Kopf)"
           :data="dataKlassen"
           :labels="labelsKlassen"
-          v-motion-fade-visible
+          v-motion-slide-bottom
         />
-        <AuswertungKlassen :data="steps_klassen" v-motion-fade-visible />
+        <AuswertungKlassen :data="steps_klassen" v-motion-slide-bottom />
       </section>
 
       <section
         class="mb-10 grid grid-cols-1 justify-items-stretch gap-3 xl:grid-cols-2"
       >
-        <div class="mb-10 space-y-3 md:mb-0" v-motion-fade-visible>
+        <div class="mb-10 space-y-3 md:mb-0">
           <AuswertungVBarChart
             title="Top 5 Schüler"
             :data="dataLäuferSchüler"
             :labels="labelsLäuferSchüler"
-            v-motion-slide-visible-bottom
+            v-motion-fade-visible
           />
           <AuswertungPersonen
             title="Platzierungen Schüler"
             :data="steps_läufer_schüler"
-            v-motion-slide-visible-bottom
+            v-motion-fade-visible
           />
         </div>
 
-        <div class="space-y-3" v-motion-fade-visible>
+        <div class="space-y-3">
           <AuswertungVBarChart
             title="Top 5 Erwachsene"
             :data="dataLäuferErwachsene"
             :labels="labelsLäuferErwachsene"
-            v-motion-slide-visible-bottom
+            v-motion-fade-visible
           />
           <AuswertungPersonen
             title="Platzierungen Erwachsene"
             :data="steps_läufer_erwachsene"
-            v-motion-slide-visible-bottom
+            v-motion-fade-visible
           />
         </div>
       </section>
 
-      <section class="mb-3" v-motion-slide-visible-bottom>
+      <section class="mb-3">
         <AuswertungAlle
           :data="steps_läufer_zeitraum"
           :zeiträume="zeiträume"
