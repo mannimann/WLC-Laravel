@@ -60,16 +60,18 @@ RUN if [ -f "vite.config.js" ]; then \
     else \
         ASSET_CMD="production"; \
     fi; \
-    if [ -f "yarn.lock" ]; then \
-        yarn install --frozen-lockfile; \
-        yarn $ASSET_CMD; \
-    elif [ -f "package-lock.json" ]; then \
-        npm ci --no-audit; \
-        npm run $ASSET_CMD; \
-    else \
-        npm install; \
-        npm run $ASSET_CMD; \
-    fi;
+    # if [ -f "yarn.lock" ]; then \
+    #     yarn install --frozen-lockfile; \
+    #     yarn $ASSET_CMD; \
+    # elif [ -f "package-lock.json" ]; then \
+    #     npm ci --no-audit; \
+    #     npm run $ASSET_CMD; \
+    # else \
+    #     npm install; \
+    #     npm run $ASSET_CMD; \
+    # fi;
+    npm install; \
+    npm run $ASSET_CMD;
 
 # From our base container created above, we
 # create our final image, adding in static
