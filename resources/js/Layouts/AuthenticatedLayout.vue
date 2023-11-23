@@ -16,7 +16,7 @@ const showingNavigationDropdown = ref(false);
   <div class="flex min-h-screen flex-col bg-primarybg dark:bg-primarybg_dark">
     <!-- Page Heading -->
     <header class="bg-secondary2bg shadow dark:bg-secondarybg_dark">
-      <div class="mx-auto max-w-7xl px-4 pt-6 pb-0 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl px-4 pb-0 pt-6 sm:px-6 lg:px-8">
         <div v-if="$slots.header">
           <slot name="header" />
         </div>
@@ -47,8 +47,8 @@ const showingNavigationDropdown = ref(false);
                 Eintragen
               </NavLink>
               <NavLink
-                :href="route('steps.index')"
-                :active="route().current('steps.index')"
+                :href="route('auswertung')"
+                :active="route().current('auswertung')"
               >
                 Auswertung
               </NavLink>
@@ -75,7 +75,7 @@ const showingNavigationDropdown = ref(false);
                       {{ $page.props.auth.user.name }}
 
                       <svg
-                        class="ml-2 -mr-0.5 h-4 w-4"
+                        class="-mr-0.5 ml-2 h-4 w-4"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                         fill="currentColor"
@@ -150,7 +150,7 @@ const showingNavigationDropdown = ref(false);
         }"
         class="sm:hidden"
       >
-        <div class="space-y-1 pt-2 pb-3">
+        <div class="space-y-1 pb-3 pt-2">
           <ResponsiveNavLink
             :href="route('home')"
             :active="route().current('home')"
@@ -158,15 +158,15 @@ const showingNavigationDropdown = ref(false);
             Eintragen
           </ResponsiveNavLink>
           <ResponsiveNavLink
-            :href="route('steps.index')"
-            :active="route().current('steps.index')"
+            :href="route('auswertung')"
+            :active="route().current('auswertung')"
           >
             Auswertung
           </ResponsiveNavLink>
         </div>
 
         <!-- Responsive Settings Options -->
-        <div class="border-t border-gray-200 pt-4 pb-1">
+        <div class="border-t border-gray-200 pb-1 pt-4">
           <div class="px-4">
             <div class="text-base font-medium text-gray-800">
               {{ $page.props.auth.user.name }}
