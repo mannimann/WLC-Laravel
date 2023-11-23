@@ -29,7 +29,7 @@ const links = [
     <!-- Page Heading -->
     <header class="bg-secondary2bg shadow dark:bg-secondarybg_dark">
       <Link :href="route('home')">
-        <div class="mx-auto max-w-7xl px-5 pt-6 pb-0 sm:px-7 lg:px-9">
+        <div class="mx-auto max-w-7xl px-5 pb-0 pt-6 sm:px-7 lg:px-9">
           <div v-if="$slots.header">
             <slot name="header" />
           </div>
@@ -99,7 +99,7 @@ const links = [
                         {{ $page.props.auth.user.name }}
 
                         <svg
-                          class="ml-2 -mr-0.5 h-4 w-4"
+                          class="-mr-0.5 ml-2 h-4 w-4"
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
                           fill="currentColor"
@@ -116,7 +116,7 @@ const links = [
 
                   <template #content>
                     <div
-                      class="px-4 py-1 text-center text-sm font-medium text-secondary dark:text-secondary_dark"
+                      class="px-4 py-1 text-center text-sm font-medium text-gray-700"
                     >
                       <p>{{ $page.props.auth.user.email }}</p>
                       <p class="mt-1 text-xs">
@@ -166,7 +166,7 @@ const links = [
       <!-- Responsive Navigation Menu -->
       <Transition name="dropdownmenu">
         <div v-show="showingNavigationDropdown" class="sm:hidden">
-          <div class="space-y-1 pt-2 pb-3">
+          <div class="space-y-1 pb-3 pt-2">
             <ResponsiveNavLink
               v-for="link in links"
               :key="link.name"
