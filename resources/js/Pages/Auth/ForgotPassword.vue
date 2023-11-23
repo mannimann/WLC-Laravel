@@ -21,12 +21,13 @@ const submit = () => {
 
 <template>
   <GuestLayout>
-    <Head title="Forgot Password" />
+    <Head title="Passwort vergessen" />
 
     <div class="mb-4 text-sm text-gray-600">
-      Forgot your password? No problem. Just let us know your email address and
-      we will email you a password reset link that will allow you to choose a
-      new one.
+      Passwort vergessen? Kein Problem. Teilen Sie uns einfach Ihre
+      E-Mail-Adresse mit, und wir senden Ihnen einen Link zum Zurücksetzen des
+      Passworts per E-Mail zu, der es Ihnen ermöglicht, ein neues Passwort
+      auszuwählen.
     </div>
 
     <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
@@ -53,7 +54,7 @@ const submit = () => {
           :class="{ 'opacity-25': form.processing }"
           :disabled="form.processing"
         >
-          Email Password Reset Link
+          Passwort zurücksetzen
         </PrimaryButton>
       </div>
     </form>
