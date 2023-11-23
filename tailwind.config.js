@@ -17,11 +17,17 @@ module.exports = {
         sans: ["Libre Franklin", ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        primary: "#FFFFFF",
-        secondary: "#252832",
-        primarybg: "#B0E7F1",
-        secondarybg: "#6FD3E6",
-        secondary2bg: "#6FD3E6",
+        primary: "#ff8d00",
+        secondary: "#d4d5d5",
+        primarybg: "#536878",
+        secondarybg: "#2a3a45",
+        secondary2bg: "#2a3a45",
+
+        // primary: "#FFFFFF",
+        // secondary: "#252832",
+        // primarybg: "#B0E7F1",
+        // secondarybg: "#6FD3E6",
+        // secondary2bg: "#6FD3E6",
 
         // primary: "#e88915",
         // secondary: "#252832",

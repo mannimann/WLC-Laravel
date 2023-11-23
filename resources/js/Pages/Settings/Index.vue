@@ -49,10 +49,10 @@ const resetSettings = () => {
         <h3 class="text-2xl font-bold">Einstellungen:</h3>
         <div class="py-2">
           <form class="space-y-2" @submit.prevent="submitForm">
-            <label for="title" class="text-xl font-bold text-primary"
-              >Titel:</label
-            >
-            <div class="flex w-full">
+            <label for="title" class="text-xl font-bold text-primary">
+              Titel:
+            </label>
+            <div class="flex w-full text-gray-700">
               <input
                 v-model="form.title"
                 type="text"
@@ -63,10 +63,10 @@ const resetSettings = () => {
             <InputError :message="form.errors.title" class="mt-2 block" />
 
             <!-- TODO: mit Formatierungsoptionen? -->
-            <label for="infoText" class="text-xl font-bold text-primary"
-              >Infotext:</label
-            >
-            <div class="flex w-full">
+            <label for="infoText" class="text-xl font-bold text-primary">
+              Infotext:
+            </label>
+            <div class="flex w-full text-gray-700">
               <textarea
                 v-model="form.infotext"
                 type="text"
@@ -77,10 +77,10 @@ const resetSettings = () => {
             </div>
             <InputError :message="form.errors.infotext" class="mt-2 block" />
 
-            <label for="videolink" class="text-xl font-bold text-primary"
-              >Video-Link:</label
-            >
-            <div class="flex w-full">
+            <label for="videolink" class="text-xl font-bold text-primary">
+              Video-Link:
+            </label>
+            <div class="flex w-full text-gray-700">
               <input
                 v-model="form.videolink"
                 type="text"
@@ -90,23 +90,23 @@ const resetSettings = () => {
             </div>
             <InputError :message="form.errors.videolink" class="mt-2 block" />
 
-            <label for="videolink" class="text-xl font-bold text-primary"
-              >Eintragen möglich:</label
-            >
+            <label for="videolink" class="text-xl font-bold text-primary">
+              Eintragen möglich:
+            </label>
             <input
               v-model="form.eintragen_moeglich"
               type="checkbox"
-              class="toggle-primary toggle toggle-lg block"
+              class="toggle toggle-primary toggle-lg block"
             />
             <InputError
               :message="form.errors.eintragen_moeglich"
               class="mt-2 block"
             />
 
-            <label for="email" class="text-xl font-bold text-primary"
-              >Kontakt-Email:</label
-            >
-            <div class="flex w-full">
+            <label for="email" class="text-xl font-bold text-primary">
+              Kontakt-Email:
+            </label>
+            <div class="flex w-full text-gray-700">
               <input
                 v-model="form.email"
                 type="email"
@@ -117,17 +117,17 @@ const resetSettings = () => {
             <InputError :message="form.errors.email" class="mt-2 block" />
 
             <div class="mt-3">
-              <PrimaryButton class="m-3" @click="form.override = false"
-                >Aktualisieren</PrimaryButton
-              >
+              <PrimaryButton class="m-3" @click="form.override = false">
+                Aktualisieren
+              </PrimaryButton>
 
-              <PrimaryButton class="m-3" type="button" @click="resetSettings"
-                >Zurücksetzen</PrimaryButton
-              >
+              <PrimaryButton class="m-3" type="button" @click="resetSettings">
+                Zurücksetzen
+              </PrimaryButton>
 
-              <PrimaryButton class="m-3" @click="form.override = true"
-                >Als Standard speichern</PrimaryButton
-              >
+              <PrimaryButton class="m-3" @click="form.override = true">
+                Als Standard speichern
+              </PrimaryButton>
             </div>
           </form>
         </div>

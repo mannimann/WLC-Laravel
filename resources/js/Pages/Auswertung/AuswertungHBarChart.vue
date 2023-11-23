@@ -47,7 +47,8 @@ let textColor, basicOptions;
 watch(
   [color, isLargeScreen],
   ([newColor, newScreen]) => {
-    textColor = newColor === "dark" ? "#ccc" : "#444";
+    // textColor = newColor === "dark" ? "#ccc" : "#444";
+    textColor = newColor === "dark" ? "#ccc" : "#d4d5d5";
     // re-render Table-Component
     key.value += 1;
 
