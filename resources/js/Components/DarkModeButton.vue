@@ -6,7 +6,7 @@ const toggleDark = useToggle(isDark);
 </script>
 
 <template>
-  <label class="swap swap-rotate">
+  <label class="swap swap-rotate hidden">
     <input
       type="checkbox"
       class="hidden"
