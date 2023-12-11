@@ -23,8 +23,8 @@ const props = defineProps(["settings"]);
           v-motion-pop
         >
           Wilkommen zur
-          <span v-if="props.settings.title">{{ props.settings.title }}</span
-          ><span v-else>Winterlauf Challenge</span>!
+          <span v-if="props.settings.title">{{ props.settings.title }}</span>
+          <span v-else>Winterlauf Challenge</span>!
         </h2>
         <div class="flex flex-wrap justify-center">
           <div v-motion-slide-left>
