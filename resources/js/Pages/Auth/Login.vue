@@ -94,5 +94,13 @@ const submit = () => {
         </PrimaryButton>
       </div>
     </form>
+
+    <div class="text-xs text-gray-800">
+      <p class="mt-10">
+        Zum Testen können folgende Zugangsdaten genutzt werden:
+      </p>
+      <p class="mt-2">Email: test01@mail.de</p>
+      <p class="">Passwort: 1234asdf!</p>
+    </div>
   </GuestLayout>
 </template>

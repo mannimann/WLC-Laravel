@@ -24,7 +24,7 @@ class BlockRegister
           storage_path("../database/database/settings.json")
         );
 
-        return Inertia::render("AccessDenied", [
+        return Inertia::render("Auth/RegisterDenied", [
           "settings.title" => $settings->get("title"),
           "admin_layout" => false,
         ]);
