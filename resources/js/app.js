@@ -16,7 +16,8 @@ import "vue-good-table-next/dist/vue-good-table-next.css";
 import "flowbite";
 
 const appName =
-  window.document.getElementsByTagName("title")[0]?.innerText || "WLC";
+  window.document.getElementsByTagName("title")[0]?.innerText ||
+  "Winterlauf Challenge";
 
 createInertiaApp({
   title: (title) => `${title} - ${appName}`,
