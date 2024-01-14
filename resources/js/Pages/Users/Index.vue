@@ -43,7 +43,7 @@ const columns = [
     field: "created_at",
     type: "date",
     dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'",
-    dateOutputFormat: "MM.dd.yyyy - HH:mm 'Uhr'",
+    dateOutputFormat: "dd.MM.yyyy - HH:mm 'Uhr'",
   },
   {
     label: "Berechtigungs-Level",
@@ -124,7 +124,7 @@ const deactivate = (props) => {
 
         <button
           type="button"
-          class="btn-primary btn m-3 mb-6 h-fit"
+          class="btn btn-primary m-3 mb-6 h-fit"
           @click="
             modalOpen = true;
             modalType = 'register';
@@ -180,7 +180,7 @@ const deactivate = (props) => {
                   <div class="flex justify-end">
                     <div v-if="props.row.active == 1" class="flex justify-end">
                       <button
-                        class="btn-ghost btn px-2 sm:px-3 md:px-4"
+                        class="btn btn-ghost px-2 sm:px-3 md:px-4"
                         type="button"
                         @click="activate(props)"
                         :disabled="modalOpen"
@@ -203,7 +203,7 @@ const deactivate = (props) => {
                     </div>
                     <div v-else class="flex justify-end">
                       <button
-                        class="btn-ghost btn px-2 sm:px-3 md:px-4"
+                        class="btn btn-ghost px-2 sm:px-3 md:px-4"
                         type="button"
                         @click="deactivate(props)"
                         :disabled="modalOpen"
@@ -227,7 +227,7 @@ const deactivate = (props) => {
 
                     <!-- Bearbeiten -->
                     <button
-                      class="btn-ghost btn px-2 sm:px-3 md:px-4"
+                      class="btn btn-ghost px-2 sm:px-3 md:px-4"
                       type="button"
                       @click="
                         modalOpen = true;
@@ -254,7 +254,7 @@ const deactivate = (props) => {
 
                     <!-- Löschen -->
                     <button
-                      class="btn-ghost btn px-2 sm:px-3 md:px-4"
+                      class="btn btn-ghost px-2 sm:px-3 md:px-4"
                       type="button"
                       @click="
                         modalOpen = true;
