@@ -24,6 +24,7 @@ const form = useForm({
   bis: "",
   schritte: "",
   screenshot: "",
+  terms: false,
 });
 
 const props = defineProps(["settings", "klassen", "zeiträume"]);
@@ -247,10 +248,10 @@ const entering = ref(false);
                       Läufer!<br />
                     </p>
                   </div>
-                  <p class="mt-3 mb-1">
-                    <strong
-                      >Also nimm die Beine in die Hand und los gehts!</strong
-                    >
+                  <p class="mb-1 mt-3">
+                    <strong>
+                      Also nimm die Beine in die Hand und los gehts!
+                    </strong>
                   </p>
                   <div class="mx-auto flex flex-shrink justify-center">
                     <iframe
@@ -489,7 +490,35 @@ const entering = ref(false);
                   </div>
                 </div>
 
-                <div class="mt-3 text-center">
+                <div class="mb-4" v-motion-pop-visible-once>
+                  <div class="flex items-center">
+                    <input
+                      type="checkbox"
+                      v-model="form.terms"
+                      class="m-2 h-4 w-4 rounded border-gray-300 bg-gray-100 p-2 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
+                    />
+                    <label
+                      for="default-checkbox"
+                      class="ms-2 text-sm font-medium"
+                    >
+                      Hiermit bestätige ich die Kenntnisahme, dass mit Teilnahme
+                      bei der Winterlaufchallenge meinen personenbezogenen Daten
+                      (Name, ggf. Klasse, Schrittzahl) zu Auswertungszwecken auf
+                      einem Server der Firma Fly.io gespeichert werden. Die
+                      Sportfachschaft der Werner-Heisenberg-Schule weist darauf
+                      hin, dass ein Recht auf Auskunft, Berichtigung, Löschung,
+                      Einschränkung der Verarbeitung und Datenübertragbarkeit
+                      besteht (Art. 15-21 DS-GVO). Bei Fragen meldet Euch gerne
+                      unter
+                      <a href="mailto:homepage@whs-leipzig.de">
+                        homepage@whs-leipzig.de
+                      </a>
+                    </label>
+                  </div>
+                  <InputError :message="form.errors.terms" class="mt-2" />
+                </div>
+
+                <div class="mt-3 text-center" v-motion-pop-visible-once>
                   <p>
                     Achtung: Du kannst für jeden Zeitraum nur einmal deine Daten
                     eintragen!
@@ -499,8 +528,8 @@ const entering = ref(false);
                     :class="{ 'btn-disabled': !settings.eintragen_moeglich }"
                     :disabled="form.processing"
                     value="Eintragen"
-                    v-motion-pop-visible-once
-                    >Eintragen
+                  >
+                    Eintragen
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"

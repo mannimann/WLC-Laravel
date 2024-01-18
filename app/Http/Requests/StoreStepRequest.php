@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\HttpFoundation\File\File;
+use Illuminate\Validation\Rule;
 
 class StoreStepRequest extends FormRequest
 {
@@ -25,6 +26,20 @@ class StoreStepRequest extends FormRequest
    */
   public function rules()
   {
+    // validate only true (for terms)
+    Validator::extend("true", function (
+      $attribute,
+      $value,
+      $parameters,
+      $validator
+    ) {
+      if ($value == true) {
+        return true;
+      }
+
+      return false;
+    });
+
     // validate base64-image
     Validator::extend("base64image", function (
       $attribute,
@@ -106,6 +121,7 @@ class StoreStepRequest extends FormRequest
       "bis" => "required|date",
       "schritte" => "required|integer|gt:0",
       "screenshot" => "nullable|base64image|base64imageMax:500",
+      "terms" => "required|boolean|true",
     ];
   }
 
@@ -120,6 +136,7 @@ class StoreStepRequest extends FormRequest
         "Screenshot muss ein Bild im JPG oder PNG Format sein.",
       "screenshot.base64image_max" =>
         "Das Bild darf maximal :max kB groß sein.",
+      "terms" => "Zustimmung erforderlich.",
     ];
   }
 }
