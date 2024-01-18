@@ -97,6 +97,7 @@ class DBAdminController extends Controller
       ->where("klasse", $request->klasse)
       ->where("von", $request->von)
       ->where("bis", $request->bis)
+      ->where("id", "!=", $id)
       ->count();
 
     if ($duplicate > 0) {

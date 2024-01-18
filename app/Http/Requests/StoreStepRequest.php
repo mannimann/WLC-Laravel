@@ -121,7 +121,7 @@ class StoreStepRequest extends FormRequest
       "bis" => "required|date",
       "schritte" => "required|integer|gt:0",
       "screenshot" => "nullable|base64image|base64imageMax:500",
-      "terms" => "required|boolean|true",
+      "terms" => "boolean|true",
     ];
   }
 
