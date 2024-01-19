@@ -100,4 +100,9 @@ Route::group(["middleware" => "adminReadOnly"], function () {
   ]);
 });
 
+// Route::get("artisan", function () {
+//   // Call and Artisan command from within your application.
+//   Artisan::call("cache:clear");
+// });
+
 require __DIR__ . "/auth.php";
