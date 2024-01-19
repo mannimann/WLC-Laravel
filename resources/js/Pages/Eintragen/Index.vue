@@ -202,7 +202,7 @@ const entering = ref(false);
                 role="button"
                 @click="setActive"
               >
-                <h3>Beschreibung:</h3>
+                <h3>Beschreibung & Video:</h3>
                 <div
                   class="transition-all duration-500 ease-in-out"
                   :class="{ 'rotate-180': isActive }"
