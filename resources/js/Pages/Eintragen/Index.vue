@@ -502,7 +502,7 @@ const entering = ref(false);
                       class="ms-2 text-sm font-medium"
                     >
                       Hiermit bestätige ich die Kenntnisahme, dass mit Teilnahme
-                      bei der Winterlaufchallenge meinen personenbezogenen Daten
+                      bei der Winterlaufchallenge meine personenbezogenen Daten
                       (Name, ggf. Klasse, Schrittzahl) zu Auswertungszwecken auf
                       einem Server der Firma Fly.io gespeichert werden. Die
                       Sportfachschaft der Werner-Heisenberg-Schule weist darauf
