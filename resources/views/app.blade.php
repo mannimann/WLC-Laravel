@@ -8,9 +8,6 @@
 
         <link rel="icon" href="{{ url('favicon.svg') }}" />
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@200;400&display=swap">
-
         <!-- Scripts -->
         @routes
         @vite('resources/js/app.js')
