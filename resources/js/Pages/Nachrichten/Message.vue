@@ -88,7 +88,7 @@ dialog.onCancel(() => {
         <div class="mr-3 mt-1">
           <input
             type="checkbox"
-            class="checkbox-info checkbox"
+            class="!checkbox !checkbox-info"
             true-value="1"
             false-value="0"
             v-model="message.erledigt"
@@ -111,7 +111,7 @@ dialog.onCancel(() => {
         type="button"
         :disabled="revaled"
         @click="dialog.reveal"
-        class="btn-ghost btn"
+        class="btn btn-ghost"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -142,7 +142,7 @@ dialog.onCancel(() => {
             <label as="button" class="btn" @click="dialog.cancel"
               >Abbrechen</label
             >
-            <label as="button" class="btn-error btn" @click="dialog.confirm"
+            <label as="button" class="btn btn-error" @click="dialog.confirm"
               >Löschen</label
             >
           </div>
