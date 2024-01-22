@@ -25,6 +25,7 @@ class EintragenController extends Controller
 
     $klassen = Klasse::select("klasse")
       ->orderByRaw("LENGTH(klasse) ASC")
+      ->orderBy("klasse")
       ->get();
     $zeiträume = Zeitraum::select("von", "bis")->get();
 
