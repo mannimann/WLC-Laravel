@@ -31,7 +31,7 @@ const showToastError = function () {
 
   <ViewLayout :title="settings.title">
     <div class="mx-auto p-4 sm:p-6 lg:p-8">
-      <div v-if="submitted" class="mt-10 text-center" v-motion-fade-visible>
+      <div v-if="submitted" class="mt-10 text-center" v-motion-fade>
         <h2 class="text-2xl">Vielen Dank!</h2>
         <div class="mb-3 text-md">Wir kümmern uns um dein Anliegen.</div>
         <PrimaryButton class="m-3" type="button" @click="submitted = false"
@@ -54,7 +54,7 @@ const showToastError = function () {
           })
         "
         class="mx-auto w-full sm:w-3/4 md:w-2/3 lg:w-1/2"
-        v-motion-fade-visible
+        v-motion-fade
       >
         <h1 class="text-xl font-bold">KONTAKT</h1>
         <p>
@@ -108,10 +108,7 @@ const showToastError = function () {
         </div>
 
         <div class="mb-3 pt-0">
-          <PrimaryButton
-            class="m-3"
-            :disabled="form.processing"
-            v-motion-pop-visible-once
+          <PrimaryButton class="m-3" :disabled="form.processing" v-motion-pop
             >Nachricht senden<svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

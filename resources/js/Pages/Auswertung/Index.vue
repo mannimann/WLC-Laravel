@@ -106,12 +106,12 @@ const labelsKlassen = topKlassen.map((entry) => entry.klasse);
             title="Top 5 Schüler"
             :data="dataLäuferSchüler"
             :labels="labelsLäuferSchüler"
-            v-motion-fade-visible
+            v-motion-fade
           />
           <AuswertungPersonen
             title="Platzierungen Schüler"
             :data="steps_läufer_schüler"
-            v-motion-fade-visible
+            v-motion-fade
           />
         </div>
 
@@ -120,12 +120,12 @@ const labelsKlassen = topKlassen.map((entry) => entry.klasse);
             title="Top 5 Erwachsene"
             :data="dataLäuferErwachsene"
             :labels="labelsLäuferErwachsene"
-            v-motion-fade-visible
+            v-motion-fade
           />
           <AuswertungPersonen
             title="Platzierungen Erwachsene"
             :data="steps_läufer_erwachsene"
-            v-motion-fade-visible
+            v-motion-fade
           />
         </div>
       </section>
@@ -134,7 +134,7 @@ const labelsKlassen = topKlassen.map((entry) => entry.klasse);
         <AuswertungAlle
           :data="steps_läufer_zeitraum"
           :zeiträume="zeiträume"
-          v-motion-fade-visible
+          v-motion-fade
         />
       </section>
     </div>

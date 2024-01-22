@@ -138,7 +138,7 @@ const entering = ref(false);
   <ViewLayout :title="settings.title">
     <div class="mx-auto p-4 sm:p-6 lg:p-8">
       <!-- Submitted -->
-      <div v-if="submitted" v-motion-fade-visible>
+      <div v-if="submitted" v-motion-fade>
         <Card class="container mx-auto p-8 text-center">
           <template v-slot:header>
             <h3>Daten erfolgreich eingetragen</h3>
@@ -193,7 +193,7 @@ const entering = ref(false);
       <!-- Main Content -->
       <div v-else class="container mx-auto">
         <!-- DescriptionCard -->
-        <section id="DescriptionCard" class="mb-3" v-motion-fade-visible>
+        <section id="DescriptionCard" class="mb-3" v-motion-fade>
           <Card>
             <template v-slot:header>
               <div
@@ -272,7 +272,7 @@ const entering = ref(false);
         </section>
 
         <!-- InputCard -->
-        <section id="InputCard" class="mb-3" v-motion-fade-visible>
+        <section id="InputCard" class="mb-3" v-motion-fade>
           <Card>
             <template v-slot:header>
               <h3>Daten eingeben:</h3>
@@ -307,7 +307,7 @@ const entering = ref(false);
                 <div
                   class="mb-1 grid grid-cols-1 justify-items-stretch gap-3 md:grid-cols-2"
                 >
-                  <div class="mb-6" v-motion-slide-visible-once-left>
+                  <div class="mb-6" v-motion-slide-left>
                     <label for="f_vorname" class="form-label">Vorname:</label>
                     <input
                       type="text"
@@ -323,7 +323,7 @@ const entering = ref(false);
                     <InputError :message="form.errors.vorname" class="mt-2" />
                   </div>
 
-                  <div class="mb-6" v-motion-slide-visible-once-right>
+                  <div class="mb-6" v-motion-slide-right>
                     <label for="f_name" class="form-label">Nachname:</label>
                     <input
                       type="text"
@@ -338,7 +338,7 @@ const entering = ref(false);
                     <InputError :message="form.errors.name" class="mt-2" />
                   </div>
 
-                  <div class="mb-6" v-motion-slide-visible-once-left>
+                  <div class="mb-6" v-motion-slide-left>
                     <label for="f_klasse" class="form-label cursor-default"
                       >Klasse:</label
                     >
@@ -364,7 +364,7 @@ const entering = ref(false);
                     <InputError :message="form.errors.klasse" class="mt-2" />
                   </div>
 
-                  <div class="mb-6" v-motion-slide-visible-once-right>
+                  <div class="mb-6" v-motion-slide-right>
                     <label for="f_zeitraum" class="form-label cursor-default"
                       >Zeitraum:</label
                     >
@@ -391,7 +391,7 @@ const entering = ref(false);
                     <InputError :message="form.errors.von" class="mt-2" />
                   </div>
 
-                  <div class="mb-6" v-motion-slide-visible-once-left>
+                  <div class="mb-6" v-motion-slide-left>
                     <label for="f_schritte" class="form-label">Schritte:</label>
                     <input
                       type="text"
@@ -405,7 +405,7 @@ const entering = ref(false);
                     <InputError :message="form.errors.schritte" class="mt-2" />
                   </div>
 
-                  <div class="mb-6" v-motion-slide-visible-once-right>
+                  <div class="mb-6" v-motion-slide-right>
                     <div class="flex overflow-hidden py-1">
                       <label
                         for="f_screenshot"
@@ -490,7 +490,7 @@ const entering = ref(false);
                   </div>
                 </div>
 
-                <div class="mb-4" v-motion-pop-visible-once>
+                <div class="mb-4" v-motion-pop>
                   <div class="flex items-center">
                     <input
                       type="checkbox"
@@ -518,7 +518,7 @@ const entering = ref(false);
                   <InputError :message="form.errors.terms" class="mt-2" />
                 </div>
 
-                <div class="mt-3 text-center" v-motion-pop-visible-once>
+                <div class="mt-3 text-center" v-motion-pop>
                   <p>
                     Achtung: Du kannst für jeden Zeitraum nur einmal deine Daten
                     eintragen!

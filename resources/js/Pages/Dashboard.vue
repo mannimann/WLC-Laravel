@@ -9,7 +9,7 @@ const props = defineProps(["settings"]);
   <Head title="Dashboard" />
 
   <ViewLayout :title="settings.title">
-    <div class="py-12" v-motion-fade-visible>
+    <div class="py-12" v-motion-fade>
       <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="overflow-hidden shadow-sm sm:rounded-lg">
           <div
