@@ -114,7 +114,7 @@ const screenshotHeight = ref(80);
           <a :href="route('admin.export')" target="_blank">
             <button
               type="button"
-              class="btn-primary btn m-3 h-fit"
+              class="btn btn-primary m-3 h-fit"
               :disabled="modalOpen"
             >
               Export als Excel
@@ -123,7 +123,7 @@ const screenshotHeight = ref(80);
           <div>
             <button
               type="button"
-              class="btn-error btn m-3 h-fit"
+              class="btn btn-error m-3 h-fit"
               @click="
                 modalOpen = true;
                 modalType = 'deleteAll';
@@ -210,7 +210,7 @@ const screenshotHeight = ref(80);
                 <div v-if="props.column.field == 'actions'">
                   <div class="flex justify-end">
                     <button
-                      class="btn-ghost btn px-2 sm:px-3 md:px-4"
+                      class="btn btn-ghost px-2 sm:px-3 md:px-4"
                       type="button"
                       @click="
                         modalOpen = true;
@@ -236,7 +236,7 @@ const screenshotHeight = ref(80);
                     </button>
 
                     <button
-                      class="btn-ghost btn px-2 sm:px-3 md:px-4"
+                      class="btn btn-ghost px-2 sm:px-3 md:px-4"
                       type="button"
                       @click="
                         modalOpen = true;
