@@ -138,7 +138,12 @@ const screenshotHeight = ref(80);
         <Card>
           <template v-slot:header>
             <div class="flex justify-between space-x-3">
-              <h4 class="text-xl">Einträge bearbeiten oder löschen:</h4>
+              <div>
+                <h4 class="text-xl">Einträge bearbeiten oder löschen:</h4>
+                <p class="text-xs font-light">
+                  Shift+Klick zum Sortieren nach mehreren Spalten
+                </p>
+              </div>
               <div>
                 <label
                   for="minmax-range"
@@ -183,7 +188,17 @@ const screenshotHeight = ref(80);
               }"
               :sort-options="{
                 enabled: true,
-                initialSortBy: { field: 'id', type: 'desc' },
+                multipleColumns: true,
+                initialSortBy: [
+                  {
+                    field: 'von',
+                    type: 'desc',
+                  },
+                  {
+                    field: 'name',
+                    type: 'asc',
+                  },
+                ],
               }"
             >
               <template #table-row="props">
