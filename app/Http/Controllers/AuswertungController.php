@@ -31,8 +31,9 @@ class AuswertungController extends Controller
 
     /*
      * Alle Daten
+     * only for testing purpose
      */
-    $steps_all = $steps->get_all();
+    // $steps_all = $steps->get_all();
 
     /*
      * Steps gruppiert nach Zeiträumen
@@ -61,7 +62,7 @@ class AuswertungController extends Controller
 
     return Inertia::render("Auswertung/Index", [
       "settings.title" => $settings->get("title"),
-      "steps_all" => $steps_all,
+      // "steps_all" => $steps_all,
       "steps_zeitraum" => $steps_zeitraum,
       "steps_läufer_schüler" => $steps_läufer_schüler,
       "steps_läufer_erwachsene" => $steps_läufer_erwachsene,

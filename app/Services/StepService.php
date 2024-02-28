@@ -17,7 +17,7 @@ class StepService
       "vorname",
       "name",
       "steps.klasse",
-      "kategorie",
+      // "kategorie",
       "von",
       "bis",
       "schritte",
@@ -25,13 +25,13 @@ class StepService
       "steps.created_at",
       "steps.updated_at"
     )
-      ->join("klassen", "steps.klasse", "=", "klassen.klasse")
-      ->orderBy("vorname")
+      // ->join("klassen", "steps.klasse", "=", "klassen.klasse")
       ->orderBy("name")
-      ->orderByRaw("LENGTH(steps.klasse) ASC")
-      ->orderBy("steps.klasse")
+      ->orderBy("vorname")
       ->orderBy("von")
-      ->orderBy("bis")
+      // ->orderByRaw("LENGTH(steps.klasse) ASC")
+      // ->orderBy("steps.klasse")
+      // ->orderBy("bis")
       ->get();
   }
 

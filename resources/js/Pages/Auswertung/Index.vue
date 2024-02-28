@@ -12,7 +12,7 @@ import { Head } from "@inertiajs/vue3";
 
 const props = defineProps([
   "settings",
-  "steps_all",
+  // "steps_all",
   "steps_zeitraum",
   "steps_läufer_schüler",
   "steps_läufer_erwachsene",
