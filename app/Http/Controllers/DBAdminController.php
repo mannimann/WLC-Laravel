@@ -29,6 +29,7 @@ class DBAdminController extends Controller
     $steps_all = $steps->get_all();
     $klassen = Klasse::select("klasse")
       ->orderByRaw("LENGTH(klasse) ASC")
+      ->orderBy("klasse")
       ->get();
     $zeiträume = Zeitraum::select("von", "bis")->get();
 
