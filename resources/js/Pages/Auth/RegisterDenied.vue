@@ -19,14 +19,6 @@ const props = defineProps(["settings", "admin_layout"]);
             >
               <p>Keine weiteren Registrierungen mehr möglich!</p>
               <p class="mt-3 text-md">Kontaktieren Sie den Administrator</p>
-
-              <div class="text-sm">
-                <p class="mt-10">
-                  Zum Testen können folgende Zugangsdaten genutzt werden:
-                </p>
-                <p class="mt-3">Email: test01@mail.de</p>
-                <p class="">Passwort: 1234asdf!</p>
-              </div>
             </div>
           </div>
         </div>
@@ -41,14 +33,6 @@ const props = defineProps(["settings", "admin_layout"]);
           >
             <p>Keine weiteren Registrierungen mehr möglich!</p>
             <p class="mt-3 text-md">Kontaktieren Sie den Administrator</p>
-
-            <div class="text-sm">
-              <p class="mt-10">
-                Zum Testen können folgende Zugangsdaten genutzt werden:
-              </p>
-              <p class="mt-3">Email: test01@mail.de</p>
-              <p class="">Passwort: 1234asdf!</p>
-            </div>
           </div>
         </div>
       </div>
