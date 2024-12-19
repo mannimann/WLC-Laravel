@@ -3,7 +3,7 @@
 // import SimpleTable from "./SimpleTable.vue";
 
 import { VueGoodTable } from "vue-good-table-next";
-import { useColorMode } from "@vueuse/core";
+// import { useColorMode } from "@vueuse/core";
 import { ref, watch } from "vue";
 import Card from "@/Components/Card.vue";
 
@@ -11,13 +11,14 @@ const props = defineProps(["data"]);
 
 // Table Theme
 const key = ref(0);
-const color = useColorMode();
-let theme = color.value === "dark" ? "nocturnal" : "";
-watch(color, (newColor) => {
-  theme = newColor === "dark" ? "nocturnal" : "";
-  // re-render Table-Component
-  key.value += 1;
-});
+// const color = useColorMode();
+let theme = "nocturnal";
+// let theme = color.value === "dark" ? "nocturnal" : "";
+// watch(color, (newColor) => {
+//   theme = newColor === "dark" ? "nocturnal" : "";
+//   // re-render Table-Component
+//   key.value += 1;
+// });
 
 const methods = {
   formatNumber: (number) => {

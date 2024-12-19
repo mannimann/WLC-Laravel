@@ -7,7 +7,7 @@ import DeleteModal from "./DeleteModal.vue";
 import RegisterModal from "./RegisterModal.vue";
 import { Head, router } from "@inertiajs/vue3";
 import { VueGoodTable } from "vue-good-table-next";
-import { useColorMode } from "@vueuse/core";
+// import { useColorMode } from "@vueuse/core";
 import { ref, watch } from "vue";
 import { useToast } from "vue-toastification";
 
@@ -16,13 +16,14 @@ const toast = useToast();
 
 // Table Theme
 const key = ref(0);
-const color = useColorMode();
-let theme = color.value === "dark" ? "nocturnal" : "";
-watch(color, (newColor) => {
-  theme = newColor === "dark" ? "nocturnal" : "";
-  // re-render Table-Component
-  key.value += 1;
-});
+// const color = useColorMode();
+let theme = "nocturnal";
+// let theme = color.value === "dark" ? "nocturnal" : "";
+// watch(color, (newColor) => {
+//   theme = newColor === "dark" ? "nocturnal" : "";
+//   // re-render Table-Component
+//   key.value += 1;
+// });
 
 const columns = [
   {
