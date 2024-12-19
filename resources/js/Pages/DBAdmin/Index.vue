@@ -9,20 +9,21 @@ import DeleteModal from "./DeleteModal.vue";
 import DeleteAllModal from "./DeleteAllModal.vue";
 import { Head } from "@inertiajs/vue3";
 import { VueGoodTable } from "vue-good-table-next";
-import { useColorMode } from "@vueuse/core";
+// import { useColorMode } from "@vueuse/core";
 import { ref, watch, onMounted } from "vue";
 
 const props = defineProps(["settings", "klassen", "zeiträume"]);
 
 // Table Theme
 const key = ref(0);
-const color = useColorMode();
-let theme = color.value === "dark" ? "nocturnal" : "";
-watch(color, (newColor) => {
-  theme = newColor === "dark" ? "nocturnal" : "";
-  // re-render Table-Component
-  key.value += 1;
-});
+// const color = useColorMode();
+let theme = "nocturnal";
+// let theme = color.value === "dark" ? "nocturnal" : "";
+// watch(color, (newColor) => {
+//   theme = newColor === "dark" ? "nocturnal" : "";
+//   // re-render Table-Component
+//   key.value += 1;
+// });
 
 const methods = {
   formatNumber: (number) => {
@@ -90,10 +91,12 @@ const columns = [
   {
     label: "Screenshot",
     field: "screenshot",
+    sortable: false,
   },
   {
     label: "Aktionen",
     field: "actions",
+    sortable: false,
   },
 ];
 
@@ -106,16 +109,16 @@ const screenshotHeight = ref(80);
 // Steps
 const steps = ref([]);
 const isLoading = ref(false);
-const pagination = ref({
-  currentPage: 1,
-  perPage: 30,
-  total: 0,
-});
-const searchQuery = ref("");
-const sortOptions = ref({
-  field: "id",
-  order: "asc",
-});
+// const pagination = ref({
+//   currentPage: 1,
+//   perPage: 30,
+//   total: 0,
+// });
+// const searchQuery = ref("");
+// const sortOptions = ref({
+//   field: "id",
+//   order: "asc",
+// });
 
 const fetchSteps = async () => {
   isLoading.value = true;
@@ -132,14 +135,14 @@ const fetchSteps = async () => {
 onMounted(fetchSteps);
 
 // Watch for changes in search or pagination and refetch data
-watch(
-  [
-    searchQuery,
-    () => pagination.value.currentPage,
-    () => pagination.value.perPage,
-  ],
-  fetchSteps
-);
+// watch(
+//   [
+//     searchQuery,
+//     () => pagination.value.currentPage,
+//     () => pagination.value.perPage,
+//   ],
+//   fetchSteps
+// );
 </script>
 
 <template>
@@ -204,6 +207,7 @@ watch(
           </template>
           <template v-slot:body>
             <VueGoodTable
+              :isLoading.sync="isLoading"
               :key="key"
               :columns="columns"
               :rows="steps"

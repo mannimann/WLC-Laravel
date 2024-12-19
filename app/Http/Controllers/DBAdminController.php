@@ -53,6 +53,30 @@ class DBAdminController extends Controller
     $steps_all = $steps->get_all();
 
     return response()->json($steps_all);
+
+    // With pagination (not quite working)
+
+    // $perPage = $request->get("perPage", 30); // Default: 30 items per page
+    // $search = $request->get("search", "");
+    // $sortField = $request->get("sortField", "id");
+    // $sortOrder = $request->get("sortOrder", "asc");
+    // $page = $request->get("page", 1); // Default: page 1
+
+    // // Build the query
+    // $query = Step::query();
+
+    // if ($search) {
+    //   $query
+    //     ->where("vorname", "like", "%{$search}%")
+    //     ->orWhere("name", "like", "%{$search}%")
+    //     ->orWhere("klasse", "like", "%{$search}%");
+    // }
+
+    // $steps = $query
+    //   ->orderBy($sortField, $sortOrder)
+    //   ->paginate($perPage, ["*"], "page", $page);
+
+    // return response()->json($steps);
   }
 
   /**
