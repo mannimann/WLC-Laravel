@@ -80,6 +80,10 @@ Route::prefix("admin")
     Route::resource("/dbadmin", DBAdminController::class, [
       "names" => "dbadmin",
     ])->only(["index"]);
+    Route::get("/dbadmin/steps", [
+      DBAdminController::class,
+      "fetchSteps",
+    ])->name("dbadmin.steps");
     Route::resource("/dbadmin", DBAdminController::class, [
       "names" => "dbadmin",
     ])

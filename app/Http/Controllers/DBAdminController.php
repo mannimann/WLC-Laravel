@@ -20,13 +20,13 @@ class DBAdminController extends Controller
    */
   public function index()
   {
-    $steps = new StepService();
+    // $steps = new StepService();
 
     $settings = Valuestore::make(
       storage_path("../database/database/settings.json")
     );
 
-    $steps_all = $steps->get_all();
+    // $steps_all = $steps->get_all();
     $klassen = Klasse::select("klasse")
       ->orderByRaw("LENGTH(klasse) ASC")
       ->orderBy("klasse")
@@ -35,10 +35,24 @@ class DBAdminController extends Controller
 
     return Inertia::render("DBAdmin/Index", [
       "settings.title" => $settings->get("title"),
-      "steps" => $steps_all,
+      // "steps" => $steps_all,
       "klassen" => $klassen->values(),
       "zeiträume" => $zeiträume->values(),
     ]);
+  }
+
+  /**
+   * Fetch steps dynamically.
+   *
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+  public function fetchSteps(Request $request)
+  {
+    $steps = new StepService();
+    $steps_all = $steps->get_all();
+
+    return response()->json($steps_all);
   }
 
   /**

@@ -1,4 +1,5 @@
 <script setup>
+import axios from "axios";
 import ViewLayout from "@/Layouts/ViewLayout.vue";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import Card from "@/Components/Card.vue";
@@ -9,9 +10,9 @@ import DeleteAllModal from "./DeleteAllModal.vue";
 import { Head } from "@inertiajs/vue3";
 import { VueGoodTable } from "vue-good-table-next";
 import { useColorMode } from "@vueuse/core";
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
 
-const props = defineProps(["settings", "steps", "klassen", "zeiträume"]);
+const props = defineProps(["settings", "klassen", "zeiträume"]);
 
 // Table Theme
 const key = ref(0);
@@ -100,6 +101,45 @@ const row = ref(null);
 const modalOpen = ref(false);
 const modalType = ref(null);
 const screenshotHeight = ref(80);
+
+// *************************
+// Steps
+const steps = ref([]);
+const isLoading = ref(false);
+const pagination = ref({
+  currentPage: 1,
+  perPage: 30,
+  total: 0,
+});
+const searchQuery = ref("");
+const sortOptions = ref({
+  field: "id",
+  order: "asc",
+});
+
+const fetchSteps = async () => {
+  isLoading.value = true;
+  try {
+    const { data } = await axios.get(route("admin.dbadmin.steps"));
+    steps.value = data;
+  } catch (error) {
+    console.error("Error fetching steps:", error);
+  } finally {
+    isLoading.value = false;
+  }
+};
+
+onMounted(fetchSteps);
+
+// Watch for changes in search or pagination and refetch data
+watch(
+  [
+    searchQuery,
+    () => pagination.value.currentPage,
+    () => pagination.value.perPage,
+  ],
+  fetchSteps
+);
 </script>
 
 <template>
@@ -204,7 +244,18 @@ const screenshotHeight = ref(80);
               <template #table-row="props">
                 <div v-if="props.column.field == 'screenshot'">
                   <div class="flex justify-end">
+                    <div
+                      v-if="
+                        props.row.screenshot == '' ||
+                        props.row.screenshot == null ||
+                        props.row.screenshot == undefined ||
+                        props.row.screenshot.length == 0
+                      "
+                    >
+                      —
+                    </div>
                     <button
+                      v-else
                       type="button"
                       @click="
                         modalOpen = true;

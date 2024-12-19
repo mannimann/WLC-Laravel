@@ -14,8 +14,8 @@ processes = []
   source = "database_vol"
   destination = "/var/www/html/database/database"
 
-[deploy]
-  release_command = "php /var/www/html/artisan migrate --force"
+# [deploy]
+#   release_command = "php /var/www/html/artisan migrate --force"
 
 [env]
   APP_ENV = "production"
