@@ -7,15 +7,15 @@ processes = []
 
 [build]
   [build.args]
-    NODE_VERSION = "14"
+    NODE_VERSION = "18"
     PHP_VERSION = "8.1"
 
 [mounts]
   source = "database_vol"
   destination = "/var/www/html/database/database"
 
-[deploy]
-  release_command = "php /var/www/html/artisan migrate --force"
+# [deploy]
+#   release_command = "php /var/www/html/artisan migrate --force"
 
 [env]
   APP_ENV = "production"
