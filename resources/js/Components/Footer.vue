@@ -17,7 +17,7 @@
               ed.bew @ nnambokaj_mj </span
             >)
           </span>
-          <span class="text-xs">[v 2.3]</span>
+          <span class="text-xs">[v 2.3a]</span>
         </p>
       </div>
       <div class="mb-1 mt-1">

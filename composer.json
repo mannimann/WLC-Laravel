@@ -1,7 +1,7 @@
 {
-  "name": "laravel/laravel",
+  "name": "winterlauf/winterlauf",
   "type": "project",
-  "description": "The Laravel Framework.",
+  "description": "Winterlauf",
   "keywords": [
     "framework",
     "laravel"
